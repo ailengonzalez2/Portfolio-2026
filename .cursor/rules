@@ -1,0 +1,277 @@
+# Portfolio 2026 - Cursor Rules
+
+## Project Overview
+Personal portfolio website built from Nuxt UI PRO Template for Ailen Gonzalez.
+
+## Tech Stack
+- **Framework**: Nuxt 4.x with TypeScript
+- **UI Library**: Nuxt UI 4.x (Tailwind CSS v4 + Reka UI)
+- **Animations**: motion-v (Motion component)
+- **State Management**: Vue composables with reactive state
+- **Content**: @nuxt/content v3 with typed collections
+- **Package Manager**: pnpm 10.x
+- **CSS**: Tailwind CSS v4 (new @import syntax)
+- **Icons**: Iconify (lucide & simple-icons)
+- **Images**: @nuxt/image
+- **OG Images**: nuxt-og-image
+- **Utilities**: @vueuse/nuxt
+
+## Project Structure
+```
+app/
+├── components/          # Shared Vue components
+│   ├── landing/        # Landing page specific components
+│   │   ├── Hero.vue         # Hero with gradient title, social icons, tech logos
+│   │   ├── About.vue        # Role tabs (Designer/Developer)
+│   │   ├── Projects.vue     # Project grid (Self/Pet projects)
+│   │   ├── Services.vue     # Service cards with wavy background
+│   │   ├── Web3Quote.vue    # Blockchain/Web3 exploration quote
+│   │   └── Contact.vue      # Contact CTA with email
+│   ├── AppHeader.vue   # Fixed header with logo, nav, CTA
+│   ├── AppFooter.vue   # Footer with social links
+│   └── ColorModeButton.vue
+├── composables/        # Global composables (auto-imported)
+├── layouts/            # Page layouts
+├── pages/              # Route pages (file-based routing)
+├── assets/css/         # Global CSS (main.css)
+├── utils/              # Shared utility functions
+└── app.config.ts       # Runtime app configuration
+
+content/
+├── index.yml           # Homepage content
+├── about.yml           # About page content
+├── blog/               # Blog posts (markdown)
+├── blog.yml            # Blog listing page
+├── projects/           # Project entries (yml)
+├── projects.yml        # Projects listing page
+└── speaking.yml        # Speaking engagements
+
+content.config.ts       # Content collection schemas (Zod)
+nuxt.config.ts          # Nuxt configuration
+```
+
+## Nuxt UI 4.x Components
+Prefer these Nuxt UI components:
+- `UButton` - All buttons (solid, outline, subtle, soft, ghost, link variants)
+- `UIcon` - Icons with iconify (i-lucide-*, i-simple-icons-*)
+- `UModal` - Dialogs and modals
+- `UCard` - Card layouts
+- `UPageHero` - Page hero sections with slots (headline, title, description, links)
+- `UPageSection` - Page content sections
+- `UPage` - Page wrapper
+- `UNavigationMenu` - Navigation menus
+- `UColorModeAvatar` - Avatar with light/dark variants
+
+## Styling Guidelines
+
+### Priority: Use Tailwind CSS First
+Always prefer Tailwind utility classes over custom CSS.
+- Write styles using Tailwind classes directly in templates
+- Only use `<style scoped>` for truly complex styles that Tailwind can't handle
+- Use Tailwind's arbitrary values for one-offs: `class="mt-[17px]"`
+- Leverage Tailwind's dark mode utilities
+
+### Tailwind CSS v4 Syntax
+This project uses Tailwind v4 with the new import syntax:
+```css
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --font-sans: 'Public Sans', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+}
+```
+
+**Important v4 class names:**
+- Use `bg-linear-to-*` instead of `bg-gradient-to-*`
+- Use `shrink-0` instead of `flex-shrink-0`
+- Use `aspect-4/3` instead of `aspect-[4/3]`
+
+### Colors
+Primary color is `violet`. Use Nuxt UI color tokens:
+- Primary: `violet` (gradients: violet → fuchsia → orange)
+- Neutral: `neutral`
+- Semantic: `success`, `warning`, `error`, `info`
+
+Use classes like:
+- `bg-primary`, `text-primary`
+- `bg-success`, `text-error`
+- `text-muted`, `bg-muted`
+- `bg-elevated`, `bg-default`
+- `ring-default`, `ring-offset-(--ui-bg)`
+
+### Typography
+- Sans font: `font-sans` (Public Sans)
+- Serif font: `font-serif` (Instrument Serif) - Use for emphasis/titles
+- Italic serif for special headings: `font-serif italic`
+
+## Vue Component Conventions
+
+### Script Setup
+```vue
+<script setup lang="ts">
+import type { SomeType } from '@nuxt/content'
+
+const { config } = useAppConfig()
+
+defineProps<{
+  page: SomeType
+}>()
+</script>
+```
+
+### Props & Emits
+- Use `defineProps<T>()` with TypeScript generics
+- Use `defineEmits<T>()` with TypeScript generics
+- Keep template logic minimal - use computed properties
+
+### Animations with Motion-v
+Use the `<Motion>` component for animations:
+```vue
+<Motion
+  :initial="{ opacity: 0, y: 30 }"
+  :animate="{ opacity: 1, y: 0 }"
+  :transition="{ duration: 0.6, delay: 0.1 }"
+>
+  <!-- Content -->
+</Motion>
+```
+
+For scroll-triggered animations:
+```vue
+<Motion
+  :initial="{ opacity: 0, y: 20 }"
+  :while-in-view="{ opacity: 1, y: 0 }"
+  :transition="{ duration: 0.5, delay: 0.1 }"
+  :in-view-options="{ once: true }"
+>
+```
+
+Stagger animations with dynamic delays:
+```vue
+<Motion
+  v-for="(item, index) in items"
+  :key="index"
+  :transition="{ duration: 0.6, delay: index * 0.1 }"
+>
+```
+
+## Content Collections
+
+### Defining Collections (content.config.ts)
+Use Zod schemas with `defineCollection`:
+```ts
+import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+
+export default defineContentConfig({
+  collections: {
+    blog: defineCollection({
+      type: 'page',        // or 'data' for non-page content
+      source: 'blog/*.md',
+      schema: z.object({
+        title: z.string(),
+        date: z.date(),
+        // ...
+      })
+    })
+  }
+})
+```
+
+### Querying Content
+```ts
+const { data: posts } = await useAsyncData('blog', () =>
+  queryCollection('blog').order('date', 'DESC').all()
+)
+```
+
+## App Configuration (app.config.ts)
+Runtime configuration for:
+- `global.*` - Site-wide settings (picture, email, available status, meetingLink)
+- `ui.*` - Nuxt UI component customizations
+- `footer.*` - Footer links and credits
+
+Access via:
+```ts
+const { global, footer } = useAppConfig()
+```
+
+## Naming Conventions
+
+### Files
+- Vue components: PascalCase (`Hero.vue`, `AppHeader.vue`)
+- Composables: camelCase with use prefix (`useClipboard.ts`)
+- Utils: camelCase (`clipboard.ts`, `links.ts`)
+- Types: camelCase (`gameTypes.ts`)
+
+### Code
+- Components: PascalCase (`Hero`, `AppHeader`)
+- Composables: camelCase (`useThreeGame`)
+- Interfaces: PascalCase (`GameState`)
+- Type aliases: PascalCase (`GameConfig`)
+- Constants: UPPER_SNAKE_CASE (`MAX_ITEMS`)
+- Functions/variables: camelCase
+
+## ESLint Configuration
+Stylistic rules:
+- No trailing commas (`commaDangle: 'never'`)
+- 1TBS brace style (`braceStyle: '1tbs'`)
+
+## Performance Guidelines
+- Use `defineAsyncComponent` for heavy components
+- Lazy load non-critical modules
+- Use `NuxtImg` for optimized images
+- Use `shallowRef` for non-reactive complex objects
+- Properly dispose of resources in `onUnmounted`
+
+## Available Composables
+Auto-imported from @vueuse/nuxt:
+- `useClipboard`, `useDark`, `useToggle`
+- `useScroll`, `useIntersectionObserver`
+- `useMouse`, `useWindowSize`
+- And many more from VueUse
+
+## MCP Tools Available
+When working with this project, use these MCP tools:
+- **Nuxt documentation**: For Nuxt-specific questions
+- **Nuxt UI**: For component documentation, props, slots, and examples
+- **Figma**: For design context and screenshots
+
+## Landing Page Components Pattern
+
+### Section with Motion animations
+```vue
+<section class="py-16 sm:py-24 relative">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <Motion
+      :initial="{ opacity: 0, y: 20 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
+      :transition="{ duration: 0.5 }"
+      :in-view-options="{ once: true }"
+    >
+      <!-- Content -->
+    </Motion>
+  </div>
+</section>
+```
+
+### Button with Status Indicator
+```vue
+<UButton :color="isActive ? 'success' : 'error'" variant="ghost">
+  <template #leading>
+    <span class="relative flex size-2">
+      <span class="absolute inline-flex size-full rounded-full opacity-75 animate-ping bg-success" />
+      <span class="relative inline-flex size-2 rounded-full bg-success" />
+    </span>
+  </template>
+  Status Label
+</UButton>
+```
+
+### Gradient Text
+```vue
+<span class="bg-linear-to-r from-violet-500 via-fuchsia-500 to-orange-400 bg-clip-text text-transparent">
+  Gradient Text
+</span>
+```

@@ -13,13 +13,75 @@
 
   ::selection {
     color: #282a30;
-    background-color: #c8c8c8;
+    background-color: #DDD6FE;
   }
 }
 
 .dark {
   ::selection {
     color: #ffffff;
-    background-color: #474747;
+    background-color: #7C3AED;
   }
+}
+
+/* Smooth page transitions */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced text shadows for hero */
+.text-shadow-md {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.dark .text-shadow-md {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ui-color-neutral-300);
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--ui-color-neutral-700);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ui-color-neutral-400);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--ui-color-neutral-600);
+}
+
+/* Focus visible styles */
+*:focus-visible {
+  outline: 2px solid var(--ui-color-primary-500);
+  outline-offset: 2px;
 }

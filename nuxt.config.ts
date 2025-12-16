@@ -4,7 +4,6 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/ui',
-    '@nuxt/content',
     '@vueuse/nuxt',
     'nuxt-og-image',
     'motion-v/nuxt'
@@ -17,6 +16,11 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   compatibilityDate: '2024-11-01',
+
+  image: {
+    quality: 80,
+    format: ['webp', 'avif']
+  },
 
   nitro: {
     prerender: {

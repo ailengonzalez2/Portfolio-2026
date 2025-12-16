@@ -2,11 +2,11 @@
 </script>
 
 <template>
-  <div>
-    <UContainer class="sm:border-x border-default pt-10">
-      <AppHeader :links="navLinks" />
+  <div class="min-h-screen flex flex-col">
+    <AppHeader :links="navLinks" />
+    <main class="flex-1 pt-20">
       <slot />
-      <AppFooter />
-    </UContainer>
+    </main>
+    <AppFooter />
   </div>
 </template>
