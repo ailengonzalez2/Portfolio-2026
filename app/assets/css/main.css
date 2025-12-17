@@ -4,8 +4,40 @@
 @source "../../../content/**/*";
 
 @theme static {
-  --font-sans: 'Public Sans', sans-serif;
+  --font-sans: 'Inter', sans-serif;
   --font-serif: 'Instrument Serif', serif;
+  --font-display: 'Megrim', cursive;
+  --font-mono: 'Fira Code', monospace;
+
+  /* Primary - #A11EE2 */
+  --color-primary-50: #faf5ff;
+  --color-primary-100: #f3e8ff;
+  --color-primary-200: #e9d5ff;
+  --color-primary-300: #d8b4fe;
+  --color-primary-400: #c084fc;
+  --color-primary-500: #A11EE2;
+  --color-primary-600: #9333ea;
+  --color-primary-700: #7e22ce;
+  --color-primary-800: #6b21a8;
+  --color-primary-900: #581c87;
+  --color-primary-950: #3b0764;
+
+  /* Secondary - #FAC789 */
+  --color-secondary-50: #fffbf5;
+  --color-secondary-100: #fef3e2;
+  --color-secondary-200: #fde4c4;
+  --color-secondary-300: #fbd5a6;
+  --color-secondary-400: #FAC789;
+  --color-secondary-500: #f5a855;
+  --color-secondary-600: #e88c2d;
+  --color-secondary-700: #c46f1a;
+  --color-secondary-800: #9c571a;
+  --color-secondary-900: #7d4718;
+  --color-secondary-950: #44230a;
+
+  /* Text Colors */
+  --color-text-primary: #45556c;
+  --color-text-primary-dark: #8a9bb5;
 }
 
 :root {
@@ -13,14 +45,14 @@
 
   ::selection {
     color: #282a30;
-    background-color: #DDD6FE;
+    background-color: #FAC789;
   }
 }
 
 .dark {
   ::selection {
     color: #ffffff;
-    background-color: #7C3AED;
+    background-color: #A11EE2;
   }
 }
 
@@ -84,4 +116,54 @@ html {
 *:focus-visible {
   outline: 2px solid var(--ui-color-primary-500);
   outline-offset: 2px;
+}
+
+/* Text Primary Classes */
+.text-primary-custom {
+  color: var(--color-text-primary);
+}
+
+.dark .text-primary-custom-dark {
+  color: var(--color-text-primary-dark);
+}
+
+/* Gradient Button - Primary Style */
+.btn-gradient {
+  background: linear-gradient(-89deg, rgba(255, 177, 71, 0.1) 5.74%, rgba(255, 108, 99, 0.1) 50.64%, rgba(184, 106, 223, 0.1) 92.05%);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  border-radius: 9999px;
+  padding: 0.625rem 3.5rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-transform: capitalize;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 3px;
+  background: linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(-89deg, rgba(255, 177, 71, 0.15) 5.74%, rgba(255, 108, 99, 0.15) 50.64%, rgba(184, 106, 223, 0.15) 92.05%);
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.btn-gradient-text {
+  background: linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

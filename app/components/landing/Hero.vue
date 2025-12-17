@@ -1,42 +1,50 @@
 <script setup lang="ts">
 const { global } = useAppConfig()
 
-const socialLinks = [
-  { icon: 'i-simple-icons-github', to: 'https://github.com', label: 'GitHub' },
-  { icon: 'i-simple-icons-linkedin', to: 'https://linkedin.com', label: 'LinkedIn' },
-  { icon: 'i-simple-icons-x', to: 'https://x.com', label: 'X' },
-  { icon: 'i-simple-icons-dribbble', to: 'https://dribbble.com', label: 'Dribbble' },
-  { icon: 'i-simple-icons-codepen', to: 'https://codepen.io', label: 'CodePen' },
-  { icon: 'i-simple-icons-behance', to: 'https://behance.net', label: 'Behance' }
-]
-
 const techLogos = [
-  { icon: 'i-simple-icons-nuxtdotjs', label: 'Nuxt', color: '#00DC82' },
-  { icon: 'i-simple-icons-vuedotjs', label: 'Vue', color: '#4FC08D' },
-  { icon: 'i-simple-icons-react', label: 'React', color: '#61DAFB' },
-  { icon: 'i-simple-icons-tailwindcss', label: 'Tailwind', color: '#06B6D4' },
-  { icon: 'i-simple-icons-figma', label: 'Figma', color: '#F24E1E' },
-  { icon: 'i-simple-icons-framer', label: 'Framer', color: '#0055FF' },
-  { icon: 'i-simple-icons-typescript', label: 'TypeScript', color: '#3178C6' },
-  { icon: 'i-simple-icons-vercel', label: 'Vercel', color: 'currentColor' }
+  { icon: '/tech-icons/figma-color.svg', label: 'Figma' },
+  { icon: '/tech-icons/html-color.svg', label: 'HTML5' },
+  { icon: '/tech-icons/css-color.svg', label: 'CSS3' },
+  { icon: '/tech-icons/vue-color.svg', label: 'Vue' },
+  { icon: '/tech-icons/tailwind-color.svg', label: 'Tailwind' },
+  { icon: '/tech-icons/bootstrap-color.svg', label: 'Bootstrap' },
+  { icon: '/tech-icons/javascript-color.svg', label: 'JavaScript' },
+  { icon: '/tech-icons/github-color.svg', label: 'GitHub' },
+  { icon: '/tech-icons/xd-color.svg', label: 'Adobe XD' },
+  { icon: '/tech-icons/wp-color.svg', label: 'WordPress' }
 ]
 </script>
 
 <template>
-  <section class="relative pt-16 sm:pt-24 lg:pt-32 pb-8">
-    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <!-- Logo/Branding small at top -->
+  <section class="relative pt-16 sm:pt-24 lg:pt-32 pb-16 lg:pb-24">
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Available Badge -->
       <Motion
         :initial="{ opacity: 0, y: 20 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.5 }"
-        class="mb-8"
+        class="mb-10 lg:mb-12"
       >
-        <div class="inline-flex items-center gap-2 text-sm text-muted">
-          <div class="size-6 rounded-lg bg-linear-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white text-xs font-bold">
-            AG
+        <div
+          class="inline-flex items-center gap-4 px-5 py-2.5 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-[0px_2px_10px_0px_rgba(0,0,0,0.1)] dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,0.3)]"
+        >
+          <div class="flex items-center gap-3">
+            <span class="relative flex size-2.5">
+              <span
+                class="absolute inline-flex size-full rounded-full opacity-75 animate-ping"
+                :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
+              />
+              <span
+                class="relative inline-flex size-2.5 rounded-full"
+                :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
+              />
+            </span>
+            <span class="text-gray-400 dark:text-gray-500 text-base">
+              {{ global.available ? 'Available for projects' : 'Not available' }}
+            </span>
           </div>
-          <span class="font-medium">Ailen Gonzalez</span>
+          <span class="size-1 rounded-full bg-gray-300 dark:bg-gray-600" />
+          <span class="text-gray-400 dark:text-gray-500 text-base">GMT-3</span>
         </div>
       </Motion>
 
@@ -45,139 +53,77 @@ const techLogos = [
         :initial="{ opacity: 0, y: 30 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.7, delay: 0.1 }"
+        class="relative"
       >
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-medium tracking-tight leading-[1.1]">
+        <!-- Gradient glow behind "digital products" -->
+        <div
+          class="absolute left-[28%] sm:left-[32%] lg:left-[38%] top-[78%] sm:top-[80%] lg:top-[78%] w-[280px] sm:w-[350px] lg:w-[480px] h-[35px] sm:h-[40px] lg:h-[45px] -translate-y-1/2 pointer-events-none"
+        >
+          <div
+            class="w-full h-full rounded-full opacity-60 blur-lg"
+            style="background: linear-gradient(90deg, #ffb86a 0%, #dab2ff 50%, #c27aff 100%)"
+          />
+        </div>
+
+        <h1 class="relative text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-medium tracking-tight leading-[1.15] text-primary-custom dark:text-gray-200">
           Building modern,
           <br>
           accessible
-          <span class="relative inline-block">
-            <span class="font-serif italic bg-linear-to-r from-violet-500 via-fuchsia-500 to-orange-400 bg-clip-text text-transparent">
-              digital products
-            </span>
-            <!-- Gradient underline decoration -->
-            <svg
-              class="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3"
-              viewBox="0 0 200 12"
-              fill="none"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M2 8C50 2 150 2 198 8"
-                stroke="url(#underline-gradient)"
-                stroke-width="4"
-                stroke-linecap="round"
-              />
-              <defs>
-                <linearGradient id="underline-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#8B5CF6" />
-                  <stop offset="50%" stop-color="#D946EF" />
-                  <stop offset="100%" stop-color="#FB923C" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </span>
+          <span class="font-serif font-bold italic"> digital products</span>
         </h1>
       </Motion>
 
-      <!-- Social Links -->
+      <!-- Tech Stack & CTA Row -->
       <Motion
         :initial="{ opacity: 0, y: 20 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.6, delay: 0.3 }"
-        class="mt-8 flex items-center justify-center gap-1 sm:gap-2"
+        class="mt-16 sm:mt-20 lg:mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
       >
-        <UButton
-          v-for="link in socialLinks"
-          :key="link.label"
-          :icon="link.icon"
-          :to="link.to"
-          target="_blank"
-          color="neutral"
-          variant="ghost"
-          size="xs"
-          :aria-label="link.label"
-          class="text-muted hover:text-highlighted"
-        />
-      </Motion>
-
-      <!-- Tech Logos -->
-      <Motion
-        :initial="{ opacity: 0, y: 20 }"
-        :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, delay: 0.4 }"
-        class="mt-6 flex items-center justify-center gap-3 flex-wrap"
-      >
-        <div
-          v-for="tech in techLogos"
-          :key="tech.label"
-          class="flex items-center justify-center size-9 sm:size-10 rounded-xl bg-elevated/60 backdrop-blur-sm border border-default/50 transition-all duration-200 hover:border-default hover:scale-105"
-          :title="tech.label"
-        >
-          <UIcon
-            :name="tech.icon"
-            class="size-4 sm:size-5"
-            :style="{ color: tech.color }"
-          />
+        <!-- Tech Stack Icons -->
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <div
+            v-for="tech in techLogos"
+            :key="tech.label"
+            class="flex items-center justify-center size-14 rounded-2xl bg-white dark:bg-gray-900 transition-transform duration-200 hover:scale-110 p-2"
+            :title="tech.label"
+          >
+            <img
+              :src="tech.icon"
+              :alt="tech.label"
+              class="w-full h-full object-contain"
+            />
+          </div>
         </div>
-      </Motion>
 
-      <!-- CTA Buttons -->
-      <Motion
-        :initial="{ opacity: 0, y: 20 }"
-        :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, delay: 0.5 }"
-        class="mt-10 flex items-center justify-center gap-3 flex-wrap"
-      >
-        <UButton
-          label="View my work"
-          to="/projects"
-          size="lg"
-          class="rounded-full px-6"
-        />
-        <UButton
-          :color="global.available ? 'success' : 'error'"
-          variant="soft"
-          size="lg"
-          class="gap-2 rounded-full"
-          :to="global.available ? global.meetingLink : undefined"
-          :label="global.available ? 'Available for new projects' : 'Not available'"
+        <!-- Gradient Border Button -->
+        <a
+          href="#projects"
+          class="group relative flex items-center justify-center h-[53px] px-10 rounded-full overflow-hidden cursor-pointer transition-transform duration-200 hover:scale-105"
+          style="background: linear-gradient(-89deg, rgba(255, 177, 71, 0.1) 5.74%, rgba(255, 108, 99, 0.1) 50.64%, rgba(184, 106, 223, 0.1) 92.05%)"
         >
-          <template #leading>
-            <span class="relative flex size-2">
-              <span
-                class="absolute inline-flex size-full rounded-full opacity-75"
-                :class="global.available ? 'bg-success animate-ping' : 'bg-error'"
-              />
-              <span
-                class="relative inline-flex size-2 scale-90 rounded-full"
-                :class="global.available ? 'bg-success' : 'bg-error'"
-              />
-            </span>
-          </template>
-        </UButton>
+          <!-- Gradient border -->
+          <span
+            class="absolute inset-0 rounded-full border-[3px] border-transparent"
+            style="background: linear-gradient(white, white) padding-box, linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%) border-box"
+          />
+          <span
+            class="dark:hidden absolute inset-0 rounded-full border-[3px] border-transparent"
+            style="background: linear-gradient(white, white) padding-box, linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%) border-box"
+          />
+          <span
+            class="hidden dark:block absolute inset-0 rounded-full border-[3px] border-transparent"
+            style="background: linear-gradient(#111827, #111827) padding-box, linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%) border-box"
+          />
+          <!-- Gradient text -->
+          <span
+            class="relative font-semibold text-lg sm:text-xl capitalize bg-clip-text text-transparent"
+            style="background-image: linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%)"
+          >
+            Explore Projects
+          </span>
+        </a>
       </Motion>
-    </div>
-
-    <!-- Wavy gradient divider at bottom -->
-    <div class="absolute bottom-0 left-0 right-0 h-32 overflow-hidden pointer-events-none">
-      <svg
-        class="absolute bottom-0 w-full h-full"
-        viewBox="0 0 1440 128"
-        preserveAspectRatio="none"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="wave-hero-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="rgb(221 214 254 / 0.3)" />
-            <stop offset="50%" stop-color="rgb(251 207 232 / 0.3)" />
-            <stop offset="100%" stop-color="rgb(254 215 170 / 0.3)" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M0,64 C360,128 720,0 1080,64 C1260,96 1380,80 1440,64 L1440,128 L0,128 Z"
-          fill="url(#wave-hero-gradient)"
-        />
-      </svg>
     </div>
   </section>
 </template>

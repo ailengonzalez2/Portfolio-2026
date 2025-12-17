@@ -1,0 +1,318 @@
+<script setup lang="ts">
+const workExperience = [
+  {
+    title: 'UI Developer',
+    company: 'Freelance',
+    period: 'August 2023 - Present (REMOTE)',
+    description: 'Delivering end-to-end digital experiences. I design in Figma with data-driven workflows and build fast.'
+  },
+  {
+    title: 'Web Designer',
+    company: 'Freelance',
+    period: 'August 2019 - Present (REMOTE)',
+    description: 'Creating brand identities and web interfaces for startups and small businesses.'
+  },
+  {
+    title: 'Web Developer',
+    company: 'Agency',
+    period: 'August 2018 - Present (REMOTE)',
+    description: 'Implementing responsive front-end solutions using React and modern CSS frameworks.'
+  }
+]
+
+const technicalSkills = [
+  { icon: '/tech-icons/figma.svg', name: 'Figma' },
+  { icon: '/tech-icons/xd.svg', name: 'Adobe XD' },
+  { icon: '/tech-icons/html5.svg', name: 'HTML5' },
+  { icon: '/tech-icons/css3.svg', name: 'CSS3' },
+  { icon: '/tech-icons/bootstrap.svg', name: 'Bootstrap' },
+  { icon: '/tech-icons/javascript.svg', name: 'JavaScript' },
+  { icon: '/tech-icons/vue.svg', name: 'Vue.js' },
+  { icon: '/tech-icons/nuxt.svg', name: 'Nuxt' },
+  { icon: '/tech-icons/tailwind.svg', name: 'Tailwind CSS' },
+  { icon: '/tech-icons/vuetify.svg', name: 'Vuetify' },
+  { icon: '/tech-icons/github.svg', name: 'GitHub' },
+  { icon: '/tech-icons/n8n.svg', name: 'n8n' }
+]
+
+const certifications = [
+  {
+    title: 'Motion Design in Figma',
+    organization: 'Memorisely',
+    type: 'On-line',
+    year: '2025',
+    logo: 'https://www.figma.com/api/mcp/asset/c185ac0a-61e0-41d1-8fe9-8d1ade0be653'
+  },
+  {
+    title: 'JavaScript Algorithms and Data Structures',
+    organization: 'Free Code Camp',
+    type: 'On-line',
+    year: '2025',
+    logo: 'https://www.figma.com/api/mcp/asset/cb19bfbd-a402-4d4f-93fd-2ddd30eaab42'
+  },
+  {
+    title: 'Intro to Vue 3',
+    organization: 'Vue Mastery',
+    type: 'On-line',
+    status: 'Ongoing',
+    logo: 'https://www.figma.com/api/mcp/asset/8bb72603-d6ef-4d82-96bb-02e164fbd94b'
+  },
+  {
+    title: 'Programación con JavaScript- Meta',
+    organization: 'Coursera',
+    type: 'On-line',
+    status: 'Ongoing',
+    logo: 'https://www.figma.com/api/mcp/asset/dd91aa2b-7bea-4ea1-8101-bd1a3565b039'
+  }
+]
+</script>
+
+<template>
+  <section class="py-10 sm:py-14 bg-[#f8fafc]">
+    <div class="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-[155px]">
+      <!-- Section Header -->
+      <Motion
+        :initial="{ opacity: 0, y: 20 }"
+        :while-in-view="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.5 }"
+        :in-view-options="{ once: true }"
+      >
+        <div class="mb-[66px]">
+          <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
+            About
+          </h2>
+          <div class="h-[2px] w-[50px] bg-[#a2a2a2]" />
+        </div>
+      </Motion>
+
+      <!-- Main Content with Buttons -->
+      <div class="relative mb-[121px]">
+        <!-- Action Buttons - Positioned Top Right -->
+        <div class="absolute right-0 top-0 flex flex-col gap-5 w-[181px] z-10">
+          <Motion
+            :initial="{ opacity: 0, y: 20 }"
+            :while-in-view="{ opacity: 1, y: 0 }"
+            :transition="{ duration: 0.5, delay: 0.1 }"
+            :in-view-options="{ once: true }"
+          >
+            <button class="w-full h-[41px] px-3 py-1.5 bg-gradient-to-r from-[#09090b] to-[#09090b] border-[0.75px] border-[rgba(255,255,255,0.3)] rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-2.5 text-white text-base font-normal">
+              <UIcon name="i-lucide-download" class="size-3.5" />
+              <span>Download CV</span>
+            </button>
+          </Motion>
+          
+          <Motion
+            :initial="{ opacity: 0, y: 20 }"
+            :while-in-view="{ opacity: 1, y: 0 }"
+            :transition="{ duration: 0.5, delay: 0.15 }"
+            :in-view-options="{ once: true }"
+          >
+            <a
+              href="https://cv.ailengonzalez.ar/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full h-[41px] px-3 py-1.5 bg-white rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-1 text-black text-base font-normal hover:bg-gray-50 transition-colors"
+            >
+              <UIcon name="i-lucide-arrow-up-right" class="size-[22px]" />
+              <span>Explore all CV</span>
+            </a>
+          </Motion>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="flex gap-14 pr-[230px]">
+          <!-- Left Column -->
+          <div class="flex-1 max-w-[551px] space-y-[41px]">
+            <!-- Design + Code Section -->
+            <Motion
+              :initial="{ opacity: 0, y: 20 }"
+              :while-in-view="{ opacity: 1, y: 0 }"
+              :transition="{ duration: 0.5, delay: 0.1 }"
+              :in-view-options="{ once: true }"
+              class="space-y-5"
+            >
+              <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
+                Design + Code
+              </h3>
+              <p class="text-primary-custom text-[16px] leading-[26px] tracking-[-0.31px]">
+                I mix solid design principles with practical, efficient development to create clean, responsive, and pixel-perfect interfaces. I take care of the whole process—from early research to prototypes to bringing everything to life with smooth, modern code.
+              </p>
+            </Motion>
+
+            <!-- Work Experience -->
+            <Motion
+              :initial="{ opacity: 0, y: 20 }"
+              :while-in-view="{ opacity: 1, y: 0 }"
+              :transition="{ duration: 0.5, delay: 0.2 }"
+              :in-view-options="{ once: true }"
+              class="space-y-8"
+            >
+              <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
+                Work Experience
+              </h3>
+              
+              <div class="space-y-10 max-w-[456px]">
+                <div
+                  v-for="(job, index) in workExperience"
+                  :key="index"
+                  class="relative border-l-2 border-[#e2e8f0] pl-8 min-h-[120px]"
+                >
+                  <!-- Timeline Dot -->
+                  <div class="absolute -left-2 top-0 size-4 rounded-full bg-[#ad46ff] border-4 border-white shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]" />
+                  
+                  <!-- Job Content -->
+                  <div class="space-y-2">
+                    <h4 class="text-[#0f172b] text-[20px] font-bold leading-[28px] tracking-[-0.45px]">
+                      {{ job.title }}
+                    </h4>
+                    <p class="text-[#62748e] text-[12px] leading-[16px] uppercase tracking-[0.3px]">
+                      {{ job.company }} | {{ job.period }}
+                    </p>
+                    <p class="text-primary-custom text-[16px] leading-[26px] tracking-[-0.31px]">
+                      {{ job.description }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Motion>
+          </div>
+
+          <!-- Right Column -->
+          <div class="flex-1 max-w-[456px] space-y-10">
+            <!-- Skills Section -->
+            <Motion
+              :initial="{ opacity: 0, y: 20 }"
+              :while-in-view="{ opacity: 1, y: 0 }"
+              :transition="{ duration: 0.5, delay: 0.2 }"
+              :in-view-options="{ once: true }"
+              class="space-y-[25px]"
+            >
+              <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
+                Skills
+              </h3>
+              
+              <!-- Technical Skills -->
+              <div class="space-y-[15px]">
+                <h4 class="text-[#0f172b] text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
+                  Technica
+                </h4>
+                <div class="space-y-5">
+                  <div class="flex gap-[15px] items-center">
+                    <img
+                      v-for="skill in technicalSkills.slice(0, 6)"
+                      :key="skill.name"
+                      :src="skill.icon"
+                      :alt="skill.name"
+                      :title="skill.name"
+                      class="size-[38px] object-contain"
+                    />
+                  </div>
+                  <div class="flex gap-[15px] items-center">
+                    <img
+                      v-for="skill in technicalSkills.slice(6)"
+                      :key="skill.name"
+                      :src="skill.icon"
+                      :alt="skill.name"
+                      :title="skill.name"
+                      class="size-[38px] object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Soft Skills -->
+              <div class="space-y-[15px]">
+                <h4 class="text-[#0f172b] text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
+                  Soft
+                </h4>
+                <p class="text-primary-custom text-[16px] leading-[26px] tracking-[-0.31px]">
+                  Autonomous work, active listening, attention to detail, clear communication, collaborative mindset, adaptability
+                </p>
+              </div>
+
+              <!-- Languages -->
+              <div class="space-y-4">
+                <h4 class="text-[#0f172b] text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
+                  Languages
+                </h4>
+                <div class="space-y-2">
+                  <p class="text-primary-custom text-[14px] leading-[20px] tracking-[-0.15px]">
+                    <span class="font-bold text-[#0f172b]">English:</span> C1 Advanced • Fluent communication
+                  </p>
+                  <p class="text-primary-custom text-[14px] leading-[20px] tracking-[-0.15px]">
+                    <span class="font-bold text-[#0f172b]">Spanish:</span> Native
+                  </p>
+                </div>
+              </div>
+            </Motion>
+
+            <!-- Latest Certifications -->
+            <Motion
+              :initial="{ opacity: 0, y: 20 }"
+              :while-in-view="{ opacity: 1, y: 0 }"
+              :transition="{ duration: 0.5, delay: 0.3 }"
+              :in-view-options="{ once: true }"
+              class="space-y-[15px]"
+            >
+              <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
+                Latest Certifications
+              </h3>
+              
+              <div class="space-y-[10px]">
+                <div
+                  v-for="(cert, index) in certifications"
+                  :key="index"
+                  class="flex gap-2 items-center"
+                >
+                  <img
+                    :src="cert.logo"
+                    :alt="cert.organization"
+                    class="size-[30px] rounded object-cover flex-shrink-0"
+                  >
+                  <div class="min-w-0">
+                    <p class="text-primary-custom text-[16px] font-medium leading-[26px] tracking-[-0.31px]">
+                      {{ cert.title }}
+                    </p>
+                    <p class="text-[#62748e] text-[12px] leading-[16px] tracking-[0.3px]">
+                      {{ cert.organization }} | {{ cert.type }} | {{ cert.year || cert.status }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Motion>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fun Fact Card -->
+      <Motion
+        :initial="{ opacity: 0, y: 20 }"
+        :while-in-view="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.5, delay: 0.4 }"
+        :in-view-options="{ once: true }"
+        class="max-w-[757px] mx-auto"
+      >
+        <div class="relative bg-white border border-[#f1f5f9] rounded-[24px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] p-8 pt-[45px] min-h-[229px]">
+          <!-- Decorative Circle -->
+          <div class="absolute bottom-0 right-[86px] size-[96px] bg-[#faf5ff] rounded-full -mb-12" />
+          
+          <!-- Icon -->
+          <div class="absolute -top-8 left-8 size-16 bg-black rounded-full flex items-center justify-center">
+            <UIcon name="i-lucide-eye" class="size-8 text-white" />
+          </div>
+          
+          <div class="relative z-10 space-y-2">
+            <h3 class="text-[#0f172b] text-[18px] font-bold leading-[28px] tracking-[-0.44px]">
+              My fun fact
+            </h3>
+            <p class="text-primary-custom text-[14px] leading-[22.75px] tracking-[-0.15px]">
+              Before I made technology my career, From 2011 to 2021 I worked as a medical doctor, mainly in emergency departments across multiple hospitals, after earning my degree from the Universidad Nacional de Córdoba—one of Argentina's most prestigious universities in emergency rooms across multiple hospitals<br>
+              This diverse  background gives me a unique analytical approach.
+            </p>
+          </div>
+        </div>
+      </Motion>
+    </div>
+  </section>
+</template>
+

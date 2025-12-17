@@ -15,9 +15,10 @@ useSeoMeta({
 <template>
   <UPage>
     <LandingHero />
-    <LandingAbout />
+    <LandingRolls />
     <LandingProjects />
     <LandingServices />
+    <LandingAboutMe />
     <LandingWeb3Quote />
     <LandingContact />
   </UPage>

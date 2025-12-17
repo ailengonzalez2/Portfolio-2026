@@ -1,16 +1,16 @@
 <script setup lang="ts">
 const projects = [
   {
-    title: 'Bloom Finance App Redesign',
-    description: 'Led the complete UX/UI overhaul and front-end implementation for a personal finance platform, focusing on data visualization clarity and improving user onboarding flow. Resulted in a 32% increase in user retention.',
+    title: 'DeFi Dashboard',
+    description: 'Redesigning the data visualization experience for a leading fintech platform.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
     url: '#',
     tags: ['UX Design', 'UI Design'],
     date: '2024'
   },
   {
-    title: 'Internal Developer Hub (Nuxt Team)',
-    description: 'Designed and built key components for an internal documentation and tooling hub for Nuxt developers, focusing on improving developer experience and streamlining access to resources.',
+    title: 'DeFi Dashboard',
+    description: 'Redesigning the data visualization experience for a leading fintech platform.',    
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
     url: '#',
     tags: ['Developer Tools', 'UX Design', 'Nuxt', 'Design System', 'Internal Tools'],
@@ -35,8 +35,7 @@ const projects = [
 ]
 
 // Split projects into categories
-const selfProjects = computed(() => projects.slice(0, 3))
-const petProjects = computed(() => projects.slice(3))
+const selfProjects = computed(() => projects.slice(0, 4))
 </script>
 
 <template>
@@ -48,94 +47,184 @@ const petProjects = computed(() => projects.slice(3))
     </div>
 
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Self Projects -->
+      <!-- Latest Projects -->
       <div class="mb-16">
         <Motion
           :initial="{ opacity: 0, y: 20 }"
           :while-in-view="{ opacity: 1, y: 0 }"
           :transition="{ duration: 0.5 }"
           :in-view-options="{ once: true }"
-          class="flex items-center gap-3 mb-8"
         >
-          <span class="uppercase tracking-widest text-xs text-muted font-medium">Self Projects</span>
-          <div class="flex-1 h-px bg-default" />
+          <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
+            Latest Projects
+          </h2>
+          <div class="h-[2px] w-[50px] bg-[#a2a2a2] mb-8" />
         </Motion>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Grid with custom columns: left card wider (2fr), right card narrower (1fr) -->
+        <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-8 lg:gap-12">
+          <!-- Left Card (wider) -->
           <Motion
-            v-for="(project, index) in selfProjects"
-            :key="project.title"
             :initial="{ opacity: 0, y: 30 }"
             :while-in-view="{ opacity: 1, y: 0 }"
-            :transition="{ duration: 0.5, delay: index * 0.1 }"
+            :transition="{ duration: 0.5 }"
             :in-view-options="{ once: true }"
+            class="w-full"
           >
             <NuxtLink
-              :to="project.url"
-              class="group block"
+              :to="selfProjects[0]?.url"
+              class="group block h-full"
             >
-              <div class="relative aspect-[4/3] overflow-hidden rounded-2xl bg-elevated border border-default/50 transition-all duration-300 group-hover:border-default group-hover:shadow-xl group-hover:shadow-neutral-950/5">
-                <NuxtImg
-                  :src="project.image"
-                  :alt="project.title"
-                  class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <!-- Overlay gradient -->
-                <div class="absolute inset-0 bg-linear-to-t from-neutral-950/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <!-- Title overlay on hover -->
-                <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 class="text-white font-medium text-lg">{{ project.title }}</h3>
-                  <div class="flex gap-2 mt-2 flex-wrap">
-                    <span
-                      v-for="tag in project.tags?.slice(0, 2)"
-                      :key="tag"
-                      class="text-xs px-2 py-1 rounded-full bg-white/20 text-white/90"
-                    >
-                      {{ tag }}
+              <div>
+                <!-- Image container with badge - Fixed height -->
+                <div class="relative rounded-[30px] overflow-hidden h-[526px] w-full mb-8">
+                  <NuxtImg
+                    :src="selfProjects[0]?.image"
+                    :alt="selfProjects[0]?.title"
+                    class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <!-- Badge -->
+                  <div class="absolute top-10 right-10 z-10">
+                    <span class="inline-flex items-center px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[12px] uppercase tracking-[0.6px] font-medium text-primary-custom shadow-sm">
+                      {{ selfProjects[0]?.tags?.[0] || 'PRODUCT DESIGN' }}
                     </span>
                   </div>
+                </div>
+                
+                <!-- Content below image -->
+                <div>
+                  <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
+                    {{ selfProjects[0]?.title }}
+                  </h3>
+                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px]">
+                    {{ selfProjects[0]?.description }}
+                  </p>
+                </div>
+              </div>
+            </NuxtLink>
+          </Motion>
+
+          <!-- Right Card (narrower) -->
+          <Motion
+            :initial="{ opacity: 0, y: 30 }"
+            :while-in-view="{ opacity: 1, y: 0 }"
+            :transition="{ duration: 0.5, delay: 0.1 }"
+            :in-view-options="{ once: true }"
+            class="w-full"
+          >
+            <NuxtLink
+              :to="selfProjects[1]?.url"
+              class="group block"
+            >
+              <div>
+                <!-- Image container with badge - Same fixed height -->
+                <div class="relative rounded-[30px] overflow-hidden h-[526px] w-full mb-8">
+                  <NuxtImg
+                    :src="selfProjects[1]?.image"
+                    :alt="selfProjects[1]?.title"
+                    class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <!-- Badge -->
+                  <div class="absolute top-10 right-10 z-10">
+                    <span class="inline-flex items-center px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[12px] uppercase tracking-[0.6px] font-medium text-primary-custom shadow-sm">
+                      {{ selfProjects[1]?.tags?.[0] || 'PRODUCT DESIGN' }}
+                    </span>
+                  </div>
+                </div>
+                
+                <!-- Content below image -->
+                <div>
+                  <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
+                    {{ selfProjects[1]?.title }}
+                  </h3>
+                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px]">
+                    {{ selfProjects[1]?.description }}
+                  </p>
                 </div>
               </div>
             </NuxtLink>
           </Motion>
         </div>
-      </div>
 
-      <!-- Pet Projects -->
-      <div v-if="petProjects.length">
-        <Motion
-          :initial="{ opacity: 0, y: 20 }"
-          :while-in-view="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.5 }"
-          :in-view-options="{ once: true }"
-          class="flex items-center gap-3 mb-8"
-        >
-          <span class="font-serif italic text-muted">Pet Projects</span>
-          <div class="flex-1 h-px bg-default" />
-        </Motion>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Second row - inverted layout [1fr_2fr] -->
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12 mt-8 lg:mt-12">
+          <!-- Left Card (narrower) -->
           <Motion
-            v-for="(project, index) in petProjects"
-            :key="project.title"
             :initial="{ opacity: 0, y: 30 }"
             :while-in-view="{ opacity: 1, y: 0 }"
-            :transition="{ duration: 0.5, delay: index * 0.1 }"
+            :transition="{ duration: 0.5, delay: 0.2 }"
             :in-view-options="{ once: true }"
+            class="w-full"
           >
             <NuxtLink
-              :to="project.url"
+              :to="selfProjects[2]?.url"
               class="group block"
             >
-              <div class="relative aspect-video overflow-hidden rounded-2xl bg-elevated border border-default/50 transition-all duration-300 group-hover:border-default group-hover:shadow-xl group-hover:shadow-neutral-950/5">
-                <NuxtImg
-                  :src="project.image"
-                  :alt="project.title"
-                  class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div class="absolute inset-0 bg-linear-to-t from-neutral-950/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 class="text-white font-medium">{{ project.title }}</h3>
+              <div>
+                <!-- Image container with badge - Same fixed height -->
+                <div class="relative rounded-[30px] overflow-hidden h-[526px] w-full mb-8">
+                  <NuxtImg
+                    :src="selfProjects[2]?.image"
+                    :alt="selfProjects[2]?.title"
+                    class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <!-- Badge -->
+                  <div class="absolute top-10 right-10 z-10">
+                    <span class="inline-flex items-center px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[12px] uppercase tracking-[0.6px] font-medium text-primary-custom shadow-sm">
+                      {{ selfProjects[2]?.tags?.[0] || 'PRODUCT DESIGN' }}
+                    </span>
+                  </div>
+                </div>
+                
+                <!-- Content below image -->
+                <div>
+                  <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
+                    {{ selfProjects[2]?.title }}
+                  </h3>
+                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px]">
+                    {{ selfProjects[2]?.description }}
+                  </p>
+                </div>
+              </div>
+            </NuxtLink>
+          </Motion>
+
+          <!-- Right Card (wider) -->
+          <Motion
+            :initial="{ opacity: 0, y: 30 }"
+            :while-in-view="{ opacity: 1, y: 0 }"
+            :transition="{ duration: 0.5, delay: 0.3 }"
+            :in-view-options="{ once: true }"
+            class="w-full"
+          >
+            <NuxtLink
+              :to="selfProjects[3]?.url"
+              class="group block h-full"
+            >
+              <div>
+                <!-- Image container with badge - Fixed height -->
+                <div class="relative rounded-[30px] overflow-hidden h-[526px] w-full mb-8">
+                  <NuxtImg
+                    :src="selfProjects[3]?.image"
+                    :alt="selfProjects[3]?.title"
+                    class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <!-- Badge -->
+                  <div class="absolute top-10 right-10 z-10">
+                    <span class="inline-flex items-center px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[12px] uppercase tracking-[0.6px] font-medium text-primary-custom shadow-sm">
+                      {{ selfProjects[3]?.tags?.[0] || 'PRODUCT DESIGN' }}
+                    </span>
+                  </div>
+                </div>
+                
+                <!-- Content below image -->
+                <div>
+                  <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
+                    {{ selfProjects[3]?.title }}
+                  </h3>
+                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px]">
+                    {{ selfProjects[3]?.description }}
+                  </p>
                 </div>
               </div>
             </NuxtLink>
@@ -151,16 +240,14 @@ const petProjects = computed(() => projects.slice(3))
         :in-view-options="{ once: true }"
         class="mt-12 text-center"
       >
-        <UButton
-          label="View all projects"
+        <NuxtLink
           to="/projects"
-          variant="ghost"
-          color="neutral"
+          class="btn-gradient inline-block"
         >
-          <template #trailing>
-            <UIcon name="i-lucide-arrow-right" class="size-4" />
-          </template>
-        </UButton>
+          <span class="btn-gradient-text relative z-10">
+            Explore Projects
+          </span>
+        </NuxtLink>
       </Motion>
     </div>
   </section>

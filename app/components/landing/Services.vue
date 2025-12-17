@@ -1,22 +1,22 @@
 <script setup lang="ts">
 const services = [
   {
-    icon: 'i-lucide-palette',
     title: 'UI Designer',
     description: 'Creating beautiful, cohesive visual systems that elevate brands and delight users with every interaction.',
-    gradient: 'from-violet-500 to-purple-600'
+    colorFilter: 'hue-rotate-[280deg] saturate-[1.4] brightness-[1.1]', // Violet/Purple tones
+    bgColor: 'bg-[#fcfcfc] dark:bg-neutral-900'
   },
   {
-    icon: 'i-lucide-code-2',
     title: 'UI Developer',
     description: 'Translating designs into performant, accessible code using modern frameworks and best practices.',
-    gradient: 'from-sky-500 to-cyan-600'
+    colorFilter: 'hue-rotate-[190deg] saturate-[1.3] brightness-[1.05]', // Cyan/Blue tones
+    bgColor: 'bg-[#fcfcfc] dark:bg-neutral-900'
   },
   {
-    icon: 'i-lucide-users',
     title: 'UX Designer',
     description: 'Crafting intuitive experiences through research, testing, and a deep understanding of user needs.',
-    gradient: 'from-orange-500 to-rose-600'
+    colorFilter: 'hue-rotate-[10deg] saturate-[1.5] brightness-[1.1]', // Orange/Rose tones
+    bgColor: 'bg-[#fcfcfc] dark:bg-neutral-900'
   }
 ]
 </script>
@@ -61,18 +61,19 @@ const services = [
     </div>
 
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Section header -->
+      <!-- Section Header -->
       <Motion
         :initial="{ opacity: 0, y: 20 }"
         :while-in-view="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.5 }"
         :in-view-options="{ once: true }"
-        class="text-center mb-12"
       >
-        <h2 class="text-2xl sm:text-3xl font-medium mb-4">What I do</h2>
-        <p class="text-muted max-w-xl mx-auto">
-          Bridging the gap between design and development to create exceptional digital experiences.
-        </p>
+        <div class="mb-[66px]">
+          <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
+            Services
+          </h2>
+          <div class="h-[2px] w-[50px] bg-[#a2a2a2]" />
+        </div>
       </Motion>
 
       <!-- Service cards -->
@@ -85,22 +86,44 @@ const services = [
           :transition="{ duration: 0.5, delay: index * 0.1 }"
           :in-view-options="{ once: true }"
         >
-          <div class="group relative p-6 rounded-2xl bg-default/90 dark:bg-elevated/90 backdrop-blur-sm border border-default/50 transition-all duration-300 hover:border-default hover:shadow-xl hover:shadow-neutral-950/5 h-full">
-            <!-- Icon -->
-            <div
-              class="inline-flex items-center justify-center size-12 rounded-xl mb-4 bg-linear-to-br text-white"
-              :class="service.gradient"
-            >
-              <UIcon :name="service.icon" class="size-6" />
+          <div 
+            class="group relative overflow-hidden rounded-[10px] border border-[#f1f5f9] dark:border-gray-700 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] hover:shadow-xl transition-all duration-300 aspect-square"
+            :class="service.bgColor"
+          >
+            <!-- Mesh gradient background with mask -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+              <div 
+                class="absolute -left-[50%] -top-[10%] w-[200%] h-[120%] transition-transform duration-700 group-hover:scale-105"
+                :class="service.colorFilter"
+              >
+                <div 
+                  class="w-full h-full"
+                  style="
+                    background-image: url('/services/mesh-gradient.png');
+                    background-size: cover;
+                    background-position: center;
+                    -webkit-mask-image: url('/services/mesh-mask.png');
+                    mask-image: url('/services/mesh-mask.png');
+                    -webkit-mask-size: 50%;
+                    mask-size: 50%;
+                    -webkit-mask-position: 25% 20%;
+                    mask-position: 25% 20%;
+                    -webkit-mask-repeat: no-repeat;
+                    mask-repeat: no-repeat;
+                    opacity: 0.85;
+                  "
+                />
+              </div>
             </div>
 
-            <!-- Content -->
-            <h3 class="text-lg font-medium mb-2">{{ service.title }}</h3>
-            <p class="text-muted text-sm leading-relaxed">{{ service.description }}</p>
-
-            <!-- Decorative corner -->
-            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <UIcon name="i-lucide-arrow-up-right" class="size-4 text-muted" />
+            <!-- Content positioned at bottom -->
+            <div class="absolute bottom-6 right-4 left-4 flex flex-col gap-3 z-10">
+              <h3 class="font-bold text-[18px] text-primary-custom dark:text-white uppercase tracking-tight">
+                {{ service.title }}
+              </h3>
+              <p class="text-[16px] text-[rgba(138,138,138,0.99)] dark:text-gray-400 leading-relaxed text-center">
+                {{ service.description }}
+              </p>
             </div>
           </div>
         </Motion>
