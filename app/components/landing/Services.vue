@@ -1,65 +1,71 @@
 <script setup lang="ts">
-const services = [
+interface Service {
+  id: string
+  title: string
+  description: string
+  textPosition: 'top-right' | 'bottom-left' | 'bottom-right'
+  waveImage: string
+  waveStyles: Record<string, string>
+}
+
+const services: Service[] = [
   {
-    title: 'UI Designer',
-    description: 'Creating beautiful, cohesive visual systems that elevate brands and delight users with every interaction.',
-    colorFilter: 'hue-rotate-[280deg] saturate-[1.4] brightness-[1.1]', // Violet/Purple tones
-    bgColor: 'bg-[#fcfcfc] dark:bg-neutral-900'
+    id: 'ux-ui',
+    title: 'UX/UI DESIGN',
+    description: 'Sitios web optimizados que convierten visitantes en clientes',
+    textPosition: 'bottom-left',
+    waveImage: '/services/service-1-waves.svg',
+    waveStyles: {
+      width: '150%',
+      height: '150%',
+      top: '-35%',
+      left: '-55%',
+      transform: 'rotate(0deg)'
+    }
   },
   {
-    title: 'UI Developer',
-    description: 'Translating designs into performant, accessible code using modern frameworks and best practices.',
-    colorFilter: 'hue-rotate-[190deg] saturate-[1.3] brightness-[1.05]', // Cyan/Blue tones
-    bgColor: 'bg-[#fcfcfc] dark:bg-neutral-900'
+    id: 'frontend',
+    title: 'FRONTEND DEVELOPMENT',
+    description: 'To enhance workflows and create smarter digital products',
+    textPosition: 'top-right',
+    waveImage: '/services/service-2-waves.svg',
+    waveStyles: {
+      width: '160%',
+      height: '160%',
+      bottom: '-45%',
+      left: '-65%',
+      transform: 'scaleY(-1)'
+    }
   },
   {
-    title: 'UX Designer',
-    description: 'Crafting intuitive experiences through research, testing, and a deep understanding of user needs.',
-    colorFilter: 'hue-rotate-[10deg] saturate-[1.5] brightness-[1.1]', // Orange/Rose tones
-    bgColor: 'bg-[#fcfcfc] dark:bg-neutral-900'
+    id: 'ai',
+    title: 'AI INTEGRATION',
+    description: 'To enhance workflows and create smarter digital products',
+    textPosition: 'bottom-right',
+    waveImage: '/services/service-3-waves.svg',
+    waveStyles: {
+      width: '150%',
+      height: '150%',
+      top: '-30%',
+      right: '-55%',
+      transform: 'scaleX(-1)'
+    }
   }
 ]
+
+// Text position classes based on Figma design
+const getTextPositionClasses = (position: Service['textPosition']) => {
+  const positions = {
+    'top-right': 'top-[52px] right-[15px] left-[44px] items-end text-right',
+    'bottom-left': 'bottom-[37px] right-[36px] left-[23px] items-start text-left',
+    'bottom-right': 'bottom-[37px] right-[9px] left-[36px] items-end text-right'
+  }
+  return positions[position]
+}
 </script>
 
 <template>
   <section class="py-16 sm:py-24 relative overflow-hidden">
-    <!-- Wavy gradient background -->
-    <div class="absolute inset-0 pointer-events-none">
-      <svg
-        class="absolute w-full h-full opacity-50 dark:opacity-30"
-        viewBox="0 0 1440 800"
-        preserveAspectRatio="none"
-        fill="none"
-      >
-        <defs>
-          <linearGradient id="services-wave-gradient" x1="0%" y1="50%" x2="100%" y2="50%">
-            <stop offset="0%" stop-color="rgb(221 214 254 / 0.6)" />
-            <stop offset="25%" stop-color="rgb(233 213 255 / 0.5)" />
-            <stop offset="50%" stop-color="rgb(251 207 232 / 0.5)" />
-            <stop offset="75%" stop-color="rgb(254 215 170 / 0.4)" />
-            <stop offset="100%" stop-color="rgb(254 226 226 / 0.3)" />
-          </linearGradient>
-        </defs>
-        <!-- Top wave -->
-        <path
-          d="M0,100 C240,50 480,150 720,100 C960,50 1200,120 1440,80 L1440,0 L0,0 Z"
-          fill="url(#services-wave-gradient)"
-          opacity="0.5"
-        />
-        <!-- Main fill -->
-        <path
-          d="M0,100 C240,50 480,150 720,100 C960,50 1200,120 1440,80 L1440,720 C1200,680 960,750 720,700 C480,650 240,750 0,700 Z"
-          fill="url(#services-wave-gradient)"
-        />
-        <!-- Bottom wave -->
-        <path
-          d="M0,700 C240,750 480,650 720,700 C960,750 1200,680 1440,720 L1440,800 L0,800 Z"
-          fill="url(#services-wave-gradient)"
-          opacity="0.5"
-        />
-      </svg>
-    </div>
-
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
       <Motion
@@ -76,52 +82,45 @@ const services = [
         </div>
       </Motion>
 
-      <!-- Service cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Service cards grid - gap matches Figma (96px) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-[96px]">
         <Motion
           v-for="(service, index) in services"
-          :key="service.title"
+          :key="service.id"
           :initial="{ opacity: 0, y: 30 }"
           :while-in-view="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.5, delay: index * 0.1 }"
+          :transition="{ duration: 0.5, delay: index * 0.15 }"
           :in-view-options="{ once: true }"
         >
+          <!-- Card container - 340x341 like Figma -->
           <div 
-            class="group relative overflow-hidden rounded-[10px] border border-[#f1f5f9] dark:border-gray-700 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] hover:shadow-xl transition-all duration-300 aspect-square"
-            :class="service.bgColor"
+            class="service-card group relative overflow-hidden rounded-[10px] border border-[#f1f5f9] dark:border-gray-700/50 bg-[#fcfcfc] dark:bg-neutral-900 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] hover:shadow-xl transition-all duration-500"
+            style="aspect-ratio: 340/341;"
           >
-            <!-- Mesh gradient background with mask -->
-            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <!-- Wave Background Image -->
+            <div class="absolute inset-0 pointer-events-none overflow-hidden">
               <div 
-                class="absolute -left-[50%] -top-[10%] w-[200%] h-[120%] transition-transform duration-700 group-hover:scale-105"
-                :class="service.colorFilter"
+                class="service-wave absolute transition-transform duration-700 ease-out group-hover:scale-105"
+                :style="service.waveStyles"
               >
-                <div 
-                  class="w-full h-full"
-                  style="
-                    background-image: url('/services/mesh-gradient.png');
-                    background-size: cover;
-                    background-position: center;
-                    -webkit-mask-image: url('/services/mesh-mask.png');
-                    mask-image: url('/services/mesh-mask.png');
-                    -webkit-mask-size: 50%;
-                    mask-size: 50%;
-                    -webkit-mask-position: 25% 20%;
-                    mask-position: 25% 20%;
-                    -webkit-mask-repeat: no-repeat;
-                    mask-repeat: no-repeat;
-                    opacity: 0.85;
-                  "
+                <img 
+                  :src="service.waveImage" 
+                  :alt="`${service.title} decoration`"
+                  class="w-full h-full object-contain dark:opacity-70"
+                  loading="lazy"
                 />
               </div>
             </div>
 
-            <!-- Content positioned at bottom -->
-            <div class="absolute bottom-6 right-4 left-4 flex flex-col gap-3 z-10">
-              <h3 class="font-bold text-[18px] text-primary-custom dark:text-white uppercase tracking-tight">
+            <!-- Content -->
+            <div 
+              class="absolute flex flex-col gap-[11px] z-10"
+              :class="getTextPositionClasses(service.textPosition)"
+            >
+              <h3 class="font-bold text-[18px] text-[#45556c] dark:text-white uppercase tracking-tight font-sans">
                 {{ service.title }}
               </h3>
-              <p class="text-[16px] text-[rgba(138,138,138,0.99)] dark:text-gray-400 leading-relaxed text-center">
+              <p class="text-[16px] text-[rgba(138,138,138,0.99)] dark:text-gray-400 leading-relaxed">
                 {{ service.description }}
               </p>
             </div>
@@ -131,3 +130,48 @@ const services = [
     </div>
   </section>
 </template>
+
+<style scoped>
+/* Base wave animation setup - ready for future animation */
+.service-wave {
+  will-change: transform;
+}
+
+/* Hover animation */
+.service-card:hover .service-wave {
+  animation: wave-float 4s ease-in-out infinite;
+}
+
+/* Animation keyframes */
+@keyframes wave-float {
+  0%, 100% {
+    transform: var(--wave-base-transform) translateY(0);
+  }
+  50% {
+    transform: var(--wave-base-transform) translateY(-8px);
+  }
+}
+
+/* Store base transform for animation */
+.service-card:nth-child(1) .service-wave {
+  --wave-base-transform: rotate(0deg);
+}
+
+.service-card:nth-child(2) .service-wave {
+  --wave-base-transform: scaleY(-1);
+}
+
+.service-card:nth-child(3) .service-wave {
+  --wave-base-transform: scaleX(-1);
+}
+
+/* Continuous animation class - add to parent to activate permanent animation */
+.animate-waves .service-wave {
+  animation: wave-float 6s ease-in-out infinite;
+}
+
+/* Dark mode adjustments */
+.dark .service-card {
+  background: linear-gradient(135deg, rgba(23, 23, 23, 1) 0%, rgba(38, 38, 38, 0.8) 100%);
+}
+</style>

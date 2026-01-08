@@ -5,6 +5,7 @@ interface SocialLink {
   url: string
   label: string
   hoverColor: string
+  colorIcon?: string // Path to color version of the icon (optional)
 }
 
 const socialLinks: SocialLink[] = [
@@ -34,7 +35,8 @@ const socialLinks: SocialLink[] = [
     icon: 'i-simple-icons-figma',
     url: 'https://figma.com/@yourprofile',
     label: 'Ver diseños en Figma',
-    hoverColor: '#F24E1E'
+    hoverColor: '#F24E1E',
+    colorIcon: '/tech-icons/figma-color.svg'
   },
   {
     name: 'Behance',
@@ -79,10 +81,20 @@ const socialLinks: SocialLink[] = [
         :style="{ '--hover-color': social.hoverColor } as any"
         class="social-icon group relative flex items-center justify-center size-14 rounded-lg transition-all duration-300"
       >
+        <!-- Default icon (hidden on hover if colorIcon exists) -->
         <UIcon
           :name="social.icon"
           class="social-icon-svg size-8 text-[#ABB2BF] transition-all duration-300 group-hover:scale-110"
+          :class="{ 'group-hover:opacity-0': social.colorIcon }"
         />
+
+        <!-- Color icon (shown on hover) -->
+        <img
+          v-if="social.colorIcon"
+          :src="social.colorIcon"
+          :alt="social.name"
+          class="absolute size-8 scale-75 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 pointer-events-none"
+        >
 
         <!-- Tooltip -->
         <span
@@ -111,12 +123,22 @@ const socialLinks: SocialLink[] = [
         rel="noopener noreferrer"
         :aria-label="social.label"
         :style="{ '--hover-color': social.hoverColor } as any"
-        class="social-icon flex items-center justify-center size-10 rounded-full transition-all duration-200 active:scale-95"
+        class="social-icon group relative flex items-center justify-center size-10 rounded-full transition-all duration-200 active:scale-95"
       >
+        <!-- Default icon (hidden on hover/active if colorIcon exists) -->
         <UIcon
           :name="social.icon"
           class="social-icon-svg size-6 text-[#ABB2BF] transition-all duration-200 group-hover:scale-110"
+          :class="{ 'group-hover:opacity-0 group-active:opacity-0': social.colorIcon }"
         />
+
+        <!-- Color icon (shown on hover/active) -->
+        <img
+          v-if="social.colorIcon"
+          :src="social.colorIcon"
+          :alt="social.name"
+          class="absolute size-6 scale-75 opacity-0 group-hover:opacity-100 group-active:opacity-100 group-hover:scale-110 group-active:scale-110 transition-all duration-200 pointer-events-none"
+        >
       </ULink>
     </nav>
   </div>
@@ -160,9 +182,10 @@ const socialLinks: SocialLink[] = [
   }
 }
 
-/* Brand color on hover */
-.social-icon:hover .social-icon-svg {
-  color: var(--hover-color);
+/* Brand color on hover - using !important to override Tailwind text color */
+.social-icon:hover .social-icon-svg,
+.social-icon:active .social-icon-svg {
+  color: var(--hover-color) !important;
 }
 
 /* Focus visible for accessibility */

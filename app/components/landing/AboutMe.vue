@@ -41,28 +41,28 @@ const certifications = [
     organization: 'Memorisely',
     type: 'On-line',
     year: '2025',
-    logo: 'https://www.figma.com/api/mcp/asset/c185ac0a-61e0-41d1-8fe9-8d1ade0be653'
+    logo: '/certifications/memorisely-logo.png'
   },
   {
     title: 'JavaScript Algorithms and Data Structures',
     organization: 'Free Code Camp',
     type: 'On-line',
     year: '2025',
-    logo: 'https://www.figma.com/api/mcp/asset/cb19bfbd-a402-4d4f-93fd-2ddd30eaab42'
+    logo: '/certifications/freecodecamp-logo.png'
   },
   {
     title: 'Intro to Vue 3',
     organization: 'Vue Mastery',
     type: 'On-line',
     status: 'Ongoing',
-    logo: 'https://www.figma.com/api/mcp/asset/8bb72603-d6ef-4d82-96bb-02e164fbd94b'
+    logo: '/certifications/vuemastery-logo.png'
   },
   {
     title: 'Programación con JavaScript- Meta',
     organization: 'Coursera',
     type: 'On-line',
     status: 'Ongoing',
-    logo: 'https://www.figma.com/api/mcp/asset/dd91aa2b-7bea-4ea1-8101-bd1a3565b039'
+    logo: '/certifications/coursera-logo.png'
   }
 ]
 </script>

@@ -69,7 +69,7 @@ const techLogos = [
           Building modern,
           <br>
           accessible
-          <span class="font-serif font-bold italic"> digital products</span>
+          <span class="font-semibold italic"> digital products</span>
         </h1>
       </Motion>
 
