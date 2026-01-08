@@ -21,11 +21,11 @@ const isScrolled = computed(() => scrollY.value > 20)
         <!-- Logo -->
         <NuxtLink
           to="/"
-          class="relative flex items-center group"
+          class="relative flex items-center justify-center group h-10"
         >
           <!-- Decorative dot -->
-          <div class="absolute -top-1 left-1 size-2 rounded-full bg-violet-500" />
-          <div class="text-3xl font-semibold text-foreground tracking-tight transition-transform group-hover:scale-105">
+          <div class="absolute -top-0.5 left-1 size-2 rounded-full bg-violet-500" />
+          <div class="text-3xl font-semibold text-foreground tracking-tight transition-transform group-hover:scale-105 leading-none">
             AG
           </div>
         </NuxtLink>
@@ -46,14 +46,14 @@ const isScrolled = computed(() => scrollY.value > 20)
 
         <!-- Right side - CTA Button & Color Mode -->
         <div class="flex items-center gap-3">
+          <ColorModeButton class="hidden sm:flex" />
+          
           <UButton
             label="HIRE ME"
             :to="`mailto:${global.email}`"
             class="hidden sm:flex rounded-full font-semibold bg-gradient-to-r from-violet-500 via-fuchsia-500 to-orange-400 hover:opacity-90 transition-opacity px-7 py-3 text-base"
             size="md"
           />
-          
-          <ColorModeButton class="hidden sm:flex" />
 
           <!-- Mobile menu button -->
           <UButton

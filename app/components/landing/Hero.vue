@@ -53,23 +53,19 @@ const techLogos = [
         :initial="{ opacity: 0, y: 30 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.7, delay: 0.1 }"
-        class="relative"
       >
-        <!-- Gradient glow behind "digital products" -->
-        <div
-          class="absolute left-[28%] sm:left-[32%] lg:left-[38%] top-[78%] sm:top-[80%] lg:top-[78%] w-[280px] sm:w-[350px] lg:w-[480px] h-[35px] sm:h-[40px] lg:h-[45px] -translate-y-1/2 pointer-events-none"
-        >
-          <div
-            class="w-full h-full rounded-full opacity-60 blur-lg"
-            style="background: linear-gradient(90deg, #ffb86a 0%, #dab2ff 50%, #c27aff 100%)"
-          />
-        </div>
-
-        <h1 class="relative text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-medium tracking-tight leading-[1.15] text-primary-custom dark:text-gray-200">
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-medium tracking-tight leading-[1.15] text-primary-custom dark:text-gray-200">
           Building modern,
           <br>
           accessible
-          <span class="font-semibold italic"> digital products</span>
+          <span class="relative font-semibold italic">
+            <!-- Gradient glow behind "digital products" -->
+            <span
+              class="absolute inset-0 -inset-x-2 rounded-full opacity-60 blur-lg pointer-events-none"
+              style="background: linear-gradient(90deg, #ffb86a 0%, #dab2ff 50%, #c27aff 100%)"
+            />
+            <span class="relative"> digital products</span>
+          </span>
         </h1>
       </Motion>
 

@@ -1,40 +1,7 @@
 <script setup lang="ts">
-const projects = [
-  {
-    title: 'DeFi Dashboard',
-    description: 'Redesigning the data visualization experience for a leading fintech platform.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    url: '#',
-    tags: ['UX Design', 'UI Design'],
-    date: '2024'
-  },
-  {
-    title: 'DeFi Dashboard',
-    description: 'Redesigning the data visualization experience for a leading fintech platform.',    
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    url: '#',
-    tags: ['Developer Tools', 'UX Design', 'Nuxt', 'Design System', 'Internal Tools'],
-    date: '2024'
-  },
-  {
-    title: 'EcoTrack Sustainability App',
-    description: 'Created a mobile-first application to help users track and reduce their environmental impact. Translated complex sustainability metrics into an accessible and motivating user interface.',
-    image: 'https://images.unsplash.com/photo-1613858749733-3a3e456e3d9e?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    url: '#',
-    tags: ['UX Research', 'UI Design', 'Mobile App'],
-    date: '2023'
-  },
-  {
-    title: 'Wavelength Music Streaming Service',
-    description: 'Designed and developed the user interface for an indie music streaming service, focusing on discovery features and creating a unique, engaging listening experience using custom audio visualizations.',
-    image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-    url: '#',
-    tags: ['UI Design', 'Front-End Dev', 'Animation'],
-    date: '2023'
-  }
-]
+import { projects } from '~/data/projects'
 
-// Split projects into categories
+// Show first 4 projects on landing page
 const selfProjects = computed(() => projects.slice(0, 4))
 </script>
 
@@ -72,7 +39,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
             class="w-full"
           >
             <NuxtLink
-              :to="selfProjects[0]?.url"
+              :to="selfProjects[0]?.links?.preview || '#'"
               class="group block h-full"
             >
               <div>
@@ -113,7 +80,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
             class="w-full"
           >
             <NuxtLink
-              :to="selfProjects[1]?.url"
+              :to="selfProjects[1]?.links?.preview || '#'"
               class="group block"
             >
               <div>
@@ -157,7 +124,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
             class="w-full"
           >
             <NuxtLink
-              :to="selfProjects[2]?.url"
+              :to="selfProjects[2]?.links?.preview || '#'"
               class="group block"
             >
               <div>
@@ -198,7 +165,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
             class="w-full"
           >
             <NuxtLink
-              :to="selfProjects[3]?.url"
+              :to="selfProjects[3]?.links?.preview || '#'"
               class="group block h-full"
             >
               <div>
