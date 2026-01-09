@@ -65,7 +65,7 @@ const getTextPositionClasses = (position: Service['textPosition']) => {
 </script>
 
 <template>
-  <section class="py-16 sm:py-24 relative overflow-hidden">
+  <section id="services" class="py-16 sm:py-24 relative overflow-hidden">
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
       <Motion

@@ -5,7 +5,7 @@ export const navLinks: NavigationMenuItem[] = [{
   to: '/#services'
 }, {
   label: 'projects',
-  to: '/projects'
+  to: '/#projects'
 }, {
   label: 'about',
   to: '/#about'

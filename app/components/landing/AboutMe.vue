@@ -68,7 +68,7 @@ const certifications = [
 </script>
 
 <template>
-  <section class="py-10 sm:py-14 bg-[#f8fafc]">
+  <section id="about" class="py-10 sm:py-14 bg-[#f8fafc]">
     <div class="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-[155px]">
       <!-- Section Header -->
       <Motion
@@ -77,52 +77,41 @@ const certifications = [
         :transition="{ duration: 0.5 }"
         :in-view-options="{ once: true }"
       >
-        <div class="mb-[66px]">
-          <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
-            About
-          </h2>
-          <div class="h-[2px] w-[50px] bg-[#a2a2a2]" />
-        </div>
-      </Motion>
-
-      <!-- Main Content with Buttons -->
-      <div class="relative mb-[121px]">
-        <!-- Action Buttons - Positioned Top Right -->
-        <div class="absolute right-0 top-0 flex flex-col gap-5 w-[181px] z-10">
-          <Motion
-            :initial="{ opacity: 0, y: 20 }"
-            :while-in-view="{ opacity: 1, y: 0 }"
-            :transition="{ duration: 0.5, delay: 0.1 }"
-            :in-view-options="{ once: true }"
-          >
-            <button class="w-full h-[41px] px-3 py-1.5 bg-gradient-to-r from-[#09090b] to-[#09090b] border-[0.75px] border-[rgba(255,255,255,0.3)] rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-2.5 text-white text-base font-normal">
+        <div class="mb-[66px] flex items-center justify-between">
+          <div>
+            <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
+              About
+            </h2>
+            <div class="h-[2px] w-[50px] bg-[#a2a2a2]" />
+          </div>
+          
+          <!-- Action Buttons -->
+          <div class="flex flex-row gap-3">
+            <button class="h-[41px] px-3 py-1.5 bg-gradient-to-r from-[#09090b] to-[#09090b] border-[0.75px] border-[rgba(255,255,255,0.3)] rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-2.5 text-white text-base font-normal whitespace-nowrap">
               <UIcon name="i-lucide-download" class="size-3.5" />
               <span>Download CV</span>
             </button>
-          </Motion>
-          
-          <Motion
-            :initial="{ opacity: 0, y: 20 }"
-            :while-in-view="{ opacity: 1, y: 0 }"
-            :transition="{ duration: 0.5, delay: 0.15 }"
-            :in-view-options="{ once: true }"
-          >
+            
             <a
               href="https://cv.ailengonzalez.ar/"
               target="_blank"
               rel="noopener noreferrer"
-              class="w-full h-[41px] px-3 py-1.5 bg-white rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-1 text-black text-base font-normal hover:bg-gray-50 transition-colors"
+              class="h-[41px] px-3 py-1.5 bg-white rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-1 text-black text-base font-normal hover:bg-gray-50 transition-colors whitespace-nowrap"
             >
               <UIcon name="i-lucide-arrow-up-right" class="size-[22px]" />
               <span>Explore all CV</span>
             </a>
-          </Motion>
+          </div>
         </div>
+      </Motion>
+
+      <!-- Main Content -->
+      <div class="relative mb-[121px]">
 
         <!-- Two Column Layout -->
-        <div class="flex gap-14 pr-[230px]">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-14">
           <!-- Left Column -->
-          <div class="flex-1 max-w-[551px] space-y-[41px]">
+          <div class="space-y-[41px]">
             <!-- Design + Code Section -->
             <Motion
               :initial="{ opacity: 0, y: 20 }"
@@ -151,7 +140,7 @@ const certifications = [
                 Work Experience
               </h3>
               
-              <div class="space-y-10 max-w-[456px]">
+              <div class="space-y-10">
                 <div
                   v-for="(job, index) in workExperience"
                   :key="index"
@@ -178,7 +167,7 @@ const certifications = [
           </div>
 
           <!-- Right Column -->
-          <div class="flex-1 max-w-[456px] space-y-10">
+          <div class="space-y-10">
             <!-- Skills Section -->
             <Motion
               :initial="{ opacity: 0, y: 20 }"

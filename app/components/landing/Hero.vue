@@ -93,32 +93,14 @@ const techLogos = [
         </div>
 
         <!-- Gradient Border Button -->
-        <a
-          href="#projects"
-          class="group relative flex items-center justify-center h-[53px] px-10 rounded-full overflow-hidden cursor-pointer transition-transform duration-200 hover:scale-105"
-          style="background: linear-gradient(-89deg, rgba(255, 177, 71, 0.1) 5.74%, rgba(255, 108, 99, 0.1) 50.64%, rgba(184, 106, 223, 0.1) 92.05%)"
+        <NuxtLink
+          to="/projects"
+          class="btn-gradient inline-block"
         >
-          <!-- Gradient border -->
-          <span
-            class="absolute inset-0 rounded-full border-[3px] border-transparent"
-            style="background: linear-gradient(white, white) padding-box, linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%) border-box"
-          />
-          <span
-            class="dark:hidden absolute inset-0 rounded-full border-[3px] border-transparent"
-            style="background: linear-gradient(white, white) padding-box, linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%) border-box"
-          />
-          <span
-            class="hidden dark:block absolute inset-0 rounded-full border-[3px] border-transparent"
-            style="background: linear-gradient(#111827, #111827) padding-box, linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%) border-box"
-          />
-          <!-- Gradient text -->
-          <span
-            class="relative font-semibold text-lg sm:text-xl capitalize bg-clip-text text-transparent"
-            style="background-image: linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%)"
-          >
+          <span class="btn-gradient-text relative z-10">
             Explore Projects
           </span>
-        </a>
+        </NuxtLink>
       </Motion>
     </div>
   </section>

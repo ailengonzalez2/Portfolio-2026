@@ -20,6 +20,5 @@ useSeoMeta({
     <LandingServices />
     <LandingAboutMe />
     <LandingWeb3Quote />
-    <LandingContact />
   </UPage>
 </template>
