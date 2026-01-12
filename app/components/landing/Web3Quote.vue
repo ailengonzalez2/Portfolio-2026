@@ -3,6 +3,15 @@
 
 <template>
   <section class="py-20 sm:py-32 relative overflow-hidden">
+    <!-- Background Image - full width horizontal -->
+    <div class="absolute left-0 bottom-0 w-full h-auto pointer-events-none">
+      <img
+        src="/background-lines-lila.png"
+        alt=""
+        class="w-full h-auto object-cover opacity-40"
+      />
+    </div>
+    
     <!-- Background subtle gradient -->
     <div class="absolute inset-0 bg-linear-to-b from-transparent via-elevated/30 to-transparent pointer-events-none" />
 

@@ -1,8 +1,22 @@
 <script setup lang="ts">
+import { useWindowScroll, useWindowSize } from '@vueuse/core'
+
 const { global } = useAppConfig()
 const year = new Date().getFullYear()
 
 const { copy, copied } = useClipboard()
+
+// Scroll detection - same logic as SocialSidebar for synchronized animation
+const { y } = useWindowScroll()
+const { height } = useWindowSize()
+
+const isExpanded = computed(() => {
+  if (!import.meta.client) return false
+  const scrollHeight = document.documentElement.scrollHeight
+  const scrollPosition = y.value + height.value
+  // Expand when within 200px of the bottom (matches SocialSidebar)
+  return scrollPosition >= scrollHeight - 200
+})
 </script>
 
 <template>
@@ -13,8 +27,19 @@ const { copy, copied } = useClipboard()
       <div class="absolute inset-0 bg-linear-to-b from-transparent via-elevated/20 to-transparent pointer-events-none" />
 
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Container with flex column and gap to prevent overlap -->
-        <div class="flex flex-col gap-8 sm:gap-10 lg:gap-12">
+        <!-- Container with flex row for arrow and text -->
+        <div class="flex flex-col lg:flex-row items-center lg:items-end justify-end gap-8 lg:gap-12 xl:gap-16">
+          <!-- Arrow pointing to social sidebar - animates with sidebar expansion -->
+          <div class="flex justify-end">
+            <img
+              src="/arrow-footer.png"
+              alt=""
+              aria-hidden="true"
+              class="arrow-reveal w-2/4 h-auto object-contain"
+              :class="isExpanded ? 'revealed' : ''"
+            >
+          </div>
+
           <!-- Main heading -->
           <Motion
             :initial="{ opacity: 0, y: 30 }"
@@ -22,7 +47,7 @@ const { copy, copied } = useClipboard()
             :transition="{ duration: 0.6 }"
             :in-view-options="{ once: true }"
           >
-            <h2 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-medium tracking-wide leading-tight text-right">
+            <h2 class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-display font-medium tracking-wide leading-tight text-right">
               Happy to connect
             </h2>
           </Motion>
@@ -60,3 +85,14 @@ const { copy, copied } = useClipboard()
     </div>
   </footer>
 </template>
+
+<style scoped>
+.arrow-reveal {
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path 1.2s ease-out;
+}
+
+.arrow-reveal.revealed {
+  clip-path: inset(0 0 0 0);
+}
+</style>
