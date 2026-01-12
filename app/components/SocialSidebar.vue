@@ -10,6 +10,7 @@ interface SocialLink {
   gradientTo: string
   colorIcon?: string // Path to color version of the icon (optional)
   hideInExpanded?: boolean // Hide this link in the expanded animation
+  showOnlyInExpanded?: boolean // Only show this link in the expanded animation
 }
 
 const socialLinks: SocialLink[] = [
@@ -29,6 +30,15 @@ const socialLinks: SocialLink[] = [
     brandColor: '#24292e',
     gradientTo: '#4c5157',
     hideInExpanded: true
+  },
+  {
+    name: 'Upwork',
+    icon: 'i-simple-icons-upwork',
+    url: 'https://www.upwork.com/freelancers/~yourprofile',
+    label: 'Contratar en Upwork',
+    brandColor: '#14a800',
+    gradientTo: '#6fda44',
+    showOnlyInExpanded: true
   },
   {
     name: 'GitHub',
@@ -76,6 +86,34 @@ const isExpanded = computed(() => {
   // Expand when within 200px of the bottom
   return scrollPosition >= scrollHeight - 200
 })
+
+// Delayed state for icon swap - waits for collapse animation to finish
+const isExpandedForSwap = ref(false)
+let swapTimeout: ReturnType<typeof setTimeout> | null = null
+
+watch(isExpanded, (newVal) => {
+  if (swapTimeout) clearTimeout(swapTimeout)
+
+  if (newVal) {
+    // Expanding: swap immediately
+    isExpandedForSwap.value = true
+  } else {
+    // Collapsing: delay the swap to let collapse animation finish
+    swapTimeout = setTimeout(() => {
+      isExpandedForSwap.value = false
+    }, 600) // Wait for collapse animation
+  }
+}, { immediate: true })
+
+// Filter links based on delayed expanded state for swap
+const visibleLinks = computed(() => {
+  return socialLinks.filter(link => {
+    if (isExpandedForSwap.value) {
+      return !link.hideInExpanded
+    }
+    return !link.showOnlyInExpanded
+  })
+})
 </script>
 
 <template>
@@ -95,22 +133,22 @@ const isExpanded = computed(() => {
       class="flex flex-col items-start gap-3 py-2"
       aria-label="Redes sociales"
     >
-      <ULink
-        v-for="(social, index) in socialLinks"
-        v-show="!(isExpanded && social.hideInExpanded)"
-        :key="social.name"
-        :to="social.url"
-        target="_blank"
-        rel="noopener noreferrer"
-        :aria-label="social.label"
-        :style="{
-          '--brand-color': social.brandColor,
-          '--gradient-to': social.gradientTo,
-          '--animation-delay': `${index * 60}ms`
-        } as any"
-        class="social-link group relative h-14 transition-all duration-500 ease-out"
-        :class="isExpanded ? 'expanded-link' : 'collapsed-link'"
-      >
+      <TransitionGroup name="social-swap">
+        <ULink
+          v-for="(social, index) in visibleLinks"
+          :key="social.name"
+          :to="social.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          :aria-label="social.label"
+          :style="{
+            '--brand-color': social.brandColor,
+            '--gradient-to': social.gradientTo,
+            '--animation-delay': `${index * 60}ms`
+          } as any"
+          class="social-link group relative h-14 transition-all duration-500 ease-out"
+          :class="isExpanded ? 'expanded-link' : 'collapsed-link'"
+        >
         <!-- Background pill (positioned behind icon, only visible when expanded) -->
         <div
           class="pill-background absolute top-1 left-5 h-12 flex items-center justify-center rounded-r-full transition-all duration-500 ease-out shadow-md"
@@ -168,6 +206,7 @@ const isExpanded = computed(() => {
           {{ social.name }}
         </span>
       </ULink>
+      </TransitionGroup>
     </nav>
   </aside>
 
@@ -182,6 +221,7 @@ const isExpanded = computed(() => {
     >
       <ULink
         v-for="social in socialLinks"
+        v-show="!social.showOnlyInExpanded"
         :key="social.name"
         :to="social.url"
         target="_blank"
@@ -245,6 +285,32 @@ const isExpanded = computed(() => {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
   }
+}
+
+/* Social swap transition for CV/Upwork */
+.social-swap-enter-active {
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-swap-leave-active {
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+}
+
+.social-swap-enter-from {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.social-swap-leave-to {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.social-swap-move {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Base link styles */
