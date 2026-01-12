@@ -105,9 +105,13 @@ watch(isExpanded, (newVal) => {
   }
 }, { immediate: true })
 
+onBeforeUnmount(() => {
+  if (swapTimeout) clearTimeout(swapTimeout)
+})
+
 // Filter links based on delayed expanded state for swap
 const visibleLinks = computed(() => {
-  return socialLinks.filter(link => {
+  return socialLinks.filter((link) => {
     if (isExpandedForSwap.value) {
       return !link.hideInExpanded
     }
@@ -149,63 +153,63 @@ const visibleLinks = computed(() => {
           class="social-link group relative h-14 transition-all duration-500 ease-out"
           :class="isExpanded ? 'expanded-link' : 'collapsed-link'"
         >
-        <!-- Background pill (positioned behind icon, only visible when expanded) -->
-        <div
-          class="pill-background absolute top-1 left-5 h-12 flex items-center justify-center rounded-r-full transition-all duration-500 ease-out shadow-md"
-          :class="isExpanded ? 'w-52 opacity-100 pl-10 pr-6' : 'w-0 opacity-0 pl-0 pr-0'"
-          :style="{
-            background: `linear-gradient(to right, var(--brand-color), var(--gradient-to))`,
-            transitionDelay: isExpanded ? '0ms' : '0ms'
-          }"
-        >
-          <!-- Text label centered in pill -->
-          <span
-            class="social-label text-white text-sm font-medium tracking-[0.15em] uppercase whitespace-nowrap transition-all duration-300 text-center w-full"
-            :class="isExpanded ? 'opacity-100' : 'opacity-0'"
-            :style="{ 
-              transitionDelay: isExpanded ? `calc(var(--animation-delay) + 150ms)` : '0ms',
-              textShadow: '0px 1px 4px rgba(0,0,0,0.15)'
+          <!-- Background pill (positioned behind icon, only visible when expanded) -->
+          <div
+            class="pill-background absolute top-1 left-5 h-12 flex items-center justify-center rounded-r-full transition-all duration-500 ease-out shadow-md"
+            :class="isExpanded ? 'w-52 opacity-100 pl-10 pr-6' : 'w-0 opacity-0 pl-0 pr-0'"
+            :style="{
+              background: `linear-gradient(to right, var(--brand-color), var(--gradient-to))`,
+              transitionDelay: isExpanded ? '0ms' : '0ms'
             }"
+          >
+            <!-- Text label centered in pill -->
+            <span
+              class="social-label text-white text-sm font-medium tracking-[0.15em] uppercase whitespace-nowrap transition-all duration-300 text-center w-full"
+              :class="isExpanded ? 'opacity-100' : 'opacity-0'"
+              :style="{
+                transitionDelay: isExpanded ? `calc(var(--animation-delay) + 150ms)` : '0ms',
+                textShadow: '0px 1px 4px rgba(0,0,0,0.15)'
+              }"
+            >
+              {{ social.name }}
+            </span>
+          </div>
+
+          <!-- Icon circle (overlaps the pill) -->
+          <div
+            class="icon-circle relative z-10 flex items-center justify-center size-14 rounded-full shrink-0 transition-all duration-500"
+            :class="isExpanded
+              ? 'shadow-[4px_0px_15px_0px_rgba(0,0,0,0.3)]'
+              : 'bg-transparent'"
+            :style="isExpanded ? { backgroundColor: social.brandColor } : {}"
+          >
+            <!-- Default icon -->
+            <UIcon
+              :name="social.icon"
+              class="social-icon-svg transition-all duration-300"
+              :class="[
+                isExpanded ? 'size-7 text-white' : 'size-8 text-[#ABB2BF] group-hover:scale-110',
+                { 'group-hover:opacity-0': social.colorIcon && !isExpanded }
+              ]"
+            />
+
+            <!-- Color icon (shown on hover when collapsed) -->
+            <img
+              v-if="social.colorIcon && !isExpanded"
+              :src="social.colorIcon"
+              :alt="social.name"
+              class="absolute size-8 scale-75 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 pointer-events-none"
+            >
+          </div>
+
+          <!-- Tooltip (only when collapsed) -->
+          <span
+            v-if="!isExpanded"
+            class="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-2 py-1 text-xs font-medium text-white bg-slate-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none z-20"
           >
             {{ social.name }}
           </span>
-        </div>
-
-        <!-- Icon circle (overlaps the pill) -->
-        <div
-          class="icon-circle relative z-10 flex items-center justify-center size-14 rounded-full shrink-0 transition-all duration-500"
-          :class="isExpanded 
-            ? 'shadow-[4px_0px_15px_0px_rgba(0,0,0,0.3)]' 
-            : 'bg-transparent'"
-          :style="isExpanded ? { backgroundColor: social.brandColor } : {}"
-        >
-          <!-- Default icon -->
-          <UIcon
-            :name="social.icon"
-            class="social-icon-svg transition-all duration-300"
-            :class="[
-              isExpanded ? 'size-7 text-white' : 'size-8 text-[#ABB2BF] group-hover:scale-110',
-              { 'group-hover:opacity-0': social.colorIcon && !isExpanded }
-            ]"
-          />
-
-          <!-- Color icon (shown on hover when collapsed) -->
-          <img
-            v-if="social.colorIcon && !isExpanded"
-            :src="social.colorIcon"
-            :alt="social.name"
-            class="absolute size-8 scale-75 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 pointer-events-none"
-          >
-        </div>
-
-        <!-- Tooltip (only when collapsed) -->
-        <span
-          v-if="!isExpanded"
-          class="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-2 py-1 text-xs font-medium text-white bg-slate-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none z-20"
-        >
-          {{ social.name }}
-        </span>
-      </ULink>
+        </ULink>
       </TransitionGroup>
     </nav>
   </aside>
@@ -377,4 +381,3 @@ const visibleLinks = computed(() => {
   color: var(--brand-color) !important;
 }
 </style>
-

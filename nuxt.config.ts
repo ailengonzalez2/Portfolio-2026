@@ -17,11 +17,6 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-11-01',
 
-  image: {
-    quality: 80,
-    format: ['webp', 'avif']
-  },
-
   nitro: {
     prerender: {
       routes: [
@@ -38,5 +33,10 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  image: {
+    quality: 80,
+    format: ['webp', 'avif']
   }
 })

@@ -88,7 +88,7 @@ const techLogos = [
               :src="tech.icon"
               :alt="tech.label"
               class="w-full h-full object-contain"
-            />
+            >
           </div>
         </div>
 

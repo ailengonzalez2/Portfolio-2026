@@ -10,7 +10,7 @@ import { Motion } from 'motion-v'
         src="/background-rolls.png"
         alt=""
         class="w-full h-full object-contain opacity-40"
-      />
+      >
     </div>
 
     <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col gap-24 sm:gap-28 lg:gap-32 relative z-10">
@@ -52,7 +52,10 @@ import { Motion } from 'motion-v'
           </p>
         </div>
         <div class="flex items-center gap-2 text-primary-custom dark:text-primary-custom-dark">
-          <UIcon name="i-lucide-map-pin" class="size-6 sm:size-7" />
+          <UIcon
+            name="i-lucide-map-pin"
+            class="size-6 sm:size-7"
+          />
           <span class="text-lg sm:text-xl">Based in Argentina</span>
         </div>
       </Motion>

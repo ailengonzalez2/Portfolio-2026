@@ -65,7 +65,10 @@ const getTextPositionClasses = (position: Service['textPosition']) => {
 </script>
 
 <template>
-  <section id="services" class="py-16 sm:py-24 relative overflow-hidden">
+  <section
+    id="services"
+    class="py-16 sm:py-24 relative overflow-hidden"
+  >
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Section Header -->
       <Motion
@@ -93,27 +96,27 @@ const getTextPositionClasses = (position: Service['textPosition']) => {
           :in-view-options="{ once: true }"
         >
           <!-- Card container - 340x341 like Figma -->
-          <div 
+          <div
             class="service-card group relative overflow-hidden rounded-[10px] border border-[#f1f5f9] dark:border-gray-700/50 bg-[#fcfcfc] dark:bg-neutral-900 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] hover:shadow-xl transition-all duration-500"
             style="aspect-ratio: 340/341;"
           >
             <!-- Wave Background Image -->
             <div class="absolute inset-0 pointer-events-none overflow-hidden">
-              <div 
+              <div
                 class="service-wave absolute transition-transform duration-700 ease-out group-hover:scale-105"
                 :style="service.waveStyles"
               >
-                <img 
-                  :src="service.waveImage" 
+                <img
+                  :src="service.waveImage"
                   :alt="`${service.title} decoration`"
                   class="w-full h-full object-contain dark:opacity-70"
                   loading="lazy"
-                />
+                >
               </div>
             </div>
 
             <!-- Content -->
-            <div 
+            <div
               class="absolute flex flex-col gap-[11px] z-10"
               :class="getTextPositionClasses(service.textPosition)"
             >

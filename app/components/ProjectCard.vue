@@ -30,7 +30,7 @@ defineProps<{
           </span>
         </div>
       </div>
-      
+
       <!-- Content -->
       <div class="flex flex-col grow">
         <div class="flex items-center justify-between mb-2">
@@ -41,7 +41,7 @@ defineProps<{
             {{ project.date }}
           </span>
         </div>
-        
+
         <p class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed line-clamp-3 mb-5 grow">
           {{ project.description }}
         </p>
@@ -58,7 +58,10 @@ defineProps<{
             class="rounded-full"
           >
             <template #leading>
-              <UIcon name="i-simple-icons-figma" class="size-4" />
+              <UIcon
+                name="i-simple-icons-figma"
+                class="size-4"
+              />
             </template>
             Figma
           </UButton>
@@ -73,7 +76,10 @@ defineProps<{
             class="rounded-full"
           >
             <template #leading>
-              <UIcon name="i-simple-icons-github" class="size-4" />
+              <UIcon
+                name="i-simple-icons-github"
+                class="size-4"
+              />
             </template>
             GitHub
           </UButton>
@@ -88,7 +94,10 @@ defineProps<{
             class="rounded-full"
           >
             <template #leading>
-              <UIcon name="i-lucide-external-link" class="size-4" />
+              <UIcon
+                name="i-lucide-external-link"
+                class="size-4"
+              />
             </template>
             Preview
           </UButton>

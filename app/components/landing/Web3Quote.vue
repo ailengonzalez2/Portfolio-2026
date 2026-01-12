@@ -9,9 +9,9 @@
         src="/background-lines-lila.png"
         alt=""
         class="w-full h-auto object-cover opacity-40"
-      />
+      >
     </div>
-    
+
     <!-- Background subtle gradient -->
     <div class="absolute inset-0 bg-linear-to-b from-transparent via-elevated/30 to-transparent pointer-events-none" />
 
@@ -43,4 +43,3 @@
     </div>
   </section>
 </template>
-

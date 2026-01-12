@@ -6,7 +6,10 @@ const selfProjects = computed(() => projects.slice(0, 4))
 </script>
 
 <template>
-  <section id="projects" class="py-16 sm:py-24 relative">
+  <section
+    id="projects"
+    class="py-16 sm:py-24 relative"
+  >
     <!-- Subtle background pattern -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
       <div class="absolute top-1/4 right-0 w-[600px] h-[600px] bg-linear-to-bl from-violet-300/10 to-transparent rounded-full blur-3xl" />
@@ -57,7 +60,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
                     </span>
                   </div>
                 </div>
-                
+
                 <!-- Content below image -->
                 <div>
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
@@ -98,7 +101,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
                     </span>
                   </div>
                 </div>
-                
+
                 <!-- Content below image -->
                 <div>
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
@@ -142,7 +145,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
                     </span>
                   </div>
                 </div>
-                
+
                 <!-- Content below image -->
                 <div>
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
@@ -183,7 +186,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
                     </span>
                   </div>
                 </div>
-                
+
                 <!-- Content below image -->
                 <div>
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">

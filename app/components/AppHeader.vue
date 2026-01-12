@@ -13,7 +13,7 @@ const isScrolled = computed(() => scrollY.value > 20)
 
 <template>
   <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4">
-    <div 
+    <div
       class="glass-header relative max-w-6xl mx-auto rounded-full transition-all duration-500 px-6 py-3"
       :class="isScrolled ? 'glass-header-scrolled' : ''"
     >
@@ -33,7 +33,10 @@ const isScrolled = computed(() => scrollY.value > 20)
         <!-- Navigation - Centered -->
         <nav class="hidden md:flex absolute left-1/2 -translate-x-1/2">
           <ul class="flex items-center gap-8">
-            <li v-for="link in links" :key="link.to">
+            <li
+              v-for="link in links"
+              :key="String(link.to)"
+            >
               <NuxtLink
                 :to="link.to"
                 class="text-base text-muted-foreground hover:text-foreground transition-colors"
@@ -47,7 +50,7 @@ const isScrolled = computed(() => scrollY.value > 20)
         <!-- Right side - CTA Button & Color Mode -->
         <div class="flex items-center gap-3">
           <ColorModeButton class="hidden sm:flex" />
-          
+
           <UButton
             label="HIRE ME"
             :to="`mailto:${global.email}`"
@@ -75,7 +78,7 @@ const isScrolled = computed(() => scrollY.value > 20)
   backdrop-filter: blur(40px) saturate(180%);
   -webkit-backdrop-filter: blur(40px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 
+  box-shadow:
     0 8px 32px 0 rgba(0, 0, 0, 0.08),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
 }
@@ -97,7 +100,7 @@ const isScrolled = computed(() => scrollY.value > 20)
 .glass-header-scrolled {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.25);
-  box-shadow: 
+  box-shadow:
     0 12px 40px 0 rgba(0, 0, 0, 0.12),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
 }
@@ -105,7 +108,7 @@ const isScrolled = computed(() => scrollY.value > 20)
 :global(.dark) .glass-header {
   background: rgba(0, 0, 0, 0.35);
   border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 
+  box-shadow:
     0 8px 32px 0 rgba(0, 0, 0, 0.3),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
 }
@@ -118,7 +121,7 @@ const isScrolled = computed(() => scrollY.value > 20)
 :global(.dark) .glass-header-scrolled {
   background: rgba(0, 0, 0, 0.45);
   border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 
+  box-shadow:
     0 12px 40px 0 rgba(0, 0, 0, 0.4),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
 }

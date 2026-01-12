@@ -68,7 +68,10 @@ const certifications = [
 </script>
 
 <template>
-  <section id="about" class="py-10 sm:py-14 bg-[#f8fafc]">
+  <section
+    id="about"
+    class="py-10 sm:py-14 bg-[#f8fafc]"
+  >
     <div class="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-[155px]">
       <!-- Section Header -->
       <Motion
@@ -84,21 +87,27 @@ const certifications = [
             </h2>
             <div class="h-[2px] w-[50px] bg-[#a2a2a2]" />
           </div>
-          
+
           <!-- Action Buttons -->
           <div class="flex flex-row gap-3">
             <button class="h-[41px] px-3 py-1.5 bg-gradient-to-r from-[#09090b] to-[#09090b] border-[0.75px] border-[rgba(255,255,255,0.3)] rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-2.5 text-white text-base font-normal whitespace-nowrap">
-              <UIcon name="i-lucide-download" class="size-3.5" />
+              <UIcon
+                name="i-lucide-download"
+                class="size-3.5"
+              />
               <span>Download CV</span>
             </button>
-            
+
             <a
               href="https://cv.ailengonzalez.ar/"
               target="_blank"
               rel="noopener noreferrer"
               class="h-[41px] px-3 py-1.5 bg-white rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-1 text-black text-base font-normal hover:bg-gray-50 transition-colors whitespace-nowrap"
             >
-              <UIcon name="i-lucide-arrow-up-right" class="size-[22px]" />
+              <UIcon
+                name="i-lucide-arrow-up-right"
+                class="size-[22px]"
+              />
               <span>Explore all CV</span>
             </a>
           </div>
@@ -107,7 +116,6 @@ const certifications = [
 
       <!-- Main Content -->
       <div class="relative mb-[121px]">
-
         <!-- Two Column Layout -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-14">
           <!-- Left Column -->
@@ -139,7 +147,7 @@ const certifications = [
               <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
                 Work Experience
               </h3>
-              
+
               <div class="space-y-10">
                 <div
                   v-for="(job, index) in workExperience"
@@ -148,7 +156,7 @@ const certifications = [
                 >
                   <!-- Timeline Dot -->
                   <div class="absolute -left-2 top-0 size-4 rounded-full bg-[#ad46ff] border-4 border-white shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]" />
-                  
+
                   <!-- Job Content -->
                   <div class="space-y-2">
                     <h4 class="text-[#0f172b] text-[20px] font-bold leading-[28px] tracking-[-0.45px]">
@@ -179,7 +187,7 @@ const certifications = [
               <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
                 Skills
               </h3>
-              
+
               <!-- Technical Skills -->
               <div class="space-y-[15px]">
                 <h4 class="text-[#0f172b] text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
@@ -194,7 +202,7 @@ const certifications = [
                       :alt="skill.name"
                       :title="skill.name"
                       class="size-[38px] object-contain"
-                    />
+                    >
                   </div>
                   <div class="flex gap-[15px] items-center">
                     <img
@@ -204,7 +212,7 @@ const certifications = [
                       :alt="skill.name"
                       :title="skill.name"
                       class="size-[38px] object-contain"
-                    />
+                    >
                   </div>
                 </div>
               </div>
@@ -246,7 +254,7 @@ const certifications = [
               <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
                 Latest Certifications
               </h3>
-              
+
               <div class="space-y-[10px]">
                 <div
                   v-for="(cert, index) in certifications"
@@ -284,12 +292,15 @@ const certifications = [
         <div class="relative bg-white border border-[#f1f5f9] rounded-[24px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] p-8 pt-[45px] min-h-[229px]">
           <!-- Decorative Circle -->
           <div class="absolute bottom-0 right-[86px] size-[96px] bg-[#faf5ff] rounded-full -mb-12" />
-          
+
           <!-- Icon -->
           <div class="absolute -top-8 left-8 size-16 bg-black rounded-full flex items-center justify-center">
-            <UIcon name="i-lucide-eye" class="size-8 text-white" />
+            <UIcon
+              name="i-lucide-eye"
+              class="size-8 text-white"
+            />
           </div>
-          
+
           <div class="relative z-10 space-y-2">
             <h3 class="text-[#0f172b] text-[18px] font-bold leading-[28px] tracking-[-0.44px]">
               My fun fact
@@ -304,4 +315,3 @@ const certifications = [
     </div>
   </section>
 </template>
-

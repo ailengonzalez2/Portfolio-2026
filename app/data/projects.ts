@@ -15,13 +15,13 @@ export interface Project {
 
 /**
  * Projects data - Update this array to add/modify your projects.
- * 
+ *
  * IMAGES:
  * - Local: Place images in /public/projects/ and use '/projects/filename.webp'
  * - External: Use full URLs (e.g., Unsplash, Cloudinary, etc.)
  * - Recommended formats: .webp, .avif (better compression), .jpg, .png
  * - Recommended size: min 1200px width, < 500KB file size
- * 
+ *
  * See /public/projects/README.md for detailed image guidelines
  */
 export const projects: Project[] = [

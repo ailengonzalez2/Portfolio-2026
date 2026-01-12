@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { useWindowScroll, useWindowSize } from '@vueuse/core'
 
-const { global } = useAppConfig()
 const year = new Date().getFullYear()
-
-const { copy, copied } = useClipboard()
 
 // Scroll detection - same logic as SocialSidebar for synchronized animation
 const { y } = useWindowScroll()
@@ -22,7 +19,10 @@ const isExpanded = computed(() => {
 <template>
   <footer>
     <!-- Contact Section -->
-    <section id="contact" class="py-20 sm:py-32 relative border-b border-default/50">
+    <section
+      id="contact"
+      class="py-20 sm:py-32 relative border-b border-default/50"
+    >
       <!-- Subtle background gradient -->
       <div class="absolute inset-0 bg-linear-to-b from-transparent via-elevated/20 to-transparent pointer-events-none" />
 
