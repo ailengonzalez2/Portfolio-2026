@@ -87,37 +87,10 @@ const isExpanded = computed(() => {
   return scrollPosition >= scrollHeight - 200
 })
 
-// Delayed state for icon swap - waits for collapse animation to finish
-const isExpandedForSwap = ref(false)
-let swapTimeout: ReturnType<typeof setTimeout> | null = null
-
-watch(isExpanded, (newVal) => {
-  if (swapTimeout) clearTimeout(swapTimeout)
-
-  if (newVal) {
-    // Expanding: swap immediately
-    isExpandedForSwap.value = true
-  } else {
-    // Collapsing: delay the swap to let collapse animation finish
-    swapTimeout = setTimeout(() => {
-      isExpandedForSwap.value = false
-    }, 600) // Wait for collapse animation
-  }
-}, { immediate: true })
-
-onBeforeUnmount(() => {
-  if (swapTimeout) clearTimeout(swapTimeout)
-})
-
-// Filter links based on delayed expanded state for swap
-const visibleLinks = computed(() => {
-  return socialLinks.filter((link) => {
-    if (isExpandedForSwap.value) {
-      return !link.hideInExpanded
-    }
-    return !link.showOnlyInExpanded
-  })
-})
+// Separate swappable links (CV/Upwork) from regular links
+const cvLink = socialLinks.find(link => link.name === 'CV')!
+const upworkLink = socialLinks.find(link => link.name === 'Upwork')!
+const regularLinks = socialLinks.filter(link => !link.hideInExpanded && !link.showOnlyInExpanded)
 </script>
 
 <template>
@@ -137,80 +110,161 @@ const visibleLinks = computed(() => {
       class="flex flex-col items-start gap-3 py-2"
       aria-label="Redes sociales"
     >
-      <TransitionGroup name="social-swap">
-        <ULink
-          v-for="(social, index) in visibleLinks"
-          :key="social.name"
-          :to="social.url"
-          target="_blank"
-          rel="noopener noreferrer"
-          :aria-label="social.label"
-          :style="{
-            '--brand-color': social.brandColor,
-            '--gradient-to': social.gradientTo,
-            '--animation-delay': `${index * 60}ms`
-          } as any"
-          class="social-link group relative h-14 transition-all duration-500 ease-out"
-          :class="isExpanded ? 'expanded-link' : 'collapsed-link'"
+      <!-- LinkedIn (first item) -->
+      <ULink
+        :to="regularLinks[0].url"
+        target="_blank"
+        rel="noopener noreferrer"
+        :aria-label="regularLinks[0].label"
+        :style="{
+          '--brand-color': regularLinks[0].brandColor,
+          '--gradient-to': regularLinks[0].gradientTo,
+          '--animation-delay': '0ms'
+        } as any"
+        class="social-link group relative h-14 transition-all duration-500 ease-out"
+        :class="isExpanded ? 'expanded-link' : 'collapsed-link'"
+      >
+        <div
+          class="pill-background absolute top-1 left-5 h-12 flex items-center justify-center rounded-r-full transition-all duration-500 ease-out shadow-md"
+          :class="isExpanded ? 'w-52 opacity-100 pl-10 pr-6' : 'w-0 opacity-0 pl-0 pr-0'"
+          :style="{ background: `linear-gradient(to right, var(--brand-color), var(--gradient-to))` }"
         >
-          <!-- Background pill (positioned behind icon, only visible when expanded) -->
-          <div
-            class="pill-background absolute top-1 left-5 h-12 flex items-center justify-center rounded-r-full transition-all duration-500 ease-out shadow-md"
-            :class="isExpanded ? 'w-52 opacity-100 pl-10 pr-6' : 'w-0 opacity-0 pl-0 pr-0'"
-            :style="{
-              background: `linear-gradient(to right, var(--brand-color), var(--gradient-to))`,
-              transitionDelay: isExpanded ? '0ms' : '0ms'
-            }"
-          >
-            <!-- Text label centered in pill -->
-            <span
-              class="social-label text-white text-sm font-medium tracking-[0.15em] uppercase whitespace-nowrap transition-all duration-300 text-center w-full"
-              :class="isExpanded ? 'opacity-100' : 'opacity-0'"
-              :style="{
-                transitionDelay: isExpanded ? `calc(var(--animation-delay) + 150ms)` : '0ms',
-                textShadow: '0px 1px 4px rgba(0,0,0,0.15)'
-              }"
-            >
-              {{ social.name }}
-            </span>
-          </div>
-
-          <!-- Icon circle (overlaps the pill) -->
-          <div
-            class="icon-circle relative z-10 flex items-center justify-center size-14 rounded-full shrink-0 transition-all duration-500"
-            :class="isExpanded
-              ? 'shadow-[4px_0px_15px_0px_rgba(0,0,0,0.3)]'
-              : 'bg-transparent'"
-            :style="isExpanded ? { backgroundColor: social.brandColor } : {}"
-          >
-            <!-- Default icon -->
-            <UIcon
-              :name="social.icon"
-              class="social-icon-svg transition-all duration-300"
-              :class="[
-                isExpanded ? 'size-7 text-white' : 'size-8 text-[#ABB2BF] group-hover:scale-110',
-                { 'group-hover:opacity-0': social.colorIcon && !isExpanded }
-              ]"
-            />
-
-            <!-- Color icon (shown on hover when collapsed) -->
-            <img
-              v-if="social.colorIcon && !isExpanded"
-              :src="social.colorIcon"
-              :alt="social.name"
-              class="absolute size-8 scale-75 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 pointer-events-none"
-            >
-          </div>
-
-          <!-- Tooltip (only when collapsed) -->
           <span
+            class="social-label text-white text-sm font-medium tracking-[0.15em] uppercase whitespace-nowrap transition-all duration-300 text-center w-full"
+            :class="isExpanded ? 'opacity-100' : 'opacity-0'"
+            :style="{ transitionDelay: isExpanded ? '150ms' : '0ms', textShadow: '0px 1px 4px rgba(0,0,0,0.15)' }"
+          >
+            {{ regularLinks[0].name }}
+          </span>
+        </div>
+        <div
+          class="icon-circle relative z-10 flex items-center justify-center size-14 rounded-full shrink-0 transition-all duration-500"
+          :class="isExpanded ? 'shadow-[4px_0px_15px_0px_rgba(0,0,0,0.3)]' : 'bg-transparent'"
+          :style="isExpanded ? { backgroundColor: regularLinks[0].brandColor } : {}"
+        >
+          <UIcon
+            :name="regularLinks[0].icon"
+            class="social-icon-svg transition-all duration-300"
+            :class="isExpanded ? 'size-7 text-white' : 'size-8 text-[#ABB2BF] group-hover:scale-110'"
+          />
+        </div>
+        <span
+          v-if="!isExpanded"
+          class="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-2 py-1 text-xs font-medium text-white bg-slate-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none z-20"
+        >
+          {{ regularLinks[0].name }}
+        </span>
+      </ULink>
+
+      <!-- CV/Upwork swap slot - shows CV when collapsed, Upwork when expanded -->
+      <ULink
+        :to="isExpanded ? upworkLink.url : cvLink.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        :aria-label="isExpanded ? upworkLink.label : cvLink.label"
+        :style="{
+          '--brand-color': isExpanded ? upworkLink.brandColor : cvLink.brandColor,
+          '--gradient-to': isExpanded ? upworkLink.gradientTo : cvLink.gradientTo,
+          '--animation-delay': '60ms'
+        } as any"
+        class="social-link group relative h-14 transition-all duration-500 ease-out"
+        :class="isExpanded ? 'expanded-link' : 'collapsed-link'"
+      >
+        <div
+          class="pill-background absolute top-1 left-5 h-12 flex items-center justify-center rounded-r-full transition-all duration-500 ease-out shadow-md"
+          :class="isExpanded ? 'w-52 opacity-100 pl-10 pr-6' : 'w-0 opacity-0 pl-0 pr-0'"
+          :style="{ background: `linear-gradient(to right, var(--brand-color), var(--gradient-to))` }"
+        >
+          <span
+            class="social-label text-white text-sm font-medium tracking-[0.15em] uppercase whitespace-nowrap transition-all duration-300 text-center w-full"
+            :class="isExpanded ? 'opacity-100' : 'opacity-0'"
+            :style="{ transitionDelay: isExpanded ? '210ms' : '0ms', textShadow: '0px 1px 4px rgba(0,0,0,0.15)' }"
+          >
+            {{ isExpanded ? upworkLink.name : cvLink.name }}
+          </span>
+        </div>
+        <div
+          class="icon-circle relative z-10 flex items-center justify-center size-14 rounded-full shrink-0 transition-all duration-500"
+          :class="isExpanded ? 'shadow-[4px_0px_15px_0px_rgba(0,0,0,0.3)]' : 'bg-transparent'"
+          :style="isExpanded ? { backgroundColor: isExpanded ? upworkLink.brandColor : cvLink.brandColor } : {}"
+        >
+          <!-- CV icon (when collapsed) -->
+          <UIcon
             v-if="!isExpanded"
-            class="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-2 py-1 text-xs font-medium text-white bg-slate-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none z-20"
+            :name="cvLink.icon"
+            class="social-icon-svg transition-all duration-300 size-8 text-[#ABB2BF] group-hover:scale-110"
+          />
+          <!-- Upwork icon (when expanded) -->
+          <UIcon
+            v-else
+            :name="upworkLink.icon"
+            class="social-icon-svg transition-all duration-300 size-7 text-white"
+          />
+        </div>
+        <span
+          v-if="!isExpanded"
+          class="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-2 py-1 text-xs font-medium text-white bg-slate-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none z-20"
+        >
+          {{ cvLink.name }}
+        </span>
+      </ULink>
+
+      <!-- Remaining links (GitHub, Figma, Behance, Discord) -->
+      <ULink
+        v-for="(social, index) in regularLinks.slice(1)"
+        :key="social.name"
+        :to="social.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        :aria-label="social.label"
+        :style="{
+          '--brand-color': social.brandColor,
+          '--gradient-to': social.gradientTo,
+          '--animation-delay': `${(index + 2) * 60}ms`
+        } as any"
+        class="social-link group relative h-14 transition-all duration-500 ease-out"
+        :class="isExpanded ? 'expanded-link' : 'collapsed-link'"
+      >
+        <div
+          class="pill-background absolute top-1 left-5 h-12 flex items-center justify-center rounded-r-full transition-all duration-500 ease-out shadow-md"
+          :class="isExpanded ? 'w-52 opacity-100 pl-10 pr-6' : 'w-0 opacity-0 pl-0 pr-0'"
+          :style="{ background: `linear-gradient(to right, var(--brand-color), var(--gradient-to))` }"
+        >
+          <span
+            class="social-label text-white text-sm font-medium tracking-[0.15em] uppercase whitespace-nowrap transition-all duration-300 text-center w-full"
+            :class="isExpanded ? 'opacity-100' : 'opacity-0'"
+            :style="{ transitionDelay: isExpanded ? `calc(var(--animation-delay) + 150ms)` : '0ms', textShadow: '0px 1px 4px rgba(0,0,0,0.15)' }"
           >
             {{ social.name }}
           </span>
-        </ULink>
-      </TransitionGroup>
+        </div>
+        <div
+          class="icon-circle relative z-10 flex items-center justify-center size-14 rounded-full shrink-0 transition-all duration-500"
+          :class="isExpanded ? 'shadow-[4px_0px_15px_0px_rgba(0,0,0,0.3)]' : 'bg-transparent'"
+          :style="isExpanded ? { backgroundColor: social.brandColor } : {}"
+        >
+          <UIcon
+            :name="social.icon"
+            class="social-icon-svg transition-all duration-300"
+            :class="[
+              isExpanded ? 'size-7 text-white' : 'size-8 text-[#ABB2BF] group-hover:scale-110',
+              { 'group-hover:opacity-0': social.colorIcon && !isExpanded }
+            ]"
+          />
+          <img
+            v-if="social.colorIcon && !isExpanded"
+            :src="social.colorIcon"
+            :alt="social.name"
+            class="absolute size-8 scale-75 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 pointer-events-none"
+          >
+        </div>
+        <span
+          v-if="!isExpanded"
+          class="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-2 py-1 text-xs font-medium text-white bg-slate-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none z-20"
+        >
+          {{ social.name }}
+        </span>
+      </ULink>
     </nav>
   </aside>
 
@@ -291,31 +345,6 @@ const visibleLinks = computed(() => {
   }
 }
 
-/* Social swap transition for CV/Upwork */
-.social-swap-enter-active {
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.social-swap-leave-active {
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  position: absolute;
-}
-
-.social-swap-enter-from {
-  opacity: 0;
-  transform: scale(0.7);
-}
-
-.social-swap-leave-to {
-  opacity: 0;
-  transform: scale(0.7);
-}
-
-.social-swap-move {
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
 /* Base link styles */
 .social-link {

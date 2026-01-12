@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
-const { global } = useAppConfig()
-
 defineProps<{
   links: NavigationMenuItem[]
 }>()
@@ -53,7 +51,7 @@ const isScrolled = computed(() => scrollY.value > 20)
 
           <UButton
             label="HIRE ME"
-            :to="`mailto:${global.email}`"
+            to="#contact"
             class="hidden sm:flex rounded-full font-semibold bg-gradient-to-r from-violet-500 via-fuchsia-500 to-orange-400 hover:opacity-90 transition-opacity px-7 py-3 text-base"
             size="md"
           />
