@@ -95,12 +95,12 @@ const regularLinks = socialLinks.filter(link => !link.hideInExpanded && !link.sh
 
 <template>
   <aside
-    class="social-sidebar fixed top-8 left-8 z-50 hidden lg:flex flex-col items-center gap-2"
+    class="social-sidebar fixed top-8 left-8 z-50 hidden lg:flex flex-col items-center"
     aria-label="Enlaces a redes sociales"
   >
     <!-- Decorative vertical line -->
     <div
-      class="decorative-line w-px h-48 bg-linear-to-b from-transparent via-[#ABB2BF]/60 to-[#ABB2BF] transition-all duration-500"
+      class="decorative-line w-px h-40 bg-linear-to-b from-transparent via-[#ABB2BF]/60 to-[#ABB2BF] transition-all duration-500"
       :class="isExpanded ? 'opacity-0 h-0' : 'opacity-100'"
       aria-hidden="true"
     />
