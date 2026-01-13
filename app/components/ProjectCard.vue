@@ -23,7 +23,7 @@ defineProps<{
           loading="lazy"
           placeholder
         />
-        <!-- Badge -->
+        <!-- Category Badge -->
         <div class="absolute top-5 right-5 z-10">
           <span class="inline-flex items-center px-3 py-1 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm rounded-full text-[11px] uppercase tracking-[0.5px] font-medium text-primary-custom dark:text-neutral-300 shadow-sm">
             {{ project.tags?.[0] }}
@@ -33,21 +33,21 @@ defineProps<{
 
       <!-- Content -->
       <div class="flex flex-col grow">
-        <div class="flex items-center justify-between mb-2">
-          <h3 class="text-lg font-bold text-[#0f172b] dark:text-white leading-tight tracking-tight">
+        <div class="flex items-start justify-between gap-3 mb-3 min-h-[28px]">
+          <h3 class="text-[15px] font-bold text-[#0f172b] dark:text-white leading-snug tracking-tight flex-1">
             {{ project.title }}
           </h3>
-          <span class="text-xs text-[#62748e] dark:text-neutral-500 font-medium">
+          <span class="text-xs text-[#62748e] dark:text-neutral-500 font-medium whitespace-nowrap shrink-0">
             {{ project.date }}
           </span>
         </div>
 
-        <p class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed line-clamp-3 mb-5 grow">
+        <p class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed line-clamp-2 mb-6 overflow-hidden max-h-[44px] group-hover:max-h-96 group-hover:line-clamp-none transition-all duration-500 ease-in-out">
           {{ project.description }}
         </p>
 
         <!-- Action buttons -->
-        <div class="flex items-center gap-2 flex-wrap">
+        <div class="flex items-center gap-2 flex-wrap mt-auto">
           <UButton
             v-if="project.links.figma"
             :to="project.links.figma"

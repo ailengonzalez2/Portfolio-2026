@@ -5,6 +5,8 @@ export interface Project {
   /** Path to image in /public/projects/ or external URL */
   image: string
   tags: string[]
+  /** Tech stack used in the project */
+  stack: string[]
   date: string
   links: {
     figma?: string
@@ -31,6 +33,7 @@ export const projects: Project[] = [
     description: 'Redesigning the data visualization experience for a leading fintech platform.',
     image: '/projects/pureskin.png',
     tags: ['UX Design', 'UI Design'],
+    stack: ['Figma', 'React', 'TypeScript'],
     date: '2024',
     links: {
       figma: 'https://figma.com',
@@ -44,6 +47,7 @@ export const projects: Project[] = [
     description: 'A minimalist e-commerce experience for a natural skincare brand. Featuring product categories, eco-friendly ingredients, and a clean aesthetic that lets the products shine.',
     image: '/projects/pureskin.png',
     tags: ['E-Commerce', 'UI Design', 'Branding'],
+    stack: ['Nuxt', 'Tailwind CSS', 'Figma'],
     date: '2024',
     links: {
       figma: 'https://figma.com',
@@ -57,6 +61,7 @@ export const projects: Project[] = [
     description: 'A bold fitness platform designed to empower users through personalized training, on-demand workouts, and a supportive women-only community. Modern design meets real results.',
     image: '/projects/soma.png',
     tags: ['UI Design', 'Fitness', 'Mobile App'],
+    stack: ['Figma', 'React Native', 'Firebase'],
     date: '2023',
     links: {
       figma: 'https://figma.com',
@@ -69,6 +74,7 @@ export const projects: Project[] = [
     description: 'A mindful mobile experience designed to guide users through yoga practices, meditation sessions, and wellness tracking with an intuitive and calming interface.',
     image: '/projects/yogaapp.png',
     tags: ['Mobile Design', 'UI Design', 'Wellness'],
+    stack: ['Figma', 'Flutter', 'Dart'],
     date: '2023',
     links: {
       figma: 'https://figma.com',
@@ -81,6 +87,7 @@ export const projects: Project[] = [
     description: 'A comprehensive health tracking application with personalized insights, goal setting, and progress visualization for users to monitor their wellness journey.',
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80',
     tags: ['Product Design', 'Mobile App', 'UX Research'],
+    stack: ['Figma', 'SwiftUI', 'HealthKit'],
     date: '2023',
     links: {
       figma: 'https://figma.com',
@@ -93,6 +100,7 @@ export const projects: Project[] = [
     description: 'Complete redesign of a fashion e-commerce platform focusing on conversion optimization, improved product discovery, and seamless checkout experience.',
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop&q=80',
     tags: ['E-Commerce', 'UI Design', 'Conversion Optimization'],
+    stack: ['Figma', 'Next.js', 'Tailwind CSS', 'Stripe'],
     date: '2022',
     links: {
       figma: 'https://figma.com',

@@ -344,8 +344,6 @@ const regularLinks = socialLinks.filter(link => !link.hideInExpanded && !link.sh
     transform: translateX(-50%) translateY(0);
   }
 }
-
-
 /* Base link styles */
 .social-link {
   display: flex;
