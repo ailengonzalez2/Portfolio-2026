@@ -4,12 +4,12 @@ import { Motion } from 'motion-v'
 
 <template>
   <section class="relative py-20 sm:py-28 lg:py-36 overflow-hidden">
-    <!-- Background Image - positioned right and bottom -->
-    <div class="absolute right-0 bottom-0 w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] lg:w-[900px] lg:h-[900px] pointer-events-none">
+    <!-- Background Image - full width, centered vertically -->
+    <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full h-auto pointer-events-none">
       <img
-        src="/background-rolls.png"
+        src="/bg-rolls.png"
         alt=""
-        class="w-full h-full object-contain opacity-40"
+        class="w-full h-auto object-cover opacity-40"
       >
     </div>
 
