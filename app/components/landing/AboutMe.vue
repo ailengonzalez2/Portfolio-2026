@@ -287,29 +287,33 @@ const certifications = [
         :while-in-view="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.5, delay: 0.4 }"
         :in-view-options="{ once: true }"
-        class="max-w-[757px] mx-auto"
+        class="max-w-[620px] ml-auto relative"
       >
-        <div class="relative bg-white border border-[#f1f5f9] rounded-[24px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] p-8 pt-[45px] min-h-[229px]">
-          <!-- Decorative Circle -->
-          <div class="absolute bottom-0 right-[86px] size-[96px] bg-[#faf5ff] rounded-full -mb-12" />
+        <div class="relative">
+          <!-- Stethoscope Left -->
+          <img
+            src="/esteto-1.png"
+            alt="stethoscope"
+            class="absolute -left-26 -top-16 w-50 h-50 object-contain pointer-events-none z-10"
+          >
 
-          <!-- Icon -->
-          <div class="absolute -top-8 left-8 size-16 bg-black rounded-full flex items-center justify-center">
-            <UIcon
-              name="i-lucide-eye"
-              class="size-8 text-white"
-            />
+          <div class="relative bg-white border border-[#f1f5f9] rounded-[24px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] p-8 min-h-[229px]">
+            <div class="space-y-2">
+              <h3 class="text-[#0f172b] text-[18px] font-bold leading-[28px] tracking-[-0.44px]">
+                My #funfact
+              </h3>
+              <p class="text-primary-custom text-[14px] leading-[22.75px] tracking-[-0.15px]">
+                Before moving into tech I worked as a medical doctor from 2011 to 2021 in emergency departments across Argentina, after graduating from the Universidad Nacional de Córdoba — one of the country's leading universities. That experience shaped my analytical mindset and problem‑solving approach in design and development.
+              </p>
+            </div>
           </div>
 
-          <div class="relative z-10 space-y-2">
-            <h3 class="text-[#0f172b] text-[18px] font-bold leading-[28px] tracking-[-0.44px]">
-              My fun fact
-            </h3>
-            <p class="text-primary-custom text-[14px] leading-[22.75px] tracking-[-0.15px]">
-              Before I made technology my career, From 2011 to 2021 I worked as a medical doctor, mainly in emergency departments across multiple hospitals, after earning my degree from the Universidad Nacional de Córdoba—one of Argentina's most prestigious universities in emergency rooms across multiple hospitals<br>
-              This diverse  background gives me a unique analytical approach.
-            </p>
-          </div>
+          <!-- Stethoscope Right -->
+          <img
+            src="/esteto-2.png"
+            alt="stethoscope"
+            class="absolute right-40 -bottom-10 w-28 h-28 object-contain pointer-events-none z-10"
+          >
         </div>
       </Motion>
     </div>

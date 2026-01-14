@@ -17,13 +17,13 @@ const services: Service[] = [
     title: 'UX/UI DESIGN',
     description: 'Sitios web optimizados que convierten visitantes en clientes',
     textPosition: 'bottom-left',
-    waveImage: '/services/service-1-waves.svg',
+    waveImage: '/services/service-2-waves.svg',
     waveStyles: {
-      width: '150%',
-      height: '150%',
-      top: '-35%',
-      left: '-55%',
-      transform: 'rotate(0deg)'
+      width: '160%',
+      height: '160%',
+      top: '-30%',
+      right: '-50%',
+      transform: 'scaleY(-1)'
     },
     detailedDescription: 'User-centered design that creates intuitive and beautiful interfaces, optimized for conversion and exceptional user experience.'
   },
@@ -32,7 +32,7 @@ const services: Service[] = [
     title: 'FRONTEND DEVELOPMENT',
     description: 'To enhance workflows and create smarter digital products',
     textPosition: 'top-right',
-    waveImage: '/services/service-2-waves.svg',
+    waveImage: '/services/service-3-waves.svg',
     waveStyles: {
       width: '160%',
       height: '160%',
@@ -47,13 +47,13 @@ const services: Service[] = [
     title: 'AI INTEGRATION',
     description: 'To enhance workflows and create smarter digital products',
     textPosition: 'bottom-right',
-    waveImage: '/services/service-3-waves.svg',
+    waveImage: '/services/service-1-waves.svg',
     waveStyles: {
-      width: '150%',
-      height: '150%',
-      top: '-30%',
-      right: '-55%',
-      transform: 'scaleX(-1)'
+      width: '200%',
+      height: '200%',
+      top: '-45%',
+      left: '-65%',
+      transform: 'rotate(0deg)'
     },
     detailedDescription: 'Artificial intelligence integration to automate processes, improve decisions, and create smarter and more efficient products.'
   }
@@ -169,7 +169,7 @@ const getTextPositionClasses = (position: Service['textPosition']) => {
                   class="absolute flex flex-col gap-[11px] z-10"
                   :class="getTextPositionClasses(service.textPosition)"
                 >
-                  <h3 class="font-bold text-[18px] text-[#45556c] dark:text-white uppercase tracking-tight font-sans">
+                  <h3 class="font-semibold text-[18px] text-[#45556c] dark:text-white uppercase tracking-tight font-sans">
                     {{ service.title }}
                   </h3>
                   <p class="text-[16px] text-[rgba(138,138,138,0.99)] dark:text-gray-400 leading-relaxed">
@@ -191,7 +191,7 @@ const getTextPositionClasses = (position: Service['textPosition']) => {
                 <!-- Back Content - Top section -->
                 <div class="flex flex-col gap-4 h-full">
                   <div>
-                    <h3 class="font-bold text-[18px] text-[#45556c] uppercase tracking-tight font-sans">
+                    <h3 class="font-semibold text-[18px] text-[#45556c] uppercase tracking-tight font-sans">
                       {{ service.title }}
                     </h3>
                     <p class="text-[14px] text-[rgba(138,138,138,0.99)] leading-relaxed mt-3">
