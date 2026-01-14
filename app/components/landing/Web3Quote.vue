@@ -1,4 +1,65 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+
+const blockquoteRef = ref<HTMLElement | null>(null)
+const charRefs = ref<HTMLElement[]>([])
+const charColors = ref<string[]>([])
+
+const text = "Lately, I've been exploring the blockchain ecosystem—focusing on wallet integrations, decentralized UI flows, and tools like Wagmi, Viem, and Web3Modal."
+
+// Initialize character colors
+const initializeColors = () => {
+  charColors.value = Array(text.length).fill('rgb(200, 210, 220)')
+}
+
+const handleScroll = () => {
+  if (!blockquoteRef.value || charRefs.value.length === 0) return
+
+  const blockquoteRect = blockquoteRef.value.getBoundingClientRect()
+  const windowHeight = window.innerHeight
+  const blockquoteTop = blockquoteRect.top
+
+  // Start animation after text enters viewport
+  const scrollProgress = Math.max(0, Math.min(1, 1 - (blockquoteTop / (windowHeight * 0.8))))
+
+  // Update each character's color based on its index in the text (linear flow)
+  const newColors = text.split('').map((char, index) => {
+    // Calculate position threshold based on character index (0 to 1)
+    const charPosition = index / text.length
+
+    // Character becomes dark when scroll progress reaches its position
+    const threshold = charPosition
+
+    // Snap to full color when threshold is reached
+    const charProgress = scrollProgress > threshold ? 1 : 0
+
+    // Interpolate color from light gray (200, 210, 220) to very dark (15, 23, 42)
+    const r = Math.round(200 - (charProgress * 185))
+    const g = Math.round(210 - (charProgress * 187))
+    const b = Math.round(220 - (charProgress * 178))
+
+    return `rgb(${r}, ${g}, ${b})`
+  })
+
+  charColors.value = newColors
+}
+
+const registerCharRef = (el: HTMLElement | null, index: number) => {
+  if (el) {
+    charRefs.value[index] = el
+  }
+}
+
+onMounted(async () => {
+  initializeColors()
+  await nextTick()
+  window.addEventListener('scroll', handleScroll)
+  handleScroll() // Call once on mount
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
@@ -23,8 +84,19 @@
         :in-view-options="{ once: true }"
       >
         <!-- Main quote -->
-        <blockquote class="text-3xl sm:text-4xl lg:text-5xl font-normal leading-snug text-balance">
-          Lately, I've been exploring the blockchain ecosystem—focusing on wallet integrations, decentralized UI flows, and tools like Wagmi, Viem, and Web3Modal.
+        <blockquote
+          ref="blockquoteRef"
+          class="text-3xl sm:text-4xl lg:text-5xl font-normal leading-snug text-balance"
+        >
+          <span
+            v-for="(char, index) in text.split('')"
+            :key="index"
+            :ref="(el) => registerCharRef(el as HTMLElement | null, index)"
+            :style="{ color: charColors[index] || 'rgb(200, 210, 220)' }"
+            class="transition-colors duration-50"
+          >
+            {{ char }}
+          </span>
         </blockquote>
       </Motion>
 
