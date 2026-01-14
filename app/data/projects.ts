@@ -83,7 +83,7 @@ export const projects: Project[] = [
   },
   {
     id: 'health-tracker',
-    title: 'Health & Wellness Tracker',
+    title: 'Personal website',
     description: 'A comprehensive health tracking application with personalized insights, goal setting, and progress visualization for users to monitor their wellness journey.',
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80',
     tags: ['Product Design', 'Mobile App', 'UX Research'],
@@ -96,7 +96,7 @@ export const projects: Project[] = [
   },
   {
     id: 'ecommerce-redesign',
-    title: 'E-Commerce Platform Redesign',
+    title: 'Sports App',
     description: 'Complete redesign of a fashion e-commerce platform focusing on conversion optimization, improved product discovery, and seamless checkout experience.',
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop&q=80',
     tags: ['E-Commerce', 'UI Design', 'Conversion Optimization'],
@@ -104,15 +104,13 @@ export const projects: Project[] = [
     date: '2022',
     links: {
       figma: 'https://figma.com',
-      github: 'https://github.com',
-      preview: 'https://example.com'
     }
   },
   {
     id: 'project-7',
-    title: 'Project Title 7',
+    title: 'Coaching website',
     description: 'A comprehensive health tracking application with personalized insights, goal setting, and progress visualization for users to monitor their wellness journey.',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80',
+    image: '/projects/coaching.png',
     tags: ['Product Design', 'Mobile App'],
     stack: ['Figma', 'React', 'TypeScript'],
     date: '2024',
@@ -124,24 +122,11 @@ export const projects: Project[] = [
   },
   {
     id: 'project-8',
-    title: 'Project Title 8',
+    title: 'Coff',
     description: 'A bold fitness platform designed to empower users through personalized training, on-demand workouts, and a supportive community. Modern design meets real results.',
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop&q=80',
+    image: '/projects/coff.png',
     tags: ['UI Design', 'Mobile App'],
     stack: ['Figma', 'React Native', 'Firebase'],
-    date: '2024',
-    links: {
-      figma: 'https://figma.com',
-      preview: 'https://example.com'
-    }
-  },
-  {
-    id: 'project-9',
-    title: 'Project Title 9',
-    description: 'A mindful mobile experience designed to guide users through practices, sessions, and tracking with an intuitive and calming interface for modern users.',
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80',
-    tags: ['Mobile Design', 'UX Design'],
-    stack: ['Figma', 'Flutter', 'Dart'],
     date: '2024',
     links: {
       figma: 'https://figma.com',
@@ -150,10 +135,22 @@ export const projects: Project[] = [
     }
   },
   {
+    id: 'UX/UI analysis',
+    title: 'Chess-genius',
+    description: 'I did a full analysis of the site, understanding it as a whole — focusing on the user flows and the overall user experience they create.',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80',
+    tags: ['Mobile Design', 'UX Design'],
+    stack: ['Figma', 'Flutter', 'Dart'],
+    date: '2024',
+    links: {
+      figma: 'https://figma.com',
+    }
+  },
+  {
     id: 'project-10',
-    title: 'Project Title 10',
+    title: 'Rally & Road',
     description: 'A minimalist e-commerce experience for a natural skincare brand. Featuring product categories, eco-friendly ingredients, and a clean aesthetic that lets the products shine.',
-    image: 'https://images.unsplash.com/photo-1556742212-5b321e3098ea?w=800&auto=format&fit=crop&q=80',
+    image: '/projects/rallyandroad.png',
     tags: ['E-Commerce', 'UI Design', 'Branding'],
     stack: ['Nuxt', 'Tailwind CSS', 'Figma'],
     date: '2024',
@@ -165,7 +162,7 @@ export const projects: Project[] = [
   },
   {
     id: 'project-11',
-    title: 'Project Title 11',
+    title: 'Cybervision',
     description: 'Redesigning the data visualization experience for a leading fintech platform with focus on real-time analytics and user engagement.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80',
     tags: ['UX Design', 'UI Design'],
@@ -179,9 +176,9 @@ export const projects: Project[] = [
   },
   {
     id: 'project-12',
-    title: 'Project Title 12',
+    title: 'Ecommerce cleaning product',
     description: 'Complete redesign of a fashion e-commerce platform focusing on conversion optimization, improved product discovery, and seamless checkout experience.',
-    image: 'https://images.unsplash.com/photo-1460925895917-aeb19be489c7?w=800&auto=format&fit=crop&q=80',
+    image: '/projects/ecommerce-cleaning.png',
     tags: ['E-Commerce', 'UI Design', 'Conversion Optimization'],
     stack: ['Figma', 'Next.js', 'Tailwind CSS', 'Stripe'],
     date: '2024',
