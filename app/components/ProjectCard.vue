@@ -4,6 +4,30 @@ import type { Project } from '~/data/projects'
 defineProps<{
   project: Project
 }>()
+
+const descriptionRef = ref<HTMLParagraphElement | null>(null)
+const isTruncated = ref(false)
+
+const checkTruncation = () => {
+  if (descriptionRef.value) {
+    // Add small buffer (2px) to account for rounding
+    isTruncated.value = descriptionRef.value.scrollHeight > descriptionRef.value.clientHeight + 2
+  }
+}
+
+onMounted(() => {
+  // Wait for next tick to ensure DOM is fully rendered
+  nextTick(() => {
+    checkTruncation()
+    // Also check after a short delay in case fonts are still loading
+    setTimeout(checkTruncation, 100)
+  })
+  window.addEventListener('resize', checkTruncation)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkTruncation)
+})
 </script>
 
 <template>
@@ -42,9 +66,19 @@ defineProps<{
           </span>
         </div>
 
-        <p class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed line-clamp-2 mb-6 overflow-hidden max-h-[44px] group-hover:max-h-96 group-hover:line-clamp-none transition-all duration-500 ease-in-out">
-          {{ project.description }}
-        </p>
+        <div class="relative mb-6 overflow-hidden">
+          <p
+            ref="descriptionRef"
+            class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed overflow-hidden max-h-[4.2em] group-hover:max-h-[10em] transition-[max-height] duration-300 group-hover:duration-500 ease-in-out"
+          >
+            {{ project.description }}
+          </p>
+          <!-- Gradient fade overlay - only shows when content is truncated -->
+          <div
+            v-if="isTruncated"
+            class="absolute bottom-0 left-0 right-0 h-4 bg-linear-to-t from-white dark:from-neutral-950 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300 group-hover:duration-500 ease-in-out pointer-events-none"
+          />
+        </div>
 
         <!-- Action buttons -->
         <div class="flex items-center gap-2 flex-wrap mt-auto">
