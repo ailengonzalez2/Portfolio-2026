@@ -136,7 +136,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
                   <NuxtImg
                     :src="selfProjects[2]?.image"
                     :alt="selfProjects[2]?.title"
-                    class="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    class="size-full object-cover object-left transition-transform duration-500 group-hover:scale-105"
                   />
                   <!-- Badge -->
                   <div class="absolute top-10 right-10 z-10">

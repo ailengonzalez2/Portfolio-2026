@@ -287,7 +287,7 @@ const certifications = [
         :while-in-view="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.5, delay: 0.4 }"
         :in-view-options="{ once: true }"
-        class="max-w-[620px] ml-auto relative"
+        class="max-w-[620px] mx-auto relative"
       >
         <div class="relative">
           <!-- Stethoscope Left -->

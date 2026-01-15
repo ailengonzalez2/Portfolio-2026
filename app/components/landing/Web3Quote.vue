@@ -44,8 +44,8 @@ const handleScroll = () => {
 
   charColors.value = newColors
 
-  // Mark quote as complete when fully colored
-  if (scrollProgress >= 1 && !quoteComplete.value) {
+  // Mark quote as complete when mostly colored (triggers earlier)
+  if (scrollProgress >= 0.7 && !quoteComplete.value) {
     quoteComplete.value = true
   }
 }

@@ -39,15 +39,14 @@ export const projects: Project[] = [
     }
   },
   {
-    id: 'pureskin-skincare',
-    title: 'PureSkin - Skincare Autumn Collection',
-    description: 'Clean skincare e-commerce design with intuitive product exploration.',
-    image: '/projects/pureskin.png',
-    tags: ['E-Commerce', 'UI Design', 'Branding'],
-    date: '2024',
+    id: 'yoga-wellness-app',
+    title: 'Yoga & Wellness App',
+    description: 'A mindful mobile experience designed to guide users through yoga practices, meditation sessions, and wellness tracking with an intuitive and calming interface.',
+    image: '/projects/yogaapp.png',
+    tags: ['Mobile Design', 'UI Design', 'Wellness'],
+    date: '2023',
     links: {
-      figma: 'https://www.figma.com/design/F3he0m70Gyvawvr5xwypT7/Pureskin?node-id=312-779&t=z7Eu4KsSdtjHDvGq-1',
-      preview: 'https://www.figma.com/proto/F3he0m70Gyvawvr5xwypT7/Pureskin?page-id=241%3A190&node-id=241-198&viewport=61%2C234%2C0.17&t=sJQRFxpHgjW1wle6-1&scaling=min-zoom&content-scaling=fixed'
+      figma: 'https://www.figma.com/design/S9bBTE8qAVUH2sYBgSAO0y/Yogapp?node-id=0-1&t=sWsqURcuHJjo9qCT-1',
     }
   },
   {
@@ -63,14 +62,15 @@ export const projects: Project[] = [
     }
   },
   {
-    id: 'yoga-wellness-app',
-    title: 'Yoga & Wellness App',
-    description: 'A mindful mobile experience designed to guide users through yoga practices, meditation sessions, and wellness tracking with an intuitive and calming interface.',
-    image: '/projects/yogaapp.png',
-    tags: ['Mobile Design', 'UI Design', 'Wellness'],
-    date: '2023',
+    id: 'pureskin-skincare',
+    title: 'PureSkin - Skincare Autumn Collection',
+    description: 'Clean skincare e-commerce design with intuitive product exploration.',
+    image: '/projects/pureskin.png',
+    tags: ['E-Commerce', 'UI Design', 'Branding'],
+    date: '2024',
     links: {
-      figma: 'https://www.figma.com/design/S9bBTE8qAVUH2sYBgSAO0y/Yogapp?node-id=0-1&t=sWsqURcuHJjo9qCT-1',
+      figma: 'https://www.figma.com/design/F3he0m70Gyvawvr5xwypT7/Pureskin?node-id=312-779&t=z7Eu4KsSdtjHDvGq-1',
+      preview: 'https://www.figma.com/proto/F3he0m70Gyvawvr5xwypT7/Pureskin?page-id=241%3A190&node-id=241-198&viewport=61%2C234%2C0.17&t=sJQRFxpHgjW1wle6-1&scaling=min-zoom&content-scaling=fixed'
     }
   },
   {
