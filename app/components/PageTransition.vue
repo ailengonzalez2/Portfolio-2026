@@ -37,7 +37,7 @@ const handleComplete = () => {
 <template>
   <PixelTransition
     :is-active="showPixels"
-    color="#000000"
+    color="#D5C8B0"
     :pixel-size="25"
     :duration="1.5"
     :direction="direction"

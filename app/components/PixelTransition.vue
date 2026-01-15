@@ -51,9 +51,8 @@ const generatePixels = () => {
         // Vertical wave from top to bottom with more randomness
         const normalizedRow = row / rows
         const randomOffset = Math.random() * 0.3
-        delay = props.direction === 'out'
-          ? normalizedRow * props.duration * 0.4 + randomOffset
-          : (1 - normalizedRow) * props.duration * 0.4 + randomOffset
+        // Both directions go top to bottom for consistency
+        delay = normalizedRow * props.duration * 0.4 + randomOffset
       } else if (props.pattern === 'diagonal') {
         // Diagonal wave from top-left to bottom-right
         const diagonalIndex = col + row

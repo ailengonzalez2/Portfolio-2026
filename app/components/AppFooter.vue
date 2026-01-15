@@ -17,7 +17,7 @@ const isExpanded = computed(() => {
 </script>
 
 <template>
-  <footer>
+  <footer class="relative z-10 bg-background">
     <!-- Contact Section -->
     <section
       id="contact"

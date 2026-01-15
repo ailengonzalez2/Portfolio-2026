@@ -43,6 +43,8 @@ onMounted(() => {
   setTimeout(() => {
     isVisible.value = false
     document.body.style.overflow = ''
+    // Ensure page is at top after intro
+    window.scrollTo(0, 0)
   }, (initialDelay + signatureDrawDuration + holdDuration + pixelTransitionDuration + 0.2) * 1000)
 })
 </script>
