@@ -6,14 +6,21 @@ defineProps<{
 }>()
 
 const { y: scrollY } = useWindowScroll()
-const isScrolled = computed(() => scrollY.value > 20)
+const isScrolled = computed(() => scrollY.value > 50)
 </script>
 
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4">
+  <header
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out"
+    :class="isScrolled ? 'px-4 sm:px-6 lg:px-8 pt-4' : 'px-6 sm:px-10 lg:px-16 py-4'"
+  >
     <div
-      class="glass-header relative max-w-6xl mx-auto rounded-full transition-all duration-500 px-6 py-3"
-      :class="isScrolled ? 'glass-header-scrolled' : ''"
+      class="relative mx-auto transition-all duration-500 ease-out px-6 py-3"
+      :class="[
+        isScrolled
+          ? 'glass-header glass-header-scrolled max-w-6xl rounded-full'
+          : 'glass-header-top max-w-full rounded-none'
+      ]"
     >
       <div class="flex items-center justify-between">
         <!-- Logo -->
@@ -52,7 +59,7 @@ const isScrolled = computed(() => scrollY.value > 20)
           <UButton
             label="HIRE ME"
             to="#contact"
-            class="hidden sm:flex rounded-full font-semibold bg-gradient-to-r from-violet-500 via-fuchsia-500 to-orange-400 hover:opacity-90 transition-opacity px-7 py-3 text-base"
+            class="hidden sm:flex rounded-full font-semibold bg-linear-to-r from-violet-500 via-fuchsia-500 to-orange-400 hover:opacity-90 transition-opacity px-7 py-3 text-base"
             size="md"
           />
 
@@ -71,6 +78,21 @@ const isScrolled = computed(() => scrollY.value > 20)
 </template>
 
 <style scoped>
+/* Top state - full width, minimal styling */
+.glass-header-top {
+  background: transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+:global(.dark) .glass-header-top {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Scrolled state - glass pill */
 .glass-header {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(40px) saturate(180%);
