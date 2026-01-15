@@ -12,6 +12,15 @@ useSeoMeta({
   description: seo.description,
   ogDescription: seo.description
 })
+
+// Group projects into rows of 3 for sticky effect
+const projectRows = computed(() => {
+  const rows = []
+  for (let i = 0; i < projects.length; i += 3) {
+    rows.push(projects.slice(i, i + 3))
+  }
+  return rows
+})
 </script>
 
 <template>
@@ -40,14 +49,31 @@ useSeoMeta({
           </p>
         </Motion>
 
-        <!-- Projects Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-          <ProjectCard
-            v-for="project in projects"
-            :key="project.id"
-            :project="project"
-          />
+        <!-- Sticky Scroll Projects -->
+        <div class="flex flex-col">
+          <template v-for="(row, rowIndex) in projectRows" :key="rowIndex">
+            <Motion
+              :initial="{ opacity: 0, y: 40 }"
+              :while-in-view="{ opacity: 1, y: 0 }"
+              :transition="{ duration: 0.6, delay: 0.1 }"
+              :in-view-options="{ once: true, amount: 0.2 }"
+              class="sticky pt-6 pb-8"
+              :style="{
+                top: `${160 + rowIndex * 60}px`,
+                zIndex: rowIndex + 1
+              }"
+            >
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                <template v-for="project in row" :key="project.id">
+                  <ProjectCard :project="project" no-animation />
+                </template>
+              </div>
+            </Motion>
+          </template>
         </div>
+
+        <!-- Spacer for last row -->
+        <div class="h-[40vh]" />
       </div>
     </section>
   </UPage>
