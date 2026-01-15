@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const seo = {
   title: 'Ailen Gonzalez - Product Designer & Frontend Developer',
-  description: 'Building modern, accessible digital products. Product designer and frontend developer specializing in creating user-centered digital experiences.'
+  description: 'Creating digital experiences. Product designer and frontend developer specializing in user-centered digital products.'
 }
 
 useSeoMeta({

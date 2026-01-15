@@ -35,6 +35,11 @@ useSeoMeta({
       <IntroAnimation />
     </ClientOnly>
 
+    <!-- Page transition for navigation -->
+    <ClientOnly>
+      <PageTransition />
+    </ClientOnly>
+
     <NuxtLayout>
       <UMain class="relative">
         <NuxtPage />

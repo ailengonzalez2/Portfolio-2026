@@ -2,16 +2,18 @@
 const { setIntroComplete } = useIntroAnimation()
 
 const isVisible = ref(true)
-const isAnimationComplete = ref(false)
 const animationStarted = ref(false)
 const moveToHeader = ref(false)
 const hideSignature = ref(false)
+const startPixelTransition = ref(false)
+const hideBackground = ref(false)
 
 // Durations in seconds
 const initialDelay = 1 // Start delay
 const signatureDrawDuration = 2 // Signature reveal
 const holdDuration = 0.4 // Brief pause after drawing
 const moveToHeaderDuration = 0.8 // Move to header animation
+const pixelTransitionDuration = 2 // Pixel dissolve effect
 
 onMounted(() => {
   // Prevent scrolling during animation
@@ -22,27 +24,26 @@ onMounted(() => {
     animationStarted.value = true
   }, initialDelay * 1000)
 
-  // After signature is drawn, start moving to header
+  // After signature is drawn, start moving to header AND start pixel transition
   setTimeout(() => {
     moveToHeader.value = true
+    // Start pixel transition slightly before signature starts moving
+    startPixelTransition.value = true
+    // Hide the solid background immediately - pixels will take over
+    hideBackground.value = true
   }, (initialDelay + signatureDrawDuration + holdDuration) * 1000)
 
-  // Fade out background only after movement completes
-  setTimeout(() => {
-    isAnimationComplete.value = true
-  }, (initialDelay + signatureDrawDuration + holdDuration + moveToHeaderDuration) * 1000)
-
-  // Hide intro signature and show header logo simultaneously at end of movement
+  // Hide intro signature and show header logo at end of movement
   setTimeout(() => {
     hideSignature.value = true
     setIntroComplete()
   }, (initialDelay + signatureDrawDuration + holdDuration + moveToHeaderDuration) * 1000)
 
-  // Remove overlay completely after handoff
+  // Remove overlay completely after pixel transition finishes
   setTimeout(() => {
     isVisible.value = false
     document.body.style.overflow = ''
-  }, (initialDelay + signatureDrawDuration + holdDuration + moveToHeaderDuration + 0.15) * 1000)
+  }, (initialDelay + signatureDrawDuration + holdDuration + pixelTransitionDuration + 0.2) * 1000)
 })
 </script>
 
@@ -51,10 +52,19 @@ onMounted(() => {
     <div
       v-if="isVisible"
       class="intro-overlay"
-      :class="{ 'fade-out': isAnimationComplete }"
     >
-      <!-- Background -->
-      <div class="intro-background" :class="{ 'fade-out': isAnimationComplete }" />
+      <!-- Solid background - hidden instantly when pixels take over -->
+      <div v-if="!hideBackground" class="intro-background" />
+
+      <!-- Pixel transition effect - replaces the background and dissolves away -->
+      <PixelTransition
+        :is-active="startPixelTransition"
+        color="#000000"
+        :pixel-size="25"
+        :duration="2"
+        direction="out"
+        pattern="vertical"
+      />
 
       <!-- Signature container -->
       <div
@@ -64,7 +74,7 @@ onMounted(() => {
         <!-- Signature image with mask animation -->
         <div class="signature-wrapper">
           <img
-            src="/signature.png"
+            src="/signature-withe.png"
             alt="Ailen"
             class="signature-image"
           >
@@ -90,12 +100,7 @@ onMounted(() => {
 .intro-background {
   position: absolute;
   inset: 0;
-  background: #FFB147;
-  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.intro-background.fade-out {
-  opacity: 0;
+  background: #000000;
 }
 
 .signature-container {
@@ -103,7 +108,7 @@ onMounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  z-index: 10000;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -155,7 +160,7 @@ onMounted(() => {
 .signature-mask {
   position: absolute;
   inset: 0;
-  background: #FFB147;
+  background: #000000;
 }
 
 .signature-mask.animate {

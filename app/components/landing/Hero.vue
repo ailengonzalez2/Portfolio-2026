@@ -55,16 +55,14 @@ const techLogos = [
         :transition="{ duration: 0.7, delay: 0.1 }"
       >
         <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-medium tracking-tight leading-[1.15] text-primary-custom dark:text-gray-200">
-          Building modern,
-          <br>
-          accessible
+          Creating digital
           <span class="relative font-semibold italic">
-            <!-- Gradient glow behind "digital products" -->
+            <!-- Gradient glow behind "experiences" -->
             <span
               class="absolute inset-0 -inset-x-2 rounded-full opacity-60 blur-lg pointer-events-none"
               style="background: linear-gradient(90deg, #ffb86a 0%, #dab2ff 50%, #c27aff 100%)"
             />
-            <span class="relative"> digital products</span>
+            <span class="relative"> experiences</span>
           </span>
         </h1>
       </Motion>
