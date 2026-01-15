@@ -81,7 +81,7 @@ onUnmounted(() => {
         </div>
 
         <!-- Action buttons -->
-        <div class="flex items-center gap-2 flex-wrap mt-auto">
+        <div class="flex items-center gap-2 flex-wrap">
           <UButton
             v-if="project.links.figma"
             :to="project.links.figma"
