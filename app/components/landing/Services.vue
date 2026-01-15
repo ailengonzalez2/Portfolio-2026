@@ -52,7 +52,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
 <template>
   <section
     id="services"
-    class="py-16 sm:py-24 relative overflow-hidden min-h-[800px]"
+    class="py-16 sm:py-24 relative overflow-hidden min-h-[900px] flex items-center justify-center"
   >
     <!-- Background Images with crossfade -->
     <div class="absolute inset-0">
@@ -72,15 +72,15 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
       </div>
     </div>
 
-    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <!-- Service cards grid -->
-      <div class="flex flex-col md:flex-row gap-4 items-stretch">
+      <div class="flex flex-col md:flex-row gap-4 items-stretch w-full">
         <div
           v-for="service in services"
           :key="service.id"
           class="service-wrapper"
           :class="[
-            activeCard === service.id ? 'md:flex-2' : 'md:flex-1'
+            activeCard === service.id ? 'md:flex-[1.3]' : 'md:flex-1'
           ]"
         >
           <div class="h-full">
@@ -95,7 +95,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
               @mouseenter="setActiveCard(service.id)"
             >
               <!-- Card Inner Container -->
-              <div class="relative h-full min-h-[380px]">
+              <div class="relative h-full min-h-[440px]">
                 <!-- Collapsed Content (Title only) -->
                 <div
                   class="collapsed-content absolute inset-0 flex items-center justify-center p-6"

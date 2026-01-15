@@ -188,7 +188,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
                 </div>
 
                 <!-- Content below image -->
-                <div>
+                <div class="p-6">
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
                     {{ selfProjects[3]?.title }}
                   </h3>
