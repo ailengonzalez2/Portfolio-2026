@@ -4,8 +4,9 @@ import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 const blockquoteRef = ref<HTMLElement | null>(null)
 const charRefs = ref<HTMLElement[]>([])
 const charColors = ref<string[]>([])
+const quoteComplete = ref(false)
 
-const text = "Lately, I've been exploring the blockchain ecosystem—focusing on wallet integrations, decentralized UI flows, and tools like Wagmi, Viem, and Web3Modal."
+const text = "Recently, I've been diving deeper into the blockchain ecosystem, building wallet integrations and decentralized UI flows."
 
 // Initialize character colors
 const initializeColors = () => {
@@ -42,6 +43,11 @@ const handleScroll = () => {
   })
 
   charColors.value = newColors
+
+  // Mark quote as complete when fully colored
+  if (scrollProgress >= 1 && !quoteComplete.value) {
+    quoteComplete.value = true
+  }
 }
 
 const registerCharRef = (el: HTMLElement | null, index: number) => {
@@ -54,7 +60,7 @@ onMounted(async () => {
   initializeColors()
   await nextTick()
   window.addEventListener('scroll', handleScroll)
-  handleScroll() // Call once on mount
+  handleScroll()
 })
 
 onUnmounted(() => {
@@ -64,42 +70,48 @@ onUnmounted(() => {
 
 <template>
   <section class="py-20 sm:py-32 relative overflow-hidden">
-    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-right">
-      <Motion
-        :initial="{ opacity: 0, y: 30 }"
-        :while-in-view="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.7 }"
-        :in-view-options="{ once: true }"
-      >
-        <!-- Main quote -->
-        <blockquote
-          ref="blockquoteRef"
-          class="text-3xl sm:text-4xl lg:text-5xl font-normal leading-snug text-balance"
-        >
-          <span
-            v-for="(char, index) in text.split('')"
-            :key="index"
-            :ref="(el) => registerCharRef(el as HTMLElement | null, index)"
-            :style="{ color: charColors[index] || 'rgb(200, 210, 220)' }"
-            class="transition-colors duration-50"
-          >
-            {{ char }}
-          </span>
-        </blockquote>
-      </Motion>
+    <!-- Subtle gradient background -->
+    <div class="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-orange-50/30 dark:from-purple-950/20 dark:via-transparent dark:to-orange-950/10" />
 
-      <!-- Additional context -->
-      <Motion
-        :initial="{ opacity: 0, y: 20 }"
-        :while-in-view="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.5, delay: 0.3 }"
-        :in-view-options="{ once: true }"
-        class="mt-8"
-      >
-        <p class="text-muted text-base sm:text-lg max-w-xl ml-auto">
-          I'm always looking to collaborate on forward-thinking solutions in the Web3 space. Whether it's a DeFi dashboard, NFT marketplace, or wallet experience—let's build something great together.
-        </p>
-      </Motion>
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-right">
+        <Motion
+          :initial="{ opacity: 0, y: 30 }"
+          :while-in-view="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.7 }"
+          :in-view-options="{ once: true }"
+        >
+          <!-- Main quote with letter animation -->
+          <blockquote
+            ref="blockquoteRef"
+            class="text-3xl sm:text-4xl lg:text-5xl font-normal leading-snug text-balance"
+          >
+            <span
+              v-for="(char, index) in text.split('')"
+              :key="index"
+              :ref="(el) => registerCharRef(el as HTMLElement | null, index)"
+              :style="{ color: charColors[index] || 'rgb(200, 210, 220)' }"
+              class="transition-colors duration-50"
+            >
+              {{ char }}
+            </span>
+          </blockquote>
+        </Motion>
+
+        <!-- Additional context - appears after quote is fully colored -->
+        <Motion
+          :initial="{ opacity: 0, y: 20 }"
+          :animate="quoteComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }"
+          :transition="{ duration: 0.6, delay: 0.1 }"
+          class="mt-10"
+        >
+          <div class="flex items-start justify-end gap-4">
+            <p class="text-muted text-base sm:text-lg max-w-xl leading-relaxed">
+              I focus on crafting clear, intuitive Web3 experiences with tools like Wagmi, Viem, and Web3Modal. From DeFi dashboards to NFT marketplaces and wallet applications, I'm always excited to collaborate on innovative ideas and projects.
+            </p>
+          </div>
+        </Motion>
+      </div>
     </div>
   </section>
 </template>
