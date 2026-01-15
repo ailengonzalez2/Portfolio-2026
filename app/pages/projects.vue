@@ -73,7 +73,7 @@ const projectRows = computed(() => {
         </div>
 
         <!-- Spacer for last row -->
-        <div class="h-[40vh]" />
+        <div class="h-20" />
       </div>
     </section>
   </UPage>
