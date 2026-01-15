@@ -7,6 +7,7 @@ defineProps<{
 
 const { y: scrollY } = useWindowScroll()
 const isScrolled = computed(() => scrollY.value > 50)
+const { isIntroComplete } = useIntroAnimation()
 </script>
 
 <template>
@@ -26,13 +27,14 @@ const isScrolled = computed(() => scrollY.value > 50)
         <!-- Logo -->
         <NuxtLink
           to="/"
-          class="relative flex items-center justify-center group h-10"
+          class="relative flex items-center justify-center group"
         >
-          <!-- Decorative dot -->
-          <div class="absolute -top-0.5 left-1 size-2 rounded-full bg-violet-500" />
-          <div class="text-3xl font-semibold text-foreground tracking-tight transition-transform group-hover:scale-105 leading-none">
-            AG
-          </div>
+          <img
+            src="/signature.png"
+            alt="AG Signature"
+            class="h-10 w-auto transition-all duration-300 group-hover:scale-105"
+            :class="isIntroComplete ? 'opacity-100' : 'opacity-0'"
+          >
         </NuxtLink>
 
         <!-- Navigation - Centered -->

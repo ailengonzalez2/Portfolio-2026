@@ -1,65 +1,78 @@
 <script setup lang="ts">
+const { setIntroComplete } = useIntroAnimation()
+
 const isVisible = ref(true)
 const isAnimationComplete = ref(false)
 const animationStarted = ref(false)
+const moveToHeader = ref(false)
+const hideSignature = ref(false)
 
 // Durations in seconds
 const initialDelay = 1 // Start delay
-const signatureDrawDuration = 1.2 // Signature reveal
-const holdDuration = 0.6 // Pause after signature
-const fadeOutDuration = 0.6 // Fade out
+const signatureDrawDuration = 2 // Signature reveal
+const holdDuration = 0.4 // Brief pause after drawing
+const moveToHeaderDuration = 0.8 // Move to header animation
 
 onMounted(() => {
   // Prevent scrolling during animation
   document.body.style.overflow = 'hidden'
 
-  // Start animation after initial delay
+  // Start drawing animation after initial delay
   setTimeout(() => {
     animationStarted.value = true
   }, initialDelay * 1000)
 
-  // After signature is drawn and held, fade out
+  // After signature is drawn, start moving to header
   setTimeout(() => {
-    isAnimationComplete.value = true
+    moveToHeader.value = true
   }, (initialDelay + signatureDrawDuration + holdDuration) * 1000)
 
-  // Remove overlay completely
+  // Fade out background only after movement completes
+  setTimeout(() => {
+    isAnimationComplete.value = true
+  }, (initialDelay + signatureDrawDuration + holdDuration + moveToHeaderDuration) * 1000)
+
+  // Hide intro signature and show header logo simultaneously at end of movement
+  setTimeout(() => {
+    hideSignature.value = true
+    setIntroComplete()
+  }, (initialDelay + signatureDrawDuration + holdDuration + moveToHeaderDuration) * 1000)
+
+  // Remove overlay completely after handoff
   setTimeout(() => {
     isVisible.value = false
     document.body.style.overflow = ''
-  }, (initialDelay + signatureDrawDuration + holdDuration + fadeOutDuration) * 1000)
+  }, (initialDelay + signatureDrawDuration + holdDuration + moveToHeaderDuration + 0.15) * 1000)
 })
 </script>
 
 <template>
   <Teleport to="body">
-    <Transition
-      leave-active-class="transition-opacity duration-400 ease-out"
-      leave-to-class="opacity-0"
+    <div
+      v-if="isVisible"
+      class="intro-overlay"
+      :class="{ 'fade-out': isAnimationComplete }"
     >
-      <div
-        v-if="isVisible"
-        class="intro-overlay"
-        :class="{ 'fade-out': isAnimationComplete }"
-      >
-        <!-- Background -->
-        <div class="intro-background" />
+      <!-- Background -->
+      <div class="intro-background" :class="{ 'fade-out': isAnimationComplete }" />
 
-        <!-- Signature container -->
-        <div class="signature-container">
-          <!-- Signature image with mask animation -->
-          <div class="signature-wrapper">
-            <img
-              src="/signature.png"
-              alt="Ailen"
-              class="signature-image"
-            >
-            <!-- Animated mask overlay -->
-            <div class="signature-mask" :class="{ 'animate': animationStarted }" />
-          </div>
+      <!-- Signature container -->
+      <div
+        class="signature-container"
+        :class="{ 'move-to-header': moveToHeader, 'hide': hideSignature }"
+      >
+        <!-- Signature image with mask animation -->
+        <div class="signature-wrapper">
+          <img
+            src="/signature.png"
+            alt="Ailen"
+            class="signature-image"
+          >
+          <!-- Animated mask overlay -->
+          <div class="signature-mask" :class="{ 'animate': animationStarted }" />
         </div>
       </div>
-    </Transition>
+    </div>
   </Teleport>
 </template>
 
@@ -72,29 +85,56 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   pointer-events: all;
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.intro-overlay.fade-out {
-  opacity: 0;
 }
 
 .intro-background {
   position: absolute;
   inset: 0;
-  background: #0a0a0a;
+  background: #FFB147;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-:root.light .intro-background {
-  background: #fafafa;
+.intro-background.fade-out {
+  opacity: 0;
 }
 
 .signature-container {
-  position: relative;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.signature-container.move-to-header {
+  /* Move to header position: top-left with header padding */
+  top: 20px;
+  left: 80px;
+  transform: translate(0, 0) scale(0.22);
+  transform-origin: left top;
+}
+
+@media (max-width: 1024px) {
+  .signature-container.move-to-header {
+    left: 56px;
+    top: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .signature-container.move-to-header {
+    left: 32px;
+    top: 16px;
+  }
+}
+
+.signature-container.hide {
+  opacity: 0;
+  transition: opacity 0.05s ease-out;
 }
 
 .signature-wrapper {
@@ -107,11 +147,6 @@ onMounted(() => {
 .signature-image {
   width: 100%;
   height: auto;
-  filter: invert(1);
-  opacity: 0.9;
-}
-
-:root.light .signature-image {
   filter: invert(0);
   opacity: 1;
 }
@@ -120,15 +155,11 @@ onMounted(() => {
 .signature-mask {
   position: absolute;
   inset: 0;
-  background: #0a0a0a;
+  background: #FFB147;
 }
 
 .signature-mask.animate {
-  animation: reveal-signature 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-:root.light .signature-mask {
-  background: #fafafa;
+  animation: reveal-signature 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes reveal-signature {
