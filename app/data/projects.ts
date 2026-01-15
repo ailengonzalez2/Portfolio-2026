@@ -6,7 +6,6 @@ export interface Project {
   image: string
   tags: string[]
   /** Tech stack used in the project */
-  stack: string[]
   date: string
   links: {
     figma?: string
@@ -31,14 +30,12 @@ export const projects: Project[] = [
     id: 'defi-dashboard',
     title: 'DeFi Dashboard',
     description: 'Redesigning the data visualization experience for a leading fintech platform.',
-    image: '/projects/pureskin.png',
-    tags: ['UX Design', 'UI Design'],
-    stack: ['Figma', 'React', 'TypeScript'],
-    date: '2024',
+    image: '/projects/defidashboard.png',
+    tags: ['Frontend Development', 'UI Design'],
+    date: '2025',
     links: {
-      figma: 'https://figma.com',
-      github: 'https://github.com',
-      preview: 'https://example.com'
+      github: 'https://github.com/ailengonzalez2/caveswap',
+      preview: 'https://caveswap.up.railway.app'
     }
   },
   {
@@ -47,12 +44,10 @@ export const projects: Project[] = [
     description: 'A minimalist e-commerce experience for a natural skincare brand. Featuring product categories, eco-friendly ingredients, and a clean aesthetic that lets the products shine.',
     image: '/projects/pureskin.png',
     tags: ['E-Commerce', 'UI Design', 'Branding'],
-    stack: ['Nuxt', 'Tailwind CSS', 'Figma'],
     date: '2024',
     links: {
-      figma: 'https://figma.com',
-      github: 'https://github.com',
-      preview: 'https://example.com'
+      figma: 'https://www.figma.com/design/F3he0m70Gyvawvr5xwypT7/Pureskin?node-id=312-779&t=z7Eu4KsSdtjHDvGq-1',
+      preview: 'https://www.figma.com/proto/F3he0m70Gyvawvr5xwypT7/Pureskin?page-id=241%3A190&node-id=241-198&viewport=61%2C234%2C0.17&t=sJQRFxpHgjW1wle6-1&scaling=min-zoom&content-scaling=fixed'
     }
   },
   {
@@ -61,7 +56,6 @@ export const projects: Project[] = [
     description: 'A bold fitness platform designed to empower users through personalized training, on-demand workouts, and a supportive women-only community. Modern design meets real results.',
     image: '/projects/soma.png',
     tags: ['UI Design', 'Fitness', 'Mobile App'],
-    stack: ['Figma', 'React Native', 'Firebase'],
     date: '2023',
     links: {
       figma: 'https://figma.com',
@@ -74,11 +68,9 @@ export const projects: Project[] = [
     description: 'A mindful mobile experience designed to guide users through yoga practices, meditation sessions, and wellness tracking with an intuitive and calming interface.',
     image: '/projects/yogaapp.png',
     tags: ['Mobile Design', 'UI Design', 'Wellness'],
-    stack: ['Figma', 'Flutter', 'Dart'],
     date: '2023',
     links: {
-      figma: 'https://figma.com',
-      preview: 'https://example.com'
+      figma: 'https://www.figma.com/design/S9bBTE8qAVUH2sYBgSAO0y/Yogapp?node-id=0-1&t=sWsqURcuHJjo9qCT-1',
     }
   },
   {
@@ -87,7 +79,6 @@ export const projects: Project[] = [
     description: 'A comprehensive health tracking application with personalized insights, goal setting, and progress visualization for users to monitor their wellness journey.',
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80',
     tags: ['Product Design', 'Mobile App', 'UX Research'],
-    stack: ['Figma', 'SwiftUI', 'HealthKit'],
     date: '2023',
     links: {
       figma: 'https://figma.com',
@@ -95,41 +86,36 @@ export const projects: Project[] = [
     }
   },
   {
-    id: 'ecommerce-redesign',
+    id: 'mobile-app',
     title: 'Sports App',
     description: 'Complete redesign of a fashion e-commerce platform focusing on conversion optimization, improved product discovery, and seamless checkout experience.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop&q=80',
-    tags: ['E-Commerce', 'UI Design', 'Conversion Optimization'],
-    stack: ['Figma', 'Next.js', 'Tailwind CSS', 'Stripe'],
-    date: '2022',
+    image: '/projects/sportapp.png',
+    tags: ['Mobile App', 'UI Design',],
+    date: '2025',
     links: {
-      figma: 'https://figma.com',
+      figma: 'https://www.figma.com/design/NrUDUZ01IIOcTc9xocvNmN/Ernie-APP?node-id=2606-59959&t=x7EujWUCTTqP2HUR-1',
     }
   },
   {
-    id: 'project-7',
+    id: 'web-design',
     title: 'Coaching website',
     description: 'A comprehensive health tracking application with personalized insights, goal setting, and progress visualization for users to monitor their wellness journey.',
     image: '/projects/coaching.png',
-    tags: ['Product Design', 'Mobile App'],
-    stack: ['Figma', 'React', 'TypeScript'],
-    date: '2024',
+    tags: ['Product Design', 'Web Design'],
+    date: '2025',
     links: {
-      figma: 'https://figma.com',
-      github: 'https://github.com',
-      preview: 'https://example.com'
+      figma: 'https://www.figma.com/design/mv9hkKYRdAOpGXnEmFwzVr/Ann-Russo?node-id=0-1&t=pd3BUh4fdEySghrj-1',
     }
   },
   {
-    id: 'project-8',
+    id: 'web-design',
     title: 'Coff',
     description: 'A bold fitness platform designed to empower users through personalized training, on-demand workouts, and a supportive community. Modern design meets real results.',
     image: '/projects/coff.png',
-    tags: ['UI Design', 'Mobile App'],
-    stack: ['Figma', 'React Native', 'Firebase'],
-    date: '2024',
+    tags: ['UI Design', 'Web App'],
+    date: '2025',
     links: {
-      figma: 'https://figma.com',
+      figma: 'https://www.figma.com/design/oeI3muavH7HTssmcUqljQq/COFF?node-id=0-1&t=HtgBVzNZjM9O5MAn-1',
       github: 'https://github.com',
       preview: 'https://example.com'
     }
@@ -138,54 +124,45 @@ export const projects: Project[] = [
     id: 'UX/UI analysis',
     title: 'Chess-genius',
     description: 'I did a full analysis of the site, understanding it as a whole — focusing on the user flows and the overall user experience they create.',
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80',
+    image: '/projects/chess-genius.png',
     tags: ['Mobile Design', 'UX Design'],
-    stack: ['Figma', 'Flutter', 'Dart'],
     date: '2024',
     links: {
-      figma: 'https://figma.com',
+      figma: 'https://www.figma.com/design/hmtwRrKwTTuH7YjIpo3NFU/Chess-genius?node-id=0-1&t=55RKGruKSdVJ4Hwy-1',
     }
   },
   {
-    id: 'project-10',
+    id: 'web-design',
     title: 'Rally & Road',
     description: 'A minimalist e-commerce experience for a natural skincare brand. Featuring product categories, eco-friendly ingredients, and a clean aesthetic that lets the products shine.',
     image: '/projects/rallyandroad.png',
-    tags: ['E-Commerce', 'UI Design', 'Branding'],
-    stack: ['Nuxt', 'Tailwind CSS', 'Figma'],
+    tags: ['Web Design', 'UI Design', 'Branding'],
     date: '2024',
     links: {
-      figma: 'https://figma.com',
-      github: 'https://github.com',
-      preview: 'https://example.com'
+      figma: 'https://www.figma.com/design/GpXvzSlW3YKH5eHSqyaXm5/Rally-Roar?node-id=0-1&t=sryVldjPLz2nSYk7-1',
     }
   },
   {
-    id: 'project-11',
+    id: 'frontend-development',
     title: 'Cybervision',
     description: 'Redesigning the data visualization experience for a leading fintech platform with focus on real-time analytics and user engagement.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80',
-    tags: ['UX Design', 'UI Design'],
-    stack: ['Figma', 'React', 'TypeScript'],
+    tags: ['Frontend Development', 'UX Design', 'UI Design'],
     date: '2024',
     links: {
-      figma: 'https://figma.com',
       github: 'https://github.com',
       preview: 'https://example.com'
     }
   },
   {
-    id: 'project-12',
+    id: 'product-design',
     title: 'Ecommerce cleaning product',
     description: 'Complete redesign of a fashion e-commerce platform focusing on conversion optimization, improved product discovery, and seamless checkout experience.',
     image: '/projects/ecommerce-cleaning.png',
-    tags: ['E-Commerce', 'UI Design', 'Conversion Optimization'],
-    stack: ['Figma', 'Next.js', 'Tailwind CSS', 'Stripe'],
+    tags: ['Product Design', 'E-Commerce', 'UI Design',],
     date: '2024',
     links: {
       figma: 'https://figma.com',
-      github: 'https://github.com',
-      preview: 'https://example.com'
     }
   }
 ]

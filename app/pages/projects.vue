@@ -33,7 +33,7 @@ useSeoMeta({
           class="mb-12 sm:mb-16"
         >
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0f172b] dark:text-white tracking-tight mb-4">
-            All Projects
+            Featured Projects
           </h1>
           <p class="text-lg text-[#62748e] dark:text-neutral-400 max-w-2xl">
             A curated collection of my design and development work. Each project represents a unique challenge and a creative solution.
@@ -48,24 +48,6 @@ useSeoMeta({
             :project="project"
           />
         </div>
-
-        <!-- Back to home link -->
-        <Motion
-          :initial="{ opacity: 0 }"
-          :while-in-view="{ opacity: 1 }"
-          :transition="{ duration: 0.5, delay: 0.3 }"
-          :in-view-options="{ once: true }"
-          class="mt-16 text-center"
-        >
-          <NuxtLink
-            to="/"
-            class="btn-gradient inline-block"
-          >
-            <span class="btn-gradient-text relative z-10">
-              Back to Home
-            </span>
-          </NuxtLink>
-        </Motion>
       </div>
     </section>
   </UPage>

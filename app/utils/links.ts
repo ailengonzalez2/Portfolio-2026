@@ -2,7 +2,7 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 
 export const navLinks: NavigationMenuItem[] = [{
   label: 'projects',
-  to: '/#projects'
+  to: '/projects'
 }, {
   label: 'services',
   to: '/#services'
