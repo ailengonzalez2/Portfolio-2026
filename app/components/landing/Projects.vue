@@ -212,9 +212,15 @@ const selfProjects = computed(() => projects.slice(0, 4))
       >
         <NuxtLink
           to="/projects"
-          class="btn-gradient inline-block"
+          class="group/btn relative inline-flex items-center bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] rounded-2xl py-4 pl-8 pr-16 transition-all duration-300 hover:pl-16 hover:pr-8"
         >
-          <span class="btn-gradient-text relative z-10">
+          <span class="absolute right-2 flex items-center justify-center size-12 bg-white rounded-full transition-all duration-300 ease-out group-hover/btn:right-[calc(100%-3.5rem)]">
+            <UIcon
+              name="i-lucide-arrow-right"
+              class="size-5 text-gray-900"
+            />
+          </span>
+          <span class="text-lg font-medium text-white">
             Explore Projects
           </span>
         </NuxtLink>

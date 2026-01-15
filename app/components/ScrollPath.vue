@@ -4,17 +4,18 @@ const pathLength = ref(0)
 const scrollProgress = ref(0)
 const documentHeight = ref(0)
 
-// Path that flows from right to left with a loop, ending off screen to the right
-const svgPath = `M 90 0
-  C 90 80, 70 120, 50 180
-  S 10 280, 15 350
-  C 20 400, 60 420, 70 380
-  C 80 340, 50 320, 35 360
-  C 20 400, 30 450, 50 500
-  S 85 580, 85 650
-  C 85 750, 40 800, 30 850
-  C 20 900, 60 940, 100 960
-  C 150 985, 200 990, 300 995`
+// Path starts above viewport, flows with a loop, ends off screen to the right
+const svgPath = `M 120 -50
+  C 100 0, 90 50, 90 100
+  C 90 180, 70 220, 50 280
+  S 10 380, 15 450
+  C 20 500, 60 520, 70 480
+  C 80 440, 50 420, 35 460
+  C 20 500, 30 550, 50 600
+  S 85 680, 85 750
+  C 85 850, 40 900, 30 950
+  C 20 1000, 60 1040, 100 1060
+  C 150 1085, 200 1090, 300 1095`
 
 onMounted(() => {
   // Calculate document height for proper scaling
@@ -28,10 +29,9 @@ onMounted(() => {
 
   const handleScroll = () => {
     const scrollTop = window.scrollY
-    const docHeight = document.documentElement.scrollHeight
-    // Calculate progress based on how far down the viewport center is
-    const viewportCenter = scrollTop + (window.innerHeight * 0.5)
-    const progress = viewportCenter / docHeight
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight
+    // Path only starts drawing after user begins scrolling
+    const progress = maxScroll > 0 ? scrollTop / maxScroll : 0
     scrollProgress.value = Math.min(Math.max(progress, 0), 1)
   }
 
@@ -77,13 +77,6 @@ const dashOffset = computed(() => {
           <stop offset="50%" stop-color="#c27aff" />
           <stop offset="100%" stop-color="#A11EE2" />
         </linearGradient>
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-          <feMerge>
-            <feMergeNode in="coloredBlur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
       </defs>
 
       <!-- Animated path -->
@@ -91,11 +84,10 @@ const dashOffset = computed(() => {
         ref="pathRef"
         :d="svgPath"
         stroke="url(#pathGradient)"
-        stroke-width="24"
+        stroke-width="32"
         stroke-linecap="round"
         :stroke-dasharray="pathLength"
         :stroke-dashoffset="dashOffset"
-        filter="url(#glow)"
       />
     </svg>
   </div>

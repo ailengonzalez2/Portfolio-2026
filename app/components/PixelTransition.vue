@@ -21,7 +21,16 @@ const emit = defineEmits<{
 }>()
 
 const containerRef = ref<HTMLElement | null>(null)
-const pixels = ref<{ id: number; delay: number; x: number; y: number; rotate: number }[]>([])
+const pixels = ref<{
+  id: number
+  delay: number
+  x: number
+  y: number
+  rotate: number
+  moveX: number
+  moveY: number
+  scale: number
+}[]>([])
 const isAnimating = ref(false)
 const hasStarted = ref(false)
 
@@ -39,20 +48,20 @@ const generatePixels = () => {
       let delay: number
 
       if (props.pattern === 'vertical') {
-        // Vertical wave from top to bottom
+        // Vertical wave from top to bottom with more randomness
         const normalizedRow = row / rows
-        const randomOffset = Math.random() * 0.06
+        const randomOffset = Math.random() * 0.3
         delay = props.direction === 'out'
-          ? normalizedRow * props.duration * 0.5 + randomOffset
-          : (1 - normalizedRow) * props.duration * 0.5 + randomOffset
+          ? normalizedRow * props.duration * 0.4 + randomOffset
+          : (1 - normalizedRow) * props.duration * 0.4 + randomOffset
       } else if (props.pattern === 'diagonal') {
         // Diagonal wave from top-left to bottom-right
         const diagonalIndex = col + row
         const normalizedDiagonal = diagonalIndex / maxDiagonal
-        const randomOffset = Math.random() * 0.08
+        const randomOffset = Math.random() * 0.3
         delay = props.direction === 'out'
-          ? normalizedDiagonal * props.duration * 0.5 + randomOffset
-          : (1 - normalizedDiagonal) * props.duration * 0.5 + randomOffset
+          ? normalizedDiagonal * props.duration * 0.4 + randomOffset
+          : (1 - normalizedDiagonal) * props.duration * 0.4 + randomOffset
       } else if (props.pattern === 'radial') {
         // Radial from center
         const centerX = cols / 2
@@ -62,24 +71,36 @@ const generatePixels = () => {
           (col - centerX) ** 2 + (row - centerY) ** 2
         )
         const normalizedDistance = distanceFromCenter / maxDistance
-        const randomOffset = Math.random() * 0.1
+        const randomOffset = Math.random() * 0.3
         delay = props.direction === 'out'
-          ? normalizedDistance * props.duration * 0.5 + randomOffset
-          : (1 - normalizedDistance) * props.duration * 0.5 + randomOffset
+          ? normalizedDistance * props.duration * 0.4 + randomOffset
+          : (1 - normalizedDistance) * props.duration * 0.4 + randomOffset
       } else {
         // Random pattern
-        delay = Math.random() * props.duration * 0.6
+        delay = Math.random() * props.duration * 0.7
       }
 
       // Random rotation for more dynamic feel
-      const rotate = (Math.random() - 0.5) * 30
+      const rotate = (Math.random() - 0.5) * 180
+
+      // Random movement direction for each pixel
+      const angle = Math.random() * Math.PI * 2
+      const distance = 50 + Math.random() * 150
+      const moveX = Math.cos(angle) * distance
+      const moveY = Math.sin(angle) * distance
+
+      // Random final scale
+      const scale = Math.random() * 0.5
 
       newPixels.push({
         id: row * cols + col,
         delay,
         x: col * props.pixelSize,
         y: row * props.pixelSize,
-        rotate
+        rotate,
+        moveX,
+        moveY,
+        scale
       })
     }
   }
@@ -134,8 +155,11 @@ onUnmounted(() => {
           height: `${pixelSize}px`,
           backgroundColor: color,
           animationDelay: `${pixel.delay}s`,
-          animationDuration: `${duration * 0.4}s`,
-          '--rotate': `${pixel.rotate}deg`
+          animationDuration: `${duration * 0.5}s`,
+          '--rotate': `${pixel.rotate}deg`,
+          '--move-x': `${pixel.moveX}px`,
+          '--move-y': `${pixel.moveY}px`,
+          '--end-scale': pixel.scale
         }"
       />
     </div>
@@ -153,48 +177,41 @@ onUnmounted(() => {
 
 .pixel {
   position: absolute;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
 }
 
 .pixel-out {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-  animation: pixel-dissolve-out cubic-bezier(0.7, 0, 0.3, 1) forwards;
+  animation: pixel-dissolve-out cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .pixel-in {
   opacity: 0;
-  transform: scale(0) rotate(var(--rotate));
-  animation: pixel-dissolve-in cubic-bezier(0.3, 0, 0.7, 1) forwards;
+  animation: pixel-dissolve-in cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes pixel-dissolve-out {
   0% {
-    transform: scale(1) rotate(0deg) translateY(0);
+    transform: translate(0, 0);
     opacity: 1;
   }
-  30% {
-    transform: scale(1.05) rotate(calc(var(--rotate) * 0.3)) translateY(-2px);
-    opacity: 1;
+  0.1% {
+    opacity: 0;
   }
   100% {
-    transform: scale(0) rotate(var(--rotate)) translateY(20px);
+    transform: translate(var(--move-x), var(--move-y));
     opacity: 0;
   }
 }
 
 @keyframes pixel-dissolve-in {
   0% {
-    transform: scale(0) rotate(var(--rotate)) translateY(20px);
+    transform: translate(var(--move-x), var(--move-y));
     opacity: 0;
   }
-  70% {
-    transform: scale(1.05) rotate(calc(var(--rotate) * 0.3)) translateY(-2px);
-    opacity: 1;
+  99.9% {
+    opacity: 0;
   }
   100% {
-    transform: scale(1) rotate(0deg) translateY(0);
+    transform: translate(0, 0);
     opacity: 1;
   }
 }

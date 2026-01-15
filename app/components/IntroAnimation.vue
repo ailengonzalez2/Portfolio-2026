@@ -59,7 +59,7 @@ onMounted(() => {
       <!-- Pixel transition effect - replaces the background and dissolves away -->
       <PixelTransition
         :is-active="startPixelTransition"
-        color="#000000"
+        color="#D5C8B0"
         :pixel-size="25"
         :duration="2"
         direction="out"
@@ -100,7 +100,7 @@ onMounted(() => {
 .intro-background {
   position: absolute;
   inset: 0;
-  background: #000000;
+  background: #D5C8B0;
 }
 
 .signature-container {
@@ -160,7 +160,7 @@ onMounted(() => {
 .signature-mask {
   position: absolute;
   inset: 0;
-  background: #000000;
+  background: #D5C8B0;
 }
 
 .signature-mask.animate {
