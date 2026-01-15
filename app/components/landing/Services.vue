@@ -12,19 +12,19 @@ const services: Service[] = [
   {
     id: 'ux-ui',
     title: 'Product Design',
-    description: 'User-centered design that creates intuitive and beautiful interfaces, optimized for conversion and exceptional user experience.',
+    description: 'I design digital products with a focus on clean, pixel-perfect interfaces and real usability. Every project starts with understanding users and ends with designs that look great, work smoothly, and make sense.',
     backgroundImage: '/projects/pureskin.png'
   },
   {
     id: 'frontend',
     title: 'Frontend Development',
-    description: 'Frontend development with modern technologies, focused on performance, accessibility, and world-class user experience.',
+    description: 'I build modern, high-quality frontends using the latest web technologies. My work is about clean code, performance, and accessibility—turning designs into fast, reliable products that feel great to use.',
     backgroundImage: '/projects/defidashboard.png'
   },
   {
     id: 'ai',
     title: 'AI Integration',
-    description: 'Artificial intelligence integration to automate processes, improve decisions, and create smarter and more efficient products.',
+    description: 'I integrate AI tools to make products smarter and more efficient. From automating simple tasks to improving user interactions, I help ideas grow with practical, human-centered technology.',
     backgroundImage: '/projects/coaching.png'
   }
 ]
@@ -39,6 +39,14 @@ const activeBackground = computed(() => {
   const service = services.find(s => s.id === activeCard.value)
   return service?.backgroundImage || services[0].backgroundImage
 })
+
+// Split text into words for word-by-word animation
+const splitWords = (text: string) => text.split(' ')
+
+// Calculate delay for each word based on index and starting offset
+const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
+  return `${baseDelay + (wordIndex * 0.05)}s`
+}
 </script>
 
 <template>
@@ -104,31 +112,49 @@ const activeBackground = computed(() => {
                 <div
                   class="expanded-content absolute inset-0 flex flex-col p-8"
                   :class="[
-                    activeCard === service.id ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    activeCard === service.id ? 'is-active' : 'is-inactive'
                   ]"
                 >
-                  <h3 class="font-sans text-[36px] text-[#2d2d2d] dark:text-white tracking-tight leading-tight mb-6">
-                    {{ service.title }}
+                  <!-- Title with word-by-word animation -->
+                  <h3 class="font-sans text-[36px] text-[#2d2d2d] dark:text-white tracking-tight leading-tight mb-6 overflow-hidden">
+                    <span
+                      v-for="(word, index) in splitWords(service.title)"
+                      :key="index"
+                      class="word-animate inline-block"
+                      :style="{ transitionDelay: getWordDelay(index, 0.1) }"
+                    >
+                      {{ word }}&nbsp;
+                    </span>
                   </h3>
-                  <p class="text-[15px] text-[#5a5a5a] dark:text-gray-400 leading-[1.7] grow max-w-[340px]">
-                    {{ service.description }}
+
+                  <!-- Description with word-by-word animation -->
+                  <p class="text-[15px] text-[#5a5a5a] dark:text-gray-400 leading-[1.7] grow max-w-[340px] overflow-hidden">
+                    <span
+                      v-for="(word, index) in splitWords(service.description)"
+                      :key="index"
+                      class="word-animate inline-block"
+                      :style="{ transitionDelay: getWordDelay(index, 0.2) }"
+                    >
+                      {{ word }}&nbsp;
+                    </span>
                   </p>
 
                   <!-- Separator and Social Links -->
                   <div class="mt-auto pt-8">
-                    <div class="h-px w-full bg-[#d4d4d4] dark:bg-gray-600 mb-5" />
-                    <div class="flex items-center justify-start gap-3">
+                    <div class="stagger-item stagger-separator h-px w-full bg-[#d4d4d4] dark:bg-gray-600 mb-5" />
+                    <div class="flex items-center justify-start gap-4">
                       <!-- LinkedIn -->
                       <a
                         href="https://www.linkedin.com/in/AilenGonzalez"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="LinkedIn"
+                        class="stagger-item stagger-icon-1 social-icon-link social-icon-linkedin"
                       >
                         <img
                           src="/tech-icons/card_linkedin.png"
                           alt="LinkedIn"
-                          class="w-7 h-7 object-contain transition-transform duration-300 hover:scale-110"
+                          class="w-7 h-7 object-contain"
                         >
                       </a>
                       <!-- Upwork -->
@@ -137,11 +163,12 @@ const activeBackground = computed(() => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Upwork"
+                        class="stagger-item stagger-icon-2 social-icon-link social-icon-upwork"
                       >
                         <img
                           src="/tech-icons/card-upwork.png"
                           alt="Upwork"
-                          class="w-7 h-7 object-contain transition-transform duration-300 hover:scale-110"
+                          class="w-7 h-7 object-contain"
                         >
                       </a>
                       <!-- Telegram -->
@@ -150,11 +177,12 @@ const activeBackground = computed(() => {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Telegram"
+                        class="stagger-item stagger-icon-3 social-icon-link social-icon-telegram"
                       >
                         <img
                           src="/tech-icons/card-telegram.png"
                           alt="Telegram"
-                          class="w-7 h-7 object-contain transition-transform duration-300 hover:scale-110"
+                          class="w-7 h-7 object-contain"
                         >
                       </a>
                     </div>
@@ -219,9 +247,21 @@ const activeBackground = computed(() => {
 }
 
 /* Content transitions */
-.collapsed-content,
-.expanded-content {
+.collapsed-content {
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+}
+
+.expanded-content {
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expanded-content.is-inactive {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.expanded-content.is-active {
+  opacity: 1;
 }
 
 /* Delayed opacity for smoother effect */
@@ -229,44 +269,118 @@ const activeBackground = computed(() => {
   transition-delay: 0s;
 }
 
-.expanded-content.opacity-100 {
-  transition-delay: 0.15s;
-}
-
-.expanded-content.opacity-0 {
-  transition-delay: 0s;
-}
-
 .collapsed-content.opacity-100 {
   transition-delay: 0.15s;
 }
 
-/* Social links */
-.social-link {
-  display: flex;
+/* Word-by-word animation - coming up from below */
+.word-animate {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* When parent is active, animate words up */
+.expanded-content.is-active .word-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Reset word animations when inactive */
+.expanded-content.is-inactive .word-animate {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.15s ease-out,
+              transform 0.15s ease-out;
+  transition-delay: 0s !important;
+}
+
+/* Staggered animation for separator and icons */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* When parent is active, animate children with staggered delays */
+.expanded-content.is-active .stagger-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.expanded-content.is-active .stagger-separator {
+  transition-delay: 1.2s;
+}
+
+.expanded-content.is-active .stagger-icon-1 {
+  transition-delay: 1.35s;
+}
+
+.expanded-content.is-active .stagger-icon-2 {
+  transition-delay: 1.45s;
+}
+
+.expanded-content.is-active .stagger-icon-3 {
+  transition-delay: 1.55s;
+}
+
+/* Reset animations when inactive */
+.expanded-content.is-inactive .stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.15s ease-out,
+              transform 0.15s ease-out;
+  transition-delay: 0s;
+}
+
+/* Social icon links */
+.social-icon-link {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.05);
-  color: #2d2d2d;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.social-link:hover {
-  background: #a11ee2;
-  color: white;
-  transform: translateY(-2px);
+.social-icon-link img {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.8);
 }
 
-.dark .social-link {
-  background: rgba(255, 255, 255, 0.1);
-  color: #e5e5e5;
+.social-icon-link:hover img {
+  transform: translateY(-2px) scale(1.15);
 }
 
-.dark .social-link:hover {
-  background: #a11ee2;
-  color: white;
+/* LinkedIn hover - #0077B5 */
+.social-icon-linkedin:hover img {
+  filter: brightness(0.8) sepia(1) saturate(5) hue-rotate(180deg);
+}
+
+/* Upwork hover - #108A00 */
+.social-icon-upwork:hover img {
+  filter: brightness(0.7) sepia(1) saturate(5) hue-rotate(80deg);
+}
+
+/* Telegram hover - #0088CC */
+.social-icon-telegram:hover img {
+  filter: brightness(0.9) sepia(1) saturate(4) hue-rotate(170deg);
+}
+
+/* Dark mode */
+.dark .social-icon-link img {
+  filter: brightness(1);
+}
+
+.dark .social-icon-linkedin:hover img {
+  filter: brightness(1) sepia(1) saturate(5) hue-rotate(180deg);
+}
+
+.dark .social-icon-upwork:hover img {
+  filter: brightness(0.9) sepia(1) saturate(5) hue-rotate(80deg);
+}
+
+.dark .social-icon-telegram:hover img {
+  filter: brightness(1.1) sepia(1) saturate(4) hue-rotate(170deg);
 }
 </style>
