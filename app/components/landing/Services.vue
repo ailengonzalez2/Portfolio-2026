@@ -1,320 +1,272 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 interface Service {
   id: string
   title: string
   description: string
-  textPosition: 'top-right' | 'bottom-left' | 'bottom-right'
-  waveImage: string
-  waveStyles: Record<string, string>
-  detailedDescription: string
+  backgroundImage: string
 }
 
 const services: Service[] = [
   {
     id: 'ux-ui',
-    title: 'UX/UI DESIGN',
-    description: 'Sitios web optimizados que convierten visitantes en clientes',
-    textPosition: 'bottom-left',
-    waveImage: '/services/service-2-waves.svg',
-    waveStyles: {
-      width: '160%',
-      height: '160%',
-      top: '-30%',
-      right: '-50%',
-      transform: 'scaleY(-1)'
-    },
-    detailedDescription: 'User-centered design that creates intuitive and beautiful interfaces, optimized for conversion and exceptional user experience.'
+    title: 'Product Design',
+    description: 'User-centered design that creates intuitive and beautiful interfaces, optimized for conversion and exceptional user experience.',
+    backgroundImage: '/projects/pureskin.png'
   },
   {
     id: 'frontend',
-    title: 'FRONTEND DEVELOPMENT',
-    description: 'To enhance workflows and create smarter digital products',
-    textPosition: 'top-right',
-    waveImage: '/services/service-3-waves.svg',
-    waveStyles: {
-      width: '160%',
-      height: '160%',
-      bottom: '-45%',
-      left: '-65%',
-      transform: 'scaleY(-1)'
-    },
-    detailedDescription: 'Frontend development with modern technologies, focused on performance, accessibility, and world-class user experience.'
+    title: 'Frontend Development',
+    description: 'Frontend development with modern technologies, focused on performance, accessibility, and world-class user experience.',
+    backgroundImage: '/projects/defidashboard.png'
   },
   {
     id: 'ai',
-    title: 'AI INTEGRATION',
-    description: 'To enhance workflows and create smarter digital products',
-    textPosition: 'bottom-right',
-    waveImage: '/services/service-1-waves.svg',
-    waveStyles: {
-      width: '200%',
-      height: '200%',
-      top: '-45%',
-      left: '-65%',
-      transform: 'rotate(0deg)'
-    },
-    detailedDescription: 'Artificial intelligence integration to automate processes, improve decisions, and create smarter and more efficient products.'
+    title: 'AI Integration',
+    description: 'Artificial intelligence integration to automate processes, improve decisions, and create smarter and more efficient products.',
+    backgroundImage: '/projects/coaching.png'
   }
 ]
 
-const flippedCards = ref<Set<string>>(new Set())
+const activeCard = ref<string>('ux-ui')
 
-const toggleFlip = (cardId: string) => {
-  if (flippedCards.value.has(cardId)) {
-    flippedCards.value.delete(cardId)
-  } else {
-    flippedCards.value.add(cardId)
-  }
-  flippedCards.value = new Set(flippedCards.value)
+const setActiveCard = (id: string) => {
+  activeCard.value = id
 }
 
-const isCardFlipped = (cardId: string) => {
-  return flippedCards.value.has(cardId)
-}
-
-const handleCardMouseEnter = (cardId: string) => {
-  if (!isCardFlipped(cardId)) {
-    toggleFlip(cardId)
-  }
-}
-
-const handleCardMouseLeave = (cardId: string) => {
-  if (isCardFlipped(cardId)) {
-    toggleFlip(cardId)
-  }
-}
-
-// Text position classes based on Figma design
-const getTextPositionClasses = (position: Service['textPosition']) => {
-  const positions = {
-    'top-right': 'top-[52px] right-[15px] left-[44px] items-end text-right',
-    'bottom-left': 'bottom-[37px] right-[36px] left-[23px] items-start text-left',
-    'bottom-right': 'bottom-[37px] right-[9px] left-[36px] items-end text-right'
-  }
-  return positions[position]
-}
+const activeBackground = computed(() => {
+  const service = services.find(s => s.id === activeCard.value)
+  return service?.backgroundImage || services[0].backgroundImage
+})
 </script>
 
 <template>
   <section
     id="services"
-    class="py-16 sm:py-24 relative overflow-hidden"
+    class="py-16 sm:py-24 relative overflow-hidden min-h-[800px]"
   >
-    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Section Header -->
-      <Motion
-        :initial="{ opacity: 0, y: 20 }"
-        :while-in-view="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.5 }"
-        :in-view-options="{ once: true }"
+    <!-- Background Images with crossfade -->
+    <div class="absolute inset-0">
+      <div
+        v-for="service in services"
+        :key="service.id"
+        class="absolute inset-0 bg-image-layer"
+        :class="[
+          activeCard === service.id ? 'opacity-100' : 'opacity-0'
+        ]"
       >
-        <div class="mb-[66px]">
-          <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
-            Services
-          </h2>
-          <div class="h-[2px] w-[50px] bg-[#a2a2a2]" />
-        </div>
-      </Motion>
-
-      <!-- Service cards grid - gap matches Figma (96px) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-[96px]">
-        <Motion
-          v-for="(service, index) in services"
-          :key="service.id"
-          :initial="{ opacity: 0, y: 30 }"
-          :while-in-view="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.5, delay: index * 0.15 }"
-          :in-view-options="{ once: true }"
+        <img
+          :src="service.backgroundImage"
+          :alt="`${service.title} background`"
+          class="w-full h-full object-cover"
         >
-          <!-- 3D Flip Container -->
-          <div
-            class="service-card-flipper group relative cursor-pointer transition-all duration-500"
-            style="aspect-ratio: 340/341; perspective: 1000px;"
-            @click="toggleFlip(service.id)"
-            @mouseenter="handleCardMouseEnter(service.id)"
-            @mouseleave="handleCardMouseLeave(service.id)"
-          >
-            <!-- Card Inner - Will rotate -->
-            <div
-              class="service-card-inner relative w-full h-full transition-transform duration-500 ease-out"
-              :style="{
-                transformStyle: 'preserve-3d',
-                transform: isCardFlipped(service.id) ? 'rotateX(180deg) scale(1.05)' : 'rotateX(0deg) scale(1)'
-              }"
-            >
-              <!-- Front Face -->
-              <div
-                class="service-card-front absolute inset-0 rounded-[10px] border border-[#f1f5f9] dark:border-gray-700/50 bg-[#fcfcfc] dark:bg-neutral-900 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] overflow-hidden"
-                :style="{ backfaceVisibility: 'hidden' }"
-              >
-                <!-- Wave Background Image -->
-                <div class="absolute inset-0 pointer-events-none overflow-hidden">
-                  <div
-                    class="service-wave absolute transition-transform duration-700 ease-out"
-                    :style="service.waveStyles"
-                  >
-                    <img
-                      :src="service.waveImage"
-                      :alt="`${service.title} decoration`"
-                      class="w-full h-full object-contain dark:opacity-70"
-                      loading="lazy"
-                    >
-                  </div>
-                </div>
+      </div>
+    </div>
 
-                <!-- Front Content -->
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Service cards grid -->
+      <div class="flex flex-col md:flex-row gap-4 items-stretch">
+        <div
+          v-for="service in services"
+          :key="service.id"
+          class="service-wrapper"
+          :class="[
+            activeCard === service.id ? 'md:flex-2' : 'md:flex-1'
+          ]"
+        >
+          <div class="h-full">
+            <!-- Glass Card -->
+            <div
+              class="service-card relative rounded-xl cursor-pointer h-full overflow-hidden"
+              :class="[
+                activeCard === service.id
+                  ? 'active-card'
+                  : 'glass-card'
+              ]"
+              @mouseenter="setActiveCard(service.id)"
+            >
+              <!-- Card Inner Container -->
+              <div class="relative h-full min-h-[380px]">
+                <!-- Collapsed Content (Title only) -->
                 <div
-                  class="absolute flex flex-col gap-[11px] z-10"
-                  :class="getTextPositionClasses(service.textPosition)"
+                  class="collapsed-content absolute inset-0 flex items-center justify-center p-6"
+                  :class="[
+                    activeCard === service.id ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                  ]"
                 >
-                  <h3 class="font-semibold text-[18px] text-[#45556c] dark:text-white uppercase tracking-tight font-sans">
+                  <h3 class="font-sans text-[24px] text-[#6b6b6b] dark:text-gray-300 tracking-tight text-center leading-tight">
                     {{ service.title }}
                   </h3>
-                  <p class="text-[16px] text-[rgba(138,138,138,0.99)] dark:text-gray-400 leading-relaxed">
+                </div>
+
+                <!-- Expanded Content (Full details) -->
+                <div
+                  class="expanded-content absolute inset-0 flex flex-col p-8"
+                  :class="[
+                    activeCard === service.id ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  ]"
+                >
+                  <h3 class="font-sans text-[36px] text-[#2d2d2d] dark:text-white tracking-tight leading-tight mb-6">
+                    {{ service.title }}
+                  </h3>
+                  <p class="text-[15px] text-[#5a5a5a] dark:text-gray-400 leading-[1.7] grow max-w-[340px]">
                     {{ service.description }}
                   </p>
-                </div>
-              </div>
 
-              <!-- Back Face -->
-              <div
-                class="service-card-back absolute inset-0 rounded-[10px] border border-[#f1f5f9] dark:border-gray-700/50 shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] overflow-hidden p-6"
-                :style="{
-                  backfaceVisibility: 'hidden',
-                  transform: 'rotateX(180deg)',
-                  backgroundImage: 'linear-gradient(-89.845deg, rgba(255, 177, 71, 0.2) 5.7398%, rgba(255, 108, 99, 0.2) 50.642%, rgba(184, 106, 223, 0.2) 92.046%)',
-                  backgroundColor: '#fcfcfc'
-                }"
-              >
-                <!-- Back Content - Top section -->
-                <div class="flex flex-col gap-4 h-full">
-                  <div>
-                    <h3 class="font-semibold text-[18px] text-[#45556c] uppercase tracking-tight font-sans">
-                      {{ service.title }}
-                    </h3>
-                    <p class="text-[14px] text-[rgba(138,138,138,0.99)] leading-relaxed mt-3">
-                      {{ service.detailedDescription }}
-                    </p>
-                  </div>
-
-                  <!-- Social Links - Bottom Right -->
-                  <div class="flex items-end justify-end gap-4 mt-auto">
-                    <!-- Upwork Link -->
-                    <a
-                      href="https://www.upwork.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center justify-center transition-all duration-300 hover:scale-125"
-                      aria-label="Contact on Upwork"
-                    >
-                      <UIcon
-                        name="i-simple-icons-upwork"
-                        class="w-8 h-8 text-[#45556c] hover:text-[#14a800] transition-colors duration-300"
-                      />
-                    </a>
-
-                    <!-- LinkedIn Link -->
-                    <a
-                      href="https://www.linkedin.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center justify-center transition-all duration-300 hover:scale-125"
-                      aria-label="Contact on LinkedIn"
-                    >
-                      <UIcon
-                        name="i-mdi-linkedin"
-                        class="w-8 h-8 text-[#45556c] hover:text-[#0077b5] transition-colors duration-300"
-                      />
-                    </a>
-
-                    <!-- Telegram Link -->
-                    <a
-                      href="https://t.me"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="inline-flex items-center justify-center transition-all duration-300 hover:scale-125"
-                      aria-label="Contact on Telegram"
-                    >
-                      <UIcon
-                        name="i-mdi-telegram"
-                        class="w-8 h-8 text-[#45556c] hover:text-[#0088cc] transition-colors duration-300"
-                      />
-                    </a>
+                  <!-- Separator and Social Links -->
+                  <div class="mt-auto pt-8">
+                    <div class="h-px w-full bg-[#d4d4d4] dark:bg-gray-600 mb-5" />
+                    <div class="flex items-center justify-start gap-3">
+                      <!-- LinkedIn -->
+                      <a
+                        href="https://www.linkedin.com/in/AilenGonzalez"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn"
+                      >
+                        <img
+                          src="/tech-icons/card_linkedin.png"
+                          alt="LinkedIn"
+                          class="w-7 h-7 object-contain transition-transform duration-300 hover:scale-110"
+                        >
+                      </a>
+                      <!-- Upwork -->
+                      <a
+                        href="https://www.upwork.com/freelancers/~AilenGonzalez"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Upwork"
+                      >
+                        <img
+                          src="/tech-icons/card-upwork.png"
+                          alt="Upwork"
+                          class="w-7 h-7 object-contain transition-transform duration-300 hover:scale-110"
+                        >
+                      </a>
+                      <!-- Telegram -->
+                      <a
+                        href="https://t.me/AilenGonzalez"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Telegram"
+                      >
+                        <img
+                          src="/tech-icons/card-telegram.png"
+                          alt="Telegram"
+                          class="w-7 h-7 object-contain transition-transform duration-300 hover:scale-110"
+                        >
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </Motion>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-/* Base wave animation setup */
-.service-wave {
-  will-change: transform;
+/* Background image crossfade */
+.bg-image-layer {
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 3D Flip Container */
-.service-card-flipper {
-  perspective: 1000px;
+/* Wrapper for flex animation */
+.service-wrapper {
+  transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Inner card with 3D transforms */
-.service-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 500ms ease-out;
-  transform-style: preserve-3d;
+/* Base card styles */
+.service-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Front and back faces */
-.service-card-front,
-.service-card-back {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+/* Active card - solid background */
+.active-card {
+  background: #faf8f5;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 }
 
-/* Back face is rotated 180 degrees initially */
-.service-card-back {
-  transform: rotateX(180deg);
+.dark .active-card {
+  background: rgb(23, 23, 23);
 }
 
-/* Animation keyframes */
-@keyframes wave-float {
-  0%, 100% {
-    transform: var(--wave-base-transform) translateY(0);
-  }
-  50% {
-    transform: var(--wave-base-transform) translateY(-8px);
-  }
+/* Glass card - frosted effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
-/* Store base transform for animation */
-:nth-child(1) .service-wave {
-  --wave-base-transform: rotate(0deg);
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
-:nth-child(2) .service-wave {
-  --wave-base-transform: scaleY(-1);
+.dark .glass-card {
+  background: rgba(38, 38, 38, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-:nth-child(3) .service-wave {
-  --wave-base-transform: scaleX(-1);
+.dark .glass-card:hover {
+  background: rgba(38, 38, 38, 0.6);
 }
 
-/* Continuous animation class */
-.animate-waves .service-wave {
-  animation: wave-float 6s ease-in-out infinite;
+/* Content transitions */
+.collapsed-content,
+.expanded-content {
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
 }
 
-/* Dark mode adjustments */
-.dark .service-card-front {
-  background: linear-gradient(135deg, rgba(23, 23, 23, 1) 0%, rgba(38, 38, 38, 0.8) 100%);
+/* Delayed opacity for smoother effect */
+.collapsed-content.opacity-0 {
+  transition-delay: 0s;
+}
+
+.expanded-content.opacity-100 {
+  transition-delay: 0.15s;
+}
+
+.expanded-content.opacity-0 {
+  transition-delay: 0s;
+}
+
+.collapsed-content.opacity-100 {
+  transition-delay: 0.15s;
+}
+
+/* Social links */
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.05);
+  color: #2d2d2d;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: #a11ee2;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.dark .social-link {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e5e5e5;
+}
+
+.dark .social-link:hover {
+  background: #a11ee2;
+  color: white;
 }
 </style>
