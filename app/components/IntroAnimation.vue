@@ -5,15 +5,14 @@ const isVisible = ref(true)
 const animationStarted = ref(false)
 const moveToHeader = ref(false)
 const hideSignature = ref(false)
-const startPixelTransition = ref(false)
-const hideBackground = ref(false)
+const fadeBackground = ref(false)
 
 // Durations in seconds
 const initialDelay = 1 // Start delay
 const signatureDrawDuration = 2 // Signature reveal
 const holdDuration = 0.4 // Brief pause after drawing
 const moveToHeaderDuration = 0.8 // Move to header animation
-const pixelTransitionDuration = 2 // Pixel dissolve effect
+const backgroundFadeDuration = 1 // Background fade out
 
 onMounted(() => {
   // Prevent scrolling during animation
@@ -24,13 +23,10 @@ onMounted(() => {
     animationStarted.value = true
   }, initialDelay * 1000)
 
-  // After signature is drawn, start moving to header AND start pixel transition
+  // After signature is drawn, start moving to header AND fade background
   setTimeout(() => {
     moveToHeader.value = true
-    // Start pixel transition slightly before signature starts moving
-    startPixelTransition.value = true
-    // Hide the solid background immediately - pixels will take over
-    hideBackground.value = true
+    fadeBackground.value = true
   }, (initialDelay + signatureDrawDuration + holdDuration) * 1000)
 
   // Hide intro signature and show header logo at end of movement
@@ -39,13 +35,13 @@ onMounted(() => {
     setIntroComplete()
   }, (initialDelay + signatureDrawDuration + holdDuration + moveToHeaderDuration) * 1000)
 
-  // Remove overlay completely after pixel transition finishes
+  // Remove overlay completely after background fade finishes
   setTimeout(() => {
     isVisible.value = false
     document.body.style.overflow = ''
     // Ensure page is at top after intro
     window.scrollTo(0, 0)
-  }, (initialDelay + signatureDrawDuration + holdDuration + pixelTransitionDuration + 0.2) * 1000)
+  }, (initialDelay + signatureDrawDuration + holdDuration + backgroundFadeDuration + 0.2) * 1000)
 })
 </script>
 
@@ -55,17 +51,10 @@ onMounted(() => {
       v-if="isVisible"
       class="intro-overlay"
     >
-      <!-- Solid background - hidden instantly when pixels take over -->
-      <div v-if="!hideBackground" class="intro-background" />
-
-      <!-- Pixel transition effect - replaces the background and dissolves away -->
-      <PixelTransition
-        :is-active="startPixelTransition"
-        color="#D5C8B0"
-        :pixel-size="25"
-        :duration="2"
-        direction="out"
-        pattern="vertical"
+      <!-- Solid background with fade transition -->
+      <div
+        class="intro-background"
+        :class="{ 'fade-out': fadeBackground }"
       />
 
       <!-- Signature container -->
@@ -103,6 +92,11 @@ onMounted(() => {
   position: absolute;
   inset: 0;
   background: #D5C8B0;
+  transition: opacity 1s ease-out;
+}
+
+.intro-background.fade-out {
+  opacity: 0;
 }
 
 .signature-container {
