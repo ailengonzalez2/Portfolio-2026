@@ -14,6 +14,7 @@ useSeoMeta({
 
 <template>
   <UPage>
+    <ScrollPath />
     <LandingHero />
     <LandingRolls />
     <LandingProjects />

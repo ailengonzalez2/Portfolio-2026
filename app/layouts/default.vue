@@ -3,7 +3,6 @@
 
 <template>
   <div class="min-h-screen flex flex-col">
-    <ScrollPath />
     <SocialSidebar />
     <AppHeader :links="navLinks" />
     <main class="flex-1 pt-20 relative z-10">
