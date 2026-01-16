@@ -91,7 +91,7 @@ onMounted(() => {
 .intro-background {
   position: absolute;
   inset: 0;
-  background: #D5C8B0;
+  background: #000000;
   transition: opacity 1s ease-out;
 }
 
@@ -156,7 +156,7 @@ onMounted(() => {
 .signature-mask {
   position: absolute;
   inset: 0;
-  background: #D5C8B0;
+  background: #000000;
 }
 
 .signature-mask.animate {
