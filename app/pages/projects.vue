@@ -52,29 +52,32 @@ const projectRows = computed(() => {
         <!-- Sticky Scroll Projects -->
         <div class="flex flex-col">
           <template v-for="(row, rowIndex) in projectRows" :key="rowIndex">
-            <Motion
-              :initial="{ opacity: 0, y: 40 }"
-              :while-in-view="{ opacity: 1, y: 0 }"
-              :transition="{ duration: 0.6, delay: 0.1 }"
-              :in-view-options="{ once: true, amount: 0.2 }"
-              class="sticky pt-6 pb-8"
+            <div
+              class="sticky"
               :style="{
-                top: `${160 + rowIndex * 60}px`,
-                zIndex: rowIndex + 1
+                top: '160px',
+                zIndex: rowIndex + 1,
+                marginBottom: rowIndex < projectRows.length - 1 ? '25vh' : '0'
               }"
             >
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-                <template v-for="project in row" :key="project.id">
-                  <ProjectCard :project="project" no-animation />
-                </template>
-              </div>
-            </Motion>
+              <Motion
+                :initial="{ opacity: 0, y: 40 }"
+                :while-in-view="{ opacity: 1, y: 0 }"
+                :transition="{ duration: 0.6, delay: 0.1 }"
+                :in-view-options="{ once: true, amount: 0.2 }"
+                class="pt-8 pb-12"
+              >
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                  <template v-for="project in row" :key="project.id">
+                    <ProjectCard :project="project" no-animation />
+                  </template>
+                </div>
+              </Motion>
+            </div>
           </template>
         </div>
 
-        <!-- Spacer for last row -->
-        <div class="h-20" />
-      </div>
+              </div>
     </section>
   </UPage>
 </template>
