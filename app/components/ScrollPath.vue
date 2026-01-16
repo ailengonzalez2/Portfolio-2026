@@ -2,7 +2,7 @@
 const pathRef = ref<SVGPathElement | null>(null)
 const pathLength = ref(0)
 const scrollProgress = ref(0)
-const documentHeight = ref(0)
+const pathEndPosition = ref(0)
 
 // Path starts above viewport, flows with a loop, ends off screen to the right
 const svgPath = `M 120 -50
@@ -18,9 +18,10 @@ const svgPath = `M 120 -50
   C 150 1085, 200 1090, 300 1095`
 
 onMounted(() => {
-  // Calculate document height for proper scaling
-  const updateDocHeight = () => {
-    documentHeight.value = document.documentElement.scrollHeight
+  // Calculate the position where the path should end (at the Services section)
+  const updatePathEnd = () => {
+    const servicesSection = document.getElementById('services')
+    pathEndPosition.value = servicesSection?.offsetTop || document.documentElement.scrollHeight
   }
 
   if (pathRef.value) {
@@ -29,18 +30,18 @@ onMounted(() => {
 
   const handleScroll = () => {
     const scrollTop = window.scrollY
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight
-    // Path only starts drawing after user begins scrolling
-    const progress = maxScroll > 0 ? scrollTop / maxScroll : 0
+    // Path completes when entering the services section (with a small offset to enter smoothly)
+    const targetScroll = Math.max(pathEndPosition.value - window.innerHeight * 0.5, 1)
+    const progress = targetScroll > 0 ? scrollTop / targetScroll : 0
     scrollProgress.value = Math.min(Math.max(progress, 0), 1)
   }
 
   // Initial setup
-  updateDocHeight()
+  updatePathEnd()
 
   // Watch for resize and content changes
   const resizeObserver = new ResizeObserver(() => {
-    updateDocHeight()
+    updatePathEnd()
     if (pathRef.value) {
       pathLength.value = pathRef.value.getTotalLength()
     }
@@ -110,7 +111,7 @@ const dashOffset = computed(() => {
   top: 0;
   left: 0;
   width: 100%;
-  height: v-bind('documentHeight + "px"');
+  height: v-bind('pathEndPosition + "px"');
   min-height: 100vh;
   overflow: visible;
 }

@@ -90,7 +90,7 @@ const certifications = [
 
           <!-- Action Buttons -->
           <div class="flex flex-row gap-3">
-            <button class="h-[41px] px-3 py-1.5 bg-gradient-to-r from-[#09090b] to-[#09090b] border-[0.75px] border-[rgba(255,255,255,0.3)] rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-2.5 text-white text-base font-normal whitespace-nowrap">
+            <button class="h-[41px] px-3 py-1.5 bg-gradient-to-r from-[#09090b] to-[#09090b] border-[0.75px] border-[rgba(255,255,255,0.3)] rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-2.5 text-white text-base font-normal whitespace-nowrap cursor-pointer hover:opacity-90 transition-opacity">
               <UIcon
                 name="i-lucide-download"
                 class="size-3.5"
@@ -102,7 +102,7 @@ const certifications = [
               href="https://cv.ailengonzalez.ar/"
               target="_blank"
               rel="noopener noreferrer"
-              class="h-[41px] px-3 py-1.5 bg-white rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-1 text-black text-base font-normal hover:bg-gray-50 transition-colors whitespace-nowrap"
+              class="h-[41px] px-3 py-1.5 bg-white rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-1 text-black text-base font-normal hover:bg-gray-50 transition-colors whitespace-nowrap cursor-pointer"
             >
               <UIcon
                 name="i-lucide-arrow-up-right"

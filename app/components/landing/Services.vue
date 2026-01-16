@@ -311,19 +311,19 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
 }
 
 .expanded-content.is-active .stagger-separator {
-  transition-delay: 1.2s;
+  transition-delay: 0.3s;
 }
 
 .expanded-content.is-active .stagger-icon-1 {
-  transition-delay: 1.35s;
+  transition-delay: 0.4s;
 }
 
 .expanded-content.is-active .stagger-icon-2 {
-  transition-delay: 1.45s;
+  transition-delay: 0.5s;
 }
 
 .expanded-content.is-active .stagger-icon-3 {
-  transition-delay: 1.55s;
+  transition-delay: 0.6s;
 }
 
 /* Reset animations when inactive */
