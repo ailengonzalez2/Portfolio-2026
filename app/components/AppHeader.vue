@@ -46,7 +46,7 @@ const { isIntroComplete } = useIntroAnimation()
             >
               <NuxtLink
                 :to="link.to"
-                class="text-base text-muted-foreground hover:text-foreground transition-colors"
+                class="text-base text-muted-foreground hover:text-foreground transition-colors uppercase"
               >
                 {{ link.label }}
               </NuxtLink>

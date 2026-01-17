@@ -14,10 +14,12 @@ useSeoMeta({
 
 <template>
   <UPage>
-    <ScrollPath />
     <LandingHero />
-    <LandingRolls />
-    <LandingProjects />
+    <!-- Wrapper for split reveal effect -->
+    <div class="relative isolate">
+      <LandingRolls />
+      <LandingProjects />
+    </div>
     <LandingServices />
     <LandingAboutMe />
     <LandingWeb3Quote />

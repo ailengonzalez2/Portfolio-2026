@@ -8,7 +8,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
 <template>
   <section
     id="projects"
-    class="py-16 sm:py-24 relative"
+    class="py-16 sm:py-24 relative bg-background -mt-[100vh] z-10"
   >
     <!-- Subtle background pattern -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
