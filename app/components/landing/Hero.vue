@@ -19,8 +19,8 @@ const techLogos = [
 </script>
 
 <template>
-  <section class="relative min-h-[calc(100vh-var(--ui-header-height))] flex flex-col justify-end pb-16 lg:pb-24">
-    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+  <section class="relative min-h-[calc(100vh-var(--ui-header-height))] flex flex-col justify-end pb-4 lg:pb-6 mb-24 lg:mb-32">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <!-- Available Badge -->
       <Motion
         :initial="{ opacity: 0, y: 20 }"
@@ -57,28 +57,20 @@ const techLogos = [
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.7, delay: 0.1 }"
       >
-        <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-[80px] font-medium tracking-tight leading-[1.15] text-primary-custom dark:text-gray-200">
-          Creating digital <br>
-          <span class="relative font-semibold italic">
-            <!-- Gradient glow behind "experiences" -->
-            <span
-              class="absolute inset-0 -inset-x-2 rounded-full opacity-60 blur-lg pointer-events-none"
-              style="background: linear-gradient(90deg, #ffb86a 0%, #dab2ff 50%, #c27aff 100%)"
-            />
-            <span class="relative"> experiences</span>
-          </span>
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-[120px] font-medium tracking-tight leading-[1.15] text-primary-custom dark:text-gray-200 uppercase text-right">
+          <span class="pr-8 sm:pr-12 lg:pr-16 xl:pr-20 whitespace-nowrap">Creating digital</span> <br>
+          experiences
         </h1>
       </Motion>
 
-      <!-- Tech Stack & CTA Row -->
+      <!-- Tech Stack Icons Carousel -->
       <Motion
         :initial="{ opacity: 0, y: 20 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ duration: 0.6, delay: 0.3 }"
-        class="mt-16 sm:mt-20 lg:mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+        class="mt-8 sm:mt-10 lg:mt-12"
       >
-        <!-- Tech Stack Icons Carousel -->
-        <div class="relative overflow-hidden flex-1 max-w-[500px] mask-gradient">
+        <div class="relative overflow-hidden max-w-[500px] mask-gradient">
           <div class="flex items-center animate-marquee w-max">
             <div class="flex items-center gap-2.5 pr-2.5">
               <div
@@ -110,22 +102,6 @@ const techLogos = [
             </div>
           </div>
         </div>
-
-        <!-- CTA Button -->
-        <NuxtLink
-          to="/projects"
-          class="group/btn relative inline-flex items-center bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] rounded-2xl py-4 pl-8 pr-16 transition-all duration-300 hover:pl-16 hover:pr-8"
-        >
-          <span class="absolute right-2 flex items-center justify-center size-12 bg-white rounded-full transition-all duration-300 ease-out group-hover/btn:right-[calc(100%-3.5rem)]">
-            <UIcon
-              name="i-lucide-arrow-right"
-              class="size-5 text-gray-900"
-            />
-          </span>
-          <span class="text-lg font-medium text-white">
-            Explore Projects
-          </span>
-        </NuxtLink>
       </Motion>
     </div>
   </section>
