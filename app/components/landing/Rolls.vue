@@ -6,16 +6,13 @@ const containerRef = ref<HTMLElement | null>(null)
 
 const { scrollYProgress } = useScroll({
   target: containerRef,
-  offset: ['start center', 'end start']
+  offset: ['start start', 'end start']
 })
 
-// Split animation - starts immediately when scrolling
-const topY = useTransform(scrollYProgress, [0, 1], ['0%', '-100%'])
-const bottomY = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
-
-// Horizontal movement for text elements
-const xLeft = useTransform(scrollYProgress, [0, 1], [0, -200])
-const xRight = useTransform(scrollYProgress, [0, 1], [0, 200])
+// Split animation - smooth synchronized movement
+const topY = useTransform(scrollYProgress, [0, 0.15, 0.6], ['0%', '0%', '-52%'])
+// Bottom moves 100% down to go completely off screen
+const bottomY = useTransform(scrollYProgress, [0, 0.15, 0.6], ['0%', '0%', '100%'])
 </script>
 
 <template>
@@ -40,32 +37,32 @@ const xRight = useTransform(scrollYProgress, [0, 1], [0, 200])
             </p>
 
             <!-- Product -->
-            <Motion :style="{ x: xLeft }" class="pl-0 sm:pl-4 lg:pl-8">
+            <div class="pl-0 sm:pl-4 lg:pl-8">
               <h2 class="font-sans uppercase text-6xl sm:text-8xl lg:text-9xl xl:text-[160px] text-[#3c4b5f] dark:text-[#7a8fa8] tracking-tight leading-[0.85] font-bold">
                 Product
               </h2>
-            </Motion>
+            </div>
 
             <!-- Designer -->
-            <Motion :style="{ x: xRight }" class="pl-12 sm:pl-24 lg:pl-40 xl:pl-56">
+            <div class="pl-12 sm:pl-24 lg:pl-40 xl:pl-56">
               <h2 class="font-sans uppercase text-6xl sm:text-8xl lg:text-9xl xl:text-[160px] text-[#3c4b5f] dark:text-[#7a8fa8] tracking-tight leading-[0.85] font-bold">
                 Designer
               </h2>
-            </Motion>
+            </div>
 
             <!-- Frontend -->
-            <Motion :style="{ x: xLeft }" class="pl-4 sm:pl-12 lg:pl-20 mt-2 sm:mt-4">
-              <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-primary-custom dark:text-primary-custom-dark tracking-tight leading-[0.85] font-bold italic">
+            <div class="pl-4 sm:pl-12 lg:pl-20 mt-2 sm:mt-4">
+              <h2 class="font-sans uppercase text-6xl sm:text-8xl lg:text-9xl xl:text-[160px] text-[#3c4b5f] dark:text-[#7a8fa8] tracking-tight leading-[0.85] font-bold">
                 Frontend
               </h2>
-            </Motion>
+            </div>
 
             <!-- Developer -->
-            <Motion :style="{ x: xRight }" class="pl-20 sm:pl-32 lg:pl-48 xl:pl-64">
-              <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-primary-custom dark:text-primary-custom-dark tracking-tight leading-[0.85] font-bold italic">
+            <div class="pl-20 sm:pl-32 lg:pl-48 xl:pl-64">
+              <h2 class="font-sans uppercase text-6xl sm:text-8xl lg:text-9xl xl:text-[160px] text-[#3c4b5f] dark:text-[#7a8fa8] tracking-tight leading-[0.85] font-bold">
                 Developer
               </h2>
-            </Motion>
+            </div>
 
             <!-- Bottom label -->
             <div class="mt-10 sm:mt-14 flex justify-end">
@@ -78,7 +75,7 @@ const xRight = useTransform(scrollYProgress, [0, 1], [0, 200])
         </div>
       </Motion>
 
-      <!-- BOTTOM HALF - moves down on scroll, clips bottom 50% of content -->
+      <!-- BOTTOM HALF - moves down and off screen -->
       <Motion
         :style="{ y: bottomY }"
         class="absolute inset-0 bg-[#F8F8F8] dark:bg-[#0a0a0a] z-30"
@@ -92,32 +89,32 @@ const xRight = useTransform(scrollYProgress, [0, 1], [0, 200])
             </p>
 
             <!-- Product -->
-            <Motion :style="{ x: xLeft }" class="pl-0 sm:pl-4 lg:pl-8">
+            <div class="pl-0 sm:pl-4 lg:pl-8">
               <h2 class="font-sans uppercase text-6xl sm:text-8xl lg:text-9xl xl:text-[160px] text-[#3c4b5f] dark:text-[#7a8fa8] tracking-tight leading-[0.85] font-bold">
                 Product
               </h2>
-            </Motion>
+            </div>
 
             <!-- Designer -->
-            <Motion :style="{ x: xRight }" class="pl-12 sm:pl-24 lg:pl-40 xl:pl-56">
+            <div class="pl-12 sm:pl-24 lg:pl-40 xl:pl-56">
               <h2 class="font-sans uppercase text-6xl sm:text-8xl lg:text-9xl xl:text-[160px] text-[#3c4b5f] dark:text-[#7a8fa8] tracking-tight leading-[0.85] font-bold">
                 Designer
               </h2>
-            </Motion>
+            </div>
 
             <!-- Frontend -->
-            <Motion :style="{ x: xLeft }" class="pl-4 sm:pl-12 lg:pl-20 mt-2 sm:mt-4">
-              <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-primary-custom dark:text-primary-custom-dark tracking-tight leading-[0.85] font-bold italic">
+            <div class="pl-4 sm:pl-12 lg:pl-20 mt-2 sm:mt-4">
+              <h2 class="font-sans uppercase text-6xl sm:text-8xl lg:text-9xl xl:text-[160px] text-[#3c4b5f] dark:text-[#7a8fa8] tracking-tight leading-[0.85] font-bold">
                 Frontend
               </h2>
-            </Motion>
+            </div>
 
             <!-- Developer -->
-            <Motion :style="{ x: xRight }" class="pl-20 sm:pl-32 lg:pl-48 xl:pl-64">
-              <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-primary-custom dark:text-primary-custom-dark tracking-tight leading-[0.85] font-bold italic">
+            <div class="pl-20 sm:pl-32 lg:pl-48 xl:pl-64">
+              <h2 class="font-sans uppercase text-6xl sm:text-8xl lg:text-9xl xl:text-[160px] text-[#3c4b5f] dark:text-[#7a8fa8] tracking-tight leading-[0.85] font-bold">
                 Developer
               </h2>
-            </Motion>
+            </div>
 
             <!-- Bottom label -->
             <div class="mt-10 sm:mt-14 flex justify-end">
