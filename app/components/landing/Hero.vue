@@ -11,7 +11,10 @@ const techLogos = [
   { icon: '/tech-icons/javascript-color.svg', label: 'JavaScript' },
   { icon: '/tech-icons/github-color.svg', label: 'GitHub' },
   { icon: '/tech-icons/xd-color.svg', label: 'Adobe XD' },
-  { icon: '/tech-icons/wp-color.svg', label: 'WordPress' }
+  { icon: '/tech-icons/wp-color.svg', label: 'WordPress' },
+  { icon: '/tech-icons/claude-color.png', label: 'Claude' },
+  { icon: '/tech-icons/copilot-color.png', label: 'Copilot' },
+  { icon: '/tech-icons/ethereum-color.png', label: 'Ethereum' }
 ]
 </script>
 
@@ -74,19 +77,37 @@ const techLogos = [
         :transition="{ duration: 0.6, delay: 0.3 }"
         class="mt-16 sm:mt-20 lg:mt-24 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
       >
-        <!-- Tech Stack Icons -->
-        <div class="flex items-center gap-2.5 flex-wrap">
-          <div
-            v-for="tech in techLogos"
-            :key="tech.label"
-            class="flex items-center justify-center size-14 rounded-2xl bg-white dark:bg-gray-900 transition-transform duration-200 hover:scale-110 p-2"
-            :title="tech.label"
-          >
-            <img
-              :src="tech.icon"
-              :alt="tech.label"
-              class="w-full h-full object-contain"
-            >
+        <!-- Tech Stack Icons Carousel -->
+        <div class="relative overflow-hidden flex-1 max-w-[500px] mask-gradient">
+          <div class="flex items-center animate-marquee w-max">
+            <div class="flex items-center gap-2.5 pr-2.5">
+              <div
+                v-for="tech in techLogos"
+                :key="tech.label"
+                class="flex items-center justify-center size-14 rounded-2xl bg-white dark:bg-gray-900 shrink-0 p-2"
+                :title="tech.label"
+              >
+                <img
+                  :src="tech.icon"
+                  :alt="tech.label"
+                  class="w-full h-full object-contain"
+                >
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 pr-2.5">
+              <div
+                v-for="tech in techLogos"
+                :key="`${tech.label}-dup`"
+                class="flex items-center justify-center size-14 rounded-2xl bg-white dark:bg-gray-900 shrink-0 p-2"
+                :title="tech.label"
+              >
+                <img
+                  :src="tech.icon"
+                  :alt="tech.label"
+                  class="w-full h-full object-contain"
+                >
+              </div>
+            </div>
           </div>
         </div>
 
@@ -109,3 +130,23 @@ const techLogos = [
     </div>
   </section>
 </template>
+
+<style scoped>
+.mask-gradient {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.animate-marquee {
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+</style>
