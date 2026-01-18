@@ -10,9 +10,11 @@ const { scrollYProgress } = useScroll({
 })
 
 // Split animation - smooth synchronized movement
-const topY = useTransform(scrollYProgress, [0, 0.15, 0.6], ['0%', '0%', '-52%'])
-// Bottom moves 100% down to go completely off screen
+const topY = useTransform(scrollYProgress, [0, 0.15, 0.6], ['0%', '0%', '-100%'])
 const bottomY = useTransform(scrollYProgress, [0, 0.15, 0.6], ['0%', '0%', '100%'])
+
+// Opacity - disappear only after going off screen
+const splitOpacity = useTransform(scrollYProgress, [0, 0.55, 0.65], [1, 1, 0])
 </script>
 
 <template>
@@ -25,7 +27,7 @@ const bottomY = useTransform(scrollYProgress, [0, 0.15, 0.6], ['0%', '0%', '100%
     <div class="sticky top-0 h-screen pointer-events-none">
       <!-- TOP HALF - moves up on scroll, clips top 50% of content -->
       <Motion
-        :style="{ y: topY }"
+        :style="{ y: topY, opacity: splitOpacity }"
         class="absolute inset-0 bg-[#F8F8F8] dark:bg-[#0a0a0a] z-30"
         style="clip-path: inset(0 0 50% 0)"
       >
@@ -77,7 +79,7 @@ const bottomY = useTransform(scrollYProgress, [0, 0.15, 0.6], ['0%', '0%', '100%
 
       <!-- BOTTOM HALF - moves down and off screen -->
       <Motion
-        :style="{ y: bottomY }"
+        :style="{ y: bottomY, opacity: splitOpacity }"
         class="absolute inset-0 bg-[#F8F8F8] dark:bg-[#0a0a0a] z-30"
         style="clip-path: inset(50% 0 0 0)"
       >
