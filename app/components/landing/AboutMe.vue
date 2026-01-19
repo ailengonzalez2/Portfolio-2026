@@ -4,25 +4,29 @@ const workExperience = [
     title: 'Product Design',
     company: 'Codecave',
     period: 'August 2023 - Present (REMOTE)',
-    description: 'Lead product design as advisor at Codecave, guiding projects from client planning and strategy through to delivery by collaborating closely with development teams to ensure high-standard outcomes. Utilize Figma, AI tools, Vue.js, Nuxt UI, TailwindCSS, and HTML/CSS to design and prototype user-centered solutions while maintaining accessibility and performance optimization across all deliverables.'
+    description: 'Lead product design as advisor at Codecave, guiding projects from client planning and strategy through to delivery by collaborating closely with development teams to ensure high-standard outcomes.',
+    badges: ['Figma', 'AI Tools', 'Vue.js', 'Nuxt UI', 'TailwindCSS', 'HTML/CSS']
   },
   {
     title: 'UI Developer',
     company: 'Freelance',
     period: 'August 2023 - Present (REMOTE)',
-    description: 'Led end-to-end design processes from research to high-fidelity prototypes using Figma and AI tools, then developed performance-optimized interfaces with Vue.js, Nuxt UI, TailwindCSS, and HTML/CSS. Leveraged AI workflows (ChatGPT, N8N) to accelerate development for international DeFi, blockchain, and cryptocurrency clients while ensuring accessibility and cross-browser compatibility.'
+    description: 'Led end-to-end design processes from research to high-fidelity prototypes, then developed performance-optimized interfaces for international DeFi, blockchain, and cryptocurrency clients.',
+    badges: ['Figma', 'Vue.js', 'Nuxt UI', 'TailwindCSS', 'ChatGPT', 'N8N']
   },
   {
     title: 'Web Designer',
     company: 'Freelance',
     period: 'August 2019 - Present (REMOTE)',
-  description: 'Designed and developed responsive websites using Figma, HTML, CSS, JavaScript, and Bootstrap for multiple concurrent projects with international teams, ensuring accessibility and optimal user experience through continuous testing and reviews.'
+    description: 'Designed and developed responsive websites for multiple concurrent projects with international teams, ensuring accessibility and optimal user experience.',
+    badges: ['Figma', 'HTML', 'CSS', 'JavaScript', 'Bootstrap']
   },
   {
     title: 'Web Developer',
     company: 'Agency',
     period: 'August 2018 - Present (REMOTE)',
-    description: 'Built e-commerce platforms, landing pages, and corporate websites using WordPress, WooCommerce, and Elementor with custom features and styling, while managing maintenance, content updates, and security optimizations.'
+    description: 'Built e-commerce platforms, landing pages, and corporate websites with custom features and styling, while managing maintenance and security optimizations.',
+    badges: ['WordPress', 'WooCommerce', 'Elementor']
   }
 ]
 
@@ -178,6 +182,16 @@ const certifications = [
                     <p class="text-primary-custom text-[16px] leading-[26px] tracking-[-0.31px]">
                       {{ job.description }}
                     </p>
+                    <!-- Tech Badges -->
+                    <div class="flex flex-wrap gap-1.5 pt-2">
+                      <span
+                        v-for="badge in job.badges"
+                        :key="badge"
+                        class="px-2.5 py-1 text-[11px] font-medium rounded-full bg-[#f1f5f9] dark:bg-neutral-800 text-[#64748b] dark:text-neutral-300"
+                      >
+                        {{ badge }}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -201,7 +215,7 @@ const certifications = [
               <!-- Technical Skills -->
               <div class="space-y-[15px]">
                 <h4 class="text-[#0f172b] dark:text-white text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
-                  Technica
+                  Technical
                 </h4>
                 <div class="space-y-5">
                   <div class="flex gap-[15px] items-center">
