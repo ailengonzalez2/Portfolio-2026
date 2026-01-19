@@ -14,12 +14,12 @@ useSeoMeta({
 
 <template>
   <UPage>
-    <LandingHero />
-    <!-- Wrapper for split reveal effect -->
+    <!-- Wrapper for Rolls split reveal effect -->
     <div class="relative isolate">
       <LandingRolls />
-      <LandingProjects />
+      <LandingHero />
     </div>
+    <LandingProjects />
     <LandingServices />
     <LandingAboutMe />
     <LandingWeb3Quote />

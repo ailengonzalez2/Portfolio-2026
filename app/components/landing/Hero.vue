@@ -1,5 +1,28 @@
 <script setup lang="ts">
+import { Motion, useScroll, useTransform } from 'motion-v'
+import { ref } from 'vue'
+
 const { global } = useAppConfig()
+
+// Reference to scroll container
+const containerRef = ref<HTMLElement | null>(null)
+
+// Track scroll progress - same timing as Rolls split
+const { scrollYProgress } = useScroll({
+  target: containerRef,
+  offset: ['start start', 'end start']
+})
+
+// Hero content animations - appear during the split (0.15 to 0.5)
+const contentOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1])
+const contentY = useTransform(scrollYProgress, [0.15, 0.4], [60, 0])
+
+// Staggered elements
+const badgeOpacity = useTransform(scrollYProgress, [0.2, 0.35], [0, 1])
+const badgeY = useTransform(scrollYProgress, [0.2, 0.4], [40, 0])
+
+const carouselOpacity = useTransform(scrollYProgress, [0.3, 0.45], [0, 1])
+const carouselY = useTransform(scrollYProgress, [0.3, 0.5], [40, 0])
 
 const techLogos = [
   { icon: '/tech-icons/figma-color.svg', label: 'Figma' },
@@ -19,13 +42,17 @@ const techLogos = [
 </script>
 
 <template>
-  <section class="relative min-h-[calc(100vh-var(--ui-header-height))] flex flex-col justify-end pb-4 lg:pb-6 mb-24 lg:mb-32">
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+  <!-- Scroll container matching Rolls height for synced animations -->
+  <div
+    ref="containerRef"
+    class="absolute inset-0 h-[200vh] z-10"
+  >
+    <!-- Sticky Hero content - revealed during Rolls split -->
+    <section class="sticky top-0 h-screen flex flex-col justify-end pb-4 lg:pb-6 bg-[#f8fafc] dark:bg-[#0a0a0a]">
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <!-- Available Badge -->
       <Motion
-        :initial="{ opacity: 0, y: 20 }"
-        :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.5 }"
+        :style="{ opacity: badgeOpacity, y: badgeY }"
         class="mb-10 lg:mb-12"
       >
         <div
@@ -53,9 +80,7 @@ const techLogos = [
 
       <!-- Main Headline -->
       <Motion
-        :initial="{ opacity: 0, y: 30 }"
-        :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.7, delay: 0.1 }"
+        :style="{ opacity: contentOpacity, y: contentY }"
       >
         <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-[120px] font-medium tracking-tight leading-[1.15] text-primary-custom dark:text-gray-200 uppercase text-right">
           <span class="pr-8 sm:pr-12 lg:pr-16 xl:pr-20 whitespace-nowrap">Creating digital</span> <br>
@@ -65,9 +90,7 @@ const techLogos = [
 
       <!-- Tech Stack Icons Carousel -->
       <Motion
-        :initial="{ opacity: 0, y: 20 }"
-        :animate="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.6, delay: 0.3 }"
+        :style="{ opacity: carouselOpacity, y: carouselY }"
         class="mt-8 sm:mt-10 lg:mt-12"
       >
         <div class="relative overflow-hidden max-w-[500px] mask-gradient">
@@ -103,8 +126,9 @@ const techLogos = [
           </div>
         </div>
       </Motion>
-    </div>
-  </section>
+      </div>
+    </section>
+  </div>
 </template>
 
 <style scoped>
