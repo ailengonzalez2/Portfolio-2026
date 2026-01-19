@@ -1,22 +1,28 @@
 <script setup lang="ts">
 const workExperience = [
   {
+    title: 'Product Design',
+    company: 'Codecave',
+    period: 'August 2023 - Present (REMOTE)',
+    description: 'Lead product design as advisor at Codecave, guiding projects from client planning and strategy through to delivery by collaborating closely with development teams to ensure high-standard outcomes. Utilize Figma, AI tools, Vue.js, Nuxt UI, TailwindCSS, and HTML/CSS to design and prototype user-centered solutions while maintaining accessibility and performance optimization across all deliverables.'
+  },
+  {
     title: 'UI Developer',
     company: 'Freelance',
     period: 'August 2023 - Present (REMOTE)',
-    description: 'Delivering end-to-end digital experiences. I design in Figma with data-driven workflows and build fast.'
+    description: 'Led end-to-end design processes from research to high-fidelity prototypes using Figma and AI tools, then developed performance-optimized interfaces with Vue.js, Nuxt UI, TailwindCSS, and HTML/CSS. Leveraged AI workflows (ChatGPT, N8N) to accelerate development for international DeFi, blockchain, and cryptocurrency clients while ensuring accessibility and cross-browser compatibility.'
   },
   {
     title: 'Web Designer',
     company: 'Freelance',
     period: 'August 2019 - Present (REMOTE)',
-    description: 'Creating brand identities and web interfaces for startups and small businesses.'
+  description: 'Designed and developed responsive websites using Figma, HTML, CSS, JavaScript, and Bootstrap for multiple concurrent projects with international teams, ensuring accessibility and optimal user experience through continuous testing and reviews.'
   },
   {
     title: 'Web Developer',
     company: 'Agency',
     period: 'August 2018 - Present (REMOTE)',
-    description: 'Implementing responsive front-end solutions using React and modern CSS frameworks.'
+    description: 'Built e-commerce platforms, landing pages, and corporate websites using WordPress, WooCommerce, and Elementor with custom features and styling, while managing maintenance, content updates, and security optimizations.'
   }
 ]
 
