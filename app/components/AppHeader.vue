@@ -8,6 +8,12 @@ defineProps<{
 const { y: scrollY } = useWindowScroll()
 const isScrolled = computed(() => scrollY.value > 50)
 const { isIntroComplete } = useIntroAnimation()
+
+// Switch to black logo when past Rolls section (approximately when Hero is visible)
+const isPastRolls = computed(() => {
+  if (import.meta.server) return false
+  return scrollY.value > window.innerHeight * 0.65
+})
 </script>
 
 <template>
@@ -29,12 +35,26 @@ const { isIntroComplete } = useIntroAnimation()
           to="/"
           class="relative flex items-center justify-center group"
         >
-          <img
-            src="/signature.png"
-            alt="AG Signature"
-            class="h-10 w-auto transition-all duration-300 group-hover:scale-105"
-            :class="isIntroComplete ? 'opacity-100' : 'opacity-0'"
-          >
+          <div class="relative h-10">
+            <!-- White logo -->
+            <img
+              src="/signature-withe.png"
+              alt="AG Signature"
+              class="h-10 w-auto transition-opacity duration-500 ease-in-out group-hover:scale-105"
+              :class="[
+                isIntroComplete ? (isPastRolls ? 'opacity-0' : 'opacity-100') : 'opacity-0'
+              ]"
+            >
+            <!-- Black logo -->
+            <img
+              src="/signature.png"
+              alt="AG Signature"
+              class="absolute top-0 left-0 h-10 w-auto transition-opacity duration-500 ease-in-out group-hover:scale-105"
+              :class="[
+                isIntroComplete ? (isPastRolls ? 'opacity-100' : 'opacity-0') : 'opacity-0'
+              ]"
+            >
+          </div>
         </NuxtLink>
 
         <!-- Navigation - Centered -->
