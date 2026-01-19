@@ -21,10 +21,10 @@ const splitOpacity = useTransform(scrollYProgress, [0, 0.55, 0.65], [1, 1, 0])
   <!-- Scroll container - provides the scroll distance for the animation -->
   <div
     ref="containerRef"
-    class="relative h-[200vh] z-20"
+    class="relative h-[200vh] z-20 -mt-20"
   >
     <!-- Sticky wrapper - keeps content fixed while scrolling through container -->
-    <div class="sticky top-0 h-screen pointer-events-none">
+    <div class="sticky top-0 h-[calc(100vh+5rem)] pointer-events-none overflow-hidden">
       <!-- TOP HALF - moves up on scroll, clips top 50% of content -->
       <Motion
         :style="{ y: topY, opacity: splitOpacity }"

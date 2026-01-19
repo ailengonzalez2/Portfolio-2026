@@ -301,45 +301,45 @@ const certifications = [
                 </div>
               </div>
             </Motion>
+
+            <!-- Fun Fact Card -->
+            <Motion
+              :initial="{ opacity: 0, y: 20 }"
+              :while-in-view="{ opacity: 1, y: 0 }"
+              :transition="{ duration: 0.5, delay: 0.4 }"
+              :in-view-options="{ once: true }"
+              class="relative mt-32 ml-16"
+            >
+              <div class="relative">
+                <!-- Stethoscope Left -->
+                <img
+                  src="/esteto-1.png"
+                  alt="stethoscope"
+                  class="absolute -left-20 -top-12 w-40 h-40 object-contain pointer-events-none z-10"
+                >
+
+                <div class="relative bg-white dark:bg-neutral-900 border border-[#f1f5f9] dark:border-neutral-700 rounded-[24px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] p-6 px-8">
+                  <div class="space-y-2">
+                    <h3 class="text-[#0f172b] dark:text-white text-[18px] font-bold leading-[28px] tracking-[-0.44px]">
+                      My #funfact
+                    </h3>
+                    <p class="text-primary-custom text-[14px] leading-[22.75px] tracking-[-0.15px]">
+                      Before moving into tech I worked as a medical doctor from 2011 to 2021 in emergency departments across Argentina, after graduating from the Universidad Nacional de Córdoba — one of the country's leading universities. That experience shaped my analytical mindset and problem‑solving approach in design and development.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Stethoscope Right -->
+                <img
+                  src="/esteto-2.png"
+                  alt="stethoscope"
+                  class="absolute right-20 -bottom-8 w-24 h-24 object-contain pointer-events-none z-10"
+                >
+              </div>
+            </Motion>
           </div>
         </div>
       </div>
-
-      <!-- Fun Fact Card -->
-      <Motion
-        :initial="{ opacity: 0, y: 20 }"
-        :while-in-view="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.5, delay: 0.4 }"
-        :in-view-options="{ once: true }"
-        class="max-w-[620px] mx-auto relative"
-      >
-        <div class="relative">
-          <!-- Stethoscope Left -->
-          <img
-            src="/esteto-1.png"
-            alt="stethoscope"
-            class="absolute -left-26 -top-16 w-50 h-50 object-contain pointer-events-none z-10"
-          >
-
-          <div class="relative bg-white dark:bg-neutral-900 border border-[#f1f5f9] dark:border-neutral-700 rounded-[24px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] p-8 px-12 min-h-[229px]">
-            <div class="space-y-2">
-              <h3 class="text-[#0f172b] dark:text-white text-[18px] font-bold leading-[28px] tracking-[-0.44px]">
-                My #funfact
-              </h3>
-              <p class="text-primary-custom text-[14px] leading-[22.75px] tracking-[-0.15px]">
-                Before moving into tech I worked as a medical doctor from 2011 to 2021 in emergency departments across Argentina, after graduating from the Universidad Nacional de Córdoba — one of the country's leading universities. That experience shaped my analytical mindset and problem‑solving approach in design and development.
-              </p>
-            </div>
-          </div>
-
-          <!-- Stethoscope Right -->
-          <img
-            src="/esteto-2.png"
-            alt="stethoscope"
-            class="absolute right-40 -bottom-10 w-28 h-28 object-contain pointer-events-none z-10"
-          >
-        </div>
-      </Motion>
     </div>
   </section>
 </template>

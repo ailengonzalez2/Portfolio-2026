@@ -48,7 +48,7 @@ const techLogos = [
     class="absolute inset-0 h-[200vh] z-10"
   >
     <!-- Sticky Hero content - revealed during Rolls split -->
-    <section class="sticky top-0 h-screen flex flex-col justify-end pb-4 lg:pb-6 bg-[#f8fafc] dark:bg-[#0a0a0a]">
+    <section class="sticky top-0 h-screen flex flex-col justify-end pb-4 lg:pb-6 bg-white dark:bg-[#0a0a0a]">
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <!-- Available Badge -->
       <Motion
