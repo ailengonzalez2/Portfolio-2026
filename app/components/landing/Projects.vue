@@ -3,6 +3,32 @@ import { projects } from '~/data/projects'
 
 // Show first 4 projects on landing page
 const selfProjects = computed(() => projects.slice(0, 4))
+
+// Refs for description elements to check truncation
+const descriptionRefs = ref<(HTMLParagraphElement | null)[]>([null, null, null, null])
+const isTruncated = ref<boolean[]>([false, false, false, false])
+
+const checkTruncation = () => {
+  descriptionRefs.value.forEach((el, index) => {
+    if (el) {
+      // Add small buffer (2px) to account for rounding
+      isTruncated.value[index] = el.scrollHeight > el.clientHeight + 2
+    }
+  })
+}
+
+onMounted(() => {
+  nextTick(() => {
+    checkTruncation()
+    // Also check after a short delay in case fonts are still loading
+    setTimeout(checkTruncation, 100)
+  })
+  window.addEventListener('resize', checkTruncation)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkTruncation)
+})
 </script>
 
 <template>
@@ -42,8 +68,10 @@ const selfProjects = computed(() => projects.slice(0, 4))
             class="w-full"
           >
             <NuxtLink
-              :to="selfProjects[0]?.links?.preview || '#'"
-              class="group block h-full"
+              :to="selfProjects[0]?.links?.preview || selfProjects[0]?.links?.figma || '#'"
+              target="_blank"
+              external
+              class="group block h-full cursor-pointer"
             >
               <div>
                 <!-- Image container with badge - Fixed height -->
@@ -66,9 +94,18 @@ const selfProjects = computed(() => projects.slice(0, 4))
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
                     {{ selfProjects[0]?.title }}
                   </h3>
-                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] mb-4">
-                    {{ selfProjects[0]?.description }}
-                  </p>
+                  <div class="relative mb-4 overflow-hidden">
+                    <p
+                      :ref="(el) => descriptionRefs[0] = el as HTMLParagraphElement"
+                      class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] overflow-hidden max-h-[4.2em] group-hover:max-h-[10em] transition-[max-height] duration-300 group-hover:duration-500 ease-in-out"
+                    >
+                      {{ selfProjects[0]?.description }}
+                    </p>
+                    <div
+                      v-if="isTruncated[0]"
+                      class="absolute bottom-0 left-0 right-0 h-4 bg-linear-to-t from-white dark:from-neutral-950 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300 group-hover:duration-500 ease-in-out pointer-events-none"
+                    />
+                  </div>
                   <!-- Action buttons -->
                   <div class="flex items-center gap-2 flex-wrap">
                     <UButton
@@ -142,8 +179,10 @@ const selfProjects = computed(() => projects.slice(0, 4))
             class="w-full"
           >
             <NuxtLink
-              :to="selfProjects[1]?.links?.preview || '#'"
-              class="group block"
+              :to="selfProjects[1]?.links?.preview || selfProjects[1]?.links?.figma || '#'"
+              target="_blank"
+              external
+              class="group block cursor-pointer"
             >
               <div>
                 <!-- Image container with badge - Same fixed height -->
@@ -166,9 +205,18 @@ const selfProjects = computed(() => projects.slice(0, 4))
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
                     {{ selfProjects[1]?.title }}
                   </h3>
-                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] mb-4">
-                    {{ selfProjects[1]?.description }}
-                  </p>
+                  <div class="relative mb-4 overflow-hidden">
+                    <p
+                      :ref="(el) => descriptionRefs[1] = el as HTMLParagraphElement"
+                      class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] overflow-hidden max-h-[4.2em] group-hover:max-h-[10em] transition-[max-height] duration-300 group-hover:duration-500 ease-in-out"
+                    >
+                      {{ selfProjects[1]?.description }}
+                    </p>
+                    <div
+                      v-if="isTruncated[1]"
+                      class="absolute bottom-0 left-0 right-0 h-4 bg-linear-to-t from-white dark:from-neutral-950 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300 group-hover:duration-500 ease-in-out pointer-events-none"
+                    />
+                  </div>
                   <!-- Action buttons -->
                   <div class="flex items-center gap-2 flex-wrap">
                     <UButton
@@ -245,8 +293,10 @@ const selfProjects = computed(() => projects.slice(0, 4))
             class="w-full"
           >
             <NuxtLink
-              :to="selfProjects[2]?.links?.preview || '#'"
-              class="group block"
+              :to="selfProjects[2]?.links?.preview || selfProjects[2]?.links?.figma || '#'"
+              target="_blank"
+              external
+              class="group block cursor-pointer"
             >
               <div>
                 <!-- Image container with badge - Same fixed height -->
@@ -269,9 +319,18 @@ const selfProjects = computed(() => projects.slice(0, 4))
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
                     {{ selfProjects[2]?.title }}
                   </h3>
-                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] mb-4">
-                    {{ selfProjects[2]?.description }}
-                  </p>
+                  <div class="relative mb-4 overflow-hidden">
+                    <p
+                      :ref="(el) => descriptionRefs[2] = el as HTMLParagraphElement"
+                      class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] overflow-hidden max-h-[4.2em] group-hover:max-h-[10em] transition-[max-height] duration-300 group-hover:duration-500 ease-in-out"
+                    >
+                      {{ selfProjects[2]?.description }}
+                    </p>
+                    <div
+                      v-if="isTruncated[2]"
+                      class="absolute bottom-0 left-0 right-0 h-4 bg-linear-to-t from-white dark:from-neutral-950 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300 group-hover:duration-500 ease-in-out pointer-events-none"
+                    />
+                  </div>
                   <!-- Action buttons -->
                   <div class="flex items-center gap-2 flex-wrap">
                     <UButton
@@ -345,8 +404,10 @@ const selfProjects = computed(() => projects.slice(0, 4))
             class="w-full"
           >
             <NuxtLink
-              :to="selfProjects[3]?.links?.preview || '#'"
-              class="group block h-full"
+              :to="selfProjects[3]?.links?.preview || selfProjects[3]?.links?.figma || '#'"
+              target="_blank"
+              external
+              class="group block h-full cursor-pointer"
             >
               <div>
                 <!-- Image container with badge - Fixed height -->
@@ -369,9 +430,18 @@ const selfProjects = computed(() => projects.slice(0, 4))
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
                     {{ selfProjects[3]?.title }}
                   </h3>
-                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] mb-4">
-                    {{ selfProjects[3]?.description }}
-                  </p>
+                  <div class="relative mb-4 overflow-hidden">
+                    <p
+                      :ref="(el) => descriptionRefs[3] = el as HTMLParagraphElement"
+                      class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] overflow-hidden max-h-[4.2em] group-hover:max-h-[10em] transition-[max-height] duration-300 group-hover:duration-500 ease-in-out"
+                    >
+                      {{ selfProjects[3]?.description }}
+                    </p>
+                    <div
+                      v-if="isTruncated[3]"
+                      class="absolute bottom-0 left-0 right-0 h-4 bg-linear-to-t from-white dark:from-neutral-950 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300 group-hover:duration-500 ease-in-out pointer-events-none"
+                    />
+                  </div>
                   <!-- Action buttons -->
                   <div class="flex items-center gap-2 flex-wrap">
                     <UButton
