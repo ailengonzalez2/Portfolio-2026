@@ -60,8 +60,8 @@ const { isIntroComplete } = useIntroAnimation()
 
           <NuxtLink
             to="#contact"
-            class="group/btn relative hidden sm:inline-flex items-center bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] py-3.5 pl-8 pr-14 transition-[padding,border-radius] duration-500 ease-out hover:pl-14 hover:pr-8"
-            :class="isScrolled ? 'rounded-full' : 'rounded-2xl'"
+            class="group/btn relative hidden sm:inline-flex items-center bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] py-3.5 pl-8 pr-14 hover:pl-14 hover:pr-8 btn-transition"
+            :class="isScrolled ? 'rounded-[50px]' : 'rounded-2xl'"
           >
             <span class="absolute right-1.5 flex items-center justify-center size-9 bg-white rounded-full transition-all duration-300 ease-out group-hover/btn:right-[calc(100%-2.625rem)]">
               <UIcon
@@ -155,5 +155,10 @@ const { isIntroComplete } = useIntroAnimation()
   box-shadow:
     0 12px 40px 0 rgba(0, 0, 0, 0.4),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+}
+
+/* Button transition - smooth in both directions */
+.btn-transition {
+  transition: padding 300ms ease-out, border-radius 300ms ease-in-out;
 }
 </style>
