@@ -32,7 +32,11 @@ const technicalSkills = [
   { icon: '/tech-icons/tailwind.svg', name: 'Tailwind CSS' },
   { icon: '/tech-icons/vuetify.svg', name: 'Vuetify' },
   { icon: '/tech-icons/github.svg', name: 'GitHub' },
-  { icon: '/tech-icons/n8n.svg', name: 'n8n' }
+  { icon: '/tech-icons/n8n.svg', name: 'n8n' },
+  { icon: '/tech-icons/claude.svg', name: 'Claude AI' },
+  { icon: '/tech-icons/copilot.svg', name: 'GitHub Copilot' },
+  { icon: '/tech-icons/ethereum.svg', name: 'Ethereum' },
+  { icon: '/tech-icons/blockchain.svg', name: 'Blockchain' }
 ]
 
 const certifications = [
@@ -196,7 +200,7 @@ const certifications = [
                 <div class="space-y-5">
                   <div class="flex gap-[15px] items-center">
                     <img
-                      v-for="skill in technicalSkills.slice(0, 6)"
+                      v-for="skill in technicalSkills.slice(0, 8)"
                       :key="skill.name"
                       :src="skill.icon"
                       :alt="skill.name"
@@ -206,7 +210,7 @@ const certifications = [
                   </div>
                   <div class="flex gap-[15px] items-center">
                     <img
-                      v-for="skill in technicalSkills.slice(6)"
+                      v-for="skill in technicalSkills.slice(8)"
                       :key="skill.name"
                       :src="skill.icon"
                       :alt="skill.name"

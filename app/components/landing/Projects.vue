@@ -66,9 +66,68 @@ const selfProjects = computed(() => projects.slice(0, 4))
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
                     {{ selfProjects[0]?.title }}
                   </h3>
-                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px]">
+                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] mb-4">
                     {{ selfProjects[0]?.description }}
                   </p>
+                  <!-- Action buttons -->
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <UButton
+                      v-if="selfProjects[0]?.links?.figma"
+                      :to="selfProjects[0]?.links?.figma"
+                      target="_blank"
+                      variant="soft"
+                      color="neutral"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-simple-icons-figma"
+                          class="size-4"
+                        />
+                      </template>
+                      Figma
+                    </UButton>
+
+                    <UButton
+                      v-if="selfProjects[0]?.links?.github"
+                      :to="selfProjects[0]?.links?.github"
+                      target="_blank"
+                      variant="soft"
+                      color="neutral"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-simple-icons-github"
+                          class="size-4"
+                        />
+                      </template>
+                      GitHub
+                    </UButton>
+
+                    <UButton
+                      v-if="selfProjects[0]?.links?.preview"
+                      :to="selfProjects[0]?.links?.preview"
+                      target="_blank"
+                      variant="soft"
+                      color="primary"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-lucide-external-link"
+                          class="size-4"
+                        />
+                      </template>
+                      Preview
+                    </UButton>
+                  </div>
                 </div>
               </div>
             </NuxtLink>
@@ -107,9 +166,68 @@ const selfProjects = computed(() => projects.slice(0, 4))
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
                     {{ selfProjects[1]?.title }}
                   </h3>
-                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px]">
+                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] mb-4">
                     {{ selfProjects[1]?.description }}
                   </p>
+                  <!-- Action buttons -->
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <UButton
+                      v-if="selfProjects[1]?.links?.figma"
+                      :to="selfProjects[1]?.links?.figma"
+                      target="_blank"
+                      variant="soft"
+                      color="neutral"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-simple-icons-figma"
+                          class="size-4"
+                        />
+                      </template>
+                      Figma
+                    </UButton>
+
+                    <UButton
+                      v-if="selfProjects[1]?.links?.github"
+                      :to="selfProjects[1]?.links?.github"
+                      target="_blank"
+                      variant="soft"
+                      color="neutral"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-simple-icons-github"
+                          class="size-4"
+                        />
+                      </template>
+                      GitHub
+                    </UButton>
+
+                    <UButton
+                      v-if="selfProjects[1]?.links?.preview"
+                      :to="selfProjects[1]?.links?.preview"
+                      target="_blank"
+                      variant="soft"
+                      color="primary"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-lucide-external-link"
+                          class="size-4"
+                        />
+                      </template>
+                      Preview
+                    </UButton>
+                  </div>
                 </div>
               </div>
             </NuxtLink>
@@ -151,9 +269,68 @@ const selfProjects = computed(() => projects.slice(0, 4))
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
                     {{ selfProjects[2]?.title }}
                   </h3>
-                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px]">
+                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] mb-4">
                     {{ selfProjects[2]?.description }}
                   </p>
+                  <!-- Action buttons -->
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <UButton
+                      v-if="selfProjects[2]?.links?.figma"
+                      :to="selfProjects[2]?.links?.figma"
+                      target="_blank"
+                      variant="soft"
+                      color="neutral"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-simple-icons-figma"
+                          class="size-4"
+                        />
+                      </template>
+                      Figma
+                    </UButton>
+
+                    <UButton
+                      v-if="selfProjects[2]?.links?.github"
+                      :to="selfProjects[2]?.links?.github"
+                      target="_blank"
+                      variant="soft"
+                      color="neutral"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-simple-icons-github"
+                          class="size-4"
+                        />
+                      </template>
+                      GitHub
+                    </UButton>
+
+                    <UButton
+                      v-if="selfProjects[2]?.links?.preview"
+                      :to="selfProjects[2]?.links?.preview"
+                      target="_blank"
+                      variant="soft"
+                      color="primary"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-lucide-external-link"
+                          class="size-4"
+                        />
+                      </template>
+                      Preview
+                    </UButton>
+                  </div>
                 </div>
               </div>
             </NuxtLink>
@@ -188,13 +365,72 @@ const selfProjects = computed(() => projects.slice(0, 4))
                 </div>
 
                 <!-- Content below image -->
-                <div class="p-6">
+                <div>
                   <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
                     {{ selfProjects[3]?.title }}
                   </h3>
-                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px]">
+                  <p class="text-[14px] text-[#62748e] dark:text-neutral-400 leading-[22.75px] tracking-[-0.15px] mb-4">
                     {{ selfProjects[3]?.description }}
                   </p>
+                  <!-- Action buttons -->
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <UButton
+                      v-if="selfProjects[3]?.links?.figma"
+                      :to="selfProjects[3]?.links?.figma"
+                      target="_blank"
+                      variant="soft"
+                      color="neutral"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-simple-icons-figma"
+                          class="size-4"
+                        />
+                      </template>
+                      Figma
+                    </UButton>
+
+                    <UButton
+                      v-if="selfProjects[3]?.links?.github"
+                      :to="selfProjects[3]?.links?.github"
+                      target="_blank"
+                      variant="soft"
+                      color="neutral"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-simple-icons-github"
+                          class="size-4"
+                        />
+                      </template>
+                      GitHub
+                    </UButton>
+
+                    <UButton
+                      v-if="selfProjects[3]?.links?.preview"
+                      :to="selfProjects[3]?.links?.preview"
+                      target="_blank"
+                      variant="soft"
+                      color="primary"
+                      size="sm"
+                      class="rounded-full"
+                      @click.stop
+                    >
+                      <template #leading>
+                        <UIcon
+                          name="i-lucide-external-link"
+                          class="size-4"
+                        />
+                      </template>
+                      Preview
+                    </UButton>
+                  </div>
                 </div>
               </div>
             </NuxtLink>
