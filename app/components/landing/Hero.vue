@@ -43,7 +43,7 @@ const techLogos = [
     class="absolute inset-0 h-[200vh] z-10"
   >
     <!-- Sticky Hero content - revealed during Rolls split -->
-    <section class="sticky top-0 h-screen flex flex-col justify-end pb-4 lg:pb-6 bg-white dark:bg-[#0a0a0a]">
+    <section class="sticky top-0 h-screen flex flex-col justify-center bg-white dark:bg-[#0a0a0a]">
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <!-- Main Headline -->
       <Motion
@@ -57,10 +57,10 @@ const techLogos = [
 
       <!-- Tech Stack Icons Carousel -->
       <Motion
-        :style="{ opacity: carouselOpacity, y: carouselY }"
+        :style="{ opacity: contentOpacity, y: carouselY }"
         class="mt-8 sm:mt-10 lg:mt-12"
       >
-        <div class="relative overflow-hidden max-w-[500px] mask-gradient">
+        <div class="relative overflow-hidden max-w-[700px] mx-auto mask-gradient">
           <div class="flex items-center animate-marquee w-max">
             <div class="flex items-center gap-2.5 pr-2.5">
               <div
