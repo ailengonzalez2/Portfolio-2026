@@ -74,7 +74,7 @@ const handleScroll = () => {
   const blockquoteTop = blockquoteRect.top
 
   // Start animation after text enters viewport
-  const scrollProgress = Math.max(0, Math.min(1, 1 - (blockquoteTop / (windowHeight * 0.8))))
+  const scrollProgress = Math.max(0, Math.min(1, 1 - (blockquoteTop / (windowHeight * 1.1))))
 
   // Update each character's color based on its index in the text (linear flow)
   const newColors = text.split('').map((char, index) => {
@@ -134,7 +134,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="py-20 sm:py-32 relative overflow-hidden">
+  <section class="py-20 sm:py-32 relative overflow-hidden bg-white dark:bg-[#0a0a0a]">
     <!-- Subtle gradient background -->
     <div class="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-orange-50/30 dark:from-purple-950/20 dark:via-transparent dark:to-orange-950/10" />
 
@@ -165,9 +165,10 @@ onUnmounted(() => {
 
         <!-- Additional context - appears after quote is fully colored -->
         <Motion
-          :initial="{ opacity: 0, y: 20 }"
-          :animate="quoteComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }"
-          :transition="{ duration: 0.6, delay: 0.1 }"
+          :initial="{ opacity: 0, y: 50 }"
+          :while-in-view="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 1.2, delay: 0.3 }"
+          :in-view-options="{ once: true, margin: '-100px' }"
           class="mt-10"
         >
           <div class="flex items-start justify-end gap-4">

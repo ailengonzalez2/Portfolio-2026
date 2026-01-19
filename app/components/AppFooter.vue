@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useWindowScroll, useWindowSize } from '@vueuse/core'
 
+const { global } = useAppConfig()
 const year = new Date().getFullYear()
 
 // Scroll detection - same logic as SocialSidebar for synchronized animation
@@ -40,13 +41,37 @@ const isExpanded = computed(() => {
             >
           </div>
 
-          <!-- Main heading -->
+          <!-- Main heading with badge -->
           <Motion
             :initial="{ opacity: 0, y: 30 }"
             :while-in-view="{ opacity: 1, y: 0 }"
             :transition="{ duration: 0.6 }"
             :in-view-options="{ once: true }"
+            class="flex flex-col items-end gap-12"
           >
+            <!-- Available Badge -->
+            <div
+              class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-sm whitespace-nowrap"
+            >
+              <div class="flex items-center gap-2">
+                <span class="relative flex size-2">
+                  <span
+                    class="absolute inline-flex size-full rounded-full opacity-75 animate-ping"
+                    :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
+                  />
+                  <span
+                    class="relative inline-flex size-2 rounded-full"
+                    :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
+                  />
+                </span>
+                <span class="text-gray-400 dark:text-gray-500 text-base">
+                  {{ global.available ? 'Available for projects' : 'Not available' }}
+                </span>
+              </div>
+              <span class="size-1 rounded-full bg-gray-300 dark:bg-gray-600" />
+              <span class="text-gray-400 dark:text-gray-500 text-base">GMT-3</span>
+            </div>
+
             <h2 class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-display font-medium tracking-wide leading-tight text-right">
               Happy to connect
             </h2>

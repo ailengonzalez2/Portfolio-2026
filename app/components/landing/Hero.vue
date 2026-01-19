@@ -2,8 +2,6 @@
 import { Motion, useScroll, useTransform } from 'motion-v'
 import { ref } from 'vue'
 
-const { global } = useAppConfig()
-
 // Reference to scroll container
 const containerRef = ref<HTMLElement | null>(null)
 
@@ -18,9 +16,6 @@ const contentOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1])
 const contentY = useTransform(scrollYProgress, [0.15, 0.4], [60, 0])
 
 // Staggered elements
-const badgeOpacity = useTransform(scrollYProgress, [0.2, 0.35], [0, 1])
-const badgeY = useTransform(scrollYProgress, [0.2, 0.4], [40, 0])
-
 const carouselOpacity = useTransform(scrollYProgress, [0.3, 0.45], [0, 1])
 const carouselY = useTransform(scrollYProgress, [0.3, 0.5], [40, 0])
 
@@ -50,34 +45,6 @@ const techLogos = [
     <!-- Sticky Hero content - revealed during Rolls split -->
     <section class="sticky top-0 h-screen flex flex-col justify-end pb-4 lg:pb-6 bg-white dark:bg-[#0a0a0a]">
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-      <!-- Available Badge -->
-      <Motion
-        :style="{ opacity: badgeOpacity, y: badgeY }"
-        class="mb-10 lg:mb-12"
-      >
-        <div
-          class="inline-flex items-center gap-4 px-5 py-2.5 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-[0px_2px_10px_0px_rgba(0,0,0,0.1)] dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,0.3)]"
-        >
-          <div class="flex items-center gap-3">
-            <span class="relative flex size-2.5">
-              <span
-                class="absolute inline-flex size-full rounded-full opacity-75 animate-ping"
-                :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
-              />
-              <span
-                class="relative inline-flex size-2.5 rounded-full"
-                :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
-              />
-            </span>
-            <span class="text-gray-400 dark:text-gray-500 text-base">
-              {{ global.available ? 'Available for projects' : 'Not available' }}
-            </span>
-          </div>
-          <span class="size-1 rounded-full bg-gray-300 dark:bg-gray-600" />
-          <span class="text-gray-400 dark:text-gray-500 text-base">GMT-3</span>
-        </div>
-      </Motion>
-
       <!-- Main Headline -->
       <Motion
         :style="{ opacity: contentOpacity, y: contentY }"
