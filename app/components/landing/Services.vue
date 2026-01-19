@@ -12,19 +12,19 @@ const services: Service[] = [
   {
     id: 'ux-ui',
     title: 'Product Design',
-    description: 'I design digital products with a focus on clean, pixel-perfect interfaces and real usability. Every project starts with understanding users and ends with designs that look great, work smoothly, and make sense.',
+    description: 'I design digital products with a focus on clarity, usability, and pixel-perfect interfaces. Every project begins by understanding user needs and carefully planning the product structure to ensure intuitive and meaningful experiences.',
     backgroundImage: '/projects/pureskin.png'
   },
   {
     id: 'frontend',
     title: 'Frontend Development',
-    description: 'I build modern, high-quality frontends using the latest web technologies. My work is about clean code, performance, and accessibility—turning designs into fast, reliable products that feel great to use.',
+    description: 'I build modern, high-quality frontends using the latest web technologies. My focus is clean structure, strong performance, and accessibility—turning design into fast, reliable products that feel seamless to use.',
     backgroundImage: '/projects/defidashboard.png'
   },
   {
     id: 'ai',
     title: 'AI Integration',
-    description: 'I integrate AI tools to make products smarter and more efficient. From automating simple tasks to improving user interactions, I help ideas grow with practical, human-centered technology.',
+    description: 'I integrate AI tools to make products smarter and more efficient—from automating workflows to enhancing user experiences. I also create custom bots that streamline repetitive tasks and improve operational performance through practical, human-centered technology.',
     backgroundImage: '/projects/ai-integration.webp'
   }
 ]

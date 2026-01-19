@@ -56,7 +56,7 @@ const { isIntroComplete } = useIntroAnimation()
 
         <!-- Right side - CTA Button & Color Mode -->
         <div class="flex items-center gap-3">
-          <ColorModeButton class="hidden sm:flex" />
+          <!-- <ColorModeButton class="hidden sm:flex" /> -->
 
           <NuxtLink
             to="#contact"

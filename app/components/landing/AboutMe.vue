@@ -3,28 +3,28 @@ const workExperience = [
   {
     title: 'Product Design',
     company: 'Codecave',
-    period: 'August 2023 - Present (REMOTE)',
-    description: 'Lead product design as advisor at Codecave, guiding projects from client planning and strategy through to delivery by collaborating closely with development teams to ensure high-standard outcomes.',
+    period: 'Sep 2025 – Present (REMOTE)',
+    description: 'Advised product strategy and design direction across multiple client projects, aligning business goals with UX decisions and working alongside developers to ensure high-quality delivery.',
     badges: ['Figma', 'AI Tools', 'Vue.js', 'Nuxt UI', 'TailwindCSS', 'HTML/CSS']
   },
   {
     title: 'UI Developer',
     company: 'Freelance',
-    period: 'August 2023 - Present (REMOTE)',
-    description: 'Led end-to-end design processes from research to high-fidelity prototypes, then developed performance-optimized interfaces for international DeFi, blockchain, and cryptocurrency clients.',
+    period: 'Aug 2024 – Present (REMOTE)',
+    description: 'Delivered end-to-end digital products—from research and wireframes to polished, high-performance interfaces—for international Web3 and DeFi clients.',
     badges: ['Figma', 'Vue.js', 'Nuxt UI', 'TailwindCSS', 'ChatGPT', 'N8N']
   },
   {
     title: 'Web Designer',
-    company: 'Freelance',
-    period: 'August 2019 - Present (REMOTE)',
-    description: 'Designed and developed responsive websites for multiple concurrent projects with international teams, ensuring accessibility and optimal user experience.',
+    company: 'Loymar S.A.',
+    period: 'Sep 2022 – Jul 2024 (REMOTE)',
+    description: 'Designed and developed responsive websites and apps for multiple concurrent projects with international teams, ensuring accessibility and optimal user experience.',
     badges: ['Figma', 'HTML', 'CSS', 'JavaScript', 'Bootstrap']
   },
   {
     title: 'Web Developer',
-    company: 'Agency',
-    period: 'August 2018 - Present (REMOTE)',
+    company: 'CodeCave',
+    period: 'Feb 2021 – Sep 2022 (REMOTE)',
     description: 'Built e-commerce platforms, landing pages, and corporate websites with custom features and styling, while managing maintenance and security optimizations.',
     badges: ['WordPress', 'WooCommerce', 'Elementor']
   }
