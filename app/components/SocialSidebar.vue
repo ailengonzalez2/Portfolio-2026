@@ -17,7 +17,7 @@ const socialLinks: SocialLink[] = [
   {
     name: 'LinkedIn',
     icon: 'i-mdi-linkedin',
-    url: 'https://linkedin.com/in/yourprofile',
+    url: 'https://www.linkedin.com/in/ailengonzalez/',
     label: 'Visitar perfil de LinkedIn',
     brandColor: '#0077b5',
     gradientTo: '#00a0dc'
@@ -34,7 +34,7 @@ const socialLinks: SocialLink[] = [
   {
     name: 'Upwork',
     icon: 'i-simple-icons-upwork',
-    url: 'https://www.upwork.com/freelancers/~yourprofile',
+    url: 'https://www.upwork.com/freelancers/~01999edab23a51d775?mp_source=share',
     label: 'Contratar en Upwork',
     brandColor: '#14a800',
     gradientTo: '#6fda44',
@@ -43,7 +43,7 @@ const socialLinks: SocialLink[] = [
   {
     name: 'GitHub',
     icon: 'i-mdi-github',
-    url: 'https://github.com/yourprofile',
+    url: 'https://github.com/ailengonzalez2',
     label: 'Ver repositorios en GitHub',
     brandColor: '#24292e',
     gradientTo: '#4c5157'
@@ -51,7 +51,7 @@ const socialLinks: SocialLink[] = [
   {
     name: 'Figma',
     icon: 'i-simple-icons-figma',
-    url: 'https://figma.com/@yourprofile',
+    url: 'https://www.figma.com/design/mRSZxWDPislTwb98P8Y8ij/PORTFOLIO-2026?node-id=124-578&t=grAgF4bmBfQuZZ1f-1',
     label: 'Ver diseños en Figma',
     brandColor: '#f24e1e',
     gradientTo: '#ff8f6b',
@@ -60,7 +60,7 @@ const socialLinks: SocialLink[] = [
   {
     name: 'Behance',
     icon: 'i-simple-icons-behance',
-    url: 'https://behance.net/yourprofile',
+    url: 'https://www.behance.net/ailengonzalez2',
     label: 'Ver portfolio en Behance',
     brandColor: '#1769ff',
     gradientTo: '#6094ff'
@@ -68,7 +68,7 @@ const socialLinks: SocialLink[] = [
   {
     name: 'Discord',
     icon: 'i-ic-twotone-discord',
-    url: 'https://discord.gg/yourcommunity',
+    url: 'https://discord.gg/ailen_gonzalez',
     label: 'Unirse a comunidad de Discord',
     brandColor: '#5865f2',
     gradientTo: '#949cf7'

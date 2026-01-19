@@ -74,7 +74,7 @@ const certifications = [
 <template>
   <section
     id="about"
-    class="py-10 sm:py-14 bg-[#f8fafc]"
+    class="py-10 sm:py-14 bg-[#f8fafc] dark:bg-[#0a0a0a]"
   >
     <div class="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-[155px]">
       <!-- Section Header -->
@@ -106,7 +106,7 @@ const certifications = [
               href="https://cv.ailengonzalez.ar/"
               target="_blank"
               rel="noopener noreferrer"
-              class="h-[41px] px-3 py-1.5 bg-white rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-1 text-black text-base font-normal hover:bg-gray-50 transition-colors whitespace-nowrap cursor-pointer"
+              class="h-[41px] px-3 py-1.5 bg-white dark:bg-neutral-800 rounded-lg shadow-[0px_0px_0px_1px_#121212] dark:shadow-[0px_0px_0px_1px_#404040] flex items-center justify-center gap-1 text-black dark:text-white text-base font-normal hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors whitespace-nowrap cursor-pointer"
             >
               <UIcon
                 name="i-lucide-arrow-up-right"
@@ -156,14 +156,14 @@ const certifications = [
                 <div
                   v-for="(job, index) in workExperience"
                   :key="index"
-                  class="relative border-l-2 border-[#e2e8f0] pl-8 min-h-[120px]"
+                  class="relative border-l-2 border-[#e2e8f0] dark:border-gray-700 pl-8 min-h-[120px]"
                 >
                   <!-- Timeline Dot -->
-                  <div class="absolute -left-2 top-0 size-4 rounded-full bg-[#ad46ff] border-4 border-white shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]" />
+                  <div class="absolute -left-2 top-0 size-4 rounded-full bg-[#ad46ff] border-4 border-white dark:border-[#0a0a0a] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]" />
 
                   <!-- Job Content -->
                   <div class="space-y-2">
-                    <h4 class="text-[#0f172b] text-[20px] font-bold leading-[28px] tracking-[-0.45px]">
+                    <h4 class="text-[#0f172b] dark:text-white text-[20px] font-bold leading-[28px] tracking-[-0.45px]">
                       {{ job.title }}
                     </h4>
                     <p class="text-[#62748e] text-[12px] leading-[16px] uppercase tracking-[0.3px]">
@@ -194,7 +194,7 @@ const certifications = [
 
               <!-- Technical Skills -->
               <div class="space-y-[15px]">
-                <h4 class="text-[#0f172b] text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
+                <h4 class="text-[#0f172b] dark:text-white text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
                   Technica
                 </h4>
                 <div class="space-y-5">
@@ -223,7 +223,7 @@ const certifications = [
 
               <!-- Soft Skills -->
               <div class="space-y-[15px]">
-                <h4 class="text-[#0f172b] text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
+                <h4 class="text-[#0f172b] dark:text-white text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
                   Soft
                 </h4>
                 <p class="text-primary-custom text-[16px] leading-[26px] tracking-[-0.31px]">
@@ -233,15 +233,15 @@ const certifications = [
 
               <!-- Languages -->
               <div class="space-y-4">
-                <h4 class="text-[#0f172b] text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
+                <h4 class="text-[#0f172b] dark:text-white text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
                   Languages
                 </h4>
                 <div class="space-y-2">
                   <p class="text-primary-custom text-[14px] leading-[20px] tracking-[-0.15px]">
-                    <span class="font-bold text-[#0f172b]">English:</span> C1 Advanced • Fluent communication
+                    <span class="font-bold text-[#0f172b] dark:text-white">English:</span> C1 Advanced • Fluent communication
                   </p>
                   <p class="text-primary-custom text-[14px] leading-[20px] tracking-[-0.15px]">
-                    <span class="font-bold text-[#0f172b]">Spanish:</span> Native
+                    <span class="font-bold text-[#0f172b] dark:text-white">Spanish:</span> Native
                   </p>
                 </div>
               </div>
@@ -301,9 +301,9 @@ const certifications = [
             class="absolute -left-26 -top-16 w-50 h-50 object-contain pointer-events-none z-10"
           >
 
-          <div class="relative bg-white border border-[#f1f5f9] rounded-[24px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] p-8 min-h-[229px]">
+          <div class="relative bg-white dark:bg-neutral-900 border border-[#f1f5f9] dark:border-neutral-700 rounded-[24px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] p-8 px-12 min-h-[229px]">
             <div class="space-y-2">
-              <h3 class="text-[#0f172b] text-[18px] font-bold leading-[28px] tracking-[-0.44px]">
+              <h3 class="text-[#0f172b] dark:text-white text-[18px] font-bold leading-[28px] tracking-[-0.44px]">
                 My #funfact
               </h3>
               <p class="text-primary-custom text-[14px] leading-[22.75px] tracking-[-0.15px]">

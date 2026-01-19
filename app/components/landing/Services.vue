@@ -25,7 +25,7 @@ const services: Service[] = [
     id: 'ai',
     title: 'AI Integration',
     description: 'I integrate AI tools to make products smarter and more efficient. From automating simple tasks to improving user interactions, I help ideas grow with practical, human-centered technology.',
-    backgroundImage: '/projects/coaching.png'
+    backgroundImage: '/projects/ai-integration.webp'
   }
 ]
 
@@ -103,7 +103,10 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                     activeCard === service.id ? 'opacity-0 pointer-events-none' : 'opacity-100'
                   ]"
                 >
-                  <h3 class="font-sans text-[24px] text-[#6b6b6b] dark:text-gray-300 tracking-tight text-center leading-tight">
+                  <h3
+                    class="font-sans text-[24px] tracking-tight text-center leading-tight dark:text-white"
+                    :class="activeCard === 'ux-ui' ? 'text-black' : 'text-white'"
+                  >
                     {{ service.title }}
                   </h3>
                 </div>

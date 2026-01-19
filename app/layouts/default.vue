@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col">
+  <div class="min-h-screen flex flex-col bg-background">
     <SocialSidebar />
     <AppHeader :links="navLinks" />
     <main class="flex-1 pt-20 relative z-10">
