@@ -94,7 +94,7 @@ const certifications = [
         :transition="{ duration: 0.5 }"
         :in-view-options="{ once: true }"
       >
-        <div class="mb-[66px] flex items-center justify-between">
+        <div class="mb-[66px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <div>
             <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
               About
@@ -217,7 +217,19 @@ const certifications = [
                 <h4 class="text-[#0f172b] dark:text-white text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
                   Technical
                 </h4>
-                <div class="space-y-5">
+                <!-- Mobile: 3 rows with flex-wrap -->
+                <div class="flex flex-wrap gap-3 sm:hidden">
+                  <img
+                    v-for="skill in technicalSkills"
+                    :key="skill.name"
+                    :src="skill.icon"
+                    :alt="skill.name"
+                    :title="skill.name"
+                    class="size-[32px] object-contain"
+                  >
+                </div>
+                <!-- Desktop: 2 rows -->
+                <div class="hidden sm:block space-y-5">
                   <div class="flex gap-[15px] items-center">
                     <img
                       v-for="skill in technicalSkills.slice(0, 8)"

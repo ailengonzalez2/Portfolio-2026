@@ -43,14 +43,14 @@ const techLogos = [
     class="absolute inset-0 h-[200vh] z-10"
   >
     <!-- Sticky Hero content - revealed during Rolls split -->
-    <section class="sticky top-0 h-screen flex flex-col justify-center bg-white dark:bg-[#0a0a0a]">
+    <section class="sticky top-0 h-screen flex flex-col justify-center bg-white dark:bg-[#0a0a0a] overflow-hidden">
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <!-- Main Headline -->
       <Motion
         :style="{ opacity: contentOpacity, y: contentY }"
       >
-        <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-[120px] font-medium tracking-tight leading-[1.15] text-primary-custom dark:text-gray-200 uppercase text-right">
-          <span class="pr-8 sm:pr-12 lg:pr-16 xl:pr-20 whitespace-nowrap">Creating digital</span> <br>
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl xl:text-[120px] font-medium tracking-tight leading-[1.15] text-primary-custom dark:text-gray-200 uppercase text-right">
+          <span class="sm:pr-12 lg:pr-16 xl:pr-20 sm:whitespace-nowrap">Creating digital</span> <br>
           experiences
         </h1>
       </Motion>

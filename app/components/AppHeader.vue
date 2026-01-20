@@ -14,6 +14,17 @@ const isPastRolls = computed(() => {
   if (import.meta.server) return false
   return scrollY.value > window.innerHeight * 0.65
 })
+
+// Mobile menu state
+const isMobileMenuOpen = ref(false)
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
+
+const closeMobileMenu = () => {
+  isMobileMenuOpen.value = false
+}
 </script>
 
 <template>
@@ -96,16 +107,55 @@ const isPastRolls = computed(() => {
 
           <!-- Mobile menu button -->
           <UButton
-            icon="i-lucide-menu"
+            :icon="isMobileMenuOpen ? 'i-lucide-x' : 'i-lucide-menu'"
             variant="ghost"
             color="neutral"
             class="md:hidden"
-            aria-label="Open menu"
+            :aria-label="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
+            @click="toggleMobileMenu"
           />
         </div>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Menu Panel -->
+  <Transition
+    enter-active-class="transition-all duration-300 ease-out"
+    enter-from-class="opacity-0 -translate-y-4"
+    enter-to-class="opacity-100 translate-y-0"
+    leave-active-class="transition-all duration-200 ease-in"
+    leave-from-class="opacity-100 translate-y-0"
+    leave-to-class="opacity-0 -translate-y-4"
+  >
+    <div
+      v-if="isMobileMenuOpen"
+      class="fixed inset-0 top-20 z-40 bg-white dark:bg-[#0a0a0a] md:hidden"
+    >
+      <nav class="flex flex-col items-center justify-center h-full gap-8 pb-20">
+        <NuxtLink
+          v-for="link in links"
+          :key="String(link.to)"
+          :to="link.to"
+          class="text-2xl font-medium text-foreground hover:text-primary transition-colors uppercase"
+          @click="closeMobileMenu"
+        >
+          {{ link.label }}
+        </NuxtLink>
+
+        <!-- Mobile CTA Button -->
+        <NuxtLink
+          to="#contact"
+          class="mt-4 inline-flex items-center bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] py-3.5 px-8 rounded-full"
+          @click="closeMobileMenu"
+        >
+          <span class="text-sm font-semibold text-white uppercase tracking-wide">
+            Hire Me
+          </span>
+        </NuxtLink>
+      </nav>
+    </div>
+  </Transition>
 </template>
 
 <style scoped>
