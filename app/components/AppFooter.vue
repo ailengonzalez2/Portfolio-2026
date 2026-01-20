@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useWindowScroll, useWindowSize } from '@vueuse/core'
+import { useWindowScroll, useWindowSize, useIntersectionObserver } from '@vueuse/core'
+import { ref } from 'vue'
 
 const { global } = useAppConfig()
 const year = new Date().getFullYear()
@@ -15,6 +16,28 @@ const isExpanded = computed(() => {
   // Expand when within 200px of the bottom (matches SocialSidebar)
   return scrollPosition >= scrollHeight - 200
 })
+
+// Word-by-word animation for "Happy to connect"
+const headingText = 'Happy to connect'
+const headingWords = headingText.split(' ')
+const headingRef = ref<HTMLElement | null>(null)
+const isHeadingVisible = ref(false)
+
+// Trigger animation when heading comes into view
+useIntersectionObserver(
+  headingRef,
+  ([{ isIntersecting }]) => {
+    if (isIntersecting) {
+      isHeadingVisible.value = true
+    }
+  },
+  { threshold: 0.3 }
+)
+
+// Calculate delay for each word based on index
+const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
+  return `${baseDelay + (wordIndex * 0.15)}s`
+}
 </script>
 
 <template>
@@ -72,8 +95,19 @@ const isExpanded = computed(() => {
               <span class="text-gray-400 dark:text-gray-500 text-base">GMT-3</span>
             </div>
 
-            <h2 class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-display font-medium tracking-wide leading-tight text-center lg:text-right">
-              Happy to connect
+            <h2
+              ref="headingRef"
+              class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-display font-medium tracking-wide leading-tight text-center lg:text-right overflow-hidden"
+            >
+              <span
+                v-for="(word, index) in headingWords"
+                :key="index"
+                class="word-animate inline-block"
+                :class="{ 'is-visible': isHeadingVisible }"
+                :style="{ transitionDelay: getWordDelay(index, 0.1) }"
+              >
+                {{ word }}&nbsp;
+              </span>
             </h2>
           </Motion>
         </div>
@@ -109,5 +143,19 @@ const isExpanded = computed(() => {
 
 .arrow-reveal.revealed {
   clip-path: inset(0 0 0 0);
+}
+
+/* Word-by-word animation - coming up from below */
+.word-animate {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* When visible, animate words up */
+.word-animate.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
