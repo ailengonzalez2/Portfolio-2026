@@ -29,14 +29,14 @@ const isExpanded = computed(() => {
 
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Container with flex row for arrow and text -->
-        <div class="flex flex-col lg:flex-row items-center lg:items-end justify-end gap-8 lg:gap-12 xl:gap-16">
+        <div class="flex flex-col lg:flex-row items-center lg:items-end justify-end gap-4 sm:gap-6 lg:gap-12 xl:gap-16">
           <!-- Arrow pointing to social sidebar - animates with sidebar expansion -->
-          <div class="flex justify-end">
+          <div class="flex justify-center lg:justify-end -mb-4 lg:mb-0 h-[7.5rem] lg:h-auto">
             <img
               src="/arrow-footer.png"
               alt=""
               aria-hidden="true"
-              class="arrow-reveal w-2/4 h-auto object-contain"
+              class="arrow-reveal w-3/5 h-auto object-contain -rotate-90 lg:rotate-0 transition-transform"
               :class="isExpanded ? 'revealed' : ''"
             >
           </div>
@@ -47,11 +47,11 @@ const isExpanded = computed(() => {
             :while-in-view="{ opacity: 1, y: 0 }"
             :transition="{ duration: 0.6 }"
             :in-view-options="{ once: true }"
-            class="flex flex-col items-end gap-12"
+            class="flex flex-col items-center lg:items-end gap-12"
           >
             <!-- Available Badge -->
             <div
-              class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-sm whitespace-nowrap"
+              class="hidden lg:inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-sm whitespace-nowrap"
             >
               <div class="flex items-center gap-2">
                 <span class="relative flex size-2">
@@ -72,7 +72,7 @@ const isExpanded = computed(() => {
               <span class="text-gray-400 dark:text-gray-500 text-base">GMT-3</span>
             </div>
 
-            <h2 class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-display font-medium tracking-wide leading-tight text-right">
+            <h2 class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-display font-medium tracking-wide leading-tight text-center lg:text-right">
               Happy to connect
             </h2>
           </Motion>

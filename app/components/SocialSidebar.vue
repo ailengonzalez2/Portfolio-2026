@@ -270,7 +270,7 @@ const regularLinks = socialLinks.filter(link => !link.hideInExpanded && !link.sh
 
   <!-- Mobile: Compact horizontal version at bottom -->
   <div
-    class="social-sidebar-mobile fixed bottom-4 left-1/2 -translate-x-1/2 z-50 lg:hidden"
+    class="social-sidebar-mobile fixed bottom-24 left-1/2 -translate-x-1/2 z-50 lg:hidden"
     aria-label="Enlaces a redes sociales"
   >
     <nav

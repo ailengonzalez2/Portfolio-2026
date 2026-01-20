@@ -130,9 +130,9 @@ const closeMobileMenu = () => {
   >
     <div
       v-if="isMobileMenuOpen"
-      class="fixed inset-0 top-20 z-40 bg-white dark:bg-[#0a0a0a] md:hidden"
+      class="fixed inset-0 z-40 bg-white dark:bg-[#0a0a0a] md:hidden"
     >
-      <nav class="flex flex-col items-center justify-center h-full gap-8 pb-20">
+      <nav class="flex flex-col items-center justify-center h-full gap-8">
         <NuxtLink
           v-for="link in links"
           :key="String(link.to)"
@@ -146,9 +146,15 @@ const closeMobileMenu = () => {
         <!-- Mobile CTA Button -->
         <NuxtLink
           to="#contact"
-          class="mt-4 inline-flex items-center bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] py-3.5 px-8 rounded-full"
+          class="group/btn relative mt-4 inline-flex items-center bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] py-3.5 pl-8 pr-14 hover:pl-14 hover:pr-8 rounded-full btn-transition"
           @click="closeMobileMenu"
         >
+          <span class="absolute right-1.5 flex items-center justify-center size-9 bg-white rounded-full transition-all duration-300 ease-out group-hover/btn:right-[calc(100%-2.625rem)]">
+            <UIcon
+              name="i-lucide-arrow-down"
+              class="size-4 text-gray-900"
+            />
+          </span>
           <span class="text-sm font-semibold text-white uppercase tracking-wide">
             Hire Me
           </span>
