@@ -274,7 +274,9 @@ const regularLinks = socialLinks.filter(link => !link.hideInExpanded && !link.sh
     aria-label="Enlaces a redes sociales"
   >
     <nav
-      class="flex items-center gap-1 px-4 py-2 bg-slate-800/90 backdrop-blur-sm rounded-full border border-slate-700/50"
+      class="flex items-center gap-1 px-4 py-2 backdrop-blur-sm rounded-full border transition-all duration-500"
+      :class="isExpanded ? 'border-slate-300/50' : 'border-slate-700/50'"
+      :style="{ backgroundColor: isExpanded ? 'rgba(226, 232, 240, 0.95)' : 'rgba(30, 41, 59, 0.9)' }"
       aria-label="Redes sociales"
     >
       <ULink
@@ -288,19 +290,24 @@ const regularLinks = socialLinks.filter(link => !link.hideInExpanded && !link.sh
         :style="{ '--brand-color': social.brandColor } as any"
         class="social-icon-mobile group relative flex items-center justify-center size-10 rounded-full transition-all duration-200 active:scale-95"
       >
-        <!-- Default icon (hidden on hover/active if colorIcon exists) -->
+        <!-- Default icon (hidden on hover/active if colorIcon exists, or when expanded with colorIcon) -->
         <UIcon
           :name="social.icon"
-          class="social-icon-svg size-6 text-[#ABB2BF] transition-all duration-200 group-hover:scale-110"
-          :class="{ 'group-hover:opacity-0 group-active:opacity-0': social.colorIcon }"
+          class="social-icon-svg size-6 transition-all duration-500 group-hover:scale-110"
+          :class="[
+            social.colorIcon && isExpanded ? 'opacity-0' : '',
+            { 'group-hover:opacity-0 group-active:opacity-0': social.colorIcon }
+          ]"
+          :style="{ color: isExpanded ? social.brandColor : '#ABB2BF' }"
         />
 
-        <!-- Color icon (shown on hover/active) -->
+        <!-- Color icon (shown on hover/active or when expanded) -->
         <img
           v-if="social.colorIcon"
           :src="social.colorIcon"
           :alt="social.name"
-          class="absolute size-6 scale-75 opacity-0 group-hover:opacity-100 group-active:opacity-100 group-hover:scale-110 group-active:scale-110 transition-all duration-200 pointer-events-none"
+          class="absolute size-6 transition-all duration-500 pointer-events-none group-hover:scale-110 group-active:scale-110"
+          :class="isExpanded ? 'opacity-100 scale-100' : 'opacity-0 scale-75 group-hover:opacity-100 group-active:opacity-100'"
         >
       </ULink>
     </nav>
