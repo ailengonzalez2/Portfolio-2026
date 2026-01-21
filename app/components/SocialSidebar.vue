@@ -87,6 +87,15 @@ const isExpanded = computed(() => {
   return scrollPosition >= scrollHeight - 200
 })
 
+// Mobile: Expand later (closer to bottom)
+const isMobileExpanded = computed(() => {
+  if (!import.meta.client) return false
+  const scrollHeight = document.documentElement.scrollHeight
+  const scrollPosition = y.value + height.value
+  // Expand when within 100px of the bottom (later than desktop)
+  return scrollPosition >= scrollHeight - 100
+})
+
 // Mobile: Calculate bottom offset to stop before footer
 const mobileBottom = computed(() => {
   if (!import.meta.client) return 16
@@ -290,8 +299,8 @@ const regularLinks = socialLinks.filter(link => !link.hideInExpanded && !link.sh
   >
     <nav
       class="flex items-center px-4 py-2 backdrop-blur-sm rounded-full border transition-all duration-500"
-      :class="isExpanded ? 'border-slate-300/50 scale-110 gap-2' : 'border-slate-700/50 gap-0'"
-      :style="{ backgroundColor: isExpanded ? 'rgba(226, 232, 240, 0.95)' : 'rgba(30, 41, 59, 0.9)' }"
+      :class="isMobileExpanded ? 'border-slate-300/50 scale-110 gap-2' : 'border-slate-700/50 gap-0'"
+      :style="{ backgroundColor: isMobileExpanded ? 'rgba(226, 232, 240, 0.95)' : 'rgba(30, 41, 59, 0.9)' }"
       aria-label="Redes sociales"
     >
       <ULink
@@ -310,11 +319,11 @@ const regularLinks = socialLinks.filter(link => !link.hideInExpanded && !link.sh
           :name="social.icon"
           class="social-icon-svg size-6 transition-all duration-500 group-hover:scale-110"
           :class="[
-            social.colorIcon && isExpanded ? 'opacity-0' : '',
+            social.colorIcon && isMobileExpanded ? 'opacity-0' : '',
             { 'group-hover:opacity-0 group-active:opacity-0': social.colorIcon },
-            isExpanded ? 'scale-125' : ''
+            isMobileExpanded ? 'scale-125' : ''
           ]"
-          :style="{ color: isExpanded ? social.brandColor : '#ABB2BF' }"
+          :style="{ color: isMobileExpanded ? social.brandColor : '#ABB2BF' }"
         />
 
         <!-- Color icon (shown on hover/active or when expanded) -->
@@ -323,7 +332,7 @@ const regularLinks = socialLinks.filter(link => !link.hideInExpanded && !link.sh
           :src="social.colorIcon"
           :alt="social.name"
           class="absolute size-6 transition-all duration-500 pointer-events-none group-hover:scale-110 group-active:scale-110"
-          :class="isExpanded ? 'opacity-100 scale-125' : 'opacity-0 scale-75 group-hover:opacity-100 group-active:opacity-100'"
+          :class="isMobileExpanded ? 'opacity-100 scale-125' : 'opacity-0 scale-75 group-hover:opacity-100 group-active:opacity-100'"
         >
       </ULink>
     </nav>
