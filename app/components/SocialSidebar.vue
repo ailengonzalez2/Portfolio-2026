@@ -87,6 +87,20 @@ const isExpanded = computed(() => {
   return scrollPosition >= scrollHeight - 200
 })
 
+// Mobile: Calculate bottom offset to stop before footer
+const mobileBottom = computed(() => {
+  if (!import.meta.client) return 16
+  const scrollHeight = document.documentElement.scrollHeight
+  const scrollPosition = y.value + height.value
+  const distanceFromBottom = scrollHeight - scrollPosition
+  const footerCreditsHeight = 80
+
+  if (distanceFromBottom < footerCreditsHeight + 60) {
+    return footerCreditsHeight + 16
+  }
+  return 16
+})
+
 // Separate swappable links (CV/Upwork) from regular links
 const cvLink = socialLinks.find(link => link.name === 'CV')!
 const upworkLink = socialLinks.find(link => link.name === 'Upwork')!
@@ -270,12 +284,13 @@ const regularLinks = socialLinks.filter(link => !link.hideInExpanded && !link.sh
 
   <!-- Mobile: Compact horizontal version at bottom -->
   <div
-    class="social-sidebar-mobile fixed bottom-4 left-1/2 -translate-x-1/2 z-50 lg:hidden"
+    class="social-sidebar-mobile fixed left-1/2 -translate-x-1/2 z-50 lg:hidden transition-[bottom] duration-300 ease-out"
+    :style="{ bottom: `${mobileBottom}px` }"
     aria-label="Enlaces a redes sociales"
   >
     <nav
-      class="flex items-center gap-1 px-4 py-2 backdrop-blur-sm rounded-full border transition-all duration-500"
-      :class="isExpanded ? 'border-slate-300/50 scale-110' : 'border-slate-700/50'"
+      class="flex items-center px-4 py-2 backdrop-blur-sm rounded-full border transition-all duration-500"
+      :class="isExpanded ? 'border-slate-300/50 scale-110 gap-2' : 'border-slate-700/50 gap-0'"
       :style="{ backgroundColor: isExpanded ? 'rgba(226, 232, 240, 0.95)' : 'rgba(30, 41, 59, 0.9)' }"
       aria-label="Redes sociales"
     >
