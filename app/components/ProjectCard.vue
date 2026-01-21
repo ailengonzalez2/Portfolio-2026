@@ -10,6 +10,25 @@ const props = defineProps<{
 const descriptionRef = ref<HTMLParagraphElement | null>(null)
 const isTruncated = ref(false)
 
+// State for mobile click-to-expand
+const isExpanded = ref(false)
+
+const toggleExpand = () => {
+  // Only toggle on mobile/tablet (below lg breakpoint)
+  if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+    if (isExpanded.value) {
+      // Already expanded - navigate to project link
+      const link = props.project.links?.preview || props.project.links?.figma
+      if (link) {
+        window.open(link, '_blank')
+      }
+    } else {
+      // First tap - expand the text
+      isExpanded.value = true
+    }
+  }
+}
+
 const checkTruncation = () => {
   if (descriptionRef.value) {
     // Add small buffer (2px) to account for rounding
@@ -70,17 +89,28 @@ onUnmounted(() => {
           </span>
         </div>
 
-        <div class="relative mb-4 md:mb-6 overflow-hidden">
+        <div
+          class="relative mb-4 md:mb-6 overflow-hidden cursor-pointer lg:cursor-default"
+          @click.stop="toggleExpand"
+        >
           <p
             ref="descriptionRef"
-            class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed overflow-hidden max-h-[4.2em] group-hover:max-h-[10em] transition-[max-height] duration-300 group-hover:duration-500 ease-in-out"
+            :class="[
+              'text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed overflow-hidden transition-[max-height] duration-300 ease-in-out',
+              isExpanded ? 'max-h-[10em] duration-500' : 'max-h-[4.2em]',
+              'lg:max-h-[4.2em] lg:group-hover:max-h-[10em] lg:group-hover:duration-500'
+            ]"
           >
             {{ project.description }}
           </p>
           <!-- Gradient fade overlay - only shows when content is truncated -->
           <div
             v-if="isTruncated"
-            class="absolute bottom-0 left-0 right-0 h-4 bg-linear-to-t from-white dark:from-neutral-950 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300 group-hover:duration-500 ease-in-out pointer-events-none"
+            :class="[
+              'absolute bottom-0 left-0 right-0 h-4 bg-linear-to-t from-white dark:from-neutral-950 to-transparent transition-opacity duration-300 ease-in-out pointer-events-none',
+              isExpanded ? 'opacity-0 duration-500' : 'opacity-100',
+              'lg:opacity-100 lg:group-hover:opacity-0 lg:group-hover:duration-500'
+            ]"
           />
         </div>
 
@@ -174,17 +204,28 @@ onUnmounted(() => {
           </span>
         </div>
 
-        <div class="relative mb-4 md:mb-6 overflow-hidden">
+        <div
+          class="relative mb-4 md:mb-6 overflow-hidden cursor-pointer lg:cursor-default"
+          @click.stop="toggleExpand"
+        >
           <p
             ref="descriptionRef"
-            class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed overflow-hidden max-h-[4.2em] group-hover:max-h-[10em] transition-[max-height] duration-300 group-hover:duration-500 ease-in-out"
+            :class="[
+              'text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed overflow-hidden transition-[max-height] duration-300 ease-in-out',
+              isExpanded ? 'max-h-[10em] duration-500' : 'max-h-[4.2em]',
+              'lg:max-h-[4.2em] lg:group-hover:max-h-[10em] lg:group-hover:duration-500'
+            ]"
           >
             {{ project.description }}
           </p>
           <!-- Gradient fade overlay - only shows when content is truncated -->
           <div
             v-if="isTruncated"
-            class="absolute bottom-0 left-0 right-0 h-4 bg-linear-to-t from-white dark:from-neutral-950 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-300 group-hover:duration-500 ease-in-out pointer-events-none"
+            :class="[
+              'absolute bottom-0 left-0 right-0 h-4 bg-linear-to-t from-white dark:from-neutral-950 to-transparent transition-opacity duration-300 ease-in-out pointer-events-none',
+              isExpanded ? 'opacity-0 duration-500' : 'opacity-100',
+              'lg:opacity-100 lg:group-hover:opacity-0 lg:group-hover:duration-500'
+            ]"
           />
         </div>
 
