@@ -60,13 +60,13 @@ const techLogos = [
         :style="{ opacity: contentOpacity, y: carouselY }"
         class="mt-8 sm:mt-10 lg:mt-12"
       >
-        <div class="relative overflow-hidden max-w-[700px] mx-auto mask-gradient">
+        <div class="relative overflow-hidden max-w-[240px] sm:max-w-[450px] lg:max-w-[700px] ml-auto mask-gradient">
           <div class="flex items-center animate-marquee w-max">
-            <div class="flex items-center gap-2.5 pr-2.5">
+            <div class="flex items-center gap-1.5 sm:gap-2.5 pr-1.5 sm:pr-2.5">
               <div
                 v-for="tech in techLogos"
                 :key="tech.label"
-                class="flex items-center justify-center size-14 rounded-2xl bg-white dark:bg-gray-900 shrink-0 p-2"
+                class="flex items-center justify-center size-10 sm:size-12 lg:size-14 rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shrink-0 p-1.5 sm:p-2"
                 :title="tech.label"
               >
                 <img
@@ -76,11 +76,11 @@ const techLogos = [
                 >
               </div>
             </div>
-            <div class="flex items-center gap-2.5 pr-2.5">
+            <div class="flex items-center gap-1.5 sm:gap-2.5 pr-1.5 sm:pr-2.5">
               <div
                 v-for="tech in techLogos"
                 :key="`${tech.label}-dup`"
-                class="flex items-center justify-center size-14 rounded-2xl bg-white dark:bg-gray-900 shrink-0 p-2"
+                class="flex items-center justify-center size-10 sm:size-12 lg:size-14 rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shrink-0 p-1.5 sm:p-2"
                 :title="tech.label"
               >
                 <img
