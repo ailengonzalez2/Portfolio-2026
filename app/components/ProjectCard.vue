@@ -41,9 +41,9 @@ onUnmounted(() => {
     :transition="{ duration: 0.5 }"
     :in-view-options="{ once: true }"
   >
-    <article class="group h-full flex flex-col bg-white dark:bg-neutral-900 rounded-3xl">
+    <article class="group h-full flex flex-col bg-white dark:bg-neutral-900 rounded-2xl md:rounded-3xl">
       <!-- Image container -->
-      <div class="relative rounded-[24px] overflow-hidden aspect-4/3 mb-5">
+      <div class="relative rounded-[16px] md:rounded-[24px] overflow-hidden aspect-4/3 mb-4 md:mb-5">
         <NuxtImg
           :src="project.image"
           :alt="project.title"
@@ -52,8 +52,8 @@ onUnmounted(() => {
           placeholder
         />
         <!-- Category Badge -->
-        <div class="absolute top-5 right-5 z-10">
-          <span class="inline-flex items-center px-3 py-1 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm rounded-full text-[11px] uppercase tracking-[0.5px] font-medium text-primary-custom dark:text-neutral-300 shadow-sm">
+        <div class="absolute top-3 right-3 md:top-5 md:right-5 z-10">
+          <span class="inline-flex items-center px-2.5 py-0.5 md:px-3 md:py-1 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm rounded-full text-[10px] md:text-[11px] uppercase tracking-[0.5px] font-medium text-primary-custom dark:text-neutral-300 shadow-sm">
             {{ project.tags?.[0] }}
           </span>
         </div>
@@ -61,8 +61,8 @@ onUnmounted(() => {
 
       <!-- Content -->
       <div class="flex flex-col grow">
-        <div class="flex items-start justify-between gap-3 mb-3 min-h-[28px]">
-          <h3 class="text-[15px] font-bold text-[#0f172b] dark:text-white leading-snug tracking-tight flex-1">
+        <div class="flex items-start justify-between gap-2 md:gap-3 mb-2 md:mb-3 min-h-[24px] md:min-h-[28px]">
+          <h3 class="text-sm md:text-[15px] font-bold text-[#0f172b] dark:text-white leading-snug tracking-tight flex-1">
             {{ project.title }}
           </h3>
           <span class="text-xs text-[#62748e] dark:text-neutral-500 font-medium whitespace-nowrap shrink-0">
@@ -70,7 +70,7 @@ onUnmounted(() => {
           </span>
         </div>
 
-        <div class="relative mb-6 overflow-hidden">
+        <div class="relative mb-4 md:mb-6 overflow-hidden">
           <p
             ref="descriptionRef"
             class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed overflow-hidden max-h-[4.2em] group-hover:max-h-[10em] transition-[max-height] duration-300 group-hover:duration-500 ease-in-out"
@@ -145,9 +145,9 @@ onUnmounted(() => {
   </Motion>
 
   <!-- Without animation -->
-  <article v-else class="group h-full flex flex-col bg-white dark:bg-neutral-900 rounded-3xl">
+  <article v-else class="group h-full flex flex-col bg-white dark:bg-neutral-900 rounded-2xl md:rounded-3xl">
       <!-- Image container -->
-      <div class="relative rounded-[24px] overflow-hidden aspect-4/3 mb-5">
+      <div class="relative rounded-[16px] md:rounded-[24px] overflow-hidden aspect-4/3 mb-4 md:mb-5">
         <NuxtImg
           :src="project.image"
           :alt="project.title"
@@ -156,8 +156,8 @@ onUnmounted(() => {
           placeholder
         />
         <!-- Category Badge -->
-        <div class="absolute top-5 right-5 z-10">
-          <span class="inline-flex items-center px-3 py-1 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm rounded-full text-[11px] uppercase tracking-[0.5px] font-medium text-primary-custom dark:text-neutral-300 shadow-sm">
+        <div class="absolute top-3 right-3 md:top-5 md:right-5 z-10">
+          <span class="inline-flex items-center px-2.5 py-0.5 md:px-3 md:py-1 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-sm rounded-full text-[10px] md:text-[11px] uppercase tracking-[0.5px] font-medium text-primary-custom dark:text-neutral-300 shadow-sm">
             {{ project.tags?.[0] }}
           </span>
         </div>
@@ -165,8 +165,8 @@ onUnmounted(() => {
 
       <!-- Content -->
       <div class="flex flex-col grow">
-        <div class="flex items-start justify-between gap-3 mb-3 min-h-[28px]">
-          <h3 class="text-[15px] font-bold text-[#0f172b] dark:text-white leading-snug tracking-tight flex-1">
+        <div class="flex items-start justify-between gap-2 md:gap-3 mb-2 md:mb-3 min-h-[24px] md:min-h-[28px]">
+          <h3 class="text-sm md:text-[15px] font-bold text-[#0f172b] dark:text-white leading-snug tracking-tight flex-1">
             {{ project.title }}
           </h3>
           <span class="text-xs text-[#62748e] dark:text-neutral-500 font-medium whitespace-nowrap shrink-0">
@@ -174,7 +174,7 @@ onUnmounted(() => {
           </span>
         </div>
 
-        <div class="relative mb-6 overflow-hidden">
+        <div class="relative mb-4 md:mb-6 overflow-hidden">
           <p
             ref="descriptionRef"
             class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed overflow-hidden max-h-[4.2em] group-hover:max-h-[10em] transition-[max-height] duration-300 group-hover:duration-500 ease-in-out"

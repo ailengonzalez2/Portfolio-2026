@@ -21,11 +21,23 @@ const projectRows = computed(() => {
   }
   return rows
 })
+
+// Disable sticky scroll on mobile for better UX
+const isMobile = ref(false)
+
+onMounted(() => {
+  const checkMobile = () => {
+    isMobile.value = window.innerWidth < 768
+  }
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+  onUnmounted(() => window.removeEventListener('resize', checkMobile))
+})
 </script>
 
 <template>
   <UPage>
-    <section class="pt-32 pb-16 sm:pt-40 sm:pb-24 relative min-h-screen">
+    <section class="pt-24 pb-12 sm:pt-40 sm:pb-24 relative min-h-screen">
       <!-- Background decorations -->
       <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
         <div class="absolute top-1/4 right-0 w-[600px] h-[600px] bg-linear-to-bl from-violet-300/10 to-transparent rounded-full blur-3xl" />
@@ -39,22 +51,22 @@ const projectRows = computed(() => {
           :while-in-view="{ opacity: 1, y: 0 }"
           :transition="{ duration: 0.5 }"
           :in-view-options="{ once: true }"
-          class="mb-12 sm:mb-16"
+          class="mb-8 sm:mb-16"
         >
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0f172b] dark:text-white tracking-tight mb-4">
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0f172b] dark:text-white tracking-tight mb-3 sm:mb-4">
             Featured Projects
           </h1>
-          <p class="text-lg text-[#62748e] dark:text-neutral-400 max-w-2xl">
+          <p class="text-base sm:text-lg text-[#62748e] dark:text-neutral-400 max-w-2xl">
             A curated collection of my design and development work. Each project represents a unique challenge and a creative solution.
           </p>
         </Motion>
 
-        <!-- Sticky Scroll Projects -->
-        <div class="flex flex-col">
+        <!-- Sticky Scroll Projects (disabled on mobile) -->
+        <div class="flex flex-col gap-6 md:gap-0">
           <template v-for="(row, rowIndex) in projectRows" :key="rowIndex">
             <div
-              class="sticky"
-              :style="{
+              :class="{ 'md:sticky': !isMobile }"
+              :style="isMobile ? {} : {
                 top: '160px',
                 zIndex: rowIndex + 1,
                 marginBottom: rowIndex < projectRows.length - 1 ? '25vh' : '0'
@@ -65,9 +77,9 @@ const projectRows = computed(() => {
                 :while-in-view="{ opacity: 1, y: 0 }"
                 :transition="{ duration: 0.6, delay: 0.1 }"
                 :in-view-options="{ once: true, amount: 0.2 }"
-                class="pt-8 pb-12"
+                class="pt-4 pb-6 md:pt-8 md:pb-12"
               >
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
                   <template v-for="project in row" :key="project.id">
                     <ProjectCard :project="project" no-animation />
                   </template>
