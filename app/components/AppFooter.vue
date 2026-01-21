@@ -54,7 +54,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
         <!-- Container with flex row for arrow and text -->
         <div class="flex flex-col lg:flex-row items-center lg:items-end justify-end gap-4 sm:gap-6 lg:gap-12 xl:gap-16">
           <!-- Arrow pointing to social sidebar - animates with sidebar expansion -->
-          <div class="flex justify-center lg:justify-end -mb-4 lg:mb-0 h-[7.5rem] lg:h-auto">
+          <div class="flex justify-center lg:justify-end mb-8 lg:mb-0 h-[7.5rem] lg:h-auto">
             <img
               src="/arrow-footer.png"
               alt=""
