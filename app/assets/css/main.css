@@ -56,6 +56,28 @@
   }
 }
 
+/* Initial loading overlay - prevents flash before IntroAnimation mounts */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  z-index: 9998;
+  pointer-events: none;
+  animation: initial-overlay-fade 0.5s ease-out forwards;
+  animation-delay: 3.4s; /* Matches IntroAnimation timing: initialDelay(1) + signatureDraw(2) + hold(0.4) */
+}
+
+@keyframes initial-overlay-fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 /* Smooth page transitions */
 html {
   scroll-behavior: smooth;

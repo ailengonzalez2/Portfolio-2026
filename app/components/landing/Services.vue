@@ -162,7 +162,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                       </a>
                       <!-- Upwork -->
                       <a
-                        href="https://www.upwork.com/freelancers/~AilenGonzalez"
+                        href="https://www.upwork.com/freelancers/ailengonzalez?mp_source=share"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Upwork"

@@ -34,7 +34,7 @@ const socialLinks: SocialLink[] = [
   {
     name: 'Upwork',
     icon: 'i-simple-icons-upwork',
-    url: 'https://www.upwork.com/freelancers/~01999edab23a51d775?mp_source=share',
+    url: 'https://www.upwork.com/freelancers/ailengonzalez?mp_source=share',
     label: 'Contratar en Upwork',
     brandColor: '#14a800',
     gradientTo: '#6fda44',
