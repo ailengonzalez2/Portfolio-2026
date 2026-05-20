@@ -123,6 +123,62 @@
       }
     }
   },
+  "brief": {
+    "section": "Brief Generator",
+    "title": "Get a personalized brief",
+    "intro": "Describe what you want to build in your own words. I'll generate a real project brief in 30 seconds — scope, timeline, price range, and what I'd ship first.",
+    "floatingCta": "Try the AI brief",
+    "floatingCtaShort": "Brief",
+    "placeholderRotation": [
+      "We're a Solana validator and need a delegator dashboard with on-chain reward claims…",
+      "I want to add a smart chat to my SaaS that can answer questions about our docs…",
+      "We need to redesign our DeFi swap UI to feel less intimidating to new users…",
+      "I have a startup landing page idea and need it shipped in two weeks…"
+    ],
+    "chips": {
+      "defi": "DeFi dashboard",
+      "ai": "AI chat for SaaS",
+      "brand": "Startup brand site"
+    },
+    "chipPrefills": {
+      "defi": "We're a small Solana validator and need a dashboard where our delegators can view staking stats, claim rewards, and see validator performance.",
+      "ai": "We have a B2B SaaS and want to add an AI chat that can answer questions about our docs and our customer data, with citations.",
+      "brand": "I'm launching a developer tools startup and need a clean, fast landing page with pricing, docs structure, and a sign-up flow."
+    },
+    "counter": "{count} / {max}",
+    "generate": "Generate brief",
+    "thinking": "Thinking…",
+    "another": "Generate another",
+    "footnote": "Powered by Claude · Free · No signup to generate",
+    "sections": {
+      "service": "Service match",
+      "priceRange": "Price range",
+      "timeline": "Timeline",
+      "whatIHeard": "What I heard",
+      "phases": "Phases",
+      "stack": "Stack I'd use",
+      "buildFirst": "What I'd build first",
+      "whyFit": "Why I'm a fit"
+    },
+    "email": {
+      "headline": "Want the full proposal?",
+      "body": "Drop your email and I'll send the brief plus a calendar link to chat about it.",
+      "placeholder": "you{'@'}company.com",
+      "submit": "Send me the brief",
+      "sending": "Sending…",
+      "sent": "Sent — check your inbox.",
+      "errorInvalid": "That doesn't look like a valid email.",
+      "errorGeneric": "Something went wrong sending the email. Try again in a bit?"
+    },
+    "or": "or",
+    "bookCall": "Book a 20-min call",
+    "errors": {
+      "tooShort": "Add a bit more — at least 20 characters so I can map it to a real brief.",
+      "tooLong": "Tighten it up — 500 characters max.",
+      "rateLimited": "You've hit today's limit. Reach me by email and we'll talk it through.",
+      "generic": "Something went wrong. Try again, or reach me by email."
+    }
+  },
   "common": {
     "switchLanguage": "Switch language"
   }

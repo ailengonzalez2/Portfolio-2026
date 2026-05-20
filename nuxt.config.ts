@@ -29,6 +29,16 @@ export default defineNuxtConfig({
     }
   },
 
+  runtimeConfig: {
+    openrouter: {
+      apiKey: '',
+      model: 'anthropic/claude-sonnet-4.5'
+    },
+    public: {
+      web3formsKey: ''
+    }
+  },
+
   devtools: {
     enabled: true
   },

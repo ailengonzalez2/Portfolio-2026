@@ -6,8 +6,10 @@ export default defineAppConfig({
       light: '/profile.png',
       alt: 'Ailen Gonzalez'
     },
-    // TODO: replace with your real Cal.com booking link
-    meetingLink: 'https://cal.com/ailengonzalez',
+    // TODO: replace with your real PUBLIC Calendly event link (not the admin URL).
+    // Find it at: Calendly → Event Types → click an event → "Copy link"
+    // Format: https://calendly.com/<handle>/<event-slug>
+    meetingLink: 'https://calendly.com/ailengonzalez',
     email: 'hey@ailengonzalez.ar',
     available: true
   },

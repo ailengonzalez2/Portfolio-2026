@@ -9,5 +9,9 @@
       <slot />
     </main>
     <AppFooter />
+
+    <!-- Brief generator: floating CTA available on every page + centered modal -->
+    <BriefFloatingButton />
+    <BriefModal />
   </div>
 </template>

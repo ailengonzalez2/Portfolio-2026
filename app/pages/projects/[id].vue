@@ -218,7 +218,7 @@ const cs = computed(() => project.value!.caseStudy)
             {{ $t('projects.caseStudy.ctaText') }}
           </p>
           <UButton
-            to="/#contact"
+            to="/#brief"
             size="lg"
             class="btn-gradient text-white rounded-full px-6"
           >

@@ -123,6 +123,62 @@
       }
     }
   },
+  "brief": {
+    "section": "Generador de Brief",
+    "title": "Obtené un brief personalizado",
+    "intro": "Contame qué querés construir, con tus propias palabras. Te genero un brief real en 30 segundos — alcance, timeline, rango de precio y qué desarrollaría primero.",
+    "floatingCta": "Probá el brief con IA",
+    "floatingCtaShort": "Brief",
+    "placeholderRotation": [
+      "Somos un validador de Solana y necesitamos un dashboard para que nuestros delegadores reclamen rewards on-chain…",
+      "Quiero sumarle un chat con IA a mi SaaS que conteste preguntas sobre nuestra documentación…",
+      "Necesitamos rediseñar la UI de nuestro swap DeFi para que no asuste a usuarios nuevos…",
+      "Tengo la idea de un landing para una startup y lo necesito listo en dos semanas…"
+    ],
+    "chips": {
+      "defi": "Dashboard DeFi",
+      "ai": "Chat con IA para SaaS",
+      "brand": "Sitio para una startup"
+    },
+    "chipPrefills": {
+      "defi": "Somos un validador de Solana pequeño y necesitamos un dashboard donde nuestros delegadores puedan ver stats de staking, reclamar rewards y ver el performance del validador.",
+      "ai": "Tenemos un SaaS B2B y queremos sumarle un chat con IA que pueda responder preguntas sobre nuestros docs y los datos de nuestros clientes, con citas.",
+      "brand": "Estoy lanzando una startup de developer tools y necesito una landing limpia y rápida con pricing, estructura de docs y un flujo de sign-up."
+    },
+    "counter": "{count} / {max}",
+    "generate": "Generar brief",
+    "thinking": "Pensando…",
+    "another": "Generar otro",
+    "footnote": "Hecho con Claude · Gratis · Sin registrarte",
+    "sections": {
+      "service": "Servicio recomendado",
+      "priceRange": "Rango de precio",
+      "timeline": "Timeline",
+      "whatIHeard": "Lo que entendí",
+      "phases": "Fases",
+      "stack": "Stack que usaría",
+      "buildFirst": "Qué construiría primero",
+      "whyFit": "Por qué soy buena para esto"
+    },
+    "email": {
+      "headline": "¿Querés la propuesta completa?",
+      "body": "Dejá tu email y te mando el brief más un link para coordinar una llamada.",
+      "placeholder": "vos{'@'}empresa.com",
+      "submit": "Mandame el brief",
+      "sending": "Enviando…",
+      "sent": "Listo — revisá tu inbox.",
+      "errorInvalid": "Ese email no parece válido.",
+      "errorGeneric": "Algo falló al enviar el email. ¿Probás de nuevo?"
+    },
+    "or": "o",
+    "bookCall": "Agendar llamada de 20 min",
+    "errors": {
+      "tooShort": "Contame un poco más — al menos 20 caracteres para armarte un brief real.",
+      "tooLong": "Ajustá un poco — máximo 500 caracteres.",
+      "rateLimited": "Llegaste al límite del día. Escribime por email y lo charlamos.",
+      "generic": "Algo falló. Probá de nuevo, o escribime por email."
+    }
+  },
   "common": {
     "switchLanguage": "Cambiar idioma"
   }
