@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { projects } from '~/data/projects'
 
-const seo = {
-  title: 'Projects - Ailen Gonzalez',
-  description: 'Explore my portfolio of product design and frontend development projects. From DeFi dashboards to mobile apps, discover the work that defines my craft.'
-}
+const { t } = useI18n()
 
 useSeoMeta({
-  title: seo.title,
-  ogTitle: seo.title,
-  description: seo.description,
-  ogDescription: seo.description
+  title: () => `${t('projects.pageTitle')} — Ailen Gonzalez`,
+  ogTitle: () => `${t('projects.pageTitle')} — Ailen Gonzalez`,
+  description: () => t('projects.pageIntro'),
+  ogDescription: () => t('projects.pageIntro')
 })
 
 // Group projects into rows of 3 for sticky effect
@@ -54,10 +51,10 @@ onMounted(() => {
           class="mb-8 sm:mb-16"
         >
           <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0f172b] dark:text-white tracking-tight mb-3 sm:mb-4">
-            Featured Projects
+            {{ $t('projects.pageTitle') }}
           </h1>
           <p class="text-base sm:text-lg text-[#62748e] dark:text-neutral-400 max-w-2xl">
-            A curated collection of my design and development work. Each project represents a unique challenge and a creative solution.
+            {{ $t('projects.pageIntro') }}
           </p>
         </Motion>
 

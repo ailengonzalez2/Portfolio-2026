@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "projects": "projects",
+    "services": "services",
+    "writing": "writing",
+    "about": "about",
+    "contact": "contact",
+    "hireMe": "Hire Me"
+  },
+  "hero": {
+    "available": "Available for work",
+    "title": "AI Product Engineer",
+    "subtitle": "I design and ship user-facing AI features end to end — chat UIs, streaming, tool calls, RAG-backed flows.",
+    "bookCall": "Book a call",
+    "seeWork": "See work"
+  },
+  "services": {
+    "aiProduct": {
+      "title": "AI Product Design",
+      "description": "I design and ship the front of your AI product — chat UIs, streaming responses, tool-call surfaces, agent flows, and eval dashboards. From Figma to production code.",
+      "deliverables": ["Chat & streaming UI", "Tool-call rendering", "Prompt + flow design", "Eval dashboards"],
+      "priceFrom": "From $2.5k",
+      "timeline": "2–3 weeks"
+    },
+    "frontend": {
+      "title": "Frontend Engineering",
+      "description": "I build production-ready frontends in Vue / Nuxt + Tailwind + TypeScript. Pixel-perfect, accessible, and fast. From Figma handoff to deployed app.",
+      "deliverables": ["Vue / Nuxt 4 apps", "Design system integration", "Responsive + a11y", "Performance-tuned"],
+      "priceFrom": "From $2k",
+      "timeline": "1–3 weeks"
+    },
+    "llmIntegration": {
+      "title": "LLM Integration",
+      "description": "I wire LLMs into real product workflows — RAG, agents, tool calling, structured outputs, n8n automations. Built to ship, measured with evals.",
+      "deliverables": ["RAG pipelines", "Tool calling + agents", "n8n / workflow automation", "Evals + monitoring"],
+      "priceFrom": "From $3k",
+      "timeline": "2–4 weeks"
+    },
+    "web3": {
+      "title": "Web3 Frontend",
+      "description": "I craft clear, intuitive Web3 experiences — DeFi dashboards, NFT marketplaces, wallet apps. Built with Wagmi, Viem, and Reown.",
+      "deliverables": ["Wallet integrations", "DeFi / swap UIs", "NFT marketplaces", "Multi-chain support"],
+      "priceFrom": "From $3k",
+      "timeline": "2–4 weeks"
+    }
+  },
+  "projects": {
+    "latestSection": "Latest Projects",
+    "exploreAll": "Explore Projects",
+    "pageTitle": "Featured Projects",
+    "pageIntro": "A curated collection of my design and development work. Each project represents a unique challenge and a creative solution.",
+    "caseStudy": {
+      "back": "All projects",
+      "viewLive": "View live",
+      "viewCode": "View code",
+      "figma": "Figma",
+      "role": "Role",
+      "client": "Client",
+      "problem": "The Problem",
+      "approach": "Approach",
+      "result": "Result",
+      "stack": "Stack",
+      "ctaText": "Building something similar?",
+      "ctaButton": "Let's talk",
+      "comingSoonTitle": "Case study coming soon",
+      "comingSoonBody": "For now, explore the work directly via Figma or the live preview above."
+    }
+  },
+  "web3Quote": {
+    "quote": "Recently, I've been diving deeper into the blockchain ecosystem, building wallet integrations and decentralized UI flows.",
+    "highlight": "wallet integrations and decentralized UI flows",
+    "context": "I focus on crafting clear, intuitive Web3 experiences with tools like Wagmi, Viem, and Web3Modal. From DeFi dashboards to NFT marketplaces and wallet applications, I'm always excited to collaborate on innovative ideas and projects."
+  },
+  "about": {
+    "heading": "About",
+    "downloadCv": "Download CV",
+    "exploreCv": "Explore all CV",
+    "designCode": "Design + Code",
+    "designCodeBody": "I mix solid design principles with practical, efficient development to create clean, responsive, and pixel-perfect interfaces. I take care of the whole process — from early research to prototypes to bringing everything to life with smooth, modern code.",
+    "workExperience": "Work Experience",
+    "skills": "Skills",
+    "technical": "Technical",
+    "soft": "Soft",
+    "softBody": "Autonomous work, active listening, attention to detail, clear communication, collaborative mindset, adaptability",
+    "languages": "Languages",
+    "english": "English",
+    "englishLevel": "C1 Advanced • Fluent communication",
+    "spanish": "Spanish",
+    "spanishLevel": "Native",
+    "certifications": "Latest Certifications"
+  },
+  "contact": {
+    "title": "Got a project in mind?",
+    "copied": "Email copied to clipboard!"
+  },
+  "writing": {
+    "section": "Writing",
+    "title": "Notes from shipping AI products",
+    "intro": "Practical lessons from designing and shipping LLM-powered features, frontend craft, and Web3 product work. First posts landing soon — in the meantime, here's what I'm writing about.",
+    "comingSoon": "Coming soon",
+    "ctaText": "Want first dibs on new posts?",
+    "ctaButton": "Get in touch",
+    "posts": {
+      "streaming": {
+        "title": "Designing streaming responses in Vue",
+        "category": "AI Product",
+        "blurb": "A no-flicker streaming chat UI in Nuxt: chunk parsing, smooth typing, and graceful tool-call rendering."
+      },
+      "ragEvals": {
+        "title": "Evaluating RAG retrieval quality",
+        "category": "LLM Integration",
+        "blurb": "A practical RAG eval setup — what to measure, how to score, and the dashboard I use to track regressions."
+      },
+      "figmaVue": {
+        "title": "The Figma → Vue handoff I actually use",
+        "category": "Frontend",
+        "blurb": "Tokens, components, and the small conventions that keep design and code in sync without a process tax."
+      },
+      "defiUi": {
+        "title": "Building a DeFi swap UI users don't fear",
+        "category": "Web3",
+        "blurb": "How I reduced visual noise in CaveSwap while still exposing the data power users need."
+      }
+    }
+  },
+  "common": {
+    "switchLanguage": "Switch language"
+  }
+}

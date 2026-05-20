@@ -9,6 +9,13 @@ const { y: scrollY } = useWindowScroll()
 const isScrolled = computed(() => scrollY.value > 50)
 const { isIntroComplete } = useIntroAnimation()
 
+// i18n
+const { locale, setLocale, t } = useI18n()
+
+const toggleLocale = () => {
+  setLocale(locale.value === 'en' ? 'es' : 'en')
+}
+
 // Switch to black logo when past Rolls section (approximately when Hero is visible)
 const isPastRolls = computed(() => {
   if (import.meta.server) return false
@@ -25,6 +32,9 @@ const toggleMobileMenu = () => {
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
+
+// Translate nav labels by using the label as a key into the nav namespace
+const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
 </script>
 
 <template>
@@ -79,15 +89,27 @@ const closeMobileMenu = () => {
                 :to="link.to"
                 class="text-base text-muted-foreground hover:text-foreground transition-colors uppercase"
               >
-                {{ link.label }}
+                {{ translateLabel(link.label) }}
               </NuxtLink>
             </li>
           </ul>
         </nav>
 
-        <!-- Right side - CTA Button & Color Mode -->
+        <!-- Right side - Lang toggle, CTA Button & Mobile menu -->
         <div class="flex items-center gap-3">
-          <!-- <ColorModeButton class="hidden sm:flex" /> -->
+          <!-- Language toggle -->
+          <button
+            type="button"
+            class="lang-toggle hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
+            :aria-label="$t('common.switchLanguage')"
+            @click="toggleLocale"
+          >
+            <UIcon
+              name="i-lucide-globe"
+              class="size-3.5"
+            />
+            {{ locale === 'en' ? 'ES' : 'EN' }}
+          </button>
 
           <NuxtLink
             to="#contact"
@@ -101,7 +123,7 @@ const closeMobileMenu = () => {
               />
             </span>
             <span class="text-sm font-semibold text-white uppercase tracking-wide">
-              Hire Me
+              {{ $t('nav.hireMe') }}
             </span>
           </NuxtLink>
 
@@ -140,8 +162,22 @@ const closeMobileMenu = () => {
           class="text-2xl font-medium text-foreground hover:text-primary transition-colors uppercase"
           @click="closeMobileMenu"
         >
-          {{ link.label }}
+          {{ translateLabel(link.label) }}
         </NuxtLink>
+
+        <!-- Mobile language toggle -->
+        <button
+          type="button"
+          class="lang-toggle inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wider cursor-pointer"
+          :aria-label="$t('common.switchLanguage')"
+          @click="toggleLocale"
+        >
+          <UIcon
+            name="i-lucide-globe"
+            class="size-4"
+          />
+          {{ locale === 'en' ? 'Español' : 'English' }}
+        </button>
 
         <!-- Mobile CTA Button -->
         <NuxtLink
@@ -156,7 +192,7 @@ const closeMobileMenu = () => {
             />
           </span>
           <span class="text-sm font-semibold text-white uppercase tracking-wide">
-            Hire Me
+            {{ $t('nav.hireMe') }}
           </span>
         </NuxtLink>
       </nav>
@@ -236,5 +272,28 @@ const closeMobileMenu = () => {
 /* Button transition - smooth in both directions */
 .btn-transition {
   transition: padding 300ms ease-out, border-radius 300ms ease-in-out;
+}
+
+/* Language toggle */
+.lang-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-foreground, #0f172b);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lang-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+:global(.dark) .lang-toggle {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e5e7eb;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+:global(.dark) .lang-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 </style>

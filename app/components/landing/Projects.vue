@@ -11,15 +11,16 @@ const isTruncated = ref<boolean[]>([false, false, false, false])
 // State for mobile click-to-expand
 const expandedCards = ref<boolean[]>([false, false, false, false])
 
+const router = useRouter()
+
 const toggleExpand = (index: number) => {
   // Only toggle on mobile/tablet (below lg breakpoint)
   if (typeof window !== 'undefined' && window.innerWidth < 1024) {
     if (expandedCards.value[index]) {
-      // Already expanded - navigate to project link
+      // Already expanded - navigate to internal case study page
       const project = selfProjects.value[index]
-      const link = project?.links?.preview || project?.links?.figma
-      if (link) {
-        window.open(link, '_blank')
+      if (project?.id) {
+        router.push(`/projects/${project.id}`)
       }
     } else {
       // First tap - expand the text
@@ -32,9 +33,8 @@ const handleCardClick = (index: number) => {
   // Only navigate on desktop (lg and above)
   if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
     const project = selfProjects.value[index]
-    const link = project?.links?.preview || project?.links?.figma
-    if (link) {
-      window.open(link, '_blank')
+    if (project?.id) {
+      router.push(`/projects/${project.id}`)
     }
   }
 }
@@ -83,7 +83,7 @@ onUnmounted(() => {
           :in-view-options="{ once: true }"
         >
           <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
-            Latest Projects
+            {{ $t('projects.latestSection') }}
           </h2>
           <div class="h-[2px] w-[50px] bg-[#a2a2a2] mb-8" />
         </Motion>
@@ -594,7 +594,7 @@ onUnmounted(() => {
             />
           </span>
           <span class="text-lg font-medium text-white">
-            Explore Projects
+            {{ $t('projects.exploreAll') }}
           </span>
         </NuxtLink>
       </Motion>

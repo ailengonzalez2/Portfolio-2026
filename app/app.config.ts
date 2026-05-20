@@ -1,11 +1,13 @@
 export default defineAppConfig({
   global: {
+    // TODO: drop a real profile image at /public/profile.png (square, min 800px)
     picture: {
-      dark: 'https://images.unsplash.com/photo-1701615004837-40d8573b6652?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      light: 'https://images.unsplash.com/photo-1701615004837-40d8573b6652?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      alt: 'Profile picture'
+      dark: '/profile.png',
+      light: '/profile.png',
+      alt: 'Ailen Gonzalez'
     },
-    meetingLink: 'https://cal.com/',
+    // TODO: replace with your real Cal.com booking link
+    meetingLink: 'https://cal.com/ailengonzalez',
     email: 'hey@ailengonzalez.ar',
     available: true
   },
@@ -29,28 +31,28 @@ export default defineAppConfig({
     }
   },
   footer: {
-    credits: `Built with Nuxt UI • © ${new Date().getFullYear()}`,
+    credits: `Built with Nuxt UI • © ${new Date().getFullYear()} Ailen Gonzalez`,
     colorMode: false,
     links: [{
-      'icon': 'i-simple-icons-github',
-      'to': 'https://github.com',
-      'target': '_blank',
-      'aria-label': 'GitHub'
-    }, {
       'icon': 'i-simple-icons-linkedin',
-      'to': 'https://linkedin.com',
+      'to': 'https://www.linkedin.com/in/AilenGonzalez',
       'target': '_blank',
       'aria-label': 'LinkedIn'
     }, {
-      'icon': 'i-simple-icons-x',
-      'to': 'https://x.com',
+      'icon': 'i-simple-icons-github',
+      'to': 'https://github.com/ailengonzalez2',
       'target': '_blank',
-      'aria-label': 'X / Twitter'
+      'aria-label': 'GitHub'
     }, {
-      'icon': 'i-simple-icons-dribbble',
-      'to': 'https://dribbble.com',
+      'icon': 'i-simple-icons-upwork',
+      'to': 'https://www.upwork.com/freelancers/ailengonzalez?mp_source=share',
       'target': '_blank',
-      'aria-label': 'Dribbble'
+      'aria-label': 'Upwork'
+    }, {
+      'icon': 'i-simple-icons-telegram',
+      'to': 'https://t.me/AilenGonzalez',
+      'target': '_blank',
+      'aria-label': 'Telegram'
     }]
   }
 })

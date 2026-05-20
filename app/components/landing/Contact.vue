@@ -20,7 +20,7 @@ const { copy, copied } = useClipboard()
           :in-view-options="{ once: true }"
         >
           <h2 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-medium tracking-wide leading-tight text-left">
-            Got a project in mind?
+            {{ $t('contact.title') }}
           </h2>
         </Motion>
 
@@ -56,7 +56,7 @@ const { copy, copied } = useClipboard()
               v-if="copied"
               class="mt-3 text-sm text-success"
             >
-              Email copied to clipboard!
+              {{ $t('contact.copied') }}
             </p>
           </Transition>
         </Motion>

@@ -1,43 +1,40 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-interface Service {
+const { t, tm, rt } = useI18n()
+
+interface ServiceConfig {
   id: string
-  title: string
-  description: string
+  i18nKey: string
   backgroundImage: string
 }
 
-const services: Service[] = [
-  {
-    id: 'ux-ui',
-    title: 'Product Design',
-    description: 'I design digital products with a focus on clarity, usability, and pixel-perfect interfaces. Every project begins by understanding user needs and carefully planning the product structure to ensure intuitive and meaningful experiences.',
-    backgroundImage: '/projects/pureskin.png'
-  },
-  {
-    id: 'frontend',
-    title: 'Frontend Development',
-    description: 'I build modern, high-quality frontends using the latest web technologies. My focus is clean structure, strong performance, and accessibility—turning design into fast, reliable products that feel seamless to use.',
-    backgroundImage: '/projects/defidashboard.png'
-  },
-  {
-    id: 'ai',
-    title: 'AI Integration',
-    description: 'I integrate AI tools to make products smarter and more efficient—from automating workflows to enhancing user experiences. I also create custom bots that streamline repetitive tasks and improve operational performance through practical, human-centered technology.',
-    backgroundImage: '/projects/ai-integration.webp'
-  }
+const serviceConfigs: ServiceConfig[] = [
+  { id: 'ai-product', i18nKey: 'aiProduct', backgroundImage: '/projects/ai-integration.webp' },
+  { id: 'frontend', i18nKey: 'frontend', backgroundImage: '/projects/defidashboard.png' },
+  { id: 'llm-integration', i18nKey: 'llmIntegration', backgroundImage: '/projects/pureskin.png' },
+  { id: 'web3', i18nKey: 'web3', backgroundImage: '/projects/defidashboard.png' }
 ]
 
-const activeCard = ref<string>('ux-ui')
+const services = computed(() => serviceConfigs.map(c => ({
+  id: c.id,
+  title: t(`services.${c.i18nKey}.title`),
+  description: t(`services.${c.i18nKey}.description`),
+  deliverables: (tm(`services.${c.i18nKey}.deliverables`) as unknown[]).map(d => rt(d as string)),
+  priceFrom: t(`services.${c.i18nKey}.priceFrom`),
+  timeline: t(`services.${c.i18nKey}.timeline`),
+  backgroundImage: c.backgroundImage
+})))
+
+const activeCard = ref<string>('ai-product')
 
 const setActiveCard = (id: string) => {
   activeCard.value = id
 }
 
 const activeBackground = computed(() => {
-  const service = services.find(s => s.id === activeCard.value)
-  return service?.backgroundImage || services[0].backgroundImage
+  const service = services.value.find(s => s.id === activeCard.value)
+  return service?.backgroundImage || services.value[0]?.backgroundImage
 })
 
 // Split text into words for word-by-word animation
@@ -105,7 +102,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                 >
                   <h3
                     class="font-sans text-[24px] tracking-tight text-center leading-tight dark:text-white"
-                    :class="activeCard === 'ux-ui' ? 'text-black' : 'text-white'"
+                    :class="activeCard === 'llm-integration' ? 'text-black' : 'text-white'"
                   >
                     {{ service.title }}
                   </h3>
@@ -131,7 +128,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                   </h3>
 
                   <!-- Description with word-by-word animation -->
-                  <p class="text-[15px] text-[#5a5a5a] dark:text-gray-400 leading-[1.7] grow max-w-[340px] overflow-hidden">
+                  <p class="text-[15px] text-[#5a5a5a] dark:text-gray-400 leading-[1.7] max-w-[340px] overflow-hidden mb-5">
                     <span
                       v-for="(word, index) in splitWords(service.description)"
                       :key="index"
@@ -141,6 +138,35 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                       {{ word }}&nbsp;
                     </span>
                   </p>
+
+                  <!-- Deliverables list -->
+                  <ul class="space-y-1.5 mb-5 grow">
+                    <li
+                      v-for="(item, index) in service.deliverables"
+                      :key="item"
+                      class="stagger-item flex items-center gap-2 text-[13px] text-[#5a5a5a] dark:text-gray-400"
+                      :style="{ transitionDelay: getWordDelay(index, 0.45) }"
+                    >
+                      <UIcon
+                        name="i-lucide-check"
+                        class="size-3.5 text-primary shrink-0"
+                      />
+                      <span>{{ item }}</span>
+                    </li>
+                  </ul>
+
+                  <!-- Price + Timeline anchor -->
+                  <div
+                    class="stagger-item flex items-baseline gap-3 mb-4"
+                    style="transition-delay: 0.65s"
+                  >
+                    <span class="text-[20px] font-semibold text-[#0f172b] dark:text-white tracking-tight">
+                      {{ service.priceFrom }}
+                    </span>
+                    <span class="text-[12px] text-[#62748e] dark:text-gray-500 uppercase tracking-wider">
+                      · {{ service.timeline }}
+                    </span>
+                  </div>
 
                   <!-- Separator and Social Links -->
                   <div class="mt-auto pt-8">

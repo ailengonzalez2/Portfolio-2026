@@ -97,7 +97,7 @@ const certifications = [
         <div class="mb-[66px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <div>
             <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
-              About
+              {{ $t('about.heading') }}
             </h2>
             <div class="h-[2px] w-[50px] bg-[#a2a2a2]" />
           </div>
@@ -109,7 +109,7 @@ const certifications = [
                 name="i-lucide-download"
                 class="size-3.5"
               />
-              <span>Download CV</span>
+              <span>{{ $t('about.downloadCv') }}</span>
             </button>
 
             <a
@@ -122,7 +122,7 @@ const certifications = [
                 name="i-lucide-arrow-up-right"
                 class="size-[22px]"
               />
-              <span>Explore all CV</span>
+              <span>{{ $t('about.exploreCv') }}</span>
             </a>
           </div>
         </div>
@@ -143,10 +143,10 @@ const certifications = [
               class="space-y-5"
             >
               <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
-                Design + Code
+                {{ $t('about.designCode') }}
               </h3>
               <p class="text-primary-custom text-[16px] leading-[26px] tracking-[-0.31px]">
-                I mix solid design principles with practical, efficient development to create clean, responsive, and pixel-perfect interfaces. I take care of the whole process—from early research to prototypes to bringing everything to life with smooth, modern code.
+                {{ $t('about.designCodeBody') }}
               </p>
             </Motion>
 
@@ -159,7 +159,7 @@ const certifications = [
               class="space-y-8"
             >
               <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
-                Work Experience
+                {{ $t('about.workExperience') }}
               </h3>
 
               <div class="space-y-10">
@@ -209,13 +209,13 @@ const certifications = [
               class="space-y-[25px]"
             >
               <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
-                Skills
+                {{ $t('about.skills') }}
               </h3>
 
               <!-- Technical Skills -->
               <div class="space-y-[15px]">
                 <h4 class="text-[#0f172b] dark:text-white text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
-                  Technical
+                  {{ $t('about.technical') }}
                 </h4>
                 <!-- Mobile: 3 rows with flex-wrap -->
                 <div class="flex flex-wrap gap-3 sm:hidden">
@@ -256,24 +256,24 @@ const certifications = [
               <!-- Soft Skills -->
               <div class="space-y-[15px]">
                 <h4 class="text-[#0f172b] dark:text-white text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
-                  Soft
+                  {{ $t('about.soft') }}
                 </h4>
                 <p class="text-primary-custom text-[16px] leading-[26px] tracking-[-0.31px]">
-                  Autonomous work, active listening, attention to detail, clear communication, collaborative mindset, adaptability
+                  {{ $t('about.softBody') }}
                 </p>
               </div>
 
               <!-- Languages -->
               <div class="space-y-4">
                 <h4 class="text-[#0f172b] dark:text-white text-[14px] font-semibold leading-[20px] tracking-[-0.15px]">
-                  Languages
+                  {{ $t('about.languages') }}
                 </h4>
                 <div class="space-y-2">
                   <p class="text-primary-custom text-[14px] leading-[20px] tracking-[-0.15px]">
-                    <span class="font-bold text-[#0f172b] dark:text-white">English:</span> C1 Advanced • Fluent communication
+                    <span class="font-bold text-[#0f172b] dark:text-white">{{ $t('about.english') }}:</span> {{ $t('about.englishLevel') }}
                   </p>
                   <p class="text-primary-custom text-[14px] leading-[20px] tracking-[-0.15px]">
-                    <span class="font-bold text-[#0f172b] dark:text-white">Spanish:</span> Native
+                    <span class="font-bold text-[#0f172b] dark:text-white">{{ $t('about.spanish') }}:</span> {{ $t('about.spanishLevel') }}
                   </p>
                 </div>
               </div>
@@ -288,7 +288,7 @@ const certifications = [
               class="space-y-[15px]"
             >
               <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
-                Latest Certifications
+                {{ $t('about.certifications') }}
               </h3>
 
               <div class="space-y-[10px]">

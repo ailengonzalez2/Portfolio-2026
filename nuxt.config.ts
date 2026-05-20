@@ -6,8 +6,28 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@vueuse/nuxt',
     'nuxt-og-image',
-    'motion-v/nuxt'
+    'motion-v/nuxt',
+    '@nuxtjs/i18n'
   ],
+
+  i18n: {
+    defaultLocale: 'en',
+    strategy: 'no_prefix',
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'es', name: 'Español', file: 'es.json' }
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_locale',
+      redirectOn: 'root',
+      alwaysRedirect: false,
+      fallbackLocale: 'en'
+    },
+    bundle: {
+      optimizeTranslationDirective: false
+    }
+  },
 
   devtools: {
     enabled: true

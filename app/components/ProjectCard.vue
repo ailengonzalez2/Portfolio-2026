@@ -62,7 +62,10 @@ onUnmounted(() => {
   >
     <article class="group h-full flex flex-col bg-white dark:bg-neutral-900 rounded-2xl md:rounded-3xl">
       <!-- Image container -->
-      <div class="relative rounded-[16px] md:rounded-[24px] overflow-hidden aspect-4/3 mb-4 md:mb-5">
+      <NuxtLink
+        :to="`/projects/${project.id}`"
+        class="block relative rounded-[16px] md:rounded-[24px] overflow-hidden aspect-4/3 mb-4 md:mb-5"
+      >
         <NuxtImg
           :src="project.image"
           :alt="project.title"
@@ -76,14 +79,17 @@ onUnmounted(() => {
             {{ project.tags?.[0] }}
           </span>
         </div>
-      </div>
+      </NuxtLink>
 
       <!-- Content -->
       <div class="flex flex-col grow">
         <div class="flex items-start justify-between gap-2 md:gap-3 mb-2 md:mb-3 min-h-[24px] md:min-h-[28px]">
-          <h3 class="text-sm md:text-[15px] font-bold text-[#0f172b] dark:text-white leading-snug tracking-tight flex-1">
+          <NuxtLink
+            :to="`/projects/${project.id}`"
+            class="text-sm md:text-[15px] font-bold text-[#0f172b] dark:text-white leading-snug tracking-tight flex-1 hover:text-primary transition-colors"
+          >
             {{ project.title }}
-          </h3>
+          </NuxtLink>
           <span class="text-xs text-[#62748e] dark:text-neutral-500 font-medium whitespace-nowrap shrink-0">
             {{ project.date }}
           </span>
@@ -177,7 +183,10 @@ onUnmounted(() => {
   <!-- Without animation -->
   <article v-else class="group h-full flex flex-col bg-white dark:bg-neutral-900 rounded-2xl md:rounded-3xl">
       <!-- Image container -->
-      <div class="relative rounded-[16px] md:rounded-[24px] overflow-hidden aspect-4/3 mb-4 md:mb-5">
+      <NuxtLink
+        :to="`/projects/${project.id}`"
+        class="block relative rounded-[16px] md:rounded-[24px] overflow-hidden aspect-4/3 mb-4 md:mb-5"
+      >
         <NuxtImg
           :src="project.image"
           :alt="project.title"
@@ -191,14 +200,17 @@ onUnmounted(() => {
             {{ project.tags?.[0] }}
           </span>
         </div>
-      </div>
+      </NuxtLink>
 
       <!-- Content -->
       <div class="flex flex-col grow">
         <div class="flex items-start justify-between gap-2 md:gap-3 mb-2 md:mb-3 min-h-[24px] md:min-h-[28px]">
-          <h3 class="text-sm md:text-[15px] font-bold text-[#0f172b] dark:text-white leading-snug tracking-tight flex-1">
+          <NuxtLink
+            :to="`/projects/${project.id}`"
+            class="text-sm md:text-[15px] font-bold text-[#0f172b] dark:text-white leading-snug tracking-tight flex-1 hover:text-primary transition-colors"
+          >
             {{ project.title }}
-          </h3>
+          </NuxtLink>
           <span class="text-xs text-[#62748e] dark:text-neutral-500 font-medium whitespace-nowrap shrink-0">
             {{ project.date }}
           </span>

@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
+
+const { t } = useI18n()
 
 const blockquoteRef = ref<HTMLElement | null>(null)
 const charRefs = ref<HTMLElement[]>([])
 const charColors = ref<string[]>([])
 const quoteComplete = ref(false)
 
-const text = "Recently, I've been diving deeper into the blockchain ecosystem, building wallet integrations and decentralized UI flows."
+const text = computed(() => t('web3Quote.quote'))
 
-// Phrases to highlight with gradient
-const highlightPhrases = ['wallet integrations and decentralized UI flows']
+// Phrases to highlight with gradient (locale-aware)
+const highlightPhrases = computed(() => [t('web3Quote.highlight')])
 
 // Gradient colors: orange → pink → purple
 const gradientColors = [
@@ -25,8 +27,8 @@ interface HighlightInfo {
 
 const getHighlightedInfo = (): Map<number, HighlightInfo> => {
   const info = new Map<number, HighlightInfo>()
-  highlightPhrases.forEach(phrase => {
-    const startIndex = text.indexOf(phrase)
+  highlightPhrases.value.forEach(phrase => {
+    const startIndex = text.value.indexOf(phrase)
     if (startIndex !== -1) {
       for (let i = 0; i < phrase.length; i++) {
         const charIndex = startIndex + i
@@ -38,7 +40,7 @@ const getHighlightedInfo = (): Map<number, HighlightInfo> => {
   return info
 }
 
-const highlightedInfo = getHighlightedInfo()
+const highlightedInfo = computed(() => getHighlightedInfo())
 
 // Interpolate between gradient colors based on position (0 to 1)
 const getGradientColor = (position: number): { r: number, g: number, b: number } => {
@@ -63,7 +65,7 @@ const getGradientColor = (position: number): { r: number, g: number, b: number }
 
 // Initialize character colors
 const initializeColors = () => {
-  charColors.value = Array(text.length).fill('rgb(200, 210, 220)')
+  charColors.value = Array(text.value.length).fill('rgb(200, 210, 220)')
 }
 
 const handleScroll = () => {
@@ -77,9 +79,9 @@ const handleScroll = () => {
   const scrollProgress = Math.max(0, Math.min(1, 1 - (blockquoteTop / (windowHeight * 1.1))))
 
   // Update each character's color based on its index in the text (linear flow)
-  const newColors = text.split('').map((char, index) => {
+  const newColors = text.value.split('').map((char, index) => {
     // Calculate position threshold based on character index (0 to 1)
-    const charPosition = index / text.length
+    const charPosition = index / text.value.length
 
     // Character becomes dark when scroll progress reaches its position
     const threshold = charPosition
@@ -88,7 +90,7 @@ const handleScroll = () => {
     const charProgress = scrollProgress > threshold ? 1 : 0
 
     // Check if this character should be highlighted with gradient
-    const highlightInfo = highlightedInfo.get(index)
+    const highlightInfo = highlightedInfo.value.get(index)
 
     if (highlightInfo) {
       // Get the target gradient color based on position in phrase
@@ -128,6 +130,13 @@ onMounted(async () => {
   handleScroll()
 })
 
+// Re-initialize when locale changes (text length / highlight indices may change)
+watch(text, async () => {
+  initializeColors()
+  await nextTick()
+  handleScroll()
+})
+
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
@@ -153,7 +162,7 @@ onUnmounted(() => {
           >
             <span
               v-for="(char, index) in text.split('')"
-              :key="index"
+              :key="`${index}-${char}`"
               :ref="(el) => registerCharRef(el as HTMLElement | null, index)"
               :style="{ color: charColors[index] || 'rgb(200, 210, 220)', fontWeight: highlightedInfo.has(index) ? 500 : 400, fontStyle: highlightedInfo.has(index) ? 'italic' : 'normal' }"
               class="transition-colors duration-50"
@@ -173,7 +182,7 @@ onUnmounted(() => {
         >
           <div class="flex items-start justify-end gap-4">
             <p class="text-muted text-base sm:text-lg max-w-xl leading-relaxed">
-              I focus on crafting clear, intuitive Web3 experiences with tools like Wagmi, Viem, and Web3Modal. From DeFi dashboards to NFT marketplaces and wallet applications, I'm always excited to collaborate on innovative ideas and projects.
+              {{ $t('web3Quote.context') }}
             </p>
           </div>
         </Motion>

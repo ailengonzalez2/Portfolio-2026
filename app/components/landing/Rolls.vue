@@ -33,31 +33,31 @@ const splitOpacity = useTransform(scrollYProgress, [0, 0.55, 0.65], [1, 1, 0])
       >
         <div class="absolute inset-0 flex items-center justify-center">
           <div class="max-w-6xl w-full px-6 sm:px-8 lg:px-12 mx-auto">
-            <!-- Product -->
+            <!-- AI -->
             <div class="pl-0 sm:pl-4 lg:pl-8">
+              <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
+                AI
+              </h2>
+            </div>
+
+            <!-- Product -->
+            <div class="pl-12 sm:pl-24 lg:pl-40 xl:pl-56">
               <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
                 Product
               </h2>
             </div>
 
-            <!-- Designer -->
-            <div class="pl-12 sm:pl-24 lg:pl-40 xl:pl-56">
-              <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
-                Designer
-              </h2>
-            </div>
-
-            <!-- Frontend -->
+            <!-- Engineer -->
             <div class="pl-4 sm:pl-12 lg:pl-20 mt-2 sm:mt-4">
               <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
-                Frontend
+                Engineer
               </h2>
             </div>
 
-            <!-- Developer -->
+            <!-- + Frontend -->
             <div class="pl-20 sm:pl-32 lg:pl-48 xl:pl-64">
               <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
-                Developer
+                + Frontend
               </h2>
             </div>
           </div>
@@ -72,31 +72,31 @@ const splitOpacity = useTransform(scrollYProgress, [0, 0.55, 0.65], [1, 1, 0])
       >
         <div class="absolute inset-0 flex items-center justify-center">
           <div class="max-w-6xl w-full px-6 sm:px-8 lg:px-12 mx-auto">
-            <!-- Product -->
+            <!-- AI -->
             <div class="pl-0 sm:pl-4 lg:pl-8">
+              <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
+                AI
+              </h2>
+            </div>
+
+            <!-- Product -->
+            <div class="pl-12 sm:pl-24 lg:pl-40 xl:pl-56">
               <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
                 Product
               </h2>
             </div>
 
-            <!-- Designer -->
-            <div class="pl-12 sm:pl-24 lg:pl-40 xl:pl-56">
-              <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
-                Designer
-              </h2>
-            </div>
-
-            <!-- Frontend -->
+            <!-- Engineer -->
             <div class="pl-4 sm:pl-12 lg:pl-20 mt-2 sm:mt-4">
               <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
-                Frontend
+                Engineer
               </h2>
             </div>
 
-            <!-- Developer -->
+            <!-- + Frontend -->
             <div class="pl-20 sm:pl-32 lg:pl-48 xl:pl-64">
               <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
-                Developer
+                + Frontend
               </h2>
             </div>
           </div>

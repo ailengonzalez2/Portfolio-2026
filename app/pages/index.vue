@@ -1,14 +1,11 @@
 <script setup lang="ts">
-const seo = {
-  title: 'Ailen Gonzalez - Product Designer & Frontend Developer',
-  description: 'Creating digital experiences. Product designer and frontend developer specializing in user-centered digital products.'
-}
+const { t } = useI18n()
 
 useSeoMeta({
-  title: seo.title,
-  ogTitle: seo.title,
-  description: seo.description,
-  ogDescription: seo.description
+  title: () => `Ailen Gonzalez — ${t('hero.title')}`,
+  ogTitle: () => `Ailen Gonzalez — ${t('hero.title')}`,
+  description: () => t('hero.subtitle'),
+  ogDescription: () => t('hero.subtitle')
 })
 </script>
 
