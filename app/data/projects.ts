@@ -46,6 +46,39 @@ export interface Project {
  */
 export const projects: Project[] = [
   {
+    id: 'codecave',
+    title: 'codeCave — Studio Site',
+    description: 'The site for codeCave, a Córdoba-based product studio. A distinctive terminal-inspired identity with a neon-on-dark aesthetic, built end to end in Nuxt — "from idea to production".',
+    image: '/projects/codecave.png',
+    tags: ['Frontend Development', 'Web Design', 'Branding'],
+    date: '2025',
+    links: {
+      preview: 'https://codecave.ar'
+    }
+  },
+  {
+    id: 'habito',
+    title: 'Habito — AI Task Management',
+    description: 'Task management for the AI era, where humans and AI agents share one workspace and coordinate as real teammates. Product design and frontend for a clean, focused SaaS interface.',
+    image: '/projects/habito.png',
+    tags: ['Product Design', 'Web App', 'AI'],
+    date: '2025',
+    links: {
+      preview: 'https://habito.ar'
+    }
+  },
+  {
+    id: 'docta',
+    title: 'Docta — Córdoba Culture Agenda',
+    description: 'A hand-curated cultural agenda for Córdoba — concerts, theatre, festivals and nightlife, refreshed daily. An editorial, print-inspired design that makes browsing what to do feel like reading a magazine.',
+    image: '/projects/docta.jpg',
+    tags: ['Web Design', 'Frontend Development', 'Editorial'],
+    date: '2025',
+    links: {
+      preview: 'https://docta.ar'
+    }
+  },
+  {
     id: 'defi-dashboard',
     title: 'CaveSwap — DeFi Dashboard',
     description: 'A shipped DeFi token-swap app with a clean, minimal UI. Built end-to-end: design, Vue/Nuxt frontend, wallet integration with Wagmi/Viem/Reown, and Railway deployment.',
