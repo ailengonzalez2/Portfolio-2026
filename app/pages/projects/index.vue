@@ -11,27 +11,6 @@ useSeoMeta({
   description: () => t('projects.pageIntro'),
   ogDescription: () => t('projects.pageIntro')
 })
-
-// Group projects into rows of 3 for sticky effect
-const projectRows = computed(() => {
-  const rows = []
-  for (let i = 0; i < projects.length; i += 3) {
-    rows.push(projects.slice(i, i + 3))
-  }
-  return rows
-})
-
-// Disable sticky scroll on mobile for better UX
-const isMobile = ref(false)
-
-onMounted(() => {
-  const checkMobile = () => {
-    isMobile.value = window.innerWidth < 768
-  }
-  checkMobile()
-  window.addEventListener('resize', checkMobile)
-  onUnmounted(() => window.removeEventListener('resize', checkMobile))
-})
 </script>
 
 <template>
@@ -60,35 +39,16 @@ onMounted(() => {
           </p>
         </Motion>
 
-        <!-- Sticky Scroll Projects (disabled on mobile) -->
-        <div class="flex flex-col gap-6 md:gap-0">
-          <template v-for="(row, rowIndex) in projectRows" :key="rowIndex">
-            <div
-              :class="{ 'md:sticky': !isMobile }"
-              :style="isMobile ? {} : {
-                top: '160px',
-                zIndex: rowIndex + 1,
-                marginBottom: rowIndex < projectRows.length - 1 ? '25vh' : '0'
-              }"
-            >
-              <Motion
-                :initial="{ opacity: 0, y: 40 }"
-                :while-in-view="{ opacity: 1, y: 0 }"
-                :transition="{ duration: 0.6, delay: 0.1 }"
-                :in-view-options="{ once: true, amount: 0.2 }"
-                class="pt-4 pb-6 md:pt-8 md:pb-12"
-              >
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
-                  <template v-for="project in row" :key="project.id">
-                    <ProjectCard :project="project" no-animation />
-                  </template>
-                </div>
-              </Motion>
-            </div>
-          </template>
+        <!-- Project grid: two cards per row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          <ProjectCard
+            v-for="project in projects"
+            :key="project.id"
+            :project="project"
+            no-animation
+          />
         </div>
-
-              </div>
+      </div>
     </section>
   </UPage>
 </template>
