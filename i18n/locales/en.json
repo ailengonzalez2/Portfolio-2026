@@ -9,6 +9,7 @@
   },
   "hero": {
     "available": "Available for work",
+    "spotsAvailable": "2 spots available",
     "title": "AI Product Engineer",
     "subtitle": "I design and ship user-facing AI features end to end — chat UIs, streaming, tool calls, RAG-backed flows.",
     "bookCall": "Book a call",

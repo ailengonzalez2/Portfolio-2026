@@ -9,6 +9,7 @@
   },
   "hero": {
     "available": "Disponible para nuevos proyectos",
+    "spotsAvailable": "2 lugares disponibles",
     "title": "AI Product Engineer",
     "subtitle": "Diseño y construyo features de IA de punta a punta — interfaces de chat, streaming, tool calls y flujos con RAG.",
     "bookCall": "Agendar una llamada",
