@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Motion, useScroll, useTransform } from 'motion-v'
 import { ref } from 'vue'
+import { projects } from '~/data/projects'
 
 const { global } = useAppConfig()
 
@@ -14,28 +15,34 @@ const { scrollYProgress } = useScroll({
 })
 
 // Hero content animations - appear during the split (0.15 to 0.5)
-const contentOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1])
-const contentY = useTransform(scrollYProgress, [0.15, 0.4], [60, 0])
+const badgeOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1])
+const badgeY = useTransform(scrollYProgress, [0.15, 0.4], [-30, 0])
 
-// Staggered elements
-const ctaOpacity = useTransform(scrollYProgress, [0.25, 0.45], [0, 1])
-const ctaY = useTransform(scrollYProgress, [0.25, 0.5], [40, 0])
+const showcaseOpacity = useTransform(scrollYProgress, [0.2, 0.45], [0, 1])
+const showcaseY = useTransform(scrollYProgress, [0.2, 0.5], [40, 0])
 
-const carouselOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1])
-const carouselY = useTransform(scrollYProgress, [0.3, 0.55], [40, 0])
+const ctaOpacity = useTransform(scrollYProgress, [0.35, 0.55], [0, 1])
+const ctaY = useTransform(scrollYProgress, [0.35, 0.6], [40, 0])
 
-const techLogos = [
-  { icon: '/tech-icons/figma-color.svg', label: 'Figma' },
-  { icon: '/tech-icons/vue-color.svg', label: 'Vue' },
-  { icon: '/tech-icons/nuxt.svg', label: 'Nuxt' },
-  { icon: '/tech-icons/tailwind-color.svg', label: 'Tailwind' },
-  { icon: '/tech-icons/javascript-color.svg', label: 'JavaScript' },
-  { icon: '/tech-icons/claude-color.png', label: 'Claude' },
-  { icon: '/tech-icons/copilot-color.png', label: 'GitHub Copilot' },
-  { icon: '/tech-icons/n8n.svg', label: 'n8n' },
-  { icon: '/tech-icons/ethereum-color.png', label: 'Ethereum' },
-  { icon: '/tech-icons/github-color.svg', label: 'GitHub' }
-]
+// Vertical project columns spanning the full width. Each column draws a
+// different rotation of the project list (so adjacent columns are NOT
+// aligned) and scrolls at its own speed/direction, looping infinitely.
+const COLUMN_DIRECTIONS = ['up', 'down', 'up', 'down', 'up'] as const
+const COLUMN_DURATIONS = ['34s', '27s', '40s', '24s', '31s']
+
+const columns = COLUMN_DIRECTIONS.map((direction, i) => {
+  const start = (i * 2) % projects.length
+  const items = Array.from(
+    { length: 5 },
+    (_, k) => projects[(start + k) % projects.length]
+  )
+  return {
+    direction,
+    duration: COLUMN_DURATIONS[i],
+    // Duplicate the slice for a seamless translateY(-50%) loop
+    loop: [...items, ...items]
+  }
+})
 </script>
 
 <template>
@@ -45,129 +52,139 @@ const techLogos = [
     class="absolute inset-0 h-[200vh] z-10"
   >
     <!-- Sticky Hero content - revealed during Rolls split -->
-    <section class="sticky top-0 h-screen flex flex-col justify-center bg-white dark:bg-[#0a0a0a] overflow-hidden">
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <!-- Availability + Headline group -->
-        <Motion
-          :style="{ opacity: contentOpacity, y: contentY }"
-          class="flex flex-col items-end"
-        >
-          <!-- Available for work pill -->
-          <div
-            v-if="global.available"
-            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/60 dark:border-emerald-800/40 mb-5 sm:mb-6"
-          >
-            <span class="relative flex size-2">
-              <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-              <span class="relative inline-flex size-2 rounded-full bg-emerald-500" />
-            </span>
-            <span class="text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-300 tracking-wide">
-              {{ $t('hero.available') }}
-            </span>
-          </div>
+    <section class="sticky top-0 h-screen flex flex-col items-center justify-center bg-white dark:bg-[#0a0a0a] overflow-hidden">
+      <!-- Hidden heading kept for SEO / accessibility (banner is visual-only) -->
+      <h1 class="sr-only">
+        Ailen Gonzalez — AI Product Engineer
+      </h1>
 
-          <!-- Main Headline -->
-          <h1 class="text-4xl sm:text-6xl lg:text-7xl xl:text-[120px] font-medium tracking-tight leading-[1.05] text-primary-custom dark:text-gray-200 uppercase text-right">
-            AI Product <br>
-            Engineer
-          </h1>
+      <!-- Available for work pill (top) -->
+      <Motion
+        v-if="global.available"
+        :style="{ opacity: badgeOpacity, y: badgeY }"
+        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/60 dark:border-emerald-800/40 mb-6 sm:mb-8"
+      >
+        <span class="relative flex size-2">
+          <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+          <span class="relative inline-flex size-2 rounded-full bg-emerald-500" />
+        </span>
+        <span class="text-xs sm:text-sm font-medium text-emerald-700 dark:text-emerald-300 tracking-wide">
+          {{ $t('hero.available') }}
+        </span>
+      </Motion>
 
-          <!-- Subtitle / positioning line -->
-          <p class="mt-5 sm:mt-6 max-w-md sm:max-w-lg lg:max-w-xl text-right text-sm sm:text-base lg:text-lg text-[#5a5a5a] dark:text-gray-400 leading-relaxed">
-            {{ $t('hero.subtitle') }}
-          </p>
-        </Motion>
-
-        <!-- CTAs -->
-        <Motion
-          :style="{ opacity: ctaOpacity, y: ctaY }"
-          class="mt-6 sm:mt-8 flex justify-end items-center gap-3"
-        >
-          <UButton
-            :to="global.meetingLink"
-            target="_blank"
-            size="lg"
-            class="btn-gradient text-white font-medium rounded-full px-6"
-          >
-            {{ $t('hero.bookCall') }}
-            <template #trailing>
-              <UIcon
-                name="i-lucide-arrow-up-right"
-                class="size-4"
-              />
-            </template>
-          </UButton>
-
-          <UButton
-            to="/#projects"
-            variant="outline"
-            color="neutral"
-            size="lg"
-            class="rounded-full px-6"
-          >
-            {{ $t('hero.seeWork') }}
-          </UButton>
-        </Motion>
-
-        <!-- Tech Stack Icons Carousel -->
-        <Motion
-          :style="{ opacity: carouselOpacity, y: carouselY }"
-          class="mt-8 sm:mt-10 lg:mt-12"
-        >
-          <div class="relative overflow-hidden max-w-[240px] sm:max-w-[450px] lg:max-w-[700px] ml-auto mask-gradient">
-            <div class="flex items-center animate-marquee w-max">
-              <div class="flex items-center gap-1.5 sm:gap-2.5 pr-1.5 sm:pr-2.5">
+      <!-- Full-width vertical project columns -->
+      <Motion
+        :style="{ opacity: showcaseOpacity, y: showcaseY }"
+        class="w-screen"
+      >
+        <div class="mask-vertical h-[46vh] sm:h-[56vh] lg:h-[64vh] overflow-hidden px-3 sm:px-4">
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 h-full">
+            <div
+              v-for="(col, i) in columns"
+              :key="i"
+              class="overflow-hidden"
+              :class="{ 'hidden sm:block': i === 2, 'hidden lg:block': i > 2 }"
+            >
+              <div
+                class="flex flex-col gap-3 sm:gap-4 will-change-transform"
+                :class="col.direction === 'up' ? 'animate-scroll-up' : 'animate-scroll-down'"
+                :style="{ animationDuration: col.duration }"
+              >
                 <div
-                  v-for="tech in techLogos"
-                  :key="tech.label"
-                  class="flex items-center justify-center size-10 sm:size-12 lg:size-14 rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shrink-0 p-1.5 sm:p-2"
-                  :title="tech.label"
+                  v-for="(project, idx) in col.loop"
+                  :key="`${i}-${idx}`"
+                  class="shrink-0 aspect-4/3 rounded-2xl overflow-hidden ring-1 ring-black/5 shadow-sm"
                 >
-                  <img
-                    :src="tech.icon"
-                    :alt="tech.label"
-                    class="w-full h-full object-contain"
-                  >
-                </div>
-              </div>
-              <div class="flex items-center gap-1.5 sm:gap-2.5 pr-1.5 sm:pr-2.5">
-                <div
-                  v-for="tech in techLogos"
-                  :key="`${tech.label}-dup`"
-                  class="flex items-center justify-center size-10 sm:size-12 lg:size-14 rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shrink-0 p-1.5 sm:p-2"
-                  :title="tech.label"
-                >
-                  <img
-                    :src="tech.icon"
-                    :alt="tech.label"
-                    class="w-full h-full object-contain"
-                  >
+                  <NuxtImg
+                    :src="project.image"
+                    :alt="project.title"
+                    class="size-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
           </div>
-        </Motion>
-      </div>
+        </div>
+      </Motion>
+
+      <!-- CTAs (under the animation) -->
+      <Motion
+        :style="{ opacity: ctaOpacity, y: ctaY }"
+        class="mt-8 sm:mt-10 flex justify-center items-center gap-3"
+      >
+        <UButton
+          :to="global.meetingLink"
+          target="_blank"
+          size="lg"
+          class="btn-gradient text-white font-medium rounded-full px-6"
+        >
+          {{ $t('hero.bookCall') }}
+          <template #trailing>
+            <UIcon
+              name="i-lucide-arrow-up-right"
+              class="size-4"
+            />
+          </template>
+        </UButton>
+
+        <UButton
+          to="/#projects"
+          variant="outline"
+          color="neutral"
+          size="lg"
+          class="rounded-full px-6"
+        >
+          {{ $t('hero.seeWork') }}
+        </UButton>
+      </Motion>
     </section>
   </div>
 </template>
 
 <style scoped>
-.mask-gradient {
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+.mask-vertical {
+  mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
 }
 
-.animate-marquee {
-  animation: marquee 15s linear infinite;
+.animate-scroll-up,
+.animate-scroll-down {
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
-@keyframes marquee {
+.animate-scroll-up {
+  animation-name: scroll-up;
+}
+
+.animate-scroll-down {
+  animation-name: scroll-down;
+}
+
+@keyframes scroll-up {
   0% {
-    transform: translateX(0);
+    transform: translateY(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-up,
+  .animate-scroll-down {
+    animation: none;
   }
 }
 </style>
