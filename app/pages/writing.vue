@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ colorMode: 'light' })
+
 const { t } = useI18n()
 
 useSeoMeta({

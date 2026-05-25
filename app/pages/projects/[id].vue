@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { projects } from '~/data/projects'
 
+definePageMeta({ colorMode: 'light' })
+
 const route = useRoute()
 const id = computed(() => route.params.id as string)
 

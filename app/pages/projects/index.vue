@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { projects } from '~/data/projects'
 
+definePageMeta({ colorMode: 'light' })
+
 const { t } = useI18n()
 
 useSeoMeta({
