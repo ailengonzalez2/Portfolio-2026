@@ -87,7 +87,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
             >
               <NuxtLink
                 :to="link.to"
-                class="text-base text-muted-foreground hover:text-foreground transition-colors uppercase"
+                class="text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors uppercase"
               >
                 {{ translateLabel(link.label) }}
               </NuxtLink>

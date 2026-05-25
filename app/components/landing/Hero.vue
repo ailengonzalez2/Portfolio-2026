@@ -69,7 +69,7 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
     class="absolute inset-0 h-[200vh] z-10"
   >
     <!-- Sticky Hero content - revealed during Rolls split -->
-    <section class="sticky top-0 h-screen flex flex-col items-center justify-center bg-white dark:bg-[#0a0a0a] overflow-hidden pt-24 sm:pt-28 pb-8">
+    <section class="sticky top-0 h-screen flex flex-col items-center justify-start bg-white dark:bg-[#0a0a0a] overflow-hidden pt-28 sm:pt-32 lg:pt-36 pb-8">
       <!-- Hidden heading kept for SEO / accessibility (banner is visual-only) -->
       <h1 class="sr-only">
         Ailen Gonzalez — AI Product Engineer
@@ -105,36 +105,49 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
         </div>
       </Motion>
 
-      <!-- 2. Faded tech-logo marquee (infinite scroll) -->
+      <!-- 2. Faded tech-logo marquee (infinite scroll, full width) -->
       <Motion
         :style="{ opacity: techOpacity, y: techY }"
-        class="w-full max-w-2xl sm:max-w-3xl lg:max-w-5xl px-4 mb-6 sm:mb-8"
+        class="w-screen mb-6 sm:mb-8"
       >
         <div class="relative overflow-hidden mask-horizontal">
           <div class="flex items-center animate-marquee w-max hover:[animation-play-state:paused]">
             <!-- First set -->
-            <div class="flex items-center gap-7 sm:gap-9 lg:gap-12 pr-7 sm:pr-9 lg:pr-12">
-              <img
+            <div class="flex items-center gap-8 sm:gap-10 lg:gap-14 pr-8 sm:pr-10 lg:pr-14">
+              <div
                 v-for="tech in techLogos"
                 :key="tech.label"
-                :src="tech.icon"
-                :alt="tech.label"
-                :title="tech.label"
-                class="h-6 sm:h-7 lg:h-8 w-auto object-contain shrink-0 grayscale opacity-40 transition duration-300 hover:grayscale-0 hover:opacity-100"
+                class="flex items-center gap-2 shrink-0 grayscale opacity-40 transition duration-300 hover:grayscale-0 hover:opacity-100"
               >
+                <img
+                  :src="tech.icon"
+                  :alt="tech.label"
+                  class="h-4 sm:h-5 w-auto object-contain"
+                >
+                <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 whitespace-nowrap">
+                  {{ tech.label }}
+                </span>
+              </div>
             </div>
             <!-- Duplicated set for seamless loop -->
             <div
-              class="flex items-center gap-7 sm:gap-9 lg:gap-12 pr-7 sm:pr-9 lg:pr-12"
+              class="flex items-center gap-8 sm:gap-10 lg:gap-14 pr-8 sm:pr-10 lg:pr-14"
               aria-hidden="true"
             >
-              <img
+              <div
                 v-for="tech in techLogos"
                 :key="`${tech.label}-dup`"
-                :src="tech.icon"
-                :alt="tech.label"
-                class="h-6 sm:h-7 lg:h-8 w-auto object-contain shrink-0 grayscale opacity-40 transition duration-300 hover:grayscale-0 hover:opacity-100"
+                class="flex items-center gap-2 shrink-0 grayscale opacity-40 transition duration-300 hover:grayscale-0 hover:opacity-100"
               >
+                <img
+                  :src="tech.icon"
+                  :alt="tech.label"
+                  class="h-4 sm:h-5 w-auto object-contain"
+                >
+                <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 whitespace-nowrap">
+                  {{ tech.label }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -145,7 +158,7 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
         :style="{ opacity: showcaseOpacity, y: showcaseY }"
         class="w-screen"
       >
-        <div class="mask-vertical h-[38vh] sm:h-[48vh] lg:h-[54vh] overflow-hidden px-3 sm:px-4">
+        <div class="mask-vertical h-[52vh] sm:h-[62vh] lg:h-[68vh] overflow-hidden px-3 sm:px-4">
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 h-full">
             <div
               v-for="(col, i) in columns"
