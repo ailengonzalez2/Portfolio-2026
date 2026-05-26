@@ -84,7 +84,7 @@ const certifications = [
 <template>
   <section
     id="about"
-    class="pt-28 sm:pt-36 pb-10 sm:pb-14 bg-[#f8fafc] dark:bg-[#0a0a0a]"
+    class="pt-6 sm:pt-10 pb-10 sm:pb-14 bg-[#f8fafc] dark:bg-[#0a0a0a]"
   >
     <div class="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-[155px]">
       <!-- Section Header -->

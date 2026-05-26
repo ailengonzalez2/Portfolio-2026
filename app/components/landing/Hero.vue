@@ -18,28 +18,11 @@ const { scrollYProgress } = useScroll({
 const badgeOpacity = useTransform(scrollYProgress, [0.15, 0.33], [0, 1])
 const badgeY = useTransform(scrollYProgress, [0.15, 0.38], [-30, 0])
 
-const techOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1])
-const techY = useTransform(scrollYProgress, [0.2, 0.42], [-20, 0])
-
 const showcaseOpacity = useTransform(scrollYProgress, [0.25, 0.5], [0, 1])
 const showcaseY = useTransform(scrollYProgress, [0.25, 0.52], [40, 0])
 
 const ctaOpacity = useTransform(scrollYProgress, [0.38, 0.58], [0, 1])
 const ctaY = useTransform(scrollYProgress, [0.38, 0.62], [40, 0])
-
-// Tech stack icons for the horizontal carousel
-const techLogos = [
-  { icon: '/tech-icons/figma-color.svg', label: 'Figma' },
-  { icon: '/tech-icons/vue-color.svg', label: 'Vue' },
-  { icon: '/tech-icons/nuxt.svg', label: 'Nuxt' },
-  { icon: '/tech-icons/tailwind-color.svg', label: 'Tailwind' },
-  { icon: '/tech-icons/javascript-color.svg', label: 'JavaScript' },
-  { icon: '/tech-icons/claude-color.png', label: 'Claude' },
-  { icon: '/tech-icons/copilot-color.png', label: 'GitHub Copilot' },
-  { icon: '/tech-icons/n8n.svg', label: 'n8n' },
-  { icon: '/tech-icons/ethereum-color.png', label: 'Ethereum' },
-  { icon: '/tech-icons/github-color.svg', label: 'GitHub' }
-]
 
 // Vertical project columns spanning the full width. Each column draws a
 // different rotation of the project list (so adjacent columns are NOT
@@ -105,55 +88,7 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
         </div>
       </Motion>
 
-      <!-- 2. Faded tech-logo marquee (infinite scroll, full width) -->
-      <Motion
-        :style="{ opacity: techOpacity, y: techY }"
-        class="w-screen mb-6 sm:mb-8"
-      >
-        <div class="relative overflow-hidden mask-horizontal">
-          <div class="flex items-center animate-marquee w-max hover:[animation-play-state:paused]">
-            <!-- First set -->
-            <div class="flex items-center gap-8 sm:gap-10 lg:gap-14 pr-8 sm:pr-10 lg:pr-14">
-              <div
-                v-for="tech in techLogos"
-                :key="tech.label"
-                class="flex items-center gap-2 shrink-0 grayscale opacity-40 transition duration-300 hover:grayscale-0 hover:opacity-100"
-              >
-                <img
-                  :src="tech.icon"
-                  :alt="tech.label"
-                  class="h-4 sm:h-5 w-auto object-contain"
-                >
-                <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 whitespace-nowrap">
-                  {{ tech.label }}
-                </span>
-              </div>
-            </div>
-            <!-- Duplicated set for seamless loop -->
-            <div
-              class="flex items-center gap-8 sm:gap-10 lg:gap-14 pr-8 sm:pr-10 lg:pr-14"
-              aria-hidden="true"
-            >
-              <div
-                v-for="tech in techLogos"
-                :key="`${tech.label}-dup`"
-                class="flex items-center gap-2 shrink-0 grayscale opacity-40 transition duration-300 hover:grayscale-0 hover:opacity-100"
-              >
-                <img
-                  :src="tech.icon"
-                  :alt="tech.label"
-                  class="h-4 sm:h-5 w-auto object-contain"
-                >
-                <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 whitespace-nowrap">
-                  {{ tech.label }}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Motion>
-
-      <!-- 3. Full-width vertical project columns -->
+      <!-- 2. Full-width vertical project columns -->
       <Motion
         :style="{ opacity: showcaseOpacity, y: showcaseY }"
         class="w-screen"
@@ -229,25 +164,6 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
 }
 
-.mask-horizontal {
-  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-}
-
-/* Horizontal tech carousel */
-.animate-marquee {
-  animation: marquee 22s linear infinite;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 /* Vertical project columns */
 .animate-scroll-up,
 .animate-scroll-down {
@@ -282,7 +198,6 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
   .animate-scroll-up,
   .animate-scroll-down {
     animation: none;

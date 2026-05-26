@@ -13,6 +13,23 @@ useSeoMeta({
 
 <template>
   <UPage>
+    <section class="pt-28 sm:pt-36 pb-2 bg-[#f8fafc] dark:bg-[#0a0a0a]">
+      <Motion
+        :initial="{ opacity: 0, y: 20 }"
+        :while-in-view="{ opacity: 1, y: 0 }"
+        :transition="{ duration: 0.5 }"
+        :in-view-options="{ once: true }"
+      >
+        <div class="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-[155px]">
+          <h1 class="max-w-4xl text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-[1.05] text-[#0f172b] dark:text-white">
+            {{ $t('about.pageTitle') }}
+          </h1>
+        </div>
+
+        <!-- Tech stack marquee (moved here from the home hero) -->
+        <TechMarquee class="mt-8 sm:mt-10" />
+      </Motion>
+    </section>
     <LandingAboutMe />
   </UPage>
 </template>
