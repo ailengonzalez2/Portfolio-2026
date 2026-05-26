@@ -11,7 +11,7 @@ export const navLinks: NavigationMenuItem[] = [{
   to: '/writing'
 }, {
   label: 'about',
-  to: '/#about'
+  to: '/about'
 }, {
   label: 'contact',
   to: '/#contact'

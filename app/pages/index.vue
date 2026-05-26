@@ -20,7 +20,6 @@ useSeoMeta({
     </div>
     <LandingProjects />
     <LandingServices />
-    <LandingAboutMe />
     <LandingWeb3Quote />
   </UPage>
 </template>
