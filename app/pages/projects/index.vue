@@ -31,12 +31,16 @@ useSeoMeta({
           :in-view-options="{ once: true }"
           class="mb-8 sm:mb-16"
         >
-          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0f172b] dark:text-white tracking-tight mb-3 sm:mb-4">
-            {{ $t('projects.pageTitle') }}
+          <h1 class="text-5xl sm:text-7xl lg:text-8xl font-medium uppercase leading-[0.95] text-[#0f172b] dark:text-white tracking-tight mb-3 sm:mb-4">
+            <span
+              v-for="(word, i) in $t('projects.pageTitle').split(' ')"
+              :key="word"
+              class="block"
+              :class="i > 0 ? 'pl-12 sm:pl-24 lg:pl-32' : ''"
+            >
+              {{ word }}
+            </span>
           </h1>
-          <p class="text-base sm:text-lg text-[#62748e] dark:text-neutral-400 max-w-2xl">
-            {{ $t('projects.pageIntro') }}
-          </p>
         </Motion>
 
         <!-- Project grid: two cards per row -->

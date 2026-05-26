@@ -8,15 +8,8 @@ const props = defineProps<{
   noAnimation?: boolean
 }>()
 
-// External link buttons rendered as cyan circles next to the tag pill
-const actions = computed(() => {
-  const links = props.project.links
-  const list: { icon: string, to: string, label: string }[] = []
-  if (links.figma) list.push({ icon: 'i-simple-icons-figma', to: links.figma, label: 'Figma' })
-  if (links.github) list.push({ icon: 'i-simple-icons-github', to: links.github, label: 'GitHub' })
-  if (links.preview) list.push({ icon: 'i-lucide-arrow-up-right', to: links.preview, label: 'Preview' })
-  return list
-})
+// Only surface the live/preview link as a single button on the top right
+const liveLink = computed(() => props.project.links.preview)
 </script>
 
 <template>
@@ -37,35 +30,20 @@ const actions = computed(() => {
           {{ project.title }}
         </NuxtLink>
 
-        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <!-- Tag pill -->
-          <span
-            v-if="project.tags?.[0]"
-            class="inline-flex items-center gap-1.5 max-w-[8rem] sm:max-w-[10rem] pl-2.5 pr-3 py-1.5 rounded-full bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] text-white text-xs sm:text-sm font-medium"
-          >
-            <UIcon
-              name="i-lucide-diamond"
-              class="size-3.5 shrink-0"
-            />
-            <span class="truncate">{{ project.tags[0] }}</span>
-          </span>
-
-          <!-- Circular action buttons -->
-          <NuxtLink
-            v-for="action in actions"
-            :key="action.label"
-            :to="action.to"
-            target="_blank"
-            :aria-label="action.label"
-            :title="action.label"
-            class="flex items-center justify-center size-8 sm:size-9 rounded-full bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] text-white hover:opacity-90 transition-opacity"
-          >
-            <UIcon
-              :name="action.icon"
-              class="size-4"
-            />
-          </NuxtLink>
-        </div>
+        <!-- Live version button (top right) -->
+        <NuxtLink
+          v-if="liveLink"
+          :to="liveLink"
+          target="_blank"
+          aria-label="Live version"
+          title="Live version"
+          class="shrink-0 flex items-center justify-center size-8 sm:size-9 rounded-full bg-neutral-900 text-white hover:opacity-90 transition-opacity"
+        >
+          <UIcon
+            name="i-lucide-arrow-up-right"
+            class="size-4"
+          />
+        </NuxtLink>
       </div>
 
       <!-- Image -->
