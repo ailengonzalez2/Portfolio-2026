@@ -190,8 +190,8 @@ onUnmounted(() => {
                       v-if="selfProjects[0]?.links?.preview"
                       :to="selfProjects[0]?.links?.preview"
                       target="_blank"
-                      variant="soft"
-                      color="primary"
+                      variant="solid"
+                      color="neutral"
                       size="sm"
                       class="rounded-full"
                       @click.stop
@@ -310,8 +310,8 @@ onUnmounted(() => {
                       v-if="selfProjects[1]?.links?.preview"
                       :to="selfProjects[1]?.links?.preview"
                       target="_blank"
-                      variant="soft"
-                      color="primary"
+                      variant="solid"
+                      color="neutral"
                       size="sm"
                       class="rounded-full"
                       @click.stop
@@ -433,8 +433,8 @@ onUnmounted(() => {
                       v-if="selfProjects[2]?.links?.preview"
                       :to="selfProjects[2]?.links?.preview"
                       target="_blank"
-                      variant="soft"
-                      color="primary"
+                      variant="solid"
+                      color="neutral"
                       size="sm"
                       class="rounded-full"
                       @click.stop
@@ -553,8 +553,8 @@ onUnmounted(() => {
                       v-if="selfProjects[3]?.links?.preview"
                       :to="selfProjects[3]?.links?.preview"
                       target="_blank"
-                      variant="soft"
-                      color="primary"
+                      variant="solid"
+                      color="neutral"
                       size="sm"
                       class="rounded-full"
                       @click.stop

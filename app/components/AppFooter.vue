@@ -1,21 +1,9 @@
 <script setup lang="ts">
-import { useWindowScroll, useWindowSize, useIntersectionObserver } from '@vueuse/core'
+import { useIntersectionObserver } from '@vueuse/core'
 import { ref } from 'vue'
 
 const { global } = useAppConfig()
 const year = new Date().getFullYear()
-
-// Scroll detection - same logic as SocialSidebar for synchronized animation
-const { y } = useWindowScroll()
-const { height } = useWindowSize()
-
-const isExpanded = computed(() => {
-  if (!import.meta.client) return false
-  const scrollHeight = document.documentElement.scrollHeight
-  const scrollPosition = y.value + height.value
-  // Expand when within 200px of the bottom (matches SocialSidebar)
-  return scrollPosition >= scrollHeight - 200
-})
 
 // Word-by-word animation for "Happy to connect"
 const headingText = 'Happy to connect'
@@ -51,26 +39,15 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
       <div class="absolute inset-0 bg-linear-to-b from-transparent via-elevated/20 to-transparent pointer-events-none" />
 
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Container with flex row for arrow and text -->
-        <div class="flex flex-col lg:flex-row items-center lg:items-end justify-end gap-4 sm:gap-6 lg:gap-12 xl:gap-16">
-          <!-- Arrow pointing to social sidebar - animates with sidebar expansion -->
-          <div class="flex justify-center lg:justify-end mb-8 lg:mb-0 h-[7.5rem] lg:h-auto">
-            <img
-              src="/arrow-footer.png"
-              alt=""
-              aria-hidden="true"
-              class="arrow-reveal w-3/5 h-auto object-contain -rotate-90 lg:rotate-0 transition-transform"
-              :class="isExpanded ? 'revealed' : ''"
-            >
-          </div>
-
+        <!-- Centered heading + badge -->
+        <div class="flex flex-col items-center justify-center">
           <!-- Main heading with badge -->
           <Motion
             :initial="{ opacity: 0, y: 30 }"
             :while-in-view="{ opacity: 1, y: 0 }"
             :transition="{ duration: 0.6 }"
             :in-view-options="{ once: true }"
-            class="flex flex-col items-center lg:items-end gap-12"
+            class="flex flex-col items-center gap-12"
           >
             <!-- Available Badge -->
             <div
@@ -97,7 +74,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
 
             <h2
               ref="headingRef"
-              class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-display font-medium tracking-wide leading-tight text-center lg:text-right overflow-hidden"
+              class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-display font-medium tracking-wide leading-tight text-center overflow-hidden"
             >
               <span
                 v-for="(word, index) in headingWords"
@@ -109,6 +86,22 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                 {{ word }}&nbsp;
               </span>
             </h2>
+
+            <!-- Book a call CTA -->
+            <UButton
+              :to="global.meetingLink"
+              target="_blank"
+              size="lg"
+              class="btn-gradient text-white font-medium rounded-full px-6"
+            >
+              {{ $t('hero.bookCall') }}
+              <template #trailing>
+                <UIcon
+                  name="i-lucide-arrow-up-right"
+                  class="size-4"
+                />
+              </template>
+            </UButton>
           </Motion>
         </div>
       </div>
@@ -136,15 +129,6 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
 </template>
 
 <style scoped>
-.arrow-reveal {
-  clip-path: inset(0 0 0 100%);
-  transition: clip-path 1.2s ease-out;
-}
-
-.arrow-reveal.revealed {
-  clip-path: inset(0 0 0 0);
-}
-
 /* Word-by-word animation - coming up from below */
 .word-animate {
   opacity: 0;

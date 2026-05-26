@@ -107,7 +107,7 @@ const related = computed(() =>
             v-if="project!.links.preview"
             :to="project!.links.preview"
             target="_blank"
-            color="primary"
+            color="neutral"
             size="lg"
             class="rounded-full"
           >

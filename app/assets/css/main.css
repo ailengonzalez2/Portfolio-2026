@@ -149,14 +149,14 @@ html {
   color: var(--color-text-primary-dark);
 }
 
-/* Gradient Button - Primary Style */
+/* Primary Button - solid black */
 .btn-gradient {
-  background: linear-gradient(-89deg, rgba(255, 177, 71, 0.1) 5.74%, rgba(255, 108, 99, 0.1) 50.64%, rgba(184, 106, 223, 0.1) 92.05%);
-  border: 3px solid transparent;
-  background-clip: padding-box;
+  background: #0a0a0a;
+  color: #fff;
+  border: none;
   position: relative;
   border-radius: 9999px;
-  padding: 0.625rem 3.5rem;
+  padding: 0.75rem 3.5rem;
   font-weight: 600;
   font-size: 1.125rem;
   text-transform: capitalize;
@@ -164,21 +164,11 @@ html {
 }
 
 .btn-gradient::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  padding: 3px;
-  background: linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  pointer-events: none;
+  content: none;
 }
 
 .btn-gradient:hover {
-  background: linear-gradient(-89deg, rgba(255, 177, 71, 0.15) 5.74%, rgba(255, 108, 99, 0.15) 50.64%, rgba(184, 106, 223, 0.15) 92.05%);
+  background: #262626;
   transform: scale(1.05);
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }

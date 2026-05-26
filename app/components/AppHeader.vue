@@ -113,7 +113,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
 
           <NuxtLink
             to="#brief"
-            class="group/btn relative hidden sm:inline-flex items-center bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] py-3.5 pl-8 pr-14 hover:pl-14 hover:pr-8 btn-transition"
+            class="group/btn relative hidden sm:inline-flex items-center bg-neutral-900 py-3.5 pl-8 pr-14 hover:pl-14 hover:pr-8 btn-transition"
             :class="isScrolled ? 'rounded-[50px]' : 'rounded-2xl'"
           >
             <span class="absolute right-1.5 flex items-center justify-center size-9 bg-white rounded-full transition-all duration-300 ease-out group-hover/btn:right-[calc(100%-2.625rem)]">
@@ -182,7 +182,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
         <!-- Mobile CTA Button -->
         <NuxtLink
           to="#brief"
-          class="group/btn relative mt-4 inline-flex items-center bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] py-3.5 pl-8 pr-14 hover:pl-14 hover:pr-8 rounded-full btn-transition"
+          class="group/btn relative mt-4 inline-flex items-center bg-neutral-900 py-3.5 pl-8 pr-14 hover:pl-14 hover:pr-8 rounded-full btn-transition"
           @click="closeMobileMenu"
         >
           <span class="absolute right-1.5 flex items-center justify-center size-9 bg-white rounded-full transition-all duration-300 ease-out group-hover/btn:right-[calc(100%-2.625rem)]">
