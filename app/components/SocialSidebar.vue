@@ -47,31 +47,6 @@ const socialLinks: SocialLink[] = [
     label: 'Ver repositorios en GitHub',
     brandColor: '#24292e',
     gradientTo: '#4c5157'
-  },
-  {
-    name: 'Figma',
-    icon: 'i-simple-icons-figma',
-    url: 'https://www.figma.com/design/mRSZxWDPislTwb98P8Y8ij/PORTFOLIO-2026?node-id=124-578&t=grAgF4bmBfQuZZ1f-1',
-    label: 'Ver diseños en Figma',
-    brandColor: '#f24e1e',
-    gradientTo: '#ff8f6b',
-    colorIcon: '/tech-icons/figma-color.svg'
-  },
-  {
-    name: 'Behance',
-    icon: 'i-simple-icons-behance',
-    url: 'https://www.behance.net/ailengonzalez2',
-    label: 'Ver portfolio en Behance',
-    brandColor: '#1769ff',
-    gradientTo: '#6094ff'
-  },
-  {
-    name: 'Discord',
-    icon: 'i-ic-twotone-discord',
-    url: 'https://discord.gg/ailen_gonzalez',
-    label: 'Unirse a comunidad de Discord',
-    brandColor: '#5865f2',
-    gradientTo: '#949cf7'
   }
 ]
 
