@@ -8,7 +8,7 @@ const id = computed(() => route.params.id as string)
 
 const project = computed(() => projects.find(p => p.id === id.value))
 
-// If the project doesn't exist OR has no case study, send back to the index.
+// If the project doesn't exist, send back to the index.
 if (!project.value) {
   throw createError({ statusCode: 404, statusMessage: 'Project not found', fatal: true })
 }
@@ -22,10 +22,16 @@ useSeoMeta({
   title: () => seo.value.title,
   ogTitle: () => seo.value.title,
   description: () => seo.value.description,
-  ogDescription: () => seo.value.description
+  ogDescription: () => seo.value.description,
+  ogImage: () => project.value!.image
 })
 
 const cs = computed(() => project.value!.caseStudy)
+
+// Three other projects to surface at the bottom
+const related = computed(() =>
+  projects.filter(p => p.id !== id.value).slice(0, 3)
+)
 </script>
 
 <template>
@@ -62,12 +68,32 @@ const cs = computed(() => project.value!.caseStudy)
         </h1>
 
         <!-- Tagline -->
-        <p class="text-lg sm:text-xl text-[#62748e] dark:text-neutral-400 leading-relaxed mb-10 max-w-3xl">
+        <p class="text-lg sm:text-xl text-[#62748e] dark:text-neutral-400 leading-relaxed mb-8 max-w-3xl">
           {{ cs?.tagline || project!.description }}
         </p>
 
+        <!-- Metric callouts (only when real numbers exist) -->
+        <div
+          v-if="cs?.metrics?.length"
+          class="grid gap-3 sm:gap-4 mb-10"
+          :class="cs.metrics.length === 2 ? 'grid-cols-2' : 'grid-cols-3'"
+        >
+          <div
+            v-for="metric in cs.metrics"
+            :key="metric.label"
+            class="rounded-2xl bg-[#f8fafc] dark:bg-neutral-900 border border-[#e2e8f0] dark:border-neutral-800 px-3 py-5 sm:px-5 sm:py-6 text-center"
+          >
+            <p class="btn-gradient-text text-2xl sm:text-4xl font-bold leading-none mb-1.5">
+              {{ metric.value }}
+            </p>
+            <p class="text-[11px] sm:text-xs uppercase tracking-[0.5px] text-[#62748e] dark:text-neutral-500 font-medium">
+              {{ metric.label }}
+            </p>
+          </div>
+        </div>
+
         <!-- Hero image -->
-        <div class="relative rounded-2xl md:rounded-3xl overflow-hidden aspect-16/10 mb-12 sm:mb-16">
+        <div class="relative rounded-2xl md:rounded-3xl overflow-hidden aspect-16/10 mb-10 sm:mb-12">
           <NuxtImg
             :src="project!.image"
             :alt="project!.title"
@@ -170,6 +196,22 @@ const cs = computed(() => project.value!.caseStudy)
             <p class="text-base sm:text-lg text-primary-custom leading-relaxed">
               {{ cs.approach }}
             </p>
+            <ul
+              v-if="cs.highlights?.length"
+              class="mt-5 space-y-2.5"
+            >
+              <li
+                v-for="point in cs.highlights"
+                :key="point"
+                class="flex items-start gap-3 text-base text-primary-custom"
+              >
+                <UIcon
+                  name="i-lucide-check"
+                  class="size-5 shrink-0 mt-0.5 text-primary"
+                />
+                <span>{{ point }}</span>
+              </li>
+            </ul>
           </section>
 
           <section class="mb-12">
@@ -179,6 +221,22 @@ const cs = computed(() => project.value!.caseStudy)
             <p class="text-base sm:text-lg text-primary-custom leading-relaxed">
               {{ cs.result }}
             </p>
+            <ul
+              v-if="cs.outcomes?.length"
+              class="mt-5 space-y-2.5"
+            >
+              <li
+                v-for="point in cs.outcomes"
+                :key="point"
+                class="flex items-start gap-3 text-base text-primary-custom"
+              >
+                <UIcon
+                  name="i-lucide-arrow-up-right"
+                  class="size-5 shrink-0 mt-0.5 text-primary"
+                />
+                <span>{{ point }}</span>
+              </li>
+            </ul>
           </section>
 
           <section class="mb-16">
@@ -197,25 +255,30 @@ const cs = computed(() => project.value!.caseStudy)
           </section>
         </template>
 
-        <!-- Fallback when no case study yet -->
+        <!-- Clean overview when there's no full case study yet -->
         <section
           v-else
-          class="mb-16 p-8 rounded-2xl border border-dashed border-[#e2e8f0] dark:border-neutral-800 text-center"
+          class="mb-16"
         >
-          <UIcon
-            name="i-lucide-construction"
-            class="size-8 text-[#90a1b9] mx-auto mb-3"
-          />
-          <h2 class="text-lg font-semibold text-[#0f172b] dark:text-white mb-1">
-            {{ $t('projects.caseStudy.comingSoonTitle') }}
+          <h2 class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-3">
+            {{ $t('projects.caseStudy.overview') }}
           </h2>
-          <p class="text-[#62748e] dark:text-neutral-400 max-w-md mx-auto">
-            {{ $t('projects.caseStudy.comingSoonBody') }}
+          <p class="text-base sm:text-lg text-primary-custom leading-relaxed mb-6">
+            {{ project!.description }}
           </p>
+          <div class="flex flex-wrap gap-2">
+            <span
+              v-for="tag in project!.tags"
+              :key="tag"
+              class="px-3 py-1.5 rounded-full bg-[#f1f5f9] dark:bg-neutral-800 text-[13px] text-[#0f172b] dark:text-neutral-200 font-medium"
+            >
+              {{ tag }}
+            </span>
+          </div>
         </section>
 
         <!-- CTA -->
-        <div class="text-center">
+        <div class="text-center pb-16 sm:pb-20 mb-16 sm:mb-20 border-b border-[#e2e8f0] dark:border-neutral-800">
           <p class="text-lg text-primary-custom mb-4">
             {{ $t('projects.caseStudy.ctaText') }}
           </p>
@@ -233,6 +296,21 @@ const cs = computed(() => project.value!.caseStudy)
             </template>
           </UButton>
         </div>
+
+        <!-- Related projects -->
+        <section>
+          <h2 class="text-xl sm:text-2xl font-bold text-[#0f172b] dark:text-white tracking-tight mb-6">
+            {{ $t('projects.caseStudy.relatedProjects') }}
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            <ProjectCard
+              v-for="item in related"
+              :key="item.id"
+              :project="item"
+              no-animation
+            />
+          </div>
+        </section>
       </div>
     </article>
   </UPage>
