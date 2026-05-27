@@ -3,8 +3,6 @@ import { Motion, useScroll, useTransform } from 'motion-v'
 import { ref } from 'vue'
 import { projects } from '~/data/projects'
 
-const { global } = useAppConfig()
-
 // Reference to scroll container
 const containerRef = ref<HTMLElement | null>(null)
 
@@ -15,9 +13,6 @@ const { scrollYProgress } = useScroll({
 })
 
 // Hero content animations - staggered reveal during the split
-const badgeOpacity = useTransform(scrollYProgress, [0.15, 0.33], [0, 1])
-const badgeY = useTransform(scrollYProgress, [0.15, 0.38], [-30, 0])
-
 const showcaseOpacity = useTransform(scrollYProgress, [0.25, 0.5], [0, 1])
 const showcaseY = useTransform(scrollYProgress, [0.25, 0.52], [40, 0])
 
@@ -52,48 +47,18 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
     class="absolute inset-0 h-[200vh] z-10"
   >
     <!-- Sticky Hero content - revealed during Rolls split -->
-    <section class="sticky top-0 h-screen flex flex-col items-center justify-start bg-white dark:bg-[#0a0a0a] overflow-hidden pt-28 sm:pt-32 lg:pt-36 pb-8">
+    <section class="sticky top-0 h-screen bg-white dark:bg-[#0a0a0a] overflow-hidden">
       <!-- Hidden heading kept for SEO / accessibility (banner is visual-only) -->
       <h1 class="sr-only">
         Ailen Gonzalez — AI Product Engineer
       </h1>
 
-      <!-- 1. Book-a-call pill with avatar + spots indicator (top) -->
-      <Motion
-        :style="{ opacity: badgeOpacity, y: badgeY }"
-        class="flex flex-col items-center gap-3 mb-5 sm:mb-6"
-      >
-        <NuxtLink
-          :to="global.meetingLink"
-          target="_blank"
-          class="group inline-flex items-center gap-2.5 pl-1.5 pr-5 py-1.5 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 shadow-md ring-1 ring-black/5 hover:bg-neutral-800 dark:hover:bg-neutral-100 transition-colors"
-        >
-          <span class="flex items-center justify-center size-7 rounded-full bg-linear-to-br from-primary to-secondary text-white text-[11px] font-semibold ring-2 ring-white/25 dark:ring-black/10">
-            AG
-          </span>
-          <span class="text-sm font-medium">{{ $t('hero.bookCall') }}</span>
-        </NuxtLink>
-
-        <div
-          v-if="global.available"
-          class="inline-flex items-center gap-2"
-        >
-          <span class="relative flex size-2">
-            <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-            <span class="relative inline-flex size-2 rounded-full bg-emerald-500" />
-          </span>
-          <span class="text-xs sm:text-sm font-medium text-neutral-500 dark:text-neutral-400 tracking-wide">
-            {{ $t('hero.spotsAvailable') }}
-          </span>
-        </div>
-      </Motion>
-
-      <!-- 2. Full-width vertical project columns -->
+      <!-- Full-viewport vertical project columns -->
       <Motion
         :style="{ opacity: showcaseOpacity, y: showcaseY }"
-        class="w-screen"
+        class="absolute inset-0 w-screen"
       >
-        <div class="mask-vertical h-[52vh] sm:h-[62vh] lg:h-[68vh] overflow-hidden px-3 sm:px-4">
+        <div class="mask-vertical h-full overflow-hidden px-3 sm:px-4">
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 h-full">
             <div
               v-for="(col, i) in columns"
@@ -124,32 +89,15 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
         </div>
       </Motion>
 
-      <!-- CTAs (under the animation) -->
+      <!-- See work CTA overlaid at the bottom -->
       <Motion
         :style="{ opacity: ctaOpacity, y: ctaY }"
-        class="mt-7 sm:mt-9 flex justify-center items-center gap-3"
+        class="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-10"
       >
         <UButton
-          :to="global.meetingLink"
-          target="_blank"
+          to="/#projects"
           size="lg"
           class="btn-gradient text-white font-medium rounded-full px-6"
-        >
-          {{ $t('hero.bookCall') }}
-          <template #trailing>
-            <UIcon
-              name="i-lucide-arrow-up-right"
-              class="size-4"
-            />
-          </template>
-        </UButton>
-
-        <UButton
-          to="/#projects"
-          variant="outline"
-          color="neutral"
-          size="lg"
-          class="rounded-full px-6"
         >
           {{ $t('hero.seeWork') }}
         </UButton>
