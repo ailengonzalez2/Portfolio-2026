@@ -12,8 +12,7 @@ interface ServiceConfig {
 const serviceConfigs: ServiceConfig[] = [
   { id: 'ai-product', i18nKey: 'aiProduct', backgroundImage: '/projects/ai-integration.webp' },
   { id: 'frontend', i18nKey: 'frontend', backgroundImage: '/projects/defidashboard.png' },
-  { id: 'llm-integration', i18nKey: 'llmIntegration', backgroundImage: '/projects/pureskin.png' },
-  { id: 'web3', i18nKey: 'web3', backgroundImage: '/projects/defidashboard.png' }
+  { id: 'llm-integration', i18nKey: 'llmIntegration', backgroundImage: '/projects/pureskin.png' }
 ]
 
 const services = computed(() => serviceConfigs.map(c => ({
@@ -127,94 +126,35 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                     </span>
                   </h3>
 
-                  <!-- Description with word-by-word animation -->
-                  <p class="text-[15px] text-[#5a5a5a] dark:text-gray-400 leading-[1.7] max-w-[340px] overflow-hidden mb-5">
-                    <span
-                      v-for="(word, index) in splitWords(service.description)"
-                      :key="index"
-                      class="word-animate inline-block"
-                      :style="{ transitionDelay: getWordDelay(index, 0.2) }"
-                    >
-                      {{ word }}&nbsp;
-                    </span>
-                  </p>
-
                   <!-- Deliverables list -->
-                  <ul class="space-y-1.5 mb-5 grow">
+                  <ul class="space-y-3 mb-5 grow">
                     <li
                       v-for="(item, index) in service.deliverables"
                       :key="item"
-                      class="stagger-item flex items-center gap-2 text-[13px] text-[#5a5a5a] dark:text-gray-400"
+                      class="stagger-item flex items-center gap-2.5 text-[19px] text-[#5a5a5a] dark:text-gray-400"
                       :style="{ transitionDelay: getWordDelay(index, 0.45) }"
                     >
                       <UIcon
                         name="i-lucide-check"
-                        class="size-3.5 text-primary shrink-0"
+                        class="size-5 text-primary shrink-0"
                       />
                       <span>{{ item }}</span>
                     </li>
                   </ul>
 
-                  <!-- Price + Timeline anchor -->
-                  <div
-                    class="stagger-item flex items-baseline gap-3 mb-4"
-                    style="transition-delay: 0.65s"
-                  >
-                    <span class="text-[20px] font-semibold text-[#0f172b] dark:text-white tracking-tight">
-                      {{ service.priceFrom }}
-                    </span>
-                    <span class="text-[12px] text-[#62748e] dark:text-gray-500 uppercase tracking-wider">
-                      · {{ service.timeline }}
-                    </span>
-                  </div>
-
-                  <!-- Separator and Social Links -->
-                  <div class="mt-auto pt-8">
+                  <!-- Separator and CTA -->
+                  <div class="mt-auto pt-8 flex flex-col items-end">
                     <div class="stagger-item stagger-separator h-px w-full bg-[#d4d4d4] dark:bg-gray-600 mb-5" />
-                    <div class="flex items-center justify-start gap-4">
-                      <!-- LinkedIn -->
-                      <a
-                        href="https://www.linkedin.com/in/AilenGonzalez"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="LinkedIn"
-                        class="stagger-item stagger-icon-1 social-icon-link social-icon-linkedin"
-                      >
-                        <img
-                          src="/tech-icons/card_linkedin.png"
-                          alt="LinkedIn"
-                          class="w-7 h-7 object-contain"
-                        >
-                      </a>
-                      <!-- Upwork -->
-                      <a
-                        href="https://www.upwork.com/freelancers/ailengonzalez?mp_source=share"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Upwork"
-                        class="stagger-item stagger-icon-2 social-icon-link social-icon-upwork"
-                      >
-                        <img
-                          src="/tech-icons/card-upwork.png"
-                          alt="Upwork"
-                          class="w-7 h-7 object-contain"
-                        >
-                      </a>
-                      <!-- Telegram -->
-                      <a
-                        href="https://t.me/AilenGonzalez"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Telegram"
-                        class="stagger-item stagger-icon-3 social-icon-link social-icon-telegram"
-                      >
-                        <img
-                          src="/tech-icons/card-telegram.png"
-                          alt="Telegram"
-                          class="w-7 h-7 object-contain"
-                        >
-                      </a>
-                    </div>
+                    <NuxtLink
+                      to="/#contact"
+                      class="stagger-item stagger-icon-1 inline-flex items-center gap-1.5 rounded-full bg-neutral-900 text-white text-xs font-medium px-3.5 py-1.5 hover:bg-neutral-800 transition-colors"
+                    >
+                      {{ $t('services.startProject') }}
+                      <UIcon
+                        name="i-lucide-arrow-up-right"
+                        class="size-3.5"
+                      />
+                    </NuxtLink>
                   </div>
                 </div>
               </div>

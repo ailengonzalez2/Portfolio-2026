@@ -16,24 +16,25 @@
     "seeWork": "Ver trabajo"
   },
   "services": {
+    "startProject": "Iniciar un proyecto",
     "aiProduct": {
       "title": "Diseño de Productos con IA",
       "description": "Diseño y desarrollo el frontend de tu producto de IA — interfaces de chat, respuestas en streaming, superficies de tool-calling, flujos de agentes y dashboards de evaluación. De Figma a código en producción.",
-      "deliverables": ["UI de chat y streaming", "Renderizado de tool-calls", "Diseño de prompts y flujos", "Dashboards de evaluación"],
+      "deliverables": ["UI de chat y streaming", "Renderizado de tool-calls", "Diseño de prompts y flujos", "Dashboards de evaluación", "Handoff de Figma a producción"],
       "priceFrom": "Desde USD 2.5k",
       "timeline": "2–3 semanas"
     },
     "frontend": {
-      "title": "Frontend Engineering",
-      "description": "Construyo frontends listos para producción en Vue / Nuxt + Tailwind + TypeScript. Pixel-perfect, accesibles y rápidos. Desde el handoff de Figma hasta el deploy.",
-      "deliverables": ["Apps en Vue / Nuxt 4", "Integración con design system", "Responsive y accesibilidad", "Performance optimizado"],
+      "title": "Frontend / Web3",
+      "description": "Construyo frontends listos para producción en Vue / Nuxt + Tailwind + TypeScript — incluyendo experiencias Web3 claras e intuitivas como dashboards DeFi, marketplaces NFT y apps de billeteras. Desde el handoff de Figma hasta el deploy.",
+      "deliverables": ["Apps en Vue / Nuxt 4", "UIs de wallet y DeFi", "Marketplaces NFT", "Responsive y accesibilidad", "Performance optimizado"],
       "priceFrom": "Desde USD 2k",
       "timeline": "1–3 semanas"
     },
     "llmIntegration": {
-      "title": "Integración con LLM",
+      "title": "Integración con IA",
       "description": "Conecto LLMs a flujos reales de producto — RAG, agentes, tool calling, outputs estructurados, automatizaciones con n8n. Diseñados para producción y medidos con evals.",
-      "deliverables": ["Pipelines de RAG", "Tool calling y agentes", "Automatización con n8n", "Evals y monitoreo"],
+      "deliverables": ["Pipelines de RAG", "Tool calling y agentes", "Automatización con n8n", "Outputs estructurados", "Evals y monitoreo"],
       "priceFrom": "Desde USD 3k",
       "timeline": "2–4 semanas"
     },
