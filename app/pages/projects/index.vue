@@ -31,7 +31,7 @@ useSeoMeta({
           :in-view-options="{ once: true }"
           class="mb-8 sm:mb-16"
         >
-          <h1 class="text-5xl sm:text-7xl lg:text-8xl font-medium uppercase leading-[0.95] text-[#0f172b] dark:text-white tracking-tight mb-3 sm:mb-4">
+          <h1 class="text-5xl sm:text-7xl lg:text-8xl font-medium uppercase leading-[0.95] text-heading dark:text-white tracking-tight mb-3 sm:mb-4">
             <span
               v-for="(word, i) in $t('projects.pageTitle').split(' ')"
               :key="word"

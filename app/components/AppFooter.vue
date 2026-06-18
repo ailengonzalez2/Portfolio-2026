@@ -35,12 +35,12 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
     <!-- Contact Section -->
     <section
       id="contact"
-      class="py-20 sm:py-32 relative border-b border-default/50"
+      class="py-20 sm:py-28 relative border-b border-default/50"
     >
       <!-- Subtle background gradient -->
       <div class="absolute inset-0 bg-linear-to-b from-transparent via-elevated/20 to-transparent pointer-events-none" />
 
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Centered heading + badge -->
         <div class="flex flex-col items-center justify-center">
           <!-- Main heading with badge -->

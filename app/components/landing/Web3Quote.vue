@@ -143,11 +143,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="py-20 sm:py-32 relative overflow-hidden bg-white dark:bg-gray-950">
+  <section class="py-20 sm:py-28 relative overflow-hidden bg-white dark:bg-gray-950">
     <!-- Subtle gradient background -->
     <div class="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-orange-50/30 dark:from-purple-950/20 dark:via-transparent dark:to-orange-950/10" />
 
-    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-right">
         <Motion
           :initial="{ opacity: 0, y: 30 }"

@@ -48,7 +48,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
 <template>
   <section
     id="services"
-    class="py-16 sm:py-24 relative overflow-hidden min-h-[900px] flex items-center justify-center"
+    class="py-20 sm:py-28 relative overflow-hidden min-h-[900px] flex items-center justify-center"
   >
     <!-- Background Images with crossfade -->
     <div class="absolute inset-0">

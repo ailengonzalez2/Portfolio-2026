@@ -41,7 +41,7 @@ const related = computed(() =>
         <!-- Back link -->
         <NuxtLink
           to="/projects"
-          class="inline-flex items-center gap-2 text-sm text-[#62748e] dark:text-neutral-400 hover:text-primary transition-colors mb-8"
+          class="inline-flex items-center gap-2 text-sm text-body dark:text-neutral-400 hover:text-primary transition-colors mb-8"
         >
           <UIcon
             name="i-lucide-arrow-left"
@@ -55,20 +55,20 @@ const related = computed(() =>
           <span
             v-for="tag in project!.tags"
             :key="tag"
-            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-[0.5px] font-medium text-primary-custom dark:text-neutral-300 bg-[#f1f5f9] dark:bg-neutral-800"
+            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-[0.5px] font-medium text-primary-custom dark:text-neutral-300 bg-surface dark:bg-neutral-800"
           >
             {{ tag }}
           </span>
-          <span class="text-xs text-[#62748e] dark:text-neutral-500">· {{ project!.date }}</span>
+          <span class="text-xs text-body dark:text-neutral-500">· {{ project!.date }}</span>
         </div>
 
         <!-- Title -->
-        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0f172b] dark:text-white tracking-tight mb-4">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-heading dark:text-white tracking-tight mb-4">
           {{ project!.title }}
         </h1>
 
         <!-- Tagline -->
-        <p class="text-lg sm:text-xl text-[#62748e] dark:text-neutral-400 leading-relaxed mb-8 max-w-3xl">
+        <p class="text-lg sm:text-xl text-body dark:text-neutral-400 leading-relaxed mb-8 max-w-3xl">
           {{ cs?.tagline || project!.description }}
         </p>
 
@@ -81,12 +81,12 @@ const related = computed(() =>
           <div
             v-for="metric in cs.metrics"
             :key="metric.label"
-            class="rounded-2xl bg-[#f8fafc] dark:bg-neutral-900 border border-[#e2e8f0] dark:border-neutral-800 px-3 py-5 sm:px-5 sm:py-6 text-center"
+            class="rounded-2xl bg-[#f8fafc] dark:bg-neutral-900 border border-hairline dark:border-neutral-800 px-3 py-5 sm:px-5 sm:py-6 text-center"
           >
             <p class="btn-gradient-text text-2xl sm:text-4xl font-bold leading-none mb-1.5">
               {{ metric.value }}
             </p>
-            <p class="text-[11px] sm:text-xs uppercase tracking-[0.5px] text-[#62748e] dark:text-neutral-500 font-medium">
+            <p class="text-[11px] sm:text-xs uppercase tracking-[0.5px] text-body dark:text-neutral-500 font-medium">
               {{ metric.label }}
             </p>
           </div>
@@ -158,10 +158,10 @@ const related = computed(() =>
         <!-- Meta strip (role + client) -->
         <div
           v-if="cs?.role || cs?.client"
-          class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 pb-12 border-b border-[#e2e8f0] dark:border-neutral-800"
+          class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 pb-12 border-b border-hairline dark:border-neutral-800"
         >
           <div v-if="cs?.role">
-            <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-1.5">
+            <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-1.5">
               {{ $t('projects.caseStudy.role') }}
             </p>
             <p class="text-primary-custom text-base">
@@ -169,7 +169,7 @@ const related = computed(() =>
             </p>
           </div>
           <div v-if="cs?.client">
-            <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-1.5">
+            <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-1.5">
               {{ $t('projects.caseStudy.client') }}
             </p>
             <p class="text-primary-custom text-base">
@@ -181,7 +181,7 @@ const related = computed(() =>
         <!-- Case study sections -->
         <template v-if="cs">
           <section class="mb-12">
-            <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
+            <h2 class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-3">
               {{ $t('projects.caseStudy.problem') }}
             </h2>
             <p class="text-base sm:text-lg text-primary-custom leading-relaxed">
@@ -190,7 +190,7 @@ const related = computed(() =>
           </section>
 
           <section class="mb-12">
-            <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
+            <h2 class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-3">
               {{ $t('projects.caseStudy.approach') }}
             </h2>
             <p class="text-base sm:text-lg text-primary-custom leading-relaxed">
@@ -215,7 +215,7 @@ const related = computed(() =>
           </section>
 
           <section class="mb-12">
-            <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
+            <h2 class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-3">
               {{ $t('projects.caseStudy.result') }}
             </h2>
             <p class="text-base sm:text-lg text-primary-custom leading-relaxed">
@@ -240,14 +240,14 @@ const related = computed(() =>
           </section>
 
           <section class="mb-16">
-            <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
+            <h2 class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-3">
               {{ $t('projects.caseStudy.stack') }}
             </h2>
             <div class="flex flex-wrap gap-2">
               <span
                 v-for="tech in cs.stack"
                 :key="tech"
-                class="px-3 py-1.5 rounded-full bg-[#f1f5f9] dark:bg-neutral-800 text-[13px] text-[#0f172b] dark:text-neutral-200 font-medium"
+                class="px-3 py-1.5 rounded-full bg-surface dark:bg-neutral-800 text-[13px] text-heading dark:text-neutral-200 font-medium"
               >
                 {{ tech }}
               </span>
@@ -260,20 +260,20 @@ const related = computed(() =>
           v-else
           class="mb-16"
         >
-          <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
+          <h2 class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-3">
             {{ $t('projects.caseStudy.overview') }}
           </h2>
           <p class="text-base sm:text-lg text-primary-custom leading-relaxed mb-4">
             {{ project!.description }}
           </p>
-          <p class="text-sm text-[#64748b] leading-relaxed mb-6">
+          <p class="text-sm text-label leading-relaxed mb-6">
             {{ $t('projects.caseStudy.comingSoonBody') }}
           </p>
           <div class="flex flex-wrap gap-2">
             <span
               v-for="tag in project!.tags"
               :key="tag"
-              class="px-3 py-1.5 rounded-full bg-[#f1f5f9] dark:bg-neutral-800 text-[13px] text-[#0f172b] dark:text-neutral-200 font-medium"
+              class="px-3 py-1.5 rounded-full bg-surface dark:bg-neutral-800 text-[13px] text-heading dark:text-neutral-200 font-medium"
             >
               {{ tag }}
             </span>
@@ -281,7 +281,7 @@ const related = computed(() =>
         </section>
 
         <!-- CTA -->
-        <div class="text-center pb-16 sm:pb-20 mb-16 sm:mb-20 border-b border-[#e2e8f0] dark:border-neutral-800">
+        <div class="text-center pb-16 sm:pb-20 mb-16 sm:mb-20 border-b border-hairline dark:border-neutral-800">
           <p class="text-lg text-primary-custom mb-4">
             {{ $t('projects.caseStudy.ctaText') }}
           </p>
@@ -302,7 +302,7 @@ const related = computed(() =>
 
         <!-- Related projects -->
         <section>
-          <h2 class="text-xl sm:text-2xl font-bold text-[#0f172b] dark:text-white tracking-tight mb-6">
+          <h2 class="text-xl sm:text-2xl font-bold text-heading dark:text-white tracking-tight mb-6">
             {{ $t('projects.caseStudy.relatedProjects') }}
           </h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">

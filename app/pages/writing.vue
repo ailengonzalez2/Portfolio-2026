@@ -29,15 +29,15 @@ const postKeys = ['streaming', 'ragEvals', 'figmaVue', 'defiUi'] as const
           :transition="{ duration: 0.5 }"
           :in-view-options="{ once: true }"
         >
-          <h2 class="text-[#64748b] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
-            {{ $t('writing.section') }}
-          </h2>
-          <div class="h-[2px] w-[50px] bg-[#64748b] mb-8" />
+          <SectionEyebrow
+            :label="$t('writing.section')"
+            class="mb-8"
+          />
 
-          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0f172b] dark:text-white tracking-tight mb-4">
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-heading dark:text-white tracking-tight mb-4">
             {{ $t('writing.title') }}
           </h1>
-          <p class="text-base sm:text-lg text-[#62748e] dark:text-neutral-400 leading-relaxed mb-16 max-w-2xl">
+          <p class="text-base sm:text-lg text-body dark:text-neutral-400 leading-relaxed mb-16 max-w-2xl">
             {{ $t('writing.intro') }}
           </p>
         </Motion>
@@ -52,20 +52,20 @@ const postKeys = ['streaming', 'ragEvals', 'figmaVue', 'defiUi'] as const
             :transition="{ duration: 0.4, delay: 0.1 + index * 0.05 }"
             :in-view-options="{ once: true }"
           >
-            <article class="group flex flex-col sm:flex-row gap-3 sm:gap-6 p-5 sm:p-6 rounded-2xl border border-[#e2e8f0] dark:border-neutral-800 bg-white/40 dark:bg-neutral-900/40 backdrop-blur-sm">
+            <article class="group flex flex-col sm:flex-row gap-3 sm:gap-6 p-5 sm:p-6 rounded-2xl border border-hairline dark:border-neutral-800 bg-white/40 dark:bg-neutral-900/40 backdrop-blur-sm">
               <div class="shrink-0">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-[0.5px] font-medium text-primary-custom dark:text-neutral-300 bg-[#f1f5f9] dark:bg-neutral-800">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-[0.5px] font-medium text-primary-custom dark:text-neutral-300 bg-surface dark:bg-neutral-800">
                   {{ $t(`writing.posts.${key}.category`) }}
                 </span>
               </div>
               <div class="grow">
-                <h3 class="text-lg sm:text-xl font-semibold text-[#0f172b] dark:text-white mb-1.5 leading-snug">
+                <h3 class="text-lg sm:text-xl font-semibold text-heading dark:text-white mb-1.5 leading-snug">
                   {{ $t(`writing.posts.${key}.title`) }}
                 </h3>
-                <p class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed mb-2">
+                <p class="text-sm text-body dark:text-neutral-400 leading-relaxed mb-2">
                   {{ $t(`writing.posts.${key}.blurb`) }}
                 </p>
-                <p class="text-[11px] uppercase tracking-[0.5px] font-medium text-[#64748b]">
+                <p class="text-[11px] uppercase tracking-[0.5px] font-medium text-label">
                   {{ $t('writing.comingSoon') }}
                 </p>
               </div>

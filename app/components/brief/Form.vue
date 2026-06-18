@@ -204,12 +204,12 @@ async function submitEmail() {
 <template>
   <div class="brief-form">
     <!-- Intro -->
-    <p class="text-sm sm:text-base text-[#62748e] dark:text-neutral-400 leading-relaxed mb-5">
+    <p class="text-sm sm:text-base text-body dark:text-neutral-400 leading-relaxed mb-5">
       {{ $t('brief.intro') }}
     </p>
 
     <!-- Input card -->
-    <div class="rounded-2xl border border-[#e2e8f0] dark:border-neutral-800 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm p-4 sm:p-5">
+    <div class="rounded-2xl border border-hairline dark:border-neutral-800 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm p-4 sm:p-5">
       <label
         for="brief-description"
         class="sr-only"
@@ -223,20 +223,20 @@ async function submitEmail() {
         rows="4"
         :aria-label="$t('brief.inputLabel')"
         aria-describedby="brief-footnote"
-        class="brief-textarea w-full resize-none bg-transparent border-0 text-[#0f172b] dark:text-white text-base leading-relaxed placeholder:text-[#64748b] dark:placeholder:text-neutral-500 focus:outline-none focus:ring-0 disabled:opacity-60"
+        class="brief-textarea w-full resize-none bg-transparent border-0 text-heading dark:text-white text-base leading-relaxed placeholder:text-label dark:placeholder:text-neutral-500 focus:outline-none focus:ring-0 disabled:opacity-60"
       />
 
       <!-- Counter -->
       <div class="flex items-center justify-between mt-2 mb-3">
         <p
           id="brief-footnote"
-          class="text-[11px] text-[#64748b] dark:text-neutral-500"
+          class="text-[11px] text-label dark:text-neutral-500"
         >
           {{ $t('brief.footnote') }}
         </p>
         <span
           class="text-[11px] font-medium tabular-nums"
-          :class="charCount > MAX - 30 ? 'text-orange-500' : 'text-[#64748b] dark:text-neutral-500'"
+          :class="charCount > MAX - 30 ? 'text-orange-500' : 'text-label dark:text-neutral-500'"
         >
           {{ $t('brief.counter', { count: charCount, max: MAX }) }}
         </span>
@@ -313,7 +313,7 @@ async function submitEmail() {
     >
       <div
         v-if="status === 'streaming' || status === 'done'"
-        class="mt-5 rounded-2xl border border-[#e2e8f0] dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 sm:p-6"
+        class="mt-5 rounded-2xl border border-hairline dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 sm:p-6"
       >
         <!-- Summary chip row -->
         <Transition
@@ -323,7 +323,7 @@ async function submitEmail() {
         >
           <div
             v-if="sections.SERVICE || sections.PRICE_RANGE || sections.TIMELINE"
-            class="flex flex-wrap items-center gap-2 mb-5 pb-5 border-b border-[#f1f5f9] dark:border-neutral-800"
+            class="flex flex-wrap items-center gap-2 mb-5 pb-5 border-b border-surface dark:border-neutral-800"
           >
             <span
               v-if="sections.SERVICE"
@@ -333,13 +333,13 @@ async function submitEmail() {
             </span>
             <span
               v-if="sections.PRICE_RANGE"
-              class="text-[14px] font-semibold text-[#0f172b] dark:text-white tabular-nums"
+              class="text-[14px] font-semibold text-heading dark:text-white tabular-nums"
             >
               {{ sections.PRICE_RANGE }}
             </span>
             <span
               v-if="sections.TIMELINE"
-              class="text-[11px] text-[#62748e] dark:text-neutral-400 uppercase tracking-wider"
+              class="text-[11px] text-body dark:text-neutral-400 uppercase tracking-wider"
             >
               · {{ sections.TIMELINE }}
             </span>
@@ -351,10 +351,10 @@ async function submitEmail() {
           v-if="sections.WHAT_I_HEARD"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-2">
+          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-2">
             {{ $t('brief.sections.whatIHeard') }}
           </p>
-          <p class="text-[15px] text-[#0f172b] dark:text-neutral-200 leading-relaxed">
+          <p class="text-[15px] text-heading dark:text-neutral-200 leading-relaxed">
             {{ sections.WHAT_I_HEARD }}
           </p>
         </div>
@@ -364,7 +364,7 @@ async function submitEmail() {
           v-if="phasesList.length"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
+          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-3">
             {{ $t('brief.sections.phases') }}
           </p>
           <ol class="space-y-2.5">
@@ -373,10 +373,10 @@ async function submitEmail() {
               :key="idx"
               class="flex items-start gap-3"
             >
-              <span class="flex items-center justify-center size-6 rounded-full bg-[#f1f5f9] dark:bg-neutral-800 text-[12px] font-semibold text-[#0f172b] dark:text-neutral-200 shrink-0 mt-0.5">
+              <span class="flex items-center justify-center size-6 rounded-full bg-surface dark:bg-neutral-800 text-[12px] font-semibold text-heading dark:text-neutral-200 shrink-0 mt-0.5">
                 {{ idx + 1 }}
               </span>
-              <span class="text-[14px] text-[#0f172b] dark:text-neutral-200 leading-relaxed">{{ phase }}</span>
+              <span class="text-[14px] text-heading dark:text-neutral-200 leading-relaxed">{{ phase }}</span>
             </li>
           </ol>
         </div>
@@ -386,14 +386,14 @@ async function submitEmail() {
           v-if="stackList.length"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
+          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-3">
             {{ $t('brief.sections.stack') }}
           </p>
           <div class="flex flex-wrap gap-1.5">
             <span
               v-for="tech in stackList"
               :key="tech"
-              class="px-2.5 py-1 rounded-full text-[12px] font-medium bg-[#f1f5f9] dark:bg-neutral-800 text-[#0f172b] dark:text-neutral-200"
+              class="px-2.5 py-1 rounded-full text-[12px] font-medium bg-surface dark:bg-neutral-800 text-heading dark:text-neutral-200"
             >
               {{ tech }}
             </span>
@@ -405,20 +405,20 @@ async function submitEmail() {
           v-if="sections.BUILD_FIRST"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-2">
+          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-2">
             {{ $t('brief.sections.buildFirst') }}
           </p>
-          <p class="text-[15px] text-[#0f172b] dark:text-neutral-200 leading-relaxed">
+          <p class="text-[15px] text-heading dark:text-neutral-200 leading-relaxed">
             {{ sections.BUILD_FIRST }}
           </p>
         </div>
 
         <!-- Why fit -->
         <div v-if="sections.WHY_FIT">
-          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-2">
+          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-2">
             {{ $t('brief.sections.whyFit') }}
           </p>
-          <p class="text-[15px] text-[#0f172b] dark:text-neutral-200 leading-relaxed">
+          <p class="text-[15px] text-heading dark:text-neutral-200 leading-relaxed">
             {{ sections.WHY_FIT }}
           </p>
         </div>
@@ -443,10 +443,10 @@ async function submitEmail() {
             />
           </div>
           <div>
-            <h4 class="text-base font-semibold text-[#0f172b] dark:text-white mb-1">
+            <h4 class="text-base font-semibold text-heading dark:text-white mb-1">
               {{ $t('brief.email.headline') }}
             </h4>
-            <p class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed">
+            <p class="text-sm text-body dark:text-neutral-400 leading-relaxed">
               {{ $t('brief.email.body') }}
             </p>
           </div>
@@ -470,7 +470,7 @@ async function submitEmail() {
               :aria-label="$t('brief.email.label')"
               :aria-invalid="emailStatus === 'error'"
               :aria-describedby="emailError ? 'brief-email-error' : undefined"
-              class="grow rounded-full bg-white dark:bg-neutral-900 border border-[#e2e8f0] dark:border-neutral-700 px-4 py-2.5 text-sm text-[#0f172b] dark:text-white placeholder:text-[#64748b] dark:placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-violet-400 disabled:opacity-60"
+              class="grow rounded-full bg-white dark:bg-neutral-900 border border-hairline dark:border-neutral-700 px-4 py-2.5 text-sm text-heading dark:text-white placeholder:text-label dark:placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-violet-400 disabled:opacity-60"
             >
             <UButton
               type="submit"
@@ -530,12 +530,12 @@ async function submitEmail() {
           </template>
           {{ $t('brief.bookCall') }}
         </UButton>
-        <span class="text-[#64748b] dark:text-neutral-500 uppercase text-[11px] tracking-[1px]">
+        <span class="text-label dark:text-neutral-500 uppercase text-[11px] tracking-[1px]">
           {{ $t('brief.or') }}
         </span>
         <button
           type="button"
-          class="text-sm text-[#62748e] dark:text-neutral-400 hover:text-primary transition-colors underline underline-offset-2 cursor-pointer"
+          class="text-sm text-body dark:text-neutral-400 hover:text-primary transition-colors underline underline-offset-2 cursor-pointer"
           @click="reset"
         >
           {{ $t('brief.another') }}

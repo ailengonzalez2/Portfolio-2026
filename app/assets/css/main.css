@@ -37,6 +37,13 @@
   /* Text Colors */
   --color-text-primary: #45556c;
   --color-text-primary-dark: #8a9bb5;
+
+  /* Semantic slate tokens (centralize the recurring hardcoded values) */
+  --color-heading: #0f172b; /* primary heading text */
+  --color-body: #62748e;    /* muted body text */
+  --color-label: #64748b;   /* eyebrows / small uppercase labels (AA) */
+  --color-surface: #f1f5f9; /* chip / tag backgrounds */
+  --color-hairline: #e2e8f0; /* subtle borders */
 }
 
 :root {

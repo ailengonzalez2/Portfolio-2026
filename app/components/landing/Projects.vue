@@ -8,7 +8,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
 <template>
   <section
     id="projects"
-    class="py-16 sm:py-24 relative bg-background"
+    class="py-20 sm:py-28 relative bg-background"
   >
     <!-- Subtle background pattern -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
@@ -25,10 +25,10 @@ const selfProjects = computed(() => projects.slice(0, 4))
           :transition="{ duration: 0.5 }"
           :in-view-options="{ once: true }"
         >
-          <h2 class="text-[#64748b] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
-            {{ $t('projects.latestSection') }}
-          </h2>
-          <div class="h-[2px] w-[50px] bg-[#64748b] mb-8" />
+          <SectionEyebrow
+            :label="$t('projects.latestSection')"
+            class="mb-8"
+          />
         </Motion>
 
         <!-- Grid: two cards per row, matching the projects page -->
