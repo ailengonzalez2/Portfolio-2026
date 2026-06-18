@@ -118,7 +118,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
           >
             <span class="absolute right-1.5 flex items-center justify-center size-9 bg-white rounded-full transition-all duration-300 ease-out group-hover/btn:right-[calc(100%-2.625rem)]">
               <UIcon
-                name="i-lucide-arrow-down"
+                name="i-lucide-arrow-right"
                 class="size-4 text-gray-900"
               />
             </span>

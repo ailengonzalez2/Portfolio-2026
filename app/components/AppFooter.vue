@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { useIntersectionObserver } from '@vueuse/core'
-import { ref } from 'vue'
+import { useIntersectionObserver, useClipboard } from '@vueuse/core'
+import { ref, computed } from 'vue'
 
 const { global } = useAppConfig()
+const { t } = useI18n()
 const year = new Date().getFullYear()
 
-// Word-by-word animation for "Happy to connect"
-const headingText = 'Happy to connect'
-const headingWords = headingText.split(' ')
+const { copy, copied } = useClipboard()
+
+// Word-by-word animation for the contact heading
+const headingWords = computed(() => t('contact.title').split(' '))
 const headingRef = ref<HTMLElement | null>(null)
 const isHeadingVisible = ref(false)
 
@@ -65,11 +67,11 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                   />
                 </span>
                 <span class="text-gray-500 dark:text-gray-400 text-base">
-                  {{ global.available ? 'Available for projects' : 'Not available' }}
+                  {{ global.available ? $t('footer.availableForProjects') : $t('footer.notAvailable') }}
                 </span>
               </div>
               <span class="size-1 rounded-full bg-gray-300 dark:bg-gray-600" />
-              <span class="text-gray-500 dark:text-gray-400 text-base">GMT-3</span>
+              <span class="text-gray-500 dark:text-gray-400 text-base">{{ $t('footer.timezone') }}</span>
             </div>
 
             <h2
@@ -87,21 +89,47 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
               </span>
             </h2>
 
-            <!-- Book a call CTA -->
-            <UButton
-              :to="global.meetingLink"
-              target="_blank"
-              size="lg"
-              class="btn-gradient text-white font-medium rounded-full px-6"
-            >
-              {{ $t('hero.bookCall') }}
-              <template #trailing>
+            <!-- Email (copy to clipboard) -->
+            <div class="flex flex-col items-center gap-2">
+              <button
+                type="button"
+                class="group relative inline-flex items-center gap-2.5 text-xl sm:text-2xl lg:text-3xl font-mono font-light lowercase hover:text-primary transition-colors"
+                :aria-label="`${$t('contact.copyAria')} ${global.email}`"
+                @click="copy(global.email)"
+              >
+                {{ global.email }}
                 <UIcon
-                  name="i-lucide-arrow-up-right"
-                  class="size-4"
+                  :name="copied ? 'i-lucide-check' : 'i-lucide-copy'"
+                  class="size-4 sm:size-5 text-muted opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity"
                 />
-              </template>
-            </UButton>
+              </button>
+              <p
+                role="status"
+                aria-live="polite"
+                class="text-sm text-success h-5"
+              >
+                <span v-if="copied">{{ $t('contact.copied') }}</span>
+              </p>
+            </div>
+
+            <!-- Book a call CTA -->
+            <div class="flex flex-col items-center gap-3">
+              <span class="text-sm text-gray-500 dark:text-gray-400">{{ $t('footer.orBookCall') }}</span>
+              <UButton
+                :to="global.meetingLink"
+                target="_blank"
+                size="lg"
+                class="btn-gradient text-white font-medium rounded-full px-6"
+              >
+                {{ $t('hero.bookCall') }}
+                <template #trailing>
+                  <UIcon
+                    name="i-lucide-arrow-up-right"
+                    class="size-4"
+                  />
+                </template>
+              </UButton>
+            </div>
           </Motion>
         </div>
       </div>

@@ -1,34 +1,33 @@
 <script setup lang="ts">
-const workExperience = [
+const { t } = useI18n()
+
+const workExperience = computed(() => [
   {
-    title: 'Product Design',
+    key: 'productDesign',
     company: 'Codecave',
-    period: 'Sep 2025 – Present (REMOTE)',
-    description: 'Advised product strategy and design direction across multiple client projects, aligning business goals with UX decisions and working alongside developers to ensure high-quality delivery.',
     badges: ['Figma', 'AI Tools', 'Vue.js', 'Nuxt UI', 'TailwindCSS', 'HTML/CSS']
   },
   {
-    title: 'UI Developer',
+    key: 'uiDeveloper',
     company: 'Freelance',
-    period: 'Aug 2024 – Present (REMOTE)',
-    description: 'Delivered end-to-end digital products—from research and wireframes to polished, high-performance interfaces—for international Web3 and DeFi clients.',
     badges: ['Figma', 'Vue.js', 'Nuxt UI', 'TailwindCSS', 'ChatGPT', 'N8N']
   },
   {
-    title: 'Web Designer',
+    key: 'webDesigner',
     company: 'Loymar S.A.',
-    period: 'Sep 2022 – Jul 2024 (REMOTE)',
-    description: 'Designed and developed responsive websites and apps for multiple concurrent projects with international teams, ensuring accessibility and optimal user experience.',
     badges: ['Figma', 'HTML', 'CSS', 'JavaScript', 'Bootstrap']
   },
   {
-    title: 'Web Developer',
+    key: 'webDeveloper',
     company: 'CodeCave',
-    period: 'Feb 2021 – Sep 2022 (REMOTE)',
-    description: 'Built e-commerce platforms, landing pages, and corporate websites with custom features and styling, while managing maintenance and security optimizations.',
     badges: ['WordPress', 'WooCommerce', 'Elementor']
   }
-]
+].map(job => ({
+  ...job,
+  title: t(`about.work.${job.key}.title`),
+  period: t(`about.work.${job.key}.period`),
+  description: t(`about.work.${job.key}.description`)
+})))
 
 const technicalSkills = [
   { icon: '/tech-icons/figma.svg', name: 'Figma' },
@@ -49,36 +48,36 @@ const technicalSkills = [
   { icon: '/tech-icons/blockchain.svg', name: 'Blockchain' }
 ]
 
-const certifications = [
+const certifications = computed(() => [
   {
     title: 'Motion Design in Figma',
     organization: 'Memorisely',
-    type: 'On-line',
+    type: t('about.cert.online'),
     year: '2025',
     logo: '/certifications/memorisely-logo.png'
   },
   {
     title: 'JavaScript Algorithms and Data Structures',
     organization: 'Free Code Camp',
-    type: 'On-line',
+    type: t('about.cert.online'),
     year: '2025',
     logo: '/certifications/freecodecamp-logo.png'
   },
   {
     title: 'Intro to Vue 3',
     organization: 'Vue Mastery',
-    type: 'On-line',
-    status: 'Ongoing',
+    type: t('about.cert.online'),
+    status: t('about.cert.ongoing'),
     logo: '/certifications/vuemastery-logo.png'
   },
   {
     title: 'Programación con JavaScript- Meta',
     organization: 'Coursera',
-    type: 'On-line',
-    status: 'Ongoing',
+    type: t('about.cert.online'),
+    status: t('about.cert.ongoing'),
     logo: '/certifications/coursera-logo.png'
   }
-]
+])
 </script>
 
 <template>
@@ -325,10 +324,10 @@ const certifications = [
                 <div class="relative bg-white dark:bg-neutral-900 border border-[#f1f5f9] dark:border-neutral-700 rounded-[24px] shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] p-6 px-8">
                   <div class="space-y-2">
                     <h3 class="text-[#0f172b] dark:text-white text-[18px] font-bold leading-[28px] tracking-[-0.44px]">
-                      My #funfact
+                      {{ $t('about.funfactLabel') }}
                     </h3>
                     <p class="text-primary-custom text-[14px] leading-[22.75px] tracking-[-0.15px]">
-                      Before moving into tech I worked as a medical doctor from 2011 to 2021 in emergency departments across Argentina, after graduating from the Universidad Nacional de Córdoba — one of the country's leading universities. That experience shaped my analytical mindset and problem‑solving approach in design and development.
+                      {{ $t('about.funfactBody') }}
                     </p>
                   </div>
                 </div>

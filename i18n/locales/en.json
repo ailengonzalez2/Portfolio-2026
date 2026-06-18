@@ -77,9 +77,9 @@
     }
   },
   "web3Quote": {
-    "quote": "Recently, I've been diving deeper into the blockchain ecosystem, building wallet integrations and decentralized UI flows.",
-    "highlight": "wallet integrations and decentralized UI flows",
-    "context": "I focus on crafting clear, intuitive Web3 experiences with tools like Wagmi, Viem, and Web3Modal. From DeFi dashboards to NFT marketplaces and wallet applications, I'm always excited to collaborate on innovative ideas and projects."
+    "quote": "Recently, I've been diving deeper into the AI ecosystem, building agent-driven workflows and intelligent UI experiences.",
+    "highlight": "agent-driven workflows and intelligent UI experiences",
+    "context": "I focus on crafting clear, intuitive AI-powered experiences with tools like the Claude API, LLM agents, and modern frontend frameworks. From conversational interfaces to AI dashboards and agentic apps, I'm always excited to collaborate on innovative ideas and projects."
   },
   "about": {
     "heading": "About",
@@ -97,11 +97,46 @@
     "englishLevel": "C1 Advanced • Fluent communication",
     "spanish": "Spanish",
     "spanishLevel": "Native",
-    "certifications": "Latest Certifications"
+    "certifications": "Latest Certifications",
+    "funfactLabel": "My #funfact",
+    "funfactBody": "Before moving into tech I worked as a medical doctor from 2011 to 2021 in emergency departments across Argentina, after graduating from the Universidad Nacional de Córdoba — one of the country's leading universities. That experience shaped my analytical mindset and problem-solving approach in design and development.",
+    "cert": {
+      "online": "Online",
+      "ongoing": "Ongoing"
+    },
+    "work": {
+      "productDesign": {
+        "title": "Product Design",
+        "period": "Sep 2025 – Present (REMOTE)",
+        "description": "Advised product strategy and design direction across multiple client projects, aligning business goals with UX decisions and working alongside developers to ensure high-quality delivery."
+      },
+      "uiDeveloper": {
+        "title": "UI Developer",
+        "period": "Aug 2024 – Present (REMOTE)",
+        "description": "Delivered end-to-end digital products—from research and wireframes to polished, high-performance interfaces—for international Web3 and DeFi clients."
+      },
+      "webDesigner": {
+        "title": "Web Designer",
+        "period": "Sep 2022 – Jul 2024 (REMOTE)",
+        "description": "Designed and developed responsive websites and apps for multiple concurrent projects with international teams, ensuring accessibility and optimal user experience."
+      },
+      "webDeveloper": {
+        "title": "Web Developer",
+        "period": "Feb 2021 – Sep 2022 (REMOTE)",
+        "description": "Built e-commerce platforms, landing pages, and corporate websites with custom features and styling, while managing maintenance and security optimizations."
+      }
+    }
   },
   "contact": {
     "title": "Got a project in mind?",
-    "copied": "Email copied to clipboard!"
+    "copied": "Email copied to clipboard!",
+    "copyAria": "Copy email address"
+  },
+  "footer": {
+    "availableForProjects": "Available for projects",
+    "notAvailable": "Not available",
+    "timezone": "GMT-3",
+    "orBookCall": "or book a call"
   },
   "writing": {
     "section": "Writing",

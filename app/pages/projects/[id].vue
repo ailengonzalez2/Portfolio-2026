@@ -263,8 +263,11 @@ const related = computed(() =>
           <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
             {{ $t('projects.caseStudy.overview') }}
           </h2>
-          <p class="text-base sm:text-lg text-primary-custom leading-relaxed mb-6">
+          <p class="text-base sm:text-lg text-primary-custom leading-relaxed mb-4">
             {{ project!.description }}
+          </p>
+          <p class="text-sm text-[#64748b] leading-relaxed mb-6">
+            {{ $t('projects.caseStudy.comingSoonBody') }}
           </p>
           <div class="flex flex-wrap gap-2">
             <span

@@ -77,9 +77,9 @@
     }
   },
   "web3Quote": {
-    "quote": "Últimamente estoy explorando más a fondo el ecosistema blockchain, construyendo integraciones de wallets y flujos de UI descentralizados.",
-    "highlight": "integraciones de wallets y flujos de UI descentralizados",
-    "context": "Me enfoco en crear experiencias Web3 claras e intuitivas con herramientas como Wagmi, Viem y Web3Modal. Desde dashboards DeFi hasta marketplaces NFT y apps de billeteras, siempre me entusiasma colaborar en ideas y proyectos innovadores."
+    "quote": "Últimamente estoy explorando más a fondo el ecosistema de la IA, construyendo flujos impulsados por agentes y experiencias de UI inteligentes.",
+    "highlight": "flujos impulsados por agentes y experiencias de UI inteligentes",
+    "context": "Me enfoco en crear experiencias impulsadas por IA claras e intuitivas con herramientas como la API de Claude, agentes LLM y frameworks de frontend modernos. Desde interfaces conversacionales hasta dashboards de IA y apps con agentes, siempre me entusiasma colaborar en ideas y proyectos innovadores."
   },
   "about": {
     "heading": "Sobre mí",
@@ -97,11 +97,46 @@
     "englishLevel": "C1 Avanzado • Comunicación fluida",
     "spanish": "Español",
     "spanishLevel": "Nativo",
-    "certifications": "Últimas certificaciones"
+    "certifications": "Últimas certificaciones",
+    "funfactLabel": "Mi #funfact",
+    "funfactBody": "Antes de dedicarme a la tecnología trabajé como médica de 2011 a 2021 en servicios de emergencias de toda Argentina, tras recibirme en la Universidad Nacional de Córdoba — una de las universidades más prestigiosas del país. Esa experiencia moldeó mi mentalidad analítica y mi enfoque para resolver problemas en el diseño y el desarrollo.",
+    "cert": {
+      "online": "Online",
+      "ongoing": "En curso"
+    },
+    "work": {
+      "productDesign": {
+        "title": "Diseño de Producto",
+        "period": "Sep 2025 – Presente (REMOTO)",
+        "description": "Asesoré la estrategia de producto y la dirección de diseño en múltiples proyectos de clientes, alineando objetivos de negocio con decisiones de UX y trabajando junto a desarrolladores para asegurar una entrega de alta calidad."
+      },
+      "uiDeveloper": {
+        "title": "Desarrolladora UI",
+        "period": "Ago 2024 – Presente (REMOTO)",
+        "description": "Entregué productos digitales de punta a punta —desde investigación y wireframes hasta interfaces pulidas y de alto rendimiento— para clientes internacionales de Web3 y DeFi."
+      },
+      "webDesigner": {
+        "title": "Diseñadora Web",
+        "period": "Sep 2022 – Jul 2024 (REMOTO)",
+        "description": "Diseñé y desarrollé sitios y apps responsive para múltiples proyectos simultáneos con equipos internacionales, asegurando accesibilidad y una experiencia de usuario óptima."
+      },
+      "webDeveloper": {
+        "title": "Desarrolladora Web",
+        "period": "Feb 2021 – Sep 2022 (REMOTO)",
+        "description": "Construí plataformas de e-commerce, landing pages y sitios corporativos con funcionalidades y estilos a medida, gestionando además el mantenimiento y las optimizaciones de seguridad."
+      }
+    }
   },
   "contact": {
     "title": "¿Tenés un proyecto en mente?",
-    "copied": "¡Email copiado al portapapeles!"
+    "copied": "¡Email copiado al portapapeles!",
+    "copyAria": "Copiar dirección de email"
+  },
+  "footer": {
+    "availableForProjects": "Disponible para proyectos",
+    "notAvailable": "No disponible",
+    "timezone": "GMT-3",
+    "orBookCall": "o agendá una llamada"
   },
   "writing": {
     "section": "Blog",

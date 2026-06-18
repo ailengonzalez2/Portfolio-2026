@@ -8,18 +8,18 @@
   --font-display: 'Megrim', cursive;
   --font-mono: 'Fira Code', monospace;
 
-  /* Primary - #A11EE2 */
-  --color-primary-50: #faf5ff;
-  --color-primary-100: #f3e8ff;
-  --color-primary-200: #e9d5ff;
-  --color-primary-300: #d8b4fe;
-  --color-primary-400: #c084fc;
-  --color-primary-500: #A11EE2;
-  --color-primary-600: #9333ea;
-  --color-primary-700: #7e22ce;
-  --color-primary-800: #6b21a8;
-  --color-primary-900: #581c87;
-  --color-primary-950: #3b0764;
+  /* Primary - coherent purple ramp anchored on the brand gradient end (#b86adf) */
+  --color-primary-50: #faf6fe;
+  --color-primary-100: #f3e7fc;
+  --color-primary-200: #e8d0f8;
+  --color-primary-300: #d6aef0;
+  --color-primary-400: #c48ce8;
+  --color-primary-500: #b86adf;
+  --color-primary-600: #9d4ec6;
+  --color-primary-700: #8239a3;
+  --color-primary-800: #6b3083;
+  --color-primary-900: #58296b;
+  --color-primary-950: #390f47;
 
   /* Secondary - #FAC789 */
   --color-secondary-50: #fffbf5;
@@ -161,7 +161,7 @@ html {
 
 /* Focus visible styles */
 *:focus-visible {
-  outline: 2px solid var(--ui-color-primary-500);
+  outline: 2px solid var(--ui-color-primary-600);
   outline-offset: 2px;
 }
 

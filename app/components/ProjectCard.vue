@@ -6,10 +6,14 @@ const props = defineProps<{
   project: Project
   /** Disable the entrance animation */
   noAnimation?: boolean
+  /** Show the project description below the image */
+  showDescription?: boolean
 }>()
 
-// Only surface the live/preview link as a single button on the top right
-const liveLink = computed(() => props.project.links.preview)
+// Surface the live/preview link as a single button on the top right,
+// falling back to Figma so Figma-only projects still get an action.
+const actionLink = computed(() => props.project.links.preview || props.project.links.figma)
+const actionIsFigma = computed(() => !props.project.links.preview && !!props.project.links.figma)
 </script>
 
 <template>
@@ -30,17 +34,17 @@ const liveLink = computed(() => props.project.links.preview)
           {{ project.title }}
         </NuxtLink>
 
-        <!-- Live version button (top right) -->
+        <!-- Live version / Figma button (top right) -->
         <NuxtLink
-          v-if="liveLink"
-          :to="liveLink"
+          v-if="actionLink"
+          :to="actionLink"
           target="_blank"
-          aria-label="Live version"
-          title="Live version"
+          :aria-label="actionIsFigma ? $t('projects.caseStudy.figma') : $t('projects.caseStudy.viewLive')"
+          :title="actionIsFigma ? $t('projects.caseStudy.figma') : $t('projects.caseStudy.viewLive')"
           class="shrink-0 flex items-center justify-center size-8 sm:size-9 rounded-full bg-neutral-900 text-white hover:opacity-90 transition-opacity"
         >
           <UIcon
-            name="i-lucide-arrow-up-right"
+            :name="actionIsFigma ? 'i-simple-icons-figma' : 'i-lucide-arrow-up-right'"
             class="size-4"
           />
         </NuxtLink>
@@ -59,6 +63,14 @@ const liveLink = computed(() => props.project.links.preview)
           placeholder
         />
       </NuxtLink>
+
+      <!-- Description -->
+      <p
+        v-if="showDescription"
+        class="px-1.5 pt-3 text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed line-clamp-3"
+      >
+        {{ project.description }}
+      </p>
 
       <!-- Tech stack -->
       <div

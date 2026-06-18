@@ -7,11 +7,6 @@
         :transition="{ duration: 0.6 }"
         :in-view-options="{ once: true }"
       >
-        <h2 class="text-[#64748b] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
-          {{ $t('hook.eyebrow') }}
-        </h2>
-        <div class="h-[2px] w-[50px] bg-[#64748b] mb-8" />
-
         <p class="max-w-4xl text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-[#0f172b] dark:text-white">
           {{ $t('hook.pre') }}<span class="btn-gradient-text">{{ $t('hook.highlight') }}</span>{{ $t('hook.post') }}
         </p>
