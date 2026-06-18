@@ -15,6 +15,12 @@
     "bookCall": "Book a call",
     "seeWork": "See work"
   },
+  "hook": {
+    "eyebrow": "What I do",
+    "pre": "I design and ship ",
+    "highlight": "user-facing AI products",
+    "post": " end to end — from the first sketch to production."
+  },
   "services": {
     "startProject": "Start a project",
     "aiProduct": {

@@ -18,6 +18,7 @@ useSeoMeta({
       <LandingRolls />
       <LandingHero />
     </div>
+    <LandingHook />
     <LandingProjects />
     <LandingServices />
     <LandingWeb3Quote />

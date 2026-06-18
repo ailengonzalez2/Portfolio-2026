@@ -15,6 +15,12 @@
     "bookCall": "Agendar una llamada",
     "seeWork": "Ver trabajo"
   },
+  "hook": {
+    "eyebrow": "Qué hago",
+    "pre": "Diseño y desarrollo ",
+    "highlight": "productos de IA",
+    "post": " de punta a punta — del primer boceto a producción."
+  },
   "services": {
     "startProject": "Iniciar un proyecto",
     "aiProduct": {
