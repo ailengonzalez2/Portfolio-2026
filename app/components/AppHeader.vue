@@ -78,25 +78,25 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
           </div>
         </NuxtLink>
 
-        <!-- Navigation - Centered -->
-        <nav class="hidden md:flex absolute left-1/2 -translate-x-1/2">
-          <ul class="flex items-center gap-8">
-            <li
-              v-for="link in links"
-              :key="String(link.to)"
-            >
-              <NuxtLink
-                :to="link.to"
-                class="text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors uppercase"
+        <!-- Right side - Nav, Lang toggle, CTA Button & Mobile menu -->
+        <div class="flex items-center gap-6">
+          <!-- Navigation -->
+          <nav class="hidden md:flex">
+            <ul class="flex items-center gap-8">
+              <li
+                v-for="link in links"
+                :key="String(link.to)"
               >
-                {{ translateLabel(link.label) }}
-              </NuxtLink>
-            </li>
-          </ul>
-        </nav>
+                <NuxtLink
+                  :to="link.to"
+                  class="text-xs tracking-wide text-muted-foreground hover:text-foreground transition-colors uppercase"
+                >
+                  {{ translateLabel(link.label) }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </nav>
 
-        <!-- Right side - Lang toggle, CTA Button & Mobile menu -->
-        <div class="flex items-center gap-3">
           <!-- Language toggle -->
           <button
             type="button"

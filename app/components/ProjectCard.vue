@@ -59,6 +59,20 @@ const liveLink = computed(() => props.project.links.preview)
           placeholder
         />
       </NuxtLink>
+
+      <!-- Tech stack -->
+      <div
+        v-if="project.caseStudy?.stack?.length"
+        class="flex items-center gap-1.5 flex-wrap px-1.5 pt-3 pb-1"
+      >
+        <span
+          v-for="tech in project.caseStudy.stack"
+          :key="tech"
+          class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-neutral-200 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300"
+        >
+          {{ tech }}
+        </span>
+      </div>
     </article>
   </Motion>
 </template>
