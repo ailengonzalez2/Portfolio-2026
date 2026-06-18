@@ -84,7 +84,6 @@
   "about": {
     "heading": "Sobre mí",
     "pageTitle": "Desarrolladora frontend obsesionada con la IA y la UI",
-    "downloadCv": "Descargar CV",
     "exploreCv": "Ver CV completo",
     "designCode": "Diseño + Código",
     "designCodeBody": "Combino principios sólidos de diseño con desarrollo práctico y eficiente para crear interfaces limpias, responsive y pixel-perfect. Me ocupo del proceso completo: desde la investigación inicial y los prototipos hasta llevarlo todo a la vida con código moderno y prolijo.",
@@ -137,6 +136,7 @@
   "brief": {
     "section": "Generador de Brief",
     "title": "Obtené un brief personalizado",
+    "inputLabel": "Describí tu proyecto",
     "intro": "Contame qué querés construir, con tus propias palabras. Te genero un brief real en 30 segundos — alcance, timeline, rango de precio y qué desarrollaría primero.",
     "floatingCta": "Probá el brief con IA",
     "floatingCtaShort": "Brief",
@@ -172,6 +172,7 @@
       "whyFit": "Por qué soy buena para esto"
     },
     "email": {
+      "label": "Tu dirección de email",
       "headline": "¿Querés la propuesta completa?",
       "body": "Dejá tu email y te mando el brief más un link para coordinar una llamada.",
       "placeholder": "vos{'@'}empresa.com",

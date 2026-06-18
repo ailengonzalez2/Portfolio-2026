@@ -89,6 +89,8 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                   : 'glass-card'
               ]"
               @mouseenter="setActiveCard(service.id)"
+              @click="setActiveCard(service.id)"
+              @focusin="setActiveCard(service.id)"
             >
               <!-- Card Inner Container -->
               <div class="relative h-full min-h-[440px]">

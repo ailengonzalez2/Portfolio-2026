@@ -29,10 +29,10 @@ const postKeys = ['streaming', 'ragEvals', 'figmaVue', 'defiUi'] as const
           :transition="{ duration: 0.5 }"
           :in-view-options="{ once: true }"
         >
-          <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
+          <h2 class="text-[#64748b] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
             {{ $t('writing.section') }}
           </h2>
-          <div class="h-[2px] w-[50px] bg-[#a2a2a2] mb-8" />
+          <div class="h-[2px] w-[50px] bg-[#64748b] mb-8" />
 
           <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-[#0f172b] dark:text-white tracking-tight mb-4">
             {{ $t('writing.title') }}
@@ -65,7 +65,7 @@ const postKeys = ['streaming', 'ragEvals', 'figmaVue', 'defiUi'] as const
                 <p class="text-sm text-[#62748e] dark:text-neutral-400 leading-relaxed mb-2">
                   {{ $t(`writing.posts.${key}.blurb`) }}
                 </p>
-                <p class="text-[11px] uppercase tracking-[0.5px] font-medium text-[#90a1b9]">
+                <p class="text-[11px] uppercase tracking-[0.5px] font-medium text-[#64748b]">
                   {{ $t('writing.comingSoon') }}
                 </p>
               </div>

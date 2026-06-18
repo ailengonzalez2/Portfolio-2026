@@ -64,12 +64,12 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                     :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
                   />
                 </span>
-                <span class="text-gray-400 dark:text-gray-500 text-base">
+                <span class="text-gray-500 dark:text-gray-400 text-base">
                   {{ global.available ? 'Available for projects' : 'Not available' }}
                 </span>
               </div>
               <span class="size-1 rounded-full bg-gray-300 dark:bg-gray-600" />
-              <span class="text-gray-400 dark:text-gray-500 text-base">GMT-3</span>
+              <span class="text-gray-500 dark:text-gray-400 text-base">GMT-3</span>
             </div>
 
             <h2

@@ -161,7 +161,7 @@ const related = computed(() =>
           class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 pb-12 border-b border-[#e2e8f0] dark:border-neutral-800"
         >
           <div v-if="cs?.role">
-            <p class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-1.5">
+            <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-1.5">
               {{ $t('projects.caseStudy.role') }}
             </p>
             <p class="text-primary-custom text-base">
@@ -169,7 +169,7 @@ const related = computed(() =>
             </p>
           </div>
           <div v-if="cs?.client">
-            <p class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-1.5">
+            <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-1.5">
               {{ $t('projects.caseStudy.client') }}
             </p>
             <p class="text-primary-custom text-base">
@@ -181,7 +181,7 @@ const related = computed(() =>
         <!-- Case study sections -->
         <template v-if="cs">
           <section class="mb-12">
-            <h2 class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-3">
+            <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
               {{ $t('projects.caseStudy.problem') }}
             </h2>
             <p class="text-base sm:text-lg text-primary-custom leading-relaxed">
@@ -190,7 +190,7 @@ const related = computed(() =>
           </section>
 
           <section class="mb-12">
-            <h2 class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-3">
+            <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
               {{ $t('projects.caseStudy.approach') }}
             </h2>
             <p class="text-base sm:text-lg text-primary-custom leading-relaxed">
@@ -215,7 +215,7 @@ const related = computed(() =>
           </section>
 
           <section class="mb-12">
-            <h2 class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-3">
+            <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
               {{ $t('projects.caseStudy.result') }}
             </h2>
             <p class="text-base sm:text-lg text-primary-custom leading-relaxed">
@@ -240,7 +240,7 @@ const related = computed(() =>
           </section>
 
           <section class="mb-16">
-            <h2 class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-3">
+            <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
               {{ $t('projects.caseStudy.stack') }}
             </h2>
             <div class="flex flex-wrap gap-2">
@@ -260,7 +260,7 @@ const related = computed(() =>
           v-else
           class="mb-16"
         >
-          <h2 class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-3">
+          <h2 class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
             {{ $t('projects.caseStudy.overview') }}
           </h2>
           <p class="text-base sm:text-lg text-primary-custom leading-relaxed mb-6">

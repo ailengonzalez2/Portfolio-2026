@@ -44,7 +44,7 @@ watch(() => route.fullPath, () => checkHash())
           <h3 class="text-base sm:text-lg font-semibold text-[#0f172b] dark:text-white leading-tight">
             {{ $t('brief.title') }}
           </h3>
-          <p class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mt-0.5">
+          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mt-0.5">
             {{ $t('brief.section') }}
           </p>
         </div>

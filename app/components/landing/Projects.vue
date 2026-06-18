@@ -82,10 +82,10 @@ onUnmounted(() => {
           :transition="{ duration: 0.5 }"
           :in-view-options="{ once: true }"
         >
-          <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
+          <h2 class="text-[#64748b] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
             {{ $t('projects.latestSection') }}
           </h2>
-          <div class="h-[2px] w-[50px] bg-[#a2a2a2] mb-8" />
+          <div class="h-[2px] w-[50px] bg-[#64748b] mb-8" />
         </Motion>
 
         <!-- Grid with custom columns: left card wider (2fr), right card narrower (1fr) -->
@@ -120,8 +120,14 @@ onUnmounted(() => {
 
                 <!-- Content below image -->
                 <div>
-                  <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
-                    {{ selfProjects[0]?.title }}
+                  <h3 class="text-[20px] font-bold leading-[28px] tracking-[-0.45px] mb-1">
+                    <NuxtLink
+                      :to="`/projects/${selfProjects[0]?.id}`"
+                      class="text-[#0f172b] dark:text-white hover:text-primary transition-colors rounded-sm"
+                      @click.stop
+                    >
+                      {{ selfProjects[0]?.title }}
+                    </NuxtLink>
                   </h3>
                   <div
                     class="relative mb-4 overflow-hidden cursor-pointer lg:cursor-default pointer-events-auto"
@@ -145,6 +151,19 @@ onUnmounted(() => {
                         'lg:opacity-100 lg:group-hover:opacity-0 lg:group-hover:duration-500'
                       ]"
                     />
+                  </div>
+                  <!-- Tech stack -->
+                  <div
+                    v-if="selfProjects[0]?.caseStudy?.stack?.length"
+                    class="flex items-center gap-1.5 flex-wrap mb-4"
+                  >
+                    <span
+                      v-for="tech in selfProjects[0]?.caseStudy?.stack"
+                      :key="tech"
+                      class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-neutral-100 dark:bg-neutral-800 text-[#62748e] dark:text-neutral-300"
+                    >
+                      {{ tech }}
+                    </span>
                   </div>
                   <!-- Action buttons -->
                   <div class="flex items-center gap-2 flex-wrap pointer-events-auto">
@@ -240,8 +259,14 @@ onUnmounted(() => {
 
                 <!-- Content below image -->
                 <div>
-                  <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
-                    {{ selfProjects[1]?.title }}
+                  <h3 class="text-[20px] font-bold leading-[28px] tracking-[-0.45px] mb-1">
+                    <NuxtLink
+                      :to="`/projects/${selfProjects[1]?.id}`"
+                      class="text-[#0f172b] dark:text-white hover:text-primary transition-colors rounded-sm"
+                      @click.stop
+                    >
+                      {{ selfProjects[1]?.title }}
+                    </NuxtLink>
                   </h3>
                   <div
                     class="relative mb-4 overflow-hidden cursor-pointer lg:cursor-default pointer-events-auto"
@@ -265,6 +290,19 @@ onUnmounted(() => {
                         'lg:opacity-100 lg:group-hover:opacity-0 lg:group-hover:duration-500'
                       ]"
                     />
+                  </div>
+                  <!-- Tech stack -->
+                  <div
+                    v-if="selfProjects[1]?.caseStudy?.stack?.length"
+                    class="flex items-center gap-1.5 flex-wrap mb-4"
+                  >
+                    <span
+                      v-for="tech in selfProjects[1]?.caseStudy?.stack"
+                      :key="tech"
+                      class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-neutral-100 dark:bg-neutral-800 text-[#62748e] dark:text-neutral-300"
+                    >
+                      {{ tech }}
+                    </span>
                   </div>
                   <!-- Action buttons -->
                   <div class="flex items-center gap-2 flex-wrap pointer-events-auto">
@@ -363,8 +401,14 @@ onUnmounted(() => {
 
                 <!-- Content below image -->
                 <div>
-                  <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
-                    {{ selfProjects[2]?.title }}
+                  <h3 class="text-[20px] font-bold leading-[28px] tracking-[-0.45px] mb-1">
+                    <NuxtLink
+                      :to="`/projects/${selfProjects[2]?.id}`"
+                      class="text-[#0f172b] dark:text-white hover:text-primary transition-colors rounded-sm"
+                      @click.stop
+                    >
+                      {{ selfProjects[2]?.title }}
+                    </NuxtLink>
                   </h3>
                   <div
                     class="relative mb-4 overflow-hidden cursor-pointer lg:cursor-default pointer-events-auto"
@@ -388,6 +432,19 @@ onUnmounted(() => {
                         'lg:opacity-100 lg:group-hover:opacity-0 lg:group-hover:duration-500'
                       ]"
                     />
+                  </div>
+                  <!-- Tech stack -->
+                  <div
+                    v-if="selfProjects[2]?.caseStudy?.stack?.length"
+                    class="flex items-center gap-1.5 flex-wrap mb-4"
+                  >
+                    <span
+                      v-for="tech in selfProjects[2]?.caseStudy?.stack"
+                      :key="tech"
+                      class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-neutral-100 dark:bg-neutral-800 text-[#62748e] dark:text-neutral-300"
+                    >
+                      {{ tech }}
+                    </span>
                   </div>
                   <!-- Action buttons -->
                   <div class="flex items-center gap-2 flex-wrap pointer-events-auto">
@@ -483,8 +540,14 @@ onUnmounted(() => {
 
                 <!-- Content below image -->
                 <div>
-                  <h3 class="text-[20px] font-bold text-[#0f172b] dark:text-white leading-[28px] tracking-[-0.45px] mb-1">
-                    {{ selfProjects[3]?.title }}
+                  <h3 class="text-[20px] font-bold leading-[28px] tracking-[-0.45px] mb-1">
+                    <NuxtLink
+                      :to="`/projects/${selfProjects[3]?.id}`"
+                      class="text-[#0f172b] dark:text-white hover:text-primary transition-colors rounded-sm"
+                      @click.stop
+                    >
+                      {{ selfProjects[3]?.title }}
+                    </NuxtLink>
                   </h3>
                   <div
                     class="relative mb-4 overflow-hidden cursor-pointer lg:cursor-default pointer-events-auto"
@@ -508,6 +571,19 @@ onUnmounted(() => {
                         'lg:opacity-100 lg:group-hover:opacity-0 lg:group-hover:duration-500'
                       ]"
                     />
+                  </div>
+                  <!-- Tech stack -->
+                  <div
+                    v-if="selfProjects[3]?.caseStudy?.stack?.length"
+                    class="flex items-center gap-1.5 flex-wrap mb-4"
+                  >
+                    <span
+                      v-for="tech in selfProjects[3]?.caseStudy?.stack"
+                      :key="tech"
+                      class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-neutral-100 dark:bg-neutral-800 text-[#62748e] dark:text-neutral-300"
+                    >
+                      {{ tech }}
+                    </span>
                   </div>
                   <!-- Action buttons -->
                   <div class="flex items-center gap-2 flex-wrap pointer-events-auto">

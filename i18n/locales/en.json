@@ -84,8 +84,7 @@
   "about": {
     "heading": "About",
     "pageTitle": "Frontend developer obsessed with AI and UI",
-    "downloadCv": "Download CV",
-    "exploreCv": "Explore all CV",
+    "exploreCv": "View full CV",
     "designCode": "Design + Code",
     "designCodeBody": "I mix solid design principles with practical, efficient development to create clean, responsive, and pixel-perfect interfaces. I take care of the whole process — from early research to prototypes to bringing everything to life with smooth, modern code.",
     "workExperience": "Work Experience",
@@ -137,6 +136,7 @@
   "brief": {
     "section": "Brief Generator",
     "title": "Get a personalized brief",
+    "inputLabel": "Describe your project",
     "intro": "Describe what you want to build in your own words. I'll generate a real project brief in 30 seconds — scope, timeline, price range, and what I'd ship first.",
     "floatingCta": "Try the AI brief",
     "floatingCtaShort": "Brief",
@@ -172,6 +172,7 @@
       "whyFit": "Why I'm a fit"
     },
     "email": {
+      "label": "Your email address",
       "headline": "Want the full proposal?",
       "body": "Drop your email and I'll send the brief plus a calendar link to chat about it.",
       "placeholder": "you{'@'}company.com",

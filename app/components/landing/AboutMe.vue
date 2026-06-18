@@ -96,22 +96,14 @@ const certifications = [
       >
         <div class="mb-[66px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <div>
-            <h2 class="text-[#a2a2a2] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
+            <h2 class="text-[#64748b] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
               {{ $t('about.heading') }}
             </h2>
-            <div class="h-[2px] w-[50px] bg-[#a2a2a2]" />
+            <div class="h-[2px] w-[50px] bg-[#64748b]" />
           </div>
 
           <!-- Action Buttons -->
           <div class="flex flex-row gap-3">
-            <button class="h-[41px] px-3 py-1.5 bg-gradient-to-r from-[#09090b] to-[#09090b] border-[0.75px] border-[rgba(255,255,255,0.3)] rounded-lg shadow-[0px_0px_0px_1px_#121212] flex items-center justify-center gap-2.5 text-white text-base font-normal whitespace-nowrap cursor-pointer hover:opacity-90 transition-opacity">
-              <UIcon
-                name="i-lucide-download"
-                class="size-3.5"
-              />
-              <span>{{ $t('about.downloadCv') }}</span>
-            </button>
-
             <a
               href="https://cv.ailengonzalez.ar/"
               target="_blank"
@@ -142,7 +134,7 @@ const certifications = [
               :in-view-options="{ once: true }"
               class="space-y-5"
             >
-              <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
+              <h3 class="text-[#64748b] text-[14px] font-bold uppercase tracking-[1.25px]">
                 {{ $t('about.designCode') }}
               </h3>
               <p class="text-primary-custom text-[16px] leading-[26px] tracking-[-0.31px]">
@@ -158,7 +150,7 @@ const certifications = [
               :in-view-options="{ once: true }"
               class="space-y-8"
             >
-              <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
+              <h3 class="text-[#64748b] text-[14px] font-bold uppercase tracking-[1.25px]">
                 {{ $t('about.workExperience') }}
               </h3>
 
@@ -208,7 +200,7 @@ const certifications = [
               :in-view-options="{ once: true }"
               class="space-y-[25px]"
             >
-              <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
+              <h3 class="text-[#64748b] text-[14px] font-bold uppercase tracking-[1.25px]">
                 {{ $t('about.skills') }}
               </h3>
 
@@ -287,7 +279,7 @@ const certifications = [
               :in-view-options="{ once: true }"
               class="space-y-[15px]"
             >
-              <h3 class="text-[#90a1b9] text-[14px] font-bold uppercase tracking-[1.25px]">
+              <h3 class="text-[#64748b] text-[14px] font-bold uppercase tracking-[1.25px]">
                 {{ $t('about.certifications') }}
               </h3>
 

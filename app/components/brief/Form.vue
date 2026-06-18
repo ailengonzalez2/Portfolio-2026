@@ -210,23 +210,33 @@ async function submitEmail() {
 
     <!-- Input card -->
     <div class="rounded-2xl border border-[#e2e8f0] dark:border-neutral-800 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm p-4 sm:p-5">
+      <label
+        for="brief-description"
+        class="sr-only"
+      >{{ $t('brief.inputLabel') }}</label>
       <textarea
+        id="brief-description"
         v-model="description"
         :placeholder="activePlaceholder"
         :disabled="status === 'streaming'"
         :maxlength="MAX"
         rows="4"
-        class="brief-textarea w-full resize-none bg-transparent border-0 text-[#0f172b] dark:text-white text-base leading-relaxed placeholder:text-[#94a3b8] dark:placeholder:text-neutral-500 focus:outline-none focus:ring-0 disabled:opacity-60"
+        :aria-label="$t('brief.inputLabel')"
+        aria-describedby="brief-footnote"
+        class="brief-textarea w-full resize-none bg-transparent border-0 text-[#0f172b] dark:text-white text-base leading-relaxed placeholder:text-[#64748b] dark:placeholder:text-neutral-500 focus:outline-none focus:ring-0 disabled:opacity-60"
       />
 
       <!-- Counter -->
       <div class="flex items-center justify-between mt-2 mb-3">
-        <p class="text-[11px] text-[#94a3b8] dark:text-neutral-500">
+        <p
+          id="brief-footnote"
+          class="text-[11px] text-[#64748b] dark:text-neutral-500"
+        >
           {{ $t('brief.footnote') }}
         </p>
         <span
           class="text-[11px] font-medium tabular-nums"
-          :class="charCount > MAX - 30 ? 'text-orange-500' : 'text-[#94a3b8] dark:text-neutral-500'"
+          :class="charCount > MAX - 30 ? 'text-orange-500' : 'text-[#64748b] dark:text-neutral-500'"
         >
           {{ $t('brief.counter', { count: charCount, max: MAX }) }}
         </span>
@@ -287,6 +297,7 @@ async function submitEmail() {
       >
         <p
           v-if="status === 'error' && errorMessage"
+          role="alert"
           class="mt-3 text-sm text-red-500"
         >
           {{ errorMessage }}
@@ -340,7 +351,7 @@ async function submitEmail() {
           v-if="sections.WHAT_I_HEARD"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-2">
+          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-2">
             {{ $t('brief.sections.whatIHeard') }}
           </p>
           <p class="text-[15px] text-[#0f172b] dark:text-neutral-200 leading-relaxed">
@@ -353,7 +364,7 @@ async function submitEmail() {
           v-if="phasesList.length"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-3">
+          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
             {{ $t('brief.sections.phases') }}
           </p>
           <ol class="space-y-2.5">
@@ -375,7 +386,7 @@ async function submitEmail() {
           v-if="stackList.length"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-3">
+          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-3">
             {{ $t('brief.sections.stack') }}
           </p>
           <div class="flex flex-wrap gap-1.5">
@@ -394,7 +405,7 @@ async function submitEmail() {
           v-if="sections.BUILD_FIRST"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-2">
+          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-2">
             {{ $t('brief.sections.buildFirst') }}
           </p>
           <p class="text-[15px] text-[#0f172b] dark:text-neutral-200 leading-relaxed">
@@ -404,7 +415,7 @@ async function submitEmail() {
 
         <!-- Why fit -->
         <div v-if="sections.WHY_FIT">
-          <p class="text-[11px] uppercase tracking-[1px] text-[#90a1b9] font-bold mb-2">
+          <p class="text-[11px] uppercase tracking-[1px] text-[#64748b] font-bold mb-2">
             {{ $t('brief.sections.whyFit') }}
           </p>
           <p class="text-[15px] text-[#0f172b] dark:text-neutral-200 leading-relaxed">
@@ -446,12 +457,20 @@ async function submitEmail() {
             class="flex flex-col sm:flex-row gap-2"
             @submit.prevent="submitEmail"
           >
+            <label
+              for="brief-email"
+              class="sr-only"
+            >{{ $t('brief.email.label') }}</label>
             <input
+              id="brief-email"
               v-model="email"
               type="email"
               :placeholder="$t('brief.email.placeholder')"
               :disabled="emailStatus === 'sending'"
-              class="grow rounded-full bg-white dark:bg-neutral-900 border border-[#e2e8f0] dark:border-neutral-700 px-4 py-2.5 text-sm text-[#0f172b] dark:text-white placeholder:text-[#94a3b8] dark:placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-violet-400 disabled:opacity-60"
+              :aria-label="$t('brief.email.label')"
+              :aria-invalid="emailStatus === 'error'"
+              :aria-describedby="emailError ? 'brief-email-error' : undefined"
+              class="grow rounded-full bg-white dark:bg-neutral-900 border border-[#e2e8f0] dark:border-neutral-700 px-4 py-2.5 text-sm text-[#0f172b] dark:text-white placeholder:text-[#64748b] dark:placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-violet-400 disabled:opacity-60"
             >
             <UButton
               type="submit"
@@ -465,6 +484,8 @@ async function submitEmail() {
           </form>
           <p
             v-if="emailError"
+            id="brief-email-error"
+            role="alert"
             class="mt-2 text-xs text-red-500"
           >
             {{ emailError }}
@@ -509,7 +530,7 @@ async function submitEmail() {
           </template>
           {{ $t('brief.bookCall') }}
         </UButton>
-        <span class="text-[#94a3b8] dark:text-neutral-500 uppercase text-[11px] tracking-[1px]">
+        <span class="text-[#64748b] dark:text-neutral-500 uppercase text-[11px] tracking-[1px]">
           {{ $t('brief.or') }}
         </span>
         <button

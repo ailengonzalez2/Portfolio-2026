@@ -84,7 +84,7 @@ const mobileBottom = computed(() => {
   >
     <!-- Decorative vertical line -->
     <div
-      class="decorative-line w-px h-40 bg-linear-to-b from-transparent via-[#ABB2BF]/60 to-[#ABB2BF] transition-all duration-500"
+      class="decorative-line w-px h-40 bg-linear-to-b from-transparent via-[#6b7280]/60 to-[#6b7280] transition-all duration-500"
       :class="isExpanded ? 'opacity-0 h-0' : 'opacity-100'"
       aria-hidden="true"
     />
@@ -107,7 +107,7 @@ const mobileBottom = computed(() => {
         <UIcon
           :name="social.icon"
           class="social-icon-svg size-8 transition-all duration-300 group-hover:scale-110"
-          :style="{ color: isExpanded ? social.brandColor : '#ABB2BF' }"
+          :style="{ color: isExpanded ? social.brandColor : '#6b7280' }"
         />
         <!-- Name on hover -->
         <span
@@ -145,7 +145,7 @@ const mobileBottom = computed(() => {
           :name="social.icon"
           class="social-icon-svg size-6 transition-all duration-500 group-hover:scale-110"
           :class="isMobileExpanded ? 'scale-125' : ''"
-          :style="{ color: isMobileExpanded ? social.brandColor : '#ABB2BF' }"
+          :style="{ color: isMobileExpanded ? social.brandColor : '#6b7280' }"
         />
       </ULink>
     </nav>
