@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
+const { locale } = useI18n()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
 
@@ -10,22 +11,41 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
   link: [
-    { rel: 'icon', href: '/favicon.ico' },
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-    { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Fira+Code:wght@400;500&family=Megrim&display=swap' }
+    { rel: 'icon', href: '/favicon.ico' }
   ],
   htmlAttrs: {
-    lang: 'en'
+    lang: locale
   }
 })
 
 useSeoMeta({
-  titleTemplate: '%s - Ailen Gonzalez',
-  ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/portfolio-light.png',
-  twitterImage: 'https://ui.nuxt.com/assets/templates/nuxt/portfolio-light.png',
+  ogType: 'website',
+  ogSiteName: 'Ailen Gonzalez',
   twitterCard: 'summary_large_image'
 })
+
+// Default social-share image, auto-generated. Individual pages can override.
+defineOgImageComponent('NuxtSeo', {
+  title: 'Ailen Gonzalez',
+  description: 'AI Product Engineer · Designer & Frontend Developer'
+})
+
+// Structured data for search engines and rich results
+useSchemaOrg([
+  definePerson({
+    name: 'Ailen Gonzalez',
+    jobTitle: 'AI Product Engineer',
+    url: 'https://ailengonzalez.ar',
+    sameAs: [
+      'https://www.linkedin.com/in/ailengonzalez/',
+      'https://github.com/ailengonzalez2',
+      'https://www.upwork.com/freelancers/ailengonzalez'
+    ]
+  }),
+  defineWebSite({
+    name: 'Ailen Gonzalez'
+  })
+])
 </script>
 
 <template>

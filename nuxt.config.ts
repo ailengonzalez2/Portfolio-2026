@@ -5,10 +5,16 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    'nuxt-og-image',
+    '@nuxtjs/seo',
     'motion-v/nuxt',
     '@nuxtjs/i18n'
   ],
+
+  site: {
+    url: 'https://ailengonzalez.ar',
+    name: 'Ailen Gonzalez',
+    description: 'Ailen Gonzalez — AI Product Engineer. I design and ship user-facing AI features and polished web experiences.'
+  },
 
   i18n: {
     defaultLocale: 'en',

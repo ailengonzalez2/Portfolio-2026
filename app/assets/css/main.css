@@ -5,7 +5,6 @@
 
 @theme static {
   --font-sans: 'Red Hat Display', sans-serif;
-  --font-serif: 'Instrument Serif', serif;
   --font-display: 'Megrim', cursive;
   --font-mono: 'Fira Code', monospace;
 
@@ -56,7 +55,12 @@
   }
 }
 
-/* Initial loading overlay - prevents flash before IntroAnimation mounts */
+/* Initial loading overlay - prevents flash before IntroAnimation mounts.
+   Suppressed via .intro-skip when the intro won't play (see plugins/intro.client.ts) */
+html.intro-skip::before {
+  display: none;
+}
+
 html::before {
   content: '';
   position: fixed;
@@ -81,6 +85,27 @@ html::before {
 /* Smooth page transitions */
 html {
   scroll-behavior: smooth;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  /* Skip the initial black intro overlay entirely */
+  html::before {
+    display: none !important;
+  }
 }
 
 /* Enhanced text shadows for hero */
@@ -161,10 +186,6 @@ html {
   font-size: 1.125rem;
   text-transform: capitalize;
   transition: all 0.3s ease;
-}
-
-.btn-gradient::before {
-  content: none;
 }
 
 .btn-gradient:hover {
