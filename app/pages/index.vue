@@ -20,7 +20,7 @@ useSeoMeta({
     </div>
     <LandingHook />
     <LandingProjects />
-    <section class="py-10 sm:py-14 bg-background">
+    <section class="pt-10 sm:pt-14 pb-24 sm:pb-32 bg-background">
       <TechMarquee />
     </section>
     <LandingServices />

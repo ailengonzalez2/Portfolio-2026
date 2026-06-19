@@ -23,14 +23,14 @@ const socialLinks: SocialLink[] = [
     icon: 'i-simple-icons-readdotcv',
     url: 'https://cv.ailengonzalez.ar/',
     label: 'Leer mi cv en Read.cv',
-    brandColor: '#24292e'
+    brandColor: '#B0282D'
   },
   {
     name: 'GitHub',
     icon: 'i-mdi-github',
     url: 'https://github.com/ailengonzalez2',
     label: 'Ver repositorios en GitHub',
-    brandColor: '#24292e'
+    brandColor: '#3b2063'
   },
   {
     name: 'Upwork',
@@ -107,6 +107,7 @@ const mobileBottom = computed(() => {
         <UIcon
           :name="social.icon"
           class="social-icon-svg size-8 transition-all duration-300 group-hover:scale-110"
+          :class="isExpanded ? 'scale-125' : ''"
           :style="{ color: isExpanded ? social.brandColor : '#6b7280' }"
         />
         <!-- Name on hover -->

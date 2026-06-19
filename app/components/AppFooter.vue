@@ -4,12 +4,12 @@ const year = new Date().getFullYear()
 </script>
 
 <template>
-  <footer class="relative z-10 bg-[#0a0a0a] text-white">
+  <footer class="relative z-10 min-h-screen flex flex-col bg-[#0a0a0a] text-white">
     <section
       id="contact"
-      class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      class="flex-1 flex flex-col items-center justify-center py-14 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
-      <div class="max-w-6xl mx-auto">
+      <div class="w-full max-w-6xl mx-auto">
         <!-- Brand statement: Design + Code + AI -->
         <Motion
           :initial="{ opacity: 0, y: 30 }"

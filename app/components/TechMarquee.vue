@@ -27,9 +27,9 @@ const techLogos = [
           <img
             :src="tech.icon"
             :alt="tech.label"
-            class="h-4 sm:h-5 w-auto object-contain"
+            class="h-6 sm:h-8 w-auto object-contain"
           >
-          <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 whitespace-nowrap">
+          <span class="text-base sm:text-lg font-medium text-neutral-600 dark:text-neutral-300 whitespace-nowrap">
             {{ tech.label }}
           </span>
         </div>
@@ -47,9 +47,9 @@ const techLogos = [
           <img
             :src="tech.icon"
             :alt="tech.label"
-            class="h-4 sm:h-5 w-auto object-contain"
+            class="h-6 sm:h-8 w-auto object-contain"
           >
-          <span class="text-sm font-medium text-neutral-600 dark:text-neutral-300 whitespace-nowrap">
+          <span class="text-base sm:text-lg font-medium text-neutral-600 dark:text-neutral-300 whitespace-nowrap">
             {{ tech.label }}
           </span>
         </div>
