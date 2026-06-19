@@ -93,14 +93,7 @@ const certifications = computed(() => [
         :transition="{ duration: 0.5 }"
         :in-view-options="{ once: true }"
       >
-        <div class="mb-[66px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-          <div>
-            <h2 class="text-[#64748b] text-[20px] font-medium uppercase tracking-normal mb-[10px]">
-              {{ $t('about.heading') }}
-            </h2>
-            <div class="h-[2px] w-[50px] bg-[#64748b]" />
-          </div>
-
+        <div class="mb-[66px] flex flex-col sm:flex-row sm:items-center sm:justify-end gap-6">
           <!-- Action Buttons -->
           <div class="flex flex-row gap-3">
             <a
@@ -125,22 +118,6 @@ const certifications = computed(() => [
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-14">
           <!-- Left Column -->
           <div class="space-y-[41px]">
-            <!-- Design + Code Section -->
-            <Motion
-              :initial="{ opacity: 0, y: 20 }"
-              :while-in-view="{ opacity: 1, y: 0 }"
-              :transition="{ duration: 0.5, delay: 0.1 }"
-              :in-view-options="{ once: true }"
-              class="space-y-5"
-            >
-              <h3 class="text-[#64748b] text-[14px] font-bold uppercase tracking-[1.25px]">
-                {{ $t('about.designCode') }}
-              </h3>
-              <p class="text-primary-custom text-[16px] leading-[26px] tracking-[-0.31px]">
-                {{ $t('about.designCodeBody') }}
-              </p>
-            </Motion>
-
             <!-- Work Experience -->
             <Motion
               :initial="{ opacity: 0, y: 20 }"

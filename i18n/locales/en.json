@@ -127,16 +127,15 @@
       }
     }
   },
-  "contact": {
-    "title": "Got a project in mind?",
-    "copied": "Email copied to clipboard!",
-    "copyAria": "Copy email address"
-  },
   "footer": {
     "availableForProjects": "Available for projects",
     "notAvailable": "Not available",
-    "timezone": "GMT-3",
-    "orBookCall": "or book a call"
+    "timezone": "GMT-3"
+  },
+  "prefooter": {
+    "design": "Design",
+    "code": "Code",
+    "ai": "AI"
   },
   "writing": {
     "section": "Writing",

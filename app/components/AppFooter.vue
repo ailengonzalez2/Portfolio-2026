@@ -1,145 +1,89 @@
 <script setup lang="ts">
-import { useIntersectionObserver, useClipboard } from '@vueuse/core'
-import { ref, computed } from 'vue'
-
 const { global } = useAppConfig()
-const { t } = useI18n()
 const year = new Date().getFullYear()
-
-const { copy, copied } = useClipboard()
-
-// Word-by-word animation for the contact heading
-const headingWords = computed(() => t('contact.title').split(' '))
-const headingRef = ref<HTMLElement | null>(null)
-const isHeadingVisible = ref(false)
-
-// Trigger animation when heading comes into view
-useIntersectionObserver(
-  headingRef,
-  ([{ isIntersecting }]) => {
-    if (isIntersecting) {
-      isHeadingVisible.value = true
-    }
-  },
-  { threshold: 0.3 }
-)
-
-// Calculate delay for each word based on index
-const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
-  return `${baseDelay + (wordIndex * 0.15)}s`
-}
 </script>
 
 <template>
-  <footer class="relative z-10 bg-background">
-    <!-- Contact Section -->
+  <footer class="relative z-10 bg-[#0a0a0a] text-white">
     <section
       id="contact"
-      class="py-20 sm:py-28 relative border-b border-default/50"
+      class="py-14 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
-      <!-- Subtle background gradient -->
-      <div class="absolute inset-0 bg-linear-to-b from-transparent via-elevated/20 to-transparent pointer-events-none" />
+      <div class="max-w-6xl mx-auto">
+        <!-- Brand statement: Design + Code + AI -->
+        <Motion
+          :initial="{ opacity: 0, y: 30 }"
+          :while-in-view="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6 }"
+          :in-view-options="{ once: true }"
+          class="text-center"
+        >
+          <h2 class="flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95]">
+            <span>{{ $t('prefooter.design') }}</span>
+            <span class="text-white/30 font-light">+</span>
+            <span>{{ $t('prefooter.code') }}</span>
+            <span class="text-white/30 font-light">+</span>
+            <span class="btn-gradient-text">{{ $t('prefooter.ai') }}</span>
+          </h2>
+        </Motion>
 
-      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Centered heading + badge -->
-        <div class="flex flex-col items-center justify-center">
-          <!-- Main heading with badge -->
-          <Motion
-            :initial="{ opacity: 0, y: 30 }"
-            :while-in-view="{ opacity: 1, y: 0 }"
-            :transition="{ duration: 0.6 }"
-            :in-view-options="{ once: true }"
-            class="flex flex-col items-center gap-12"
+        <!-- Divider -->
+        <div class="my-8 sm:my-12 h-px w-full max-w-xs mx-auto bg-white/10" />
+
+        <!-- Contact -->
+        <Motion
+          :initial="{ opacity: 0, y: 30 }"
+          :while-in-view="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6 }"
+          :in-view-options="{ once: true }"
+          class="flex flex-col items-center gap-10"
+        >
+          <!-- Available Badge -->
+          <div
+            class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 whitespace-nowrap"
           >
-            <!-- Available Badge -->
-            <div
-              class="hidden lg:inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-sm whitespace-nowrap"
-            >
-              <div class="flex items-center gap-2">
-                <span class="relative flex size-2">
-                  <span
-                    class="absolute inline-flex size-full rounded-full opacity-75 animate-ping"
-                    :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
-                  />
-                  <span
-                    class="relative inline-flex size-2 rounded-full"
-                    :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
-                  />
-                </span>
-                <span class="text-gray-500 dark:text-gray-400 text-base">
-                  {{ global.available ? $t('footer.availableForProjects') : $t('footer.notAvailable') }}
-                </span>
-              </div>
-              <span class="size-1 rounded-full bg-gray-300 dark:bg-gray-600" />
-              <span class="text-gray-500 dark:text-gray-400 text-base">{{ $t('footer.timezone') }}</span>
-            </div>
-
-            <h2
-              ref="headingRef"
-              class="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-display font-medium tracking-wide leading-tight text-center overflow-hidden"
-            >
-              <span
-                v-for="(word, index) in headingWords"
-                :key="index"
-                class="word-animate inline-block"
-                :class="{ 'is-visible': isHeadingVisible }"
-                :style="{ transitionDelay: getWordDelay(index, 0.1) }"
-              >
-                {{ word }}&nbsp;
-              </span>
-            </h2>
-
-            <!-- Email (copy to clipboard) -->
-            <div class="flex flex-col items-center gap-2">
-              <button
-                type="button"
-                class="group relative inline-flex items-center gap-2.5 text-xl sm:text-2xl lg:text-3xl font-mono font-light lowercase hover:text-primary transition-colors"
-                :aria-label="`${$t('contact.copyAria')} ${global.email}`"
-                @click="copy(global.email)"
-              >
-                {{ global.email }}
-                <UIcon
-                  :name="copied ? 'i-lucide-check' : 'i-lucide-copy'"
-                  class="size-4 sm:size-5 text-muted opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity"
+            <div class="flex items-center gap-2">
+              <span class="relative flex size-2">
+                <span
+                  class="absolute inline-flex size-full rounded-full opacity-75 animate-ping"
+                  :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
                 />
-              </button>
-              <p
-                role="status"
-                aria-live="polite"
-                class="text-sm text-success h-5"
-              >
-                <span v-if="copied">{{ $t('contact.copied') }}</span>
-              </p>
+                <span
+                  class="relative inline-flex size-2 rounded-full"
+                  :class="global.available ? 'bg-emerald-400' : 'bg-red-400'"
+                />
+              </span>
+              <span class="text-white/70 text-sm sm:text-base">
+                {{ global.available ? $t('footer.availableForProjects') : $t('footer.notAvailable') }}
+              </span>
             </div>
+            <span class="size-1 rounded-full bg-white/30" />
+            <span class="text-white/70 text-sm sm:text-base">{{ $t('footer.timezone') }}</span>
+          </div>
 
-            <!-- Book a call CTA -->
-            <div class="flex flex-col items-center gap-3">
-              <span class="text-sm text-gray-500 dark:text-gray-400">{{ $t('footer.orBookCall') }}</span>
-              <UButton
-                :to="global.meetingLink"
-                target="_blank"
-                size="lg"
-                class="btn-gradient text-white font-medium rounded-full px-6"
-              >
-                {{ $t('hero.bookCall') }}
-                <template #trailing>
-                  <UIcon
-                    name="i-lucide-arrow-up-right"
-                    class="size-4"
-                  />
-                </template>
-              </UButton>
-            </div>
-          </Motion>
-        </div>
+          <!-- Book a call CTA -->
+          <UButton
+            :to="global.meetingLink"
+            target="_blank"
+            size="lg"
+            class="bg-white text-[#0a0a0a] hover:bg-white/90 font-semibold rounded-full px-8 py-3 text-base"
+          >
+            {{ $t('hero.bookCall') }}
+            <template #trailing>
+              <UIcon
+                name="i-lucide-arrow-up-right"
+                class="size-4"
+              />
+            </template>
+          </UButton>
+        </Motion>
       </div>
     </section>
 
     <!-- Footer Credits -->
-    <div class="py-8 border-t border-default/50">
+    <div class="py-8 border-t border-white/10">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-center text-primary-custom dark:text-primary-custom-dark">
-          <!-- Credits -->
+        <div class="flex items-center justify-center text-white/50">
           <p class="font-sans text-xs sm:text-base text-center">
             <span>© {{ year }} – Designed &amp; Coded by </span>
             <NuxtLink
@@ -155,19 +99,3 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
     </div>
   </footer>
 </template>
-
-<style scoped>
-/* Word-by-word animation - coming up from below */
-.word-animate {
-  opacity: 0;
-  transform: translateY(100%);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* When visible, animate words up */
-.word-animate.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>

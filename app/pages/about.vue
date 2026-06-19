@@ -24,10 +24,10 @@ useSeoMeta({
           <h1 class="max-w-4xl text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-[1.05] text-[#0f172b] dark:text-white">
             {{ $t('about.pageTitle') }}
           </h1>
+          <p class="mt-6 max-w-2xl text-[16px] sm:text-[18px] leading-relaxed text-[#62748e] dark:text-neutral-400">
+            {{ $t('about.designCodeBody') }}
+          </p>
         </div>
-
-        <!-- Tech stack marquee (moved here from the home hero) -->
-        <TechMarquee class="mt-8 sm:mt-10" />
       </Motion>
     </section>
     <LandingAboutMe />
