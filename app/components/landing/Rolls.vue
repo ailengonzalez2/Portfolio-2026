@@ -40,17 +40,17 @@ const splitOpacity = useTransform(scrollYProgress, [0, 0.55, 0.65], [1, 1, 0])
               </h2>
             </div>
 
-            <!-- Engineer -->
+            <!-- Design -->
             <div class="pl-4 sm:pl-12 lg:pl-20 mt-2 sm:mt-4">
               <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
-                Engineer
+                Design
               </h2>
             </div>
 
-            <!-- + -->
+            <!-- & -->
             <div class="pl-16 sm:pl-32 lg:pl-52 xl:pl-72">
               <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
-                +
+                &
               </h2>
             </div>
 
@@ -79,17 +79,17 @@ const splitOpacity = useTransform(scrollYProgress, [0, 0.55, 0.65], [1, 1, 0])
               </h2>
             </div>
 
-            <!-- Engineer -->
+            <!-- Design -->
             <div class="pl-4 sm:pl-12 lg:pl-20 mt-2 sm:mt-4">
               <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
-                Engineer
+                Design
               </h2>
             </div>
 
-            <!-- + -->
+            <!-- & -->
             <div class="pl-16 sm:pl-32 lg:pl-52 xl:pl-72">
               <h2 class="font-sans uppercase text-5xl sm:text-7xl lg:text-8xl xl:text-[140px] text-white tracking-tight leading-[0.85] font-bold">
-                +
+                &
               </h2>
             </div>
 

@@ -16,9 +16,6 @@ const { scrollYProgress } = useScroll({
 const showcaseOpacity = useTransform(scrollYProgress, [0.25, 0.5], [0, 1])
 const showcaseY = useTransform(scrollYProgress, [0.25, 0.52], [40, 0])
 
-const ctaOpacity = useTransform(scrollYProgress, [0.38, 0.58], [0, 1])
-const ctaY = useTransform(scrollYProgress, [0.38, 0.62], [40, 0])
-
 // Vertical project columns spanning the full width. Each column draws a
 // different rotation of the project list (so adjacent columns are NOT
 // aligned) and scrolls at its own speed/direction, looping infinitely.
@@ -50,7 +47,7 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
     <section class="sticky top-0 h-screen bg-white dark:bg-[#0a0a0a] overflow-hidden">
       <!-- Hidden heading kept for SEO / accessibility (banner is visual-only) -->
       <h1 class="sr-only">
-        Ailen Gonzalez — AI Product Engineer
+        Ailen Gonzalez — AI Product Design & Frontend
       </h1>
 
       <!-- Full-viewport vertical project columns -->
@@ -87,20 +84,6 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
             </div>
           </div>
         </div>
-      </Motion>
-
-      <!-- See work CTA overlaid at the bottom -->
-      <Motion
-        :style="{ opacity: ctaOpacity, y: ctaY }"
-        class="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-10"
-      >
-        <UButton
-          to="/#projects"
-          size="lg"
-          class="btn-gradient text-white font-medium rounded-full px-6"
-        >
-          {{ $t('hero.seeWork') }}
-        </UButton>
       </Motion>
     </section>
   </div>

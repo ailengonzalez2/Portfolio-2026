@@ -65,7 +65,7 @@ const getGradientColor = (position: number): { r: number, g: number, b: number }
 
 // Initialize character colors
 const initializeColors = () => {
-  charColors.value = Array(text.value.length).fill('rgb(90, 100, 116)')
+  charColors.value = Array(text.value.length).fill('rgb(203, 213, 225)')
 }
 
 const handleScroll = () => {
@@ -95,16 +95,16 @@ const handleScroll = () => {
     if (highlightInfo) {
       // Get the target gradient color based on position in phrase
       const targetColor = getGradientColor(highlightInfo.position)
-      // Interpolate from dim slate (90, 100, 116) to gradient color
-      const r = Math.round(90 + (charProgress * (targetColor.r - 90)))
-      const g = Math.round(100 + (charProgress * (targetColor.g - 100)))
-      const b = Math.round(116 + (charProgress * (targetColor.b - 116)))
+      // Interpolate from faint slate (203, 213, 225) to gradient color
+      const r = Math.round(203 + (charProgress * (targetColor.r - 203)))
+      const g = Math.round(213 + (charProgress * (targetColor.g - 213)))
+      const b = Math.round(225 + (charProgress * (targetColor.b - 225)))
       return `rgb(${r}, ${g}, ${b})`
     } else {
-      // Interpolate from dim slate (90, 100, 116) to near-white (241, 245, 249)
-      const r = Math.round(90 + (charProgress * 151))
-      const g = Math.round(100 + (charProgress * 145))
-      const b = Math.round(116 + (charProgress * 133))
+      // Interpolate from faint slate (203, 213, 225) to near-black (15, 23, 42)
+      const r = Math.round(203 - (charProgress * 188))
+      const g = Math.round(213 - (charProgress * 190))
+      const b = Math.round(225 - (charProgress * 183))
       return `rgb(${r}, ${g}, ${b})`
     }
   })
@@ -143,7 +143,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="py-20 sm:py-28 relative overflow-hidden bg-[#0a0a0a]">
+  <section class="py-20 sm:py-28 relative overflow-hidden bg-white">
     <!-- Subtle brand glow -->
     <div class="absolute inset-0 bg-linear-to-br from-[#b86adf]/10 via-transparent to-[#ffb147]/10" />
 
@@ -158,13 +158,13 @@ onUnmounted(() => {
           <!-- Main quote with letter animation -->
           <blockquote
             ref="blockquoteRef"
-            class="text-3xl sm:text-4xl lg:text-5xl font-normal leading-snug text-balance"
+            class="max-w-4xl ml-auto text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight"
           >
             <span
               v-for="(char, index) in text.split('')"
               :key="`${index}-${char}`"
               :ref="(el) => registerCharRef(el as HTMLElement | null, index)"
-              :style="{ color: charColors[index] || 'rgb(90, 100, 116)', fontWeight: highlightedInfo.has(index) ? 500 : 400, fontStyle: highlightedInfo.has(index) ? 'italic' : 'normal' }"
+              :style="{ color: charColors[index] || 'rgb(203, 213, 225)', fontWeight: highlightedInfo.has(index) ? 800 : 700, fontStyle: highlightedInfo.has(index) ? 'italic' : 'normal' }"
               class="transition-colors duration-50"
             >
               {{ char }}

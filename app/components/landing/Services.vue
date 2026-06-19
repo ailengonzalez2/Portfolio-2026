@@ -48,7 +48,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
 <template>
   <section
     id="services"
-    class="py-20 sm:py-28 relative overflow-hidden min-h-[900px] flex items-center justify-center"
+    class="py-16 sm:py-20 relative overflow-hidden flex items-center justify-center"
   >
     <!-- Background Images with crossfade -->
     <div class="absolute inset-0">
@@ -117,7 +117,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                   ]"
                 >
                   <!-- Title with word-by-word animation -->
-                  <h3 class="font-sans text-[36px] text-[#2d2d2d] dark:text-white tracking-tight leading-tight mb-6 overflow-hidden">
+                  <h3 class="font-sans text-[28px] text-[#2d2d2d] dark:text-white tracking-tight leading-tight mb-6 overflow-hidden">
                     <span
                       v-for="(word, index) in splitWords(service.title)"
                       :key="index"
@@ -133,7 +133,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                     <li
                       v-for="(item, index) in service.deliverables"
                       :key="item"
-                      class="stagger-item flex items-center gap-2.5 text-[19px] text-[#5a5a5a] dark:text-gray-400"
+                      class="stagger-item flex items-center gap-2.5 text-[15px] text-[#5a5a5a] dark:text-gray-400"
                       :style="{ transitionDelay: getWordDelay(index, 0.45) }"
                     >
                       <UIcon
@@ -149,12 +149,12 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                     <div class="stagger-item stagger-separator h-px w-full bg-[#d4d4d4] dark:bg-gray-600 mb-5" />
                     <NuxtLink
                       to="/#contact"
-                      class="stagger-item stagger-icon-1 inline-flex items-center gap-1.5 rounded-full bg-neutral-900 text-white text-xs font-medium px-3.5 py-1.5 hover:bg-neutral-800 transition-colors"
+                      class="stagger-item stagger-icon-1 inline-flex items-center gap-2 rounded-full bg-neutral-900 text-white text-sm font-medium px-5 py-2.5 hover:bg-neutral-800 transition-colors"
                     >
                       {{ $t('services.startProject') }}
                       <UIcon
                         name="i-lucide-arrow-up-right"
-                        class="size-3.5"
+                        class="size-4"
                       />
                     </NuxtLink>
                   </div>
