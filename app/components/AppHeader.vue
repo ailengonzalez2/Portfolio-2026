@@ -22,6 +22,17 @@ const isPastRolls = computed(() => {
   return scrollY.value > window.innerHeight * 0.65
 })
 
+// The only place the header floats over a dark background is the black Rolls
+// hero on the home page. Everywhere else (other pages, and home past the hero)
+// the header sits over light content / photos, so it gets the opaque light
+// surface with dark text.
+const route = useRoute()
+const overDarkHero = computed(() => route.path === '/' && !isPastRolls.value)
+
+// Full-width square bar only over the dark home hero; a centered pill everywhere
+// else (scrolled, or any non-hero page).
+const isPill = computed(() => isScrolled.value || !overDarkHero.value)
+
 // Mobile menu state
 const isMobileMenuOpen = ref(false)
 
@@ -40,14 +51,13 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
 <template>
   <header
     class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out"
-    :class="isScrolled ? 'px-4 sm:px-6 lg:px-8 pt-4' : 'px-6 sm:px-10 lg:px-16 py-4'"
+    :class="isPill ? 'px-4 sm:px-6 lg:px-8 pt-4' : 'px-6 sm:px-10 lg:px-16 py-4'"
   >
     <div
-      class="relative mx-auto transition-all duration-500 ease-out px-6 py-3"
+      class="glass-base relative mx-auto transition-all duration-500 ease-out px-6 py-3"
       :class="[
-        isScrolled
-          ? 'glass-header glass-header-scrolled max-w-6xl rounded-full'
-          : 'glass-header-top max-w-full rounded-none'
+        isPill ? 'max-w-6xl rounded-full' : 'max-w-full rounded-none',
+        overDarkHero ? 'glass-dark' : 'glass-light'
       ]"
     >
       <div class="flex items-center justify-between">
@@ -63,7 +73,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
               alt="AG Signature"
               class="h-10 w-auto transition-opacity duration-500 ease-in-out group-hover:scale-105"
               :class="[
-                isIntroComplete ? (isPastRolls ? 'opacity-0' : 'opacity-100') : 'opacity-0'
+                isIntroComplete ? (overDarkHero ? 'opacity-100' : 'opacity-0') : 'opacity-0'
               ]"
             >
             <!-- Black logo -->
@@ -72,7 +82,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
               alt="AG Signature"
               class="absolute top-0 left-0 h-10 w-auto transition-opacity duration-500 ease-in-out group-hover:scale-105"
               :class="[
-                isIntroComplete ? (isPastRolls ? 'opacity-100' : 'opacity-0') : 'opacity-0'
+                isIntroComplete ? (overDarkHero ? 'opacity-0' : 'opacity-100') : 'opacity-0'
               ]"
             >
           </div>
@@ -89,7 +99,8 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
               >
                 <NuxtLink
                   :to="link.to"
-                  class="text-xs tracking-wide text-muted-foreground hover:text-foreground transition-colors uppercase"
+                  class="text-xs tracking-wide transition-colors uppercase"
+                  :class="overDarkHero ? 'text-white/75 hover:text-white' : 'text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white'"
                 >
                   {{ translateLabel(link.label) }}
                 </NuxtLink>
@@ -201,72 +212,42 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
 </template>
 
 <style scoped>
-/* Top state - full width, minimal styling */
-.glass-header-top {
-  background: transparent;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+/* Shared frosted base for the header bar */
+.glass-base {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  transition:
+    max-width 500ms ease-out,
+    border-radius 500ms ease-out,
+    background 400ms ease,
+    border-color 400ms ease,
+    box-shadow 400ms ease;
 }
 
-:global(.dark) .glass-header-top {
-  background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+/* Over the dark Rolls hero — subtle dark glass so the white logo + links read */
+.glass-dark {
+  background: rgba(10, 10, 10, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18);
 }
 
-/* Scrolled state - glass pill */
-.glass-header {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+/* Everywhere else — opaque light frosted surface so the varied backgrounds
+   underneath (white sections, Services photos, etc.) can't bleed through and
+   wash out the links. This is what keeps the nav legible at every scroll. */
+.glass-light {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   box-shadow:
-    0 8px 32px 0 rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+    0 10px 36px 0 rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
 }
 
-.glass-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0.6;
-}
-
-.glass-header-scrolled {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.25);
+:global(.dark) .glass-light {
+  background: rgba(20, 20, 20, 0.72);
+  border-color: rgba(255, 255, 255, 0.10);
   box-shadow:
-    0 12px 40px 0 rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
-}
-
-:global(.dark) .glass-header {
-  background: rgba(0, 0, 0, 0.35);
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow:
-    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    0 10px 36px 0 rgba(0, 0, 0, 0.4),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
-}
-
-:global(.dark) .glass-header::before {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02));
-  opacity: 0.4;
-}
-
-:global(.dark) .glass-header-scrolled {
-  background: rgba(0, 0, 0, 0.45);
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow:
-    0 12px 40px 0 rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
 }
 
 /* Button transition - smooth in both directions */
@@ -274,26 +255,36 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
   transition: padding 300ms ease-out, border-radius 300ms ease-in-out;
 }
 
-/* Language toggle */
+/* Language toggle - tone follows the surface underneath */
 .lang-toggle {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--color-foreground, #0f172b);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: color 300ms ease, background 300ms ease, border-color 300ms ease;
 }
 
-.lang-toggle:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.35);
+.glass-light .lang-toggle {
+  background: rgba(0, 0, 0, 0.04);
+  color: #1f2937;
+  border: 1px solid rgba(0, 0, 0, 0.10);
 }
 
-:global(.dark) .lang-toggle {
-  background: rgba(255, 255, 255, 0.05);
+.glass-light .lang-toggle:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+
+:global(.dark) .glass-light .lang-toggle {
+  background: rgba(255, 255, 255, 0.06);
   color: #e5e7eb;
   border-color: rgba(255, 255, 255, 0.12);
 }
 
-:global(.dark) .lang-toggle:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+.glass-dark .lang-toggle {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.glass-dark .lang-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 </style>

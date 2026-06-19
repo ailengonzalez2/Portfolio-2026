@@ -143,7 +143,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="py-20 sm:py-28 relative overflow-hidden bg-white">
+  <section class="py-32 sm:py-44 relative overflow-hidden bg-white">
     <!-- Subtle brand glow -->
     <div class="absolute inset-0 bg-linear-to-br from-[#b86adf]/10 via-transparent to-[#ffb147]/10" />
 
