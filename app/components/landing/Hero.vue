@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Motion, useScroll, useTransform } from 'motion-v'
 import { ref } from 'vue'
-import { projects } from '~/data/projects'
 
 // Reference to scroll container
 const containerRef = ref<HTMLElement | null>(null)
@@ -16,17 +15,44 @@ const { scrollYProgress } = useScroll({
 const showcaseOpacity = useTransform(scrollYProgress, [0.25, 0.5], [0, 1])
 const showcaseY = useTransform(scrollYProgress, [0.25, 0.52], [40, 0])
 
-// Vertical project columns spanning the full width. Each column draws a
-// different rotation of the project list (so adjacent columns are NOT
-// aligned) and scrolls at its own speed/direction, looping infinitely.
+// Showcase images that scroll through the hero columns. The original project
+// covers plus the extra gallery shots, interleaved by project so adjacent
+// tiles belong to different work.
+const heroImages = [
+  { src: '/projects/codecave.png', alt: 'codeCave studio site' },
+  { src: '/projects/habito.png', alt: 'Habito AI task management' },
+  { src: '/projects/docta.jpg', alt: 'Docta culture agenda' },
+  { src: '/projects/asistente.png', alt: 'Asistente booking SaaS' },
+  { src: '/projects/yogaapp.png', alt: 'Yoga & wellness app' },
+  { src: '/projects/codecave1.png', alt: 'codeCave studio site' },
+  { src: '/projects/habito1.png', alt: 'Habito AI task management' },
+  { src: '/projects/docta1.jpg', alt: 'Docta culture agenda' },
+  { src: '/projects/asistente1.png', alt: 'Asistente booking SaaS' },
+  { src: '/projects/codecave2.png', alt: 'codeCave studio site' },
+  { src: '/projects/habito2.png', alt: 'Habito AI task management' },
+  { src: '/projects/docta2.jpg', alt: 'Docta culture agenda' },
+  { src: '/projects/asistente2.png', alt: 'Asistente booking SaaS' },
+  { src: '/projects/codecave3.png', alt: 'codeCave studio site' },
+  { src: '/projects/docta3.jpg', alt: 'Docta culture agenda' },
+  { src: '/projects/asistente3.png', alt: 'Asistente booking SaaS' },
+  { src: '/projects/codecave4.png', alt: 'codeCave studio site' },
+  { src: '/projects/codecave5.png', alt: 'codeCave studio site' },
+  { src: '/projects/codecave6.png', alt: 'codeCave studio site' },
+  { src: '/projects/codecave7.png', alt: 'codeCave studio site' }
+]
+
+// Vertical columns spanning the full width. Each column draws a different
+// rotation of the image list (so adjacent columns are NOT aligned) and scrolls
+// at its own speed/direction, looping infinitely.
 const COLUMN_DIRECTIONS = ['up', 'down', 'up', 'down', 'up'] as const
 const COLUMN_DURATIONS = ['34s', '27s', '40s', '24s', '31s']
+const ITEMS_PER_COLUMN = 6
 
 const columns = COLUMN_DIRECTIONS.map((direction, i) => {
-  const start = (i * 2) % projects.length
+  const start = (i * 4) % heroImages.length
   const items = Array.from(
-    { length: 5 },
-    (_, k) => projects[(start + k) % projects.length]
+    { length: ITEMS_PER_COLUMN },
+    (_, k) => heroImages[(start + k) % heroImages.length]
   )
   return {
     direction,
@@ -69,13 +95,13 @@ const columns = COLUMN_DIRECTIONS.map((direction, i) => {
                 :style="{ animationDuration: col.duration }"
               >
                 <div
-                  v-for="(project, idx) in col.loop"
+                  v-for="(image, idx) in col.loop"
                   :key="`${i}-${idx}`"
                   class="shrink-0 aspect-4/3 rounded-2xl overflow-hidden ring-1 ring-black/5 shadow-sm"
                 >
                   <NuxtImg
-                    :src="project.image"
-                    :alt="project.title"
+                    :src="image.src"
+                    :alt="image.alt"
                     class="size-full object-cover"
                     loading="lazy"
                   />

@@ -11,7 +11,8 @@
     <AppFooter />
 
     <!-- Brief generator: floating CTA available on every page + centered modal -->
-    <BriefFloatingButton />
+    <!-- TODO: hidden for now — re-enable when we resume work on the AI brief -->
+    <!-- <BriefFloatingButton /> -->
     <BriefModal />
   </div>
 </template>

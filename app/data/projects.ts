@@ -135,14 +135,28 @@ export const projects: Project[] = [
     }
   },
   {
-    id: 'sports-app',
-    title: 'Ernie — Sports Tracking App',
-    description: 'A dynamic sports tracking mobile app designed to help athletes monitor performance, track workouts, and achieve their fitness goals with an engaging interface.',
-    image: '/projects/sportapp.png',
-    tags: ['Mobile App', 'Product Design'],
-    date: '2025',
+    id: 'asistente',
+    title: 'Asistente — Tu agenda trabaja sola',
+    description: 'A booking SaaS for independent professionals in Argentina: a shareable reservations page, deposit collection, and automatic reminders — so the calendar runs itself.',
+    image: '/projects/asistente.png',
+    tags: ['SaaS', 'Web App', 'Product Design'],
+    date: '2026',
     links: {
-      figma: 'https://www.figma.com/design/NrUDUZ01IIOcTc9xocvNmN/Ernie-APP?node-id=2606-59959&t=x7EujWUCTTqP2HUR-1'
+      preview: 'https://asistente.ar/'
+    },
+    caseStudy: {
+      tagline: 'A booking page that collects deposits and sends reminders on its own — so independent pros stop chasing no-shows.',
+      role: 'Product Design + Frontend',
+      problem: 'Independent professionals in Argentina — instructors, therapists, stylists, consultants — lose hours to DM back-and-forth and money to no-shows. The available options are either heavy international SaaS that ignore local payment habits, or a fragile mix of WhatsApp, a spreadsheet, and manual reminders.',
+      approach: 'I designed and built a focused booking product around one promise: "tu agenda trabaja sola". Clients open a shareable page, pick a slot, and pay a deposit (seña) up front; the system then sends automatic reminders so appointments actually happen. The experience is Spanish-first, Argentina-specific, and friction-light — no credit card required to get started.',
+      highlights: [
+        'Shareable reservations page per professional',
+        'Up-front deposit (seña) collection to cut no-shows',
+        'Automatic appointment reminders',
+        'Spanish-first, built for the Argentine market'
+      ],
+      result: 'Live at asistente.ar. The product turns a scattered WhatsApp-and-spreadsheet workflow into a single page that books, charges, and reminds — without manual chasing.',
+      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Drizzle ORM']
     }
   },
   {
@@ -154,6 +168,20 @@ export const projects: Project[] = [
     date: '2023',
     links: {
       figma: 'https://www.figma.com/design/S9bBTE8qAVUH2sYBgSAO0y/Yogapp?node-id=0-1&t=sWsqURcuHJjo9qCT-1'
+    },
+    caseStudy: {
+      tagline: 'A calm, guided mobile experience for yoga, meditation, and wellness tracking.',
+      role: 'Product Design',
+      problem: 'Wellness apps often feel as noisy and demanding as the stress they claim to relieve — cluttered dashboards, aggressive streaks, and busy color. A yoga and meditation experience needs to feel like the practice itself: calm, focused, and unhurried.',
+      approach: 'I designed a mobile experience around a soft, breathable visual language — generous spacing, gentle gradients, and quiet typography. The flows guide users through yoga sessions, meditation, and simple wellness tracking without overwhelming them, keeping each screen focused on a single clear next step.',
+      highlights: [
+        'Guided yoga and meditation session flows',
+        'Lightweight wellness and progress tracking',
+        'Calm, spacious visual language',
+        'Mobile-first interaction and prototyping'
+      ],
+      result: 'Delivered as a complete mobile product design in Figma — a cohesive system of screens, components, and flows ready for development.',
+      stack: ['Figma', 'Prototyping', 'Design System', 'iOS / Android']
     }
   }
 ]
