@@ -65,7 +65,7 @@ const getGradientColor = (position: number): { r: number, g: number, b: number }
 
 // Initialize character colors
 const initializeColors = () => {
-  charColors.value = Array(text.value.length).fill('rgb(200, 210, 220)')
+  charColors.value = Array(text.value.length).fill('rgb(90, 100, 116)')
 }
 
 const handleScroll = () => {
@@ -95,16 +95,16 @@ const handleScroll = () => {
     if (highlightInfo) {
       // Get the target gradient color based on position in phrase
       const targetColor = getGradientColor(highlightInfo.position)
-      // Interpolate from light gray (200, 210, 220) to gradient color
-      const r = Math.round(200 - (charProgress * (200 - targetColor.r)))
-      const g = Math.round(210 - (charProgress * (210 - targetColor.g)))
-      const b = Math.round(220 - (charProgress * (220 - targetColor.b)))
+      // Interpolate from dim slate (90, 100, 116) to gradient color
+      const r = Math.round(90 + (charProgress * (targetColor.r - 90)))
+      const g = Math.round(100 + (charProgress * (targetColor.g - 100)))
+      const b = Math.round(116 + (charProgress * (targetColor.b - 116)))
       return `rgb(${r}, ${g}, ${b})`
     } else {
-      // Interpolate color from light gray (200, 210, 220) to very dark (15, 23, 42)
-      const r = Math.round(200 - (charProgress * 185))
-      const g = Math.round(210 - (charProgress * 187))
-      const b = Math.round(220 - (charProgress * 178))
+      // Interpolate from dim slate (90, 100, 116) to near-white (241, 245, 249)
+      const r = Math.round(90 + (charProgress * 151))
+      const g = Math.round(100 + (charProgress * 145))
+      const b = Math.round(116 + (charProgress * 133))
       return `rgb(${r}, ${g}, ${b})`
     }
   })
@@ -143,9 +143,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="py-20 sm:py-28 relative overflow-hidden bg-white dark:bg-gray-950">
-    <!-- Subtle gradient background -->
-    <div class="absolute inset-0 bg-linear-to-br from-purple-50/50 via-transparent to-orange-50/30 dark:from-purple-950/20 dark:via-transparent dark:to-orange-950/10" />
+  <section class="py-20 sm:py-28 relative overflow-hidden bg-[#0a0a0a]">
+    <!-- Subtle brand glow -->
+    <div class="absolute inset-0 bg-linear-to-br from-[#b86adf]/10 via-transparent to-[#ffb147]/10" />
 
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-right">
@@ -164,27 +164,12 @@ onUnmounted(() => {
               v-for="(char, index) in text.split('')"
               :key="`${index}-${char}`"
               :ref="(el) => registerCharRef(el as HTMLElement | null, index)"
-              :style="{ color: charColors[index] || 'rgb(200, 210, 220)', fontWeight: highlightedInfo.has(index) ? 500 : 400, fontStyle: highlightedInfo.has(index) ? 'italic' : 'normal' }"
+              :style="{ color: charColors[index] || 'rgb(90, 100, 116)', fontWeight: highlightedInfo.has(index) ? 500 : 400, fontStyle: highlightedInfo.has(index) ? 'italic' : 'normal' }"
               class="transition-colors duration-50"
             >
               {{ char }}
             </span>
           </blockquote>
-        </Motion>
-
-        <!-- Additional context - appears after quote is fully colored -->
-        <Motion
-          :initial="{ opacity: 0, y: 50 }"
-          :while-in-view="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 1.2, delay: 0.3 }"
-          :in-view-options="{ once: true, margin: '-100px' }"
-          class="mt-10"
-        >
-          <div class="flex items-start justify-end gap-4">
-            <p class="text-muted text-base sm:text-lg max-w-xl leading-relaxed">
-              {{ $t('web3Quote.context') }}
-            </p>
-          </div>
         </Motion>
       </div>
     </div>
