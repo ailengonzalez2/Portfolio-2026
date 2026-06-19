@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
+const cvHover = ref(false)
+
 const workExperience = computed(() => [
   {
     key: 'productDesign',
@@ -83,35 +85,9 @@ const certifications = computed(() => [
 <template>
   <section
     id="about"
-    class="pt-6 sm:pt-10 pb-10 sm:pb-14 bg-[#f8fafc] dark:bg-[#0a0a0a]"
+    class="pt-16 sm:pt-24 pb-10 sm:pb-14 bg-[#f8fafc] dark:bg-[#0a0a0a]"
   >
     <div class="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-[155px]">
-      <!-- Section Header -->
-      <Motion
-        :initial="{ opacity: 0, y: 20 }"
-        :while-in-view="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.5 }"
-        :in-view-options="{ once: true }"
-      >
-        <div class="mb-[66px] flex flex-col sm:flex-row sm:items-center sm:justify-end gap-6">
-          <!-- Action Buttons -->
-          <div class="flex flex-row gap-3">
-            <a
-              href="https://cv.ailengonzalez.ar/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="h-[41px] px-3 py-1.5 bg-white dark:bg-neutral-800 rounded-lg shadow-[0px_0px_0px_1px_#121212] dark:shadow-[0px_0px_0px_1px_#404040] flex items-center justify-center gap-1 text-black dark:text-white text-base font-normal hover:bg-gray-50 dark:hover:bg-neutral-700 transition-colors whitespace-nowrap cursor-pointer"
-            >
-              <UIcon
-                name="i-lucide-arrow-up-right"
-                class="size-[22px]"
-              />
-              <span>{{ $t('about.exploreCv') }}</span>
-            </a>
-          </div>
-        </div>
-      </Motion>
-
       <!-- Main Content -->
       <div class="relative mb-[121px]">
         <!-- Two Column Layout -->
@@ -163,6 +139,36 @@ const certifications = computed(() => [
                   </div>
                 </div>
               </div>
+
+              <!-- View Full CV -->
+              <a
+                href="https://cv.ailengonzalez.ar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group mt-10 ml-8 inline-flex h-[41px] px-3 py-1.5 bg-white dark:bg-neutral-800 rounded-lg shadow-[0px_0px_0px_1px_#121212] dark:shadow-[0px_0px_0px_1px_#404040] items-center justify-center gap-1 text-black dark:text-white text-base font-normal hover:bg-black hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                @mouseenter="cvHover = true"
+                @mouseleave="cvHover = false"
+              >
+                <Motion
+                  :layout="true"
+                  :transition="{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }"
+                  :style="{ order: cvHover ? 2 : 1 }"
+                  class="inline-flex"
+                >
+                  <UIcon
+                    name="i-lucide-arrow-up-right"
+                    class="size-[22px]"
+                  />
+                </Motion>
+                <Motion
+                  :layout="true"
+                  :transition="{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }"
+                  :style="{ order: cvHover ? 1 : 2 }"
+                  class="inline-flex"
+                >
+                  <span>{{ $t('about.exploreCv') }}</span>
+                </Motion>
+              </a>
             </Motion>
           </div>
 
