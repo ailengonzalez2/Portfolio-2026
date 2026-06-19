@@ -1,3 +1,0 @@
-[build]
-# Pin to Nixpacks so nixpacks.toml (npm install override) is honored.
-builder = "NIXPACKS"

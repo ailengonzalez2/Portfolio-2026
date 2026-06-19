@@ -1,7 +1,0 @@
-[phases.install]
-# Use `npm install` instead of the default `npm ci`.
-# The lockfile only pins the macOS (darwin) oxc-transform native binding, so
-# `npm ci` can't find `@oxc-transform/binding-linux-x64-gnu` on Railway's Linux
-# builder (npm optional-deps bug: https://github.com/npm/cli/issues/4828).
-# `npm install` resolves the correct platform binding at build time.
-cmds = ["npm install"]

@@ -10,23 +10,23 @@ Personal portfolio website for Ailen Gonzalez built with Nuxt 4 and Nuxt UI 4.
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Development server (http://localhost:3000)
-npm run dev
+bun run dev
 
 # Production build
-npm run build
+bun run build
 
 # Preview production build
-npm run preview
+bun run preview
 
 # Linting
-npm run lint
-npm run lint:fix
+bun run lint
+bun run lint:fix
 
 # Type checking
-npm run typecheck
+bun run typecheck
 ```
 
 ## Tech Stack
@@ -36,7 +36,7 @@ npm run typecheck
 - **Animations**: motion-v (`<Motion>` component)
 - **Icons**: Iconify (lucide & simple-icons sets)
 - **Images**: @nuxt/image
-- **Package Manager**: npm
+- **Package Manager**: Bun
 
 ## Architecture
 
