@@ -108,7 +108,7 @@ const mobileBottom = computed(() => {
           :name="social.icon"
           class="social-icon-svg size-8 transition-all duration-300 group-hover:scale-110"
           :class="isExpanded ? 'scale-125' : ''"
-          :style="{ color: isExpanded ? social.brandColor : '#6b7280' }"
+          :style="{ color: isExpanded ? '#ffffff' : '#6b7280' }"
         />
         <!-- Name on hover -->
         <span
@@ -129,7 +129,7 @@ const mobileBottom = computed(() => {
     <nav
       class="flex items-center px-4 py-2 backdrop-blur-sm rounded-full border transition-all duration-500"
       :class="isMobileExpanded ? 'border-slate-300/50 scale-110 gap-2' : 'border-slate-700/50 gap-0'"
-      :style="{ backgroundColor: isMobileExpanded ? 'rgba(226, 232, 240, 0.95)' : 'rgba(30, 41, 59, 0.9)' }"
+      :style="{ backgroundColor: isMobileExpanded ? 'rgba(15, 23, 42, 0.95)' : 'rgba(30, 41, 59, 0.9)' }"
       aria-label="Redes sociales"
     >
       <ULink
@@ -146,7 +146,7 @@ const mobileBottom = computed(() => {
           :name="social.icon"
           class="social-icon-svg size-6 transition-all duration-500 group-hover:scale-110"
           :class="isMobileExpanded ? 'scale-125' : ''"
-          :style="{ color: isMobileExpanded ? social.brandColor : '#6b7280' }"
+          :style="{ color: isMobileExpanded ? '#ffffff' : '#6b7280' }"
         />
       </ULink>
     </nav>

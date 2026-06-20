@@ -144,9 +144,6 @@ onUnmounted(() => {
 
 <template>
   <section class="py-32 sm:py-44 relative overflow-hidden bg-white">
-    <!-- Subtle brand glow -->
-    <div class="absolute inset-0 bg-linear-to-br from-[#b86adf]/10 via-transparent to-[#ffb147]/10" />
-
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-right">
         <Motion
