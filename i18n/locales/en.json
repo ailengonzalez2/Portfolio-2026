@@ -19,7 +19,9 @@
     "eyebrow": "What I do",
     "pre": "I design and ship ",
     "highlight": "user-facing AI products",
-    "post": " end to end — from the first sketch to production."
+    "post": " end to end — from the first sketch to production.",
+    "bookCall": "Book a call",
+    "viewWork": "View work"
   },
   "services": {
     "startProject": "Start a project",

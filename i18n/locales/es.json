@@ -19,7 +19,9 @@
     "eyebrow": "Qué hago",
     "pre": "Diseño y desarrollo ",
     "highlight": "productos de IA",
-    "post": " de punta a punta — del primer boceto a producción."
+    "post": " de punta a punta — del primer boceto a producción.",
+    "bookCall": "Agendar una llamada",
+    "viewWork": "Ver trabajo"
   },
   "services": {
     "startProject": "Iniciar un proyecto",
