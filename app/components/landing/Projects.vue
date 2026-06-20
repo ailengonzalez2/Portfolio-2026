@@ -19,24 +19,23 @@ const selfProjects = computed(() => projects.slice(0, 4))
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Latest Projects -->
       <div class="mb-16">
-        <Motion
-          :initial="{ opacity: 0, y: 20 }"
-          :while-in-view="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.5 }"
-          :in-view-options="{ once: true }"
+        <ScrollReveal
+          :y="20"
+          :blur="4"
         >
           <SectionEyebrow
             :label="$t('projects.latestSection')"
             class="mb-8"
           />
-        </Motion>
+        </ScrollReveal>
 
         <!-- Grid: two cards per row, matching the projects page -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           <ProjectCard
-            v-for="project in selfProjects"
+            v-for="(project, i) in selfProjects"
             :key="project.id"
             :project="project"
+            :index="i"
             show-description
           />
         </div>

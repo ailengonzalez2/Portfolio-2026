@@ -13,9 +13,9 @@ useSeoMeta({
 
 <template>
   <UPage>
-    <section class="relative pt-28 sm:pt-36 pb-2 bg-[#f8fafc] dark:bg-[#0a0a0a] overflow-hidden">
+    <section class="relative -mt-20 pt-40 sm:pt-52 pb-2 bg-[#f8fafc] dark:bg-[#0a0a0a] overflow-hidden">
       <!-- Name tag dropping in on its lanyard -->
-      <div class="pointer-events-none absolute top-0 right-4 sm:right-10 lg:right-20 z-20 hidden sm:block">
+      <div class="pointer-events-none absolute top-20 right-4 sm:right-10 lg:right-20 z-20 hidden sm:block">
         <NuxtImg
           src="/name-tag.png"
           alt="Ailen Gonzalez name tag"
@@ -25,11 +25,10 @@ useSeoMeta({
         />
       </div>
 
-      <Motion
-        :initial="{ opacity: 0, y: 20 }"
-        :while-in-view="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.5 }"
-        :in-view-options="{ once: true }"
+      <ScrollReveal
+        :y="28"
+        :blur="8"
+        :duration="0.7"
       >
         <div class="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-[155px]">
           <h1 class="max-w-4xl text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-[1.05] text-[#0f172b] dark:text-white">
@@ -39,7 +38,7 @@ useSeoMeta({
             {{ $t('about.designCodeBody') }}
           </p>
         </div>
-      </Motion>
+      </ScrollReveal>
     </section>
     <LandingAboutMe />
   </UPage>

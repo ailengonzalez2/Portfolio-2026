@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { Motion, useScroll, useTransform, useReducedMotion } from 'motion-v'
+import { ref, computed } from 'vue'
 import type { Project } from '~/data/projects'
 
 const props = defineProps<{
@@ -8,20 +9,40 @@ const props = defineProps<{
   noAnimation?: boolean
   /** Show the project description below the image */
   showDescription?: boolean
+  /** Position in a grid — used to stagger the entrance */
+  index?: number
 }>()
 
 // Surface the live/preview link as a single button on the top right,
 // falling back to Figma so Figma-only projects still get an action.
 const actionLink = computed(() => props.project.links.preview || props.project.links.figma)
 const actionIsFigma = computed(() => !props.project.links.preview && !!props.project.links.figma)
+
+const reduced = useReducedMotion()
+
+// Staggered entrance based on grid position
+const entranceDelay = computed(() => (props.index ?? 0) * 0.08)
+
+// Scroll-linked parallax on the image. The image sits at scale-110 inside an
+// overflow-hidden frame, so it can drift ±5% without ever revealing an edge.
+const imageFrame = ref<HTMLElement | null>(null)
+const { scrollYProgress } = useScroll({
+  target: imageFrame,
+  offset: ['start end', 'end start']
+})
+const imageY = useTransform(
+  scrollYProgress,
+  [0, 1],
+  reduced.value ? ['0%', '0%'] : ['-5%', '5%']
+)
 </script>
 
 <template>
   <Motion
-    :initial="props.noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }"
-    :while-in-view="{ opacity: 1, y: 0 }"
-    :transition="{ duration: 0.5 }"
-    :in-view-options="{ once: true }"
+    :initial="props.noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 30, filter: 'blur(6px)' }"
+    :while-in-view="{ opacity: 1, y: 0, filter: 'blur(0px)' }"
+    :transition="{ duration: 0.55, delay: entranceDelay, ease: [0.22, 1, 0.36, 1] }"
+    :in-view-options="{ once: true, margin: '0px 0px -12% 0px' }"
     class="h-full"
   >
     <article class="group h-full flex flex-col bg-neutral-100 dark:bg-neutral-900 rounded-3xl p-3 sm:p-4">
@@ -55,13 +76,23 @@ const actionIsFigma = computed(() => !props.project.links.preview && !!props.pro
         :to="`/projects/${project.id}`"
         class="block relative mt-1 rounded-2xl overflow-hidden aspect-4/3 bg-white"
       >
-        <NuxtImg
-          :src="project.image"
-          :alt="project.title"
-          class="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-          loading="lazy"
-          placeholder
-        />
+        <div
+          ref="imageFrame"
+          class="absolute inset-0"
+        >
+          <Motion
+            class="size-full"
+            :style="{ y: imageY }"
+          >
+            <NuxtImg
+              :src="project.image"
+              :alt="project.title"
+              class="size-full object-cover scale-110 transition-transform duration-500 group-hover:scale-[1.15]"
+              loading="lazy"
+              placeholder
+            />
+          </Motion>
+        </div>
       </NuxtLink>
 
       <!-- Description -->
