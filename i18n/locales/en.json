@@ -88,7 +88,7 @@
     "bookCall": "Book a call",
     "email": "Email me"
   },
-  "web3Quote": {
+  "aiQuote": {
     "quote": "Recently, I've been diving deeper into the AI ecosystem, building agent-driven workflows and intelligent UI experiences.",
     "highlight": "agent-driven workflows and intelligent UI experiences",
     "context": "I focus on crafting clear, intuitive AI-powered experiences with tools like the Claude API, LLM agents, and modern frontend frameworks. From conversational interfaces to AI dashboards and agentic apps, I'm always excited to collaborate on innovative ideas and projects."

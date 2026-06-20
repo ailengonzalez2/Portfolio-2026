@@ -88,7 +88,7 @@
     "bookCall": "Agendar una llamada",
     "email": "Escribime"
   },
-  "web3Quote": {
+  "aiQuote": {
     "quote": "Últimamente estoy explorando más a fondo el ecosistema de la IA, construyendo flujos impulsados por agentes y experiencias de UI inteligentes.",
     "highlight": "flujos impulsados por agentes y experiencias de UI inteligentes",
     "context": "Me enfoco en crear experiencias impulsadas por IA claras e intuitivas con herramientas como la API de Claude, agentes LLM y frameworks de frontend modernos. Desde interfaces conversacionales hasta dashboards de IA y apps con agentes, siempre me entusiasma colaborar en ideas y proyectos innovadores."

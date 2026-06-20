@@ -8,16 +8,16 @@ const charRefs = ref<HTMLElement[]>([])
 const charColors = ref<string[]>([])
 const quoteComplete = ref(false)
 
-const text = computed(() => t('web3Quote.quote'))
+const text = computed(() => t('aiQuote.quote'))
 
 // Phrases to highlight with gradient (locale-aware)
-const highlightPhrases = computed(() => [t('web3Quote.highlight')])
+const highlightPhrases = computed(() => [t('aiQuote.highlight')])
 
 // Gradient colors: orange → pink → purple
 const gradientColors = [
-  { r: 255, g: 177, b: 71 },  // #ffb147 - orange
-  { r: 255, g: 108, b: 99 },  // #ff6c63 - pink/red
-  { r: 184, g: 106, b: 223 }  // #b86adf - purple
+  { r: 255, g: 177, b: 71 }, // #ffb147 - orange
+  { r: 255, g: 108, b: 99 }, // #ff6c63 - pink/red
+  { r: 184, g: 106, b: 223 } // #b86adf - purple
 ]
 
 // Calculate highlighted ranges with position info for gradient
@@ -27,7 +27,7 @@ interface HighlightInfo {
 
 const getHighlightedInfo = (): Map<number, HighlightInfo> => {
   const info = new Map<number, HighlightInfo>()
-  highlightPhrases.value.forEach(phrase => {
+  highlightPhrases.value.forEach((phrase) => {
     const startIndex = text.value.indexOf(phrase)
     if (startIndex !== -1) {
       for (let i = 0; i < phrase.length; i++) {
