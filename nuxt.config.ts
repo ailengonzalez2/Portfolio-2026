@@ -10,29 +10,20 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n'
   ],
 
+  devtools: {
+    enabled: true
+  },
+
+  css: ['~/assets/css/main.css'],
+
   site: {
     url: 'https://ailengonzalez.ar',
     name: 'Ailen Gonzalez',
     description: 'Ailen Gonzalez — AI Product Engineer. I design and ship user-facing AI features and polished web experiences.'
   },
 
-  i18n: {
-    defaultLocale: 'en',
-    strategy: 'no_prefix',
-    locales: [
-      { code: 'en', name: 'English', file: 'en.json' },
-      { code: 'es', name: 'Español', file: 'es.json' }
-    ],
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_locale',
-      redirectOn: 'root',
-      alwaysRedirect: false,
-      fallbackLocale: 'en'
-    },
-    bundle: {
-      optimizeTranslationDirective: false
-    }
+  colorMode: {
+    preference: 'light'
   },
 
   runtimeConfig: {
@@ -44,12 +35,6 @@ export default defineNuxtConfig({
       web3formsKey: ''
     }
   },
-
-  devtools: {
-    enabled: true
-  },
-
-  css: ['~/assets/css/main.css'],
 
   compatibilityDate: '2024-11-01',
 
@@ -71,12 +56,27 @@ export default defineNuxtConfig({
     }
   },
 
+  i18n: {
+    defaultLocale: 'en',
+    strategy: 'no_prefix',
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'es', name: 'Español', file: 'es.json' }
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_locale',
+      redirectOn: 'root',
+      alwaysRedirect: false,
+      fallbackLocale: 'en'
+    },
+    bundle: {
+      optimizeTranslationDirective: false
+    }
+  },
+
   image: {
     quality: 80,
     format: ['webp', 'avif']
-  },
-
-  colorMode: {
-    preference: 'light'
   }
 })

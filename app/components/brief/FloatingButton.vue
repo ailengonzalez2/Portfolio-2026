@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import { useWindowScroll, useWindowSize } from '@vueuse/core'
 
 const { isOpen, open } = useBriefModal()
@@ -19,7 +19,9 @@ watch(isPastHero, (val) => {
   if (val && !hasPulsed.value) {
     hasPulsed.value = true
     pulseActive.value = true
-    pulseTimer = setTimeout(() => { pulseActive.value = false }, 3500)
+    pulseTimer = setTimeout(() => {
+      pulseActive.value = false
+    }, 3500)
   }
 })
 

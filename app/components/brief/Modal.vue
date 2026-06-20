@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { watch, onMounted } from 'vue'
 
-const { isOpen, open, close } = useBriefModal()
+const { isOpen, open } = useBriefModal()
 const route = useRoute()
 const router = useRouter()
 

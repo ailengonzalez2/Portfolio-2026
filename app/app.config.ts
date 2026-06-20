@@ -37,7 +37,7 @@ export default defineAppConfig({
     colorMode: false,
     links: [{
       'icon': 'i-simple-icons-linkedin',
-      'to': 'https://www.linkedin.com/in/AilenGonzalez',
+      'to': 'https://www.linkedin.com/in/ailengonzalez/',
       'target': '_blank',
       'aria-label': 'LinkedIn'
     }, {

@@ -31,11 +31,6 @@ const setActiveCard = (id: string) => {
   activeCard.value = id
 }
 
-const activeBackground = computed(() => {
-  const service = services.value.find(s => s.id === activeCard.value)
-  return service?.backgroundImage || services.value[0]?.backgroundImage
-})
-
 // Split text into words for word-by-word animation
 const splitWords = (text: string) => text.split(' ')
 
@@ -60,11 +55,12 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
           activeCard === service.id ? 'opacity-100' : 'opacity-0'
         ]"
       >
-        <img
+        <NuxtImg
           :src="service.backgroundImage"
           :alt="`${service.title} background`"
+          loading="lazy"
           class="w-full h-full object-cover"
-        >
+        />
       </div>
     </div>
 
