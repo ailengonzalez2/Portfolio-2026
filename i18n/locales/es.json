@@ -82,6 +82,12 @@
     "eyebrow": "Testimonios",
     "heading": "Lo que dicen mis clientes"
   },
+  "contactCta": {
+    "heading": "Trabajemos juntos",
+    "subtitle": "¿Tenés un producto de IA o un frontend en mente? Hagámoslo realidad con algo que la gente ame usar.",
+    "bookCall": "Agendar una llamada",
+    "email": "Escribime"
+  },
   "web3Quote": {
     "quote": "Últimamente estoy explorando más a fondo el ecosistema de la IA, construyendo flujos impulsados por agentes y experiencias de UI inteligentes.",
     "highlight": "flujos impulsados por agentes y experiencias de UI inteligentes",

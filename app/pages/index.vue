@@ -26,5 +26,6 @@ useSeoMeta({
       <TechMarquee />
     </section>
     <LandingWeb3Quote />
+    <LandingContactCta />
   </UPage>
 </template>

@@ -92,7 +92,6 @@ onUnmounted(() => {
 <template>
   <footer class="relative z-10 min-h-screen flex flex-col bg-[#0a0a0a] text-white">
     <section
-      id="contact"
       ref="sectionRef"
       class="flex-1 flex flex-col items-center justify-center py-14 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >

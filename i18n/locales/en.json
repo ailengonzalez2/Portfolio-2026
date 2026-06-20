@@ -82,6 +82,12 @@
     "eyebrow": "Kind words",
     "heading": "What clients say"
   },
+  "contactCta": {
+    "heading": "Let's work together",
+    "subtitle": "Have an AI product or frontend in mind? Let's turn it into something people love to use.",
+    "bookCall": "Book a call",
+    "email": "Email me"
+  },
   "web3Quote": {
     "quote": "Recently, I've been diving deeper into the AI ecosystem, building agent-driven workflows and intelligent UI experiences.",
     "highlight": "agent-driven workflows and intelligent UI experiences",
