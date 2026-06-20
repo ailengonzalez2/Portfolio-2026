@@ -145,7 +145,7 @@ const certifications = computed(() => [
                 href="https://cv.ailengonzalez.ar/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="group mt-10 ml-8 inline-flex h-[41px] px-3 py-1.5 bg-white dark:bg-neutral-800 rounded-lg shadow-[0px_0px_0px_1px_#121212] dark:shadow-[0px_0px_0px_1px_#404040] items-center justify-center gap-1 text-black dark:text-white text-base font-normal hover:bg-black hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                class="group mt-10 ml-8 inline-flex h-[41px] px-4 py-1.5 bg-white dark:bg-neutral-800 rounded-full shadow-[0px_0px_0px_1px_#121212] dark:shadow-[0px_0px_0px_1px_#404040] items-center justify-center gap-1 text-black dark:text-white text-base font-normal hover:bg-black hover:text-white transition-colors whitespace-nowrap cursor-pointer"
                 @mouseenter="cvHover = true"
                 @mouseleave="cvHover = false"
               >

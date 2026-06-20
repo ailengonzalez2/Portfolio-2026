@@ -79,12 +79,11 @@
     }
   },
   "testimonials": {
-    "eyebrow": "Testimonios",
-    "heading": "Lo que dicen mis clientes"
+    "eyebrow": "Testimonios"
   },
   "contactCta": {
     "heading": "Trabajemos juntos",
-    "subtitle": "¿Tenés un producto de IA o un frontend en mente? Hagámoslo realidad con algo que la gente ame usar.",
+    "subtitle": "¿Tenés un producto de IA o un frontend en mente? Hagámoslo realidad",
     "bookCall": "Agendar una llamada",
     "email": "Escribime"
   },

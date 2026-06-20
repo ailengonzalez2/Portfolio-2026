@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-const { global } = useAppConfig()
 const { t } = useI18n()
 const year = new Date().getFullYear()
 
@@ -128,34 +127,6 @@ onUnmounted(() => {
               >{{ seg.text }}</span>
             </h2>
           </div>
-        </Motion>
-
-        <!-- Divider -->
-        <div class="my-8 sm:my-12 h-px w-full max-w-xs mx-auto bg-white/10" />
-
-        <!-- Contact -->
-        <Motion
-          :initial="{ opacity: 0, y: 30 }"
-          :while-in-view="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6 }"
-          :in-view-options="{ once: true }"
-          class="flex flex-col items-center gap-10"
-        >
-          <!-- Book a call CTA -->
-          <UButton
-            :to="global.meetingLink"
-            target="_blank"
-            size="lg"
-            class="bg-white text-[#0a0a0a] hover:bg-white/90 font-semibold rounded-full px-8 py-3 text-base"
-          >
-            {{ $t('hero.bookCall') }}
-            <template #trailing>
-              <UIcon
-                name="i-lucide-arrow-up-right"
-                class="size-4"
-              />
-            </template>
-          </UButton>
         </Motion>
       </div>
     </section>

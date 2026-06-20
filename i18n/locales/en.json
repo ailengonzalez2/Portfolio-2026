@@ -79,12 +79,11 @@
     }
   },
   "testimonials": {
-    "eyebrow": "Kind words",
-    "heading": "What clients say"
+    "eyebrow": "Kind words"
   },
   "contactCta": {
     "heading": "Let's work together",
-    "subtitle": "Have an AI product or frontend in mind? Let's turn it into something people love to use.",
+    "subtitle": "Have an AI product or frontend in mind? Let's turn it into real",
     "bookCall": "Book a call",
     "email": "Email me"
   },
