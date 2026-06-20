@@ -11,8 +11,8 @@ interface ServiceConfig {
 
 const serviceConfigs: ServiceConfig[] = [
   { id: 'ai-product', i18nKey: 'aiProduct', backgroundImage: '/projects/ai-integration.webp' },
-  { id: 'frontend', i18nKey: 'frontend', backgroundImage: '/projects/defidashboard.png' },
-  { id: 'llm-integration', i18nKey: 'llmIntegration', backgroundImage: '/projects/pureskin.png' }
+  { id: 'frontend', i18nKey: 'frontend', backgroundImage: '/projects/web3-frontend.png' },
+  { id: 'llm-integration', i18nKey: 'llmIntegration', backgroundImage: '/projects/ai-integration.png' }
 ]
 
 const services = computed(() => serviceConfigs.map(c => ({
