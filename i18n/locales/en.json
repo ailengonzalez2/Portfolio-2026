@@ -78,6 +78,10 @@
       "comingSoonBody": "For now, explore the work directly via Figma or the live preview above."
     }
   },
+  "testimonials": {
+    "eyebrow": "Kind words",
+    "heading": "What clients say"
+  },
   "web3Quote": {
     "quote": "Recently, I've been diving deeper into the AI ecosystem, building agent-driven workflows and intelligent UI experiences.",
     "highlight": "agent-driven workflows and intelligent UI experiences",

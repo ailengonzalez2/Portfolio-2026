@@ -78,6 +78,10 @@
       "comingSoonBody": "Por ahora podés explorar el trabajo directamente en Figma o en el preview arriba."
     }
   },
+  "testimonials": {
+    "eyebrow": "Testimonios",
+    "heading": "Lo que dicen mis clientes"
+  },
   "web3Quote": {
     "quote": "Últimamente estoy explorando más a fondo el ecosistema de la IA, construyendo flujos impulsados por agentes y experiencias de UI inteligentes.",
     "highlight": "flujos impulsados por agentes y experiencias de UI inteligentes",
