@@ -20,10 +20,10 @@ useSeoMeta({
     </div>
     <LandingHook />
     <LandingServices />
-    <LandingHookQuote />
     <section class="pt-10 sm:pt-14 pb-24 sm:pb-32 bg-background">
       <TechMarquee />
     </section>
+    <LandingHookQuote />
     <LandingProjects />
     <LandingAIquote />
     <LandingTestimonials />
