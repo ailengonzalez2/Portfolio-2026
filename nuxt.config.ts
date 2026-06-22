@@ -16,6 +16,18 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  app: {
+    head: {
+      script: [
+        {
+          src: 'https://umami.codecave.ar/script.js',
+          'data-website-id': '3bdc851d-7f3e-402e-9712-cdb5a201091e',
+          defer: true
+        }
+      ]
+    }
+  },
+
   site: {
     url: 'https://ailengonzalez.ar',
     name: 'Ailen Gonzalez',
