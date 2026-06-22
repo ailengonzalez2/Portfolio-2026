@@ -78,6 +78,12 @@
       "comingSoonBody": "Por ahora podés explorar el trabajo directamente en Figma o en el preview arriba."
     }
   },
+  "hookQuote": {
+    "pre": "Ayudo a startups y equipos de producto a pasar del concepto de diseño a ",
+    "highlight": "productos web escalables y pixel-perfect",
+    "post": " en poco tiempo.",
+    "support": "Esto significa entregas más limpias, iteraciones más rápidas y productos que de verdad coinciden con la visión."
+  },
   "testimonials": {
     "eyebrow": "Testimonios"
   },

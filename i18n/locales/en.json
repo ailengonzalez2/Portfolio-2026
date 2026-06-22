@@ -78,6 +78,12 @@
       "comingSoonBody": "For now, explore the work directly via Figma or the live preview above."
     }
   },
+  "hookQuote": {
+    "pre": "I help startups and product teams go from design concept to ",
+    "highlight": "scalable, pixel-perfect web products",
+    "post": " in a short time.",
+    "support": "This means cleaner handoffs, faster iterations, and products that actually match the vision."
+  },
   "testimonials": {
     "eyebrow": "Kind words"
   },
