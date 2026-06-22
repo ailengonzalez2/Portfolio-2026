@@ -26,6 +26,5 @@ useSeoMeta({
     </section>
     <LandingProjects />
     <LandingTestimonials />
-    <LandingContactCta />
   </UPage>
 </template>

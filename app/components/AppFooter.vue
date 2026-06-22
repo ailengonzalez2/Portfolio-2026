@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const { t } = useI18n()
+const { global } = useAppConfig()
 const year = new Date().getFullYear()
 
 // Segments shared by the base (white) layer and the glow overlay so both align
@@ -130,6 +131,30 @@ onUnmounted(() => {
         </Motion>
       </div>
     </section>
+
+    <!-- Book a call -->
+    <Motion
+      :initial="{ opacity: 0, y: 20 }"
+      :while-in-view="{ opacity: 1, y: 0 }"
+      :transition="{ duration: 0.6 }"
+      :in-view-options="{ once: true }"
+      class="px-4 sm:px-6 lg:px-8 pb-14 sm:pb-20 flex items-center justify-center"
+    >
+      <UButton
+        :to="global.meetingLink"
+        target="_blank"
+        size="lg"
+        class="btn-gradient text-white font-semibold rounded-full px-8 py-3 text-base"
+      >
+        {{ t('contactCta.bookCall') }}
+        <template #trailing>
+          <UIcon
+            name="i-lucide-arrow-up-right"
+            class="size-4"
+          />
+        </template>
+      </UButton>
+    </Motion>
 
     <!-- Footer Credits -->
     <div class="py-8 border-t border-white/10">
