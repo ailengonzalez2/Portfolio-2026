@@ -50,8 +50,31 @@ const onMove = (e: MouseEvent) => {
               <blockquote class="flex-1 text-base sm:text-lg leading-relaxed text-heading dark:text-white/90">
                 {{ t.quote }}
               </blockquote>
-              <figcaption class="mt-6 text-sm font-medium text-muted">
-                Upwork client
+              <figcaption class="mt-6 text-sm">
+                <template v-if="t.author">
+                  <span class="font-semibold text-heading dark:text-white/90">{{ t.author }}</span>
+                  <span
+                    v-if="t.role"
+                    class="text-muted"
+                  > — {{ t.role }}</span>
+                  <a
+                    v-if="t.link"
+                    :href="t.link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="ml-1 inline-flex items-center gap-1 text-primary hover:underline"
+                  >
+                    <UIcon
+                      name="i-simple-icons-upwork"
+                      class="size-3.5"
+                    />
+                    View on Upwork
+                  </a>
+                </template>
+                <span
+                  v-else
+                  class="font-medium text-muted"
+                >Upwork client</span>
               </figcaption>
             </div>
           </figure>

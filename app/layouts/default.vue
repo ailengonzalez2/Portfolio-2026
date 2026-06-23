@@ -1,4 +1,7 @@
 <script setup lang="ts">
+const route = useRoute()
+// The About page has its own ending, so skip the global contact prompt there.
+const showContact = computed(() => route.path !== '/about')
 </script>
 
 <template>
@@ -11,6 +14,7 @@
 
     <!-- Contact prompt: white background, sits above the dark footer -->
     <section
+      v-if="showContact"
       id="contact"
       class="relative z-10 bg-background px-4 sm:px-6 lg:px-8 pt-24 pb-40 sm:pt-32 sm:pb-56 text-center"
     >
