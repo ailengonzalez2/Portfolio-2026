@@ -16,7 +16,7 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: 'testimonial-1',
-    quote: 'Ailen is great - understands the projects quickly and puts together excellent work. She’s a great communicator and is quick to get things done. Will definitely continue to work with her on this and future projects!',
+    quote: 'Ailen is great - understands the projects quickly and puts together excellent work. She’s a great communicator and is quick to get things done.',
     author: 'Tim Keough',
     role: 'Upwork client',
     link: 'https://www.upwork.com/freelancers/ailengonzalez?mp_source=share'

@@ -62,12 +62,8 @@ const onMove = (e: MouseEvent) => {
                     :href="t.link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="ml-1 inline-flex items-center gap-1 text-primary hover:underline"
+                    class="inline-flex items-center gap-1 font-bold text-heading dark:text-white hover:underline"
                   >
-                    <UIcon
-                      name="i-simple-icons-upwork"
-                      class="size-3.5"
-                    />
                     View on Upwork
                   </a>
                 </template>
