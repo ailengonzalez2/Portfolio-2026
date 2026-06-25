@@ -93,7 +93,7 @@ onUnmounted(() => {
   <footer class="relative z-10 min-h-screen flex flex-col bg-[#0a0a0a] text-white">
     <section
       ref="sectionRef"
-      class="flex-1 flex flex-col items-center justify-center py-14 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      class="flex-1 flex flex-col items-center justify-center pt-14 sm:pt-20 pb-4 sm:pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
       <div class="w-full max-w-6xl mx-auto">
         <!-- Brand statement: Design + Code + AI -->
@@ -106,7 +106,7 @@ onUnmounted(() => {
         >
           <div class="relative inline-block">
             <!-- Base layer: solid white words, gray + -->
-            <h2 class="magic-heading flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95]">
+            <h2 class="magic-heading flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] pb-[0.18em]">
               <span
                 v-for="(seg, i) in segments"
                 :key="`b${i}`"
@@ -118,7 +118,7 @@ onUnmounted(() => {
             <h2
               ref="overlayRef"
               aria-hidden="true"
-              class="magic-overlay absolute inset-0 flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95]"
+              class="magic-overlay absolute inset-0 flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] pb-[0.18em]"
               :style="{ backgroundImage: trailBg }"
             >
               <span
@@ -129,32 +129,32 @@ onUnmounted(() => {
             </h2>
           </div>
         </Motion>
+
+        <!-- Book a call -->
+        <Motion
+          :initial="{ opacity: 0, y: 20 }"
+          :while-in-view="{ opacity: 1, y: 0 }"
+          :transition="{ duration: 0.6, delay: 0.15 }"
+          :in-view-options="{ once: true }"
+          class="mt-8 sm:mt-10 flex items-center justify-center"
+        >
+          <UButton
+            :to="global.meetingLink"
+            target="_blank"
+            size="lg"
+            class="btn-gradient text-white font-semibold rounded-full px-8 py-3 text-base"
+          >
+            {{ t('contactCta.bookCall') }}
+            <template #trailing>
+              <UIcon
+                name="i-lucide-arrow-up-right"
+                class="size-4"
+              />
+            </template>
+          </UButton>
+        </Motion>
       </div>
     </section>
-
-    <!-- Book a call -->
-    <Motion
-      :initial="{ opacity: 0, y: 20 }"
-      :while-in-view="{ opacity: 1, y: 0 }"
-      :transition="{ duration: 0.6 }"
-      :in-view-options="{ once: true }"
-      class="px-4 sm:px-6 lg:px-8 pb-14 sm:pb-20 flex items-center justify-center"
-    >
-      <UButton
-        :to="global.meetingLink"
-        target="_blank"
-        size="lg"
-        class="btn-gradient text-white font-semibold rounded-full px-8 py-3 text-base"
-      >
-        {{ t('contactCta.bookCall') }}
-        <template #trailing>
-          <UIcon
-            name="i-lucide-arrow-up-right"
-            class="size-4"
-          />
-        </template>
-      </UButton>
-    </Motion>
 
     <!-- Footer Credits -->
     <div class="py-8 border-t border-white/10">
