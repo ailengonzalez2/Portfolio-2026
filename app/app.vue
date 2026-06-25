@@ -25,10 +25,7 @@ useSeoMeta({
 })
 
 // Default social-share image, auto-generated. Individual pages can override.
-defineOgImageComponent('NuxtSeo', {
-  title: 'Ailen Gonzalez',
-  description: 'AI Product Engineer · Designer & Frontend Developer'
-})
+defineOgImageComponent('Hero')
 
 // Structured data for search engines and rich results
 useSchemaOrg([
