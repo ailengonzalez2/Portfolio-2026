@@ -55,6 +55,8 @@ const visible = computed(() => isPastHero.value && !isOpen.value)
 
       <button
         type="button"
+        data-umami-event="brief-open"
+        data-umami-event-location="fab"
         class="brief-fab group relative inline-flex items-center gap-2 bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] text-white font-semibold rounded-full pl-3 pr-4 sm:pl-4 sm:pr-5 py-3 shadow-[0_8px_30px_rgba(184,106,223,0.35)] hover:shadow-[0_12px_40px_rgba(184,106,223,0.45)] transition-all hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
         :aria-label="$t('brief.floatingCta')"
         @click="open()"

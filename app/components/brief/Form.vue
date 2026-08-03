@@ -94,6 +94,7 @@ const hasFullBrief = computed(() => Boolean(
 async function generate() {
   if (!canSubmit.value) return
 
+  trackEvent('brief-generate')
   status.value = 'streaming'
   errorMessage.value = ''
   sections.value = {}
@@ -194,6 +195,7 @@ async function submitEmail() {
     }
     emailStatus.value = 'sent'
     emailSent.value = true
+    trackEvent('brief-lead-email')
   } catch {
     emailStatus.value = 'error'
     emailError.value = t('brief.email.errorGeneric')
@@ -520,6 +522,8 @@ async function submitEmail() {
           variant="outline"
           color="neutral"
           size="lg"
+          data-umami-event="book-call"
+          data-umami-event-location="brief"
           class="rounded-full"
         >
           <template #leading>

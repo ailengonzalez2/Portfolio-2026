@@ -142,6 +142,8 @@ onUnmounted(() => {
             :to="global.meetingLink"
             target="_blank"
             size="lg"
+            data-umami-event="book-call"
+            data-umami-event-location="footer"
             class="btn-gradient text-white font-semibold rounded-full px-8 py-3 text-base"
           >
             {{ t('contactCta.bookCall') }}

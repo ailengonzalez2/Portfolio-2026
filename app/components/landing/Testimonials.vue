@@ -138,6 +138,8 @@ const onMove = (e: MouseEvent) => {
                     :href="t.link"
                     target="_blank"
                     rel="noopener noreferrer"
+                    data-umami-event="upwork-profile"
+                    data-umami-event-location="testimonials"
                     class="ml-2 inline-flex items-center gap-1 font-bold text-heading dark:text-white hover:underline"
                   >
                     View on Upwork

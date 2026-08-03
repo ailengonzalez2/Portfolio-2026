@@ -24,6 +24,13 @@ useSeoMeta({
   ogType: 'article'
 })
 
+// Per-post social card: dark layout with category, title and reading time.
+defineOgImageComponent('BlogPost', {
+  title: post.value.title,
+  category: post.value.category,
+  readingTime: post.value.readingTime || ''
+})
+
 useSchemaOrg([
   defineArticle({
     headline: post.value.title,

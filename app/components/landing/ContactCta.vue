@@ -29,6 +29,8 @@ const { global } = useAppConfig()
             :to="global.meetingLink"
             target="_blank"
             size="lg"
+            data-umami-event="book-call"
+            data-umami-event-location="contact"
             class="btn-gradient text-white font-semibold rounded-full px-8 py-3 text-base"
           >
             {{ $t('contactCta.bookCall') }}
@@ -45,6 +47,8 @@ const { global } = useAppConfig()
             size="lg"
             variant="ghost"
             color="neutral"
+            data-umami-event="email-click"
+            data-umami-event-location="contact"
             class="font-semibold rounded-full px-8 py-3 text-base"
           >
             {{ $t('contactCta.email') }}
