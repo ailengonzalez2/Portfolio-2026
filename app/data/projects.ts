@@ -83,29 +83,35 @@ export const projects: Project[] = [
     }
   },
   {
-    id: 'habito',
-    title: 'Habito — AI Task Management',
-    description: 'Task management for the AI era, where humans and AI agents share one workspace and coordinate as real teammates. Product design and frontend for a clean, focused SaaS interface.',
-    image: '/projects/habito.png',
-    tags: ['Product Design', 'Web App', 'AI'],
-    date: '2025',
+    id: 'enter',
+    title: 'Enter — Sell Tickets Online',
+    description: 'A ticketing platform made in Argentina: signed QR codes, a web scanner that works on any phone, and a flat 2% fee via Mercado Pago. A bold, retro ticket-stub identity that stands out from corporate ticketing.',
+    image: '/projects/enter.png',
+    tags: ['SaaS', 'Web App', 'Product Design'],
+    date: '2026',
     links: {
-      preview: 'https://habito.ar'
+      preview: 'https://enter.ar'
     },
     caseStudy: {
-      tagline: 'A task manager built for teams where humans and AI agents work side by side.',
+      tagline: 'Ticketing without the friction — sell entradas in minutes, with a 2% fee and zero cost for free events.',
       role: 'Product Design + Frontend',
       client: 'codeCave',
-      problem: 'Most task tools treat AI as a bolt-on chat box. But teams increasingly delegate real work to agents, and there is no shared space where people and agents — even agents from different organizations — can coordinate as actual teammates with status, ownership, and accountability.',
-      approach: 'I designed a workspace where any task can be owned by a person or an agent. The interface keeps it legible: clear task states, agent labels, and real-time sync so you always know who (or what) is doing what. The product surface stays calm and focused on a dark theme, with a marketing site that explains the "humans + agents" model without jargon.',
-      highlights: [
-        'Shared workspace for humans and AI agents',
-        'Cross-organization agent coordination',
-        'Real-time task status and ownership',
-        'Calm, focused dark-theme product UI'
+      metrics: [
+        { value: '2%', label: 'Fee per paid sale' },
+        { value: 'ARS 0', label: 'For free events' },
+        { value: '5 min', label: 'To start selling' }
       ],
-      result: 'Live at habito.ar with a marketing site and product app. The "new era AI" positioning gives a clear, opinionated take on how agent-assisted teams actually work.',
-      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Drizzle ORM']
+      problem: 'Selling tickets in Argentina means choosing between big platforms with high fees and rigid contracts, or improvising with bank transfers and guest lists in WhatsApp. Organizers of parties, festivals and community events needed something simple, cheap and trustworthy — without hardware, paperwork or upfront costs.',
+      approach: 'I designed Enter around a retro ticket-stub identity — perforated edges, stamp-style type and a warm paper palette that feels like a physical entrada, not a corporate checkout. Under that skin sits a serious product: signed QR codes unique per ticket, a web scanner that runs on any phone camera, numbered seating, discount codes, team roles and one-click refunds. Payments flow through Mercado Pago with installments, and free events cost nothing.',
+      highlights: [
+        'Signed QR codes, unique per ticket, to stop counterfeits',
+        'Web-based scanner — any smartphone, no hardware',
+        'Flat 2% fee via Mercado Pago; free events pay ARS 0',
+        'Numbered seating, discount codes, team roles and refunds',
+        'Retro ticket-stub visual identity, Spanish-first'
+      ],
+      result: 'Live at enter.ar. Organizers go from signup to selling in about five minutes, and the "hecho en Argentina" identity gives the product a personality the incumbent platforms don\'t have.',
+      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Mercado Pago API']
     }
   },
   {
@@ -132,6 +138,58 @@ export const projects: Project[] = [
       ],
       result: 'Live at docta.ar. The design stands out in a sea of generic event sites and makes browsing what to do feel like an experience in itself.',
       stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'Nuxt Content']
+    }
+  },
+  {
+    id: 'ef1',
+    title: 'eF1 — Eficiencia Constructiva',
+    description: 'The site for a Córdoba construction company specialized in BIM and Lean Construction. A confident editorial hero over real obra photography, built to signal order, clarity and results.',
+    image: '/projects/ef1.jpg',
+    tags: ['Web Design', 'Frontend Development', 'Branding'],
+    date: '2026',
+    links: {
+      preview: 'https://ef1.up.railway.app/'
+    },
+    caseStudy: {
+      tagline: 'A construction company that innovates deserves a site that shows it — not a template with stock photos.',
+      role: 'Design + Frontend',
+      client: 'eF1 — Eficiencia Constructiva',
+      problem: 'eF1 manages construction projects with BIM modeling and Lean methodologies — a genuinely modern way of building. But most construction company sites look interchangeable: stock helmets, generic blue, a list of services. eF1 needed a web presence that matches how they actually work: precise, technological and trustworthy for investors who value order and results.',
+      approach: 'I built the identity around their own material: full-bleed obra photography with a bold editorial headline — "Eficiencia constructiva." in mixed sans and script type — and a restrained yellow accent. The site walks through their six services, from Obra Digital (3D BIM models that resolve interferences before they cost money on site) to post-delivery support, with a recent-projects portfolio spanning residential, commercial and healthcare work.',
+      highlights: [
+        'Editorial hero over real construction photography',
+        'Clear service architecture: BIM, cost control, dirección técnica',
+        'Recent-projects portfolio across sectors',
+        'Restrained palette with a single yellow accent'
+      ],
+      result: 'Shipped as the company\'s web presence. The site presents BIM and Lean Construction in plain language and gives eF1 a visual identity that separates it from template-built competitors.',
+      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS']
+    }
+  },
+  {
+    id: 'habito',
+    title: 'Habito — AI Task Management',
+    description: 'Task management for the AI era, where humans and AI agents share one workspace and coordinate as real teammates. Product design and frontend for a clean, focused SaaS interface.',
+    image: '/projects/habito.png',
+    tags: ['Product Design', 'Web App', 'AI'],
+    date: '2025',
+    links: {
+      preview: 'https://habito.ar'
+    },
+    caseStudy: {
+      tagline: 'A task manager built for teams where humans and AI agents work side by side.',
+      role: 'Product Design + Frontend',
+      client: 'codeCave',
+      problem: 'Most task tools treat AI as a bolt-on chat box. But teams increasingly delegate real work to agents, and there is no shared space where people and agents — even agents from different organizations — can coordinate as actual teammates with status, ownership, and accountability.',
+      approach: 'I designed a workspace where any task can be owned by a person or an agent. The interface keeps it legible: clear task states, agent labels, and real-time sync so you always know who (or what) is doing what. The product surface stays calm and focused on a dark theme, with a marketing site that explains the "humans + agents" model without jargon.',
+      highlights: [
+        'Shared workspace for humans and AI agents',
+        'Cross-organization agent coordination',
+        'Real-time task status and ownership',
+        'Calm, focused dark-theme product UI'
+      ],
+      result: 'Live at habito.ar with a marketing site and product app. The "new era AI" positioning gives a clear, opinionated take on how agent-assisted teams actually work.',
+      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Drizzle ORM']
     }
   },
   {
