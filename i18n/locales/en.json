@@ -163,8 +163,9 @@
   "writing": {
     "section": "Writing",
     "title": "Notes from shipping AI products",
-    "intro": "Practical lessons from designing and shipping LLM-powered features, frontend craft, and Web3 product work. First posts landing soon — in the meantime, here's what I'm writing about.",
+    "intro": "Practical lessons from designing and shipping LLM-powered features, frontend craft, and Web3 product work.",
     "comingSoon": "Coming soon",
+    "back": "All posts",
     "ctaText": "Want first dibs on new posts?",
     "ctaButton": "Get in touch",
     "posts": {

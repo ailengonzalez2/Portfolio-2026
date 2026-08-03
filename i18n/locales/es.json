@@ -118,7 +118,7 @@
   },
   "contactCta": {
     "heading": "Trabajemos juntos",
-    "subtitle": "¿Tenés un producto de IA o un frontend en mente? Hagámoslo realidad",
+    "subtitle": "¿Tenés un producto de IA o un frontend en mente? Hagámoslo realidad.",
     "bookCall": "Agendar una llamada",
     "email": "Escribime"
   },
@@ -186,8 +186,9 @@
   "writing": {
     "section": "Blog",
     "title": "Notas de construir productos con IA",
-    "intro": "Aprendizajes prácticos de diseñar y lanzar features con LLM, craft de frontend y diseño de producto Web3. Los primeros posts ya están en camino — mientras tanto, esto es sobre lo que estoy escribiendo.",
+    "intro": "Lecciones prácticas de diseñar y shippear features con LLMs, frontend y productos Web3.",
     "comingSoon": "Próximamente",
+    "back": "Todos los posts",
     "ctaText": "¿Querés enterarte primero de los próximos posts?",
     "ctaButton": "Contactame",
     "posts": {
