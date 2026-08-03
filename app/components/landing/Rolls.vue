@@ -15,6 +15,14 @@ const bottomY = useTransform(scrollYProgress, [0, 0.15, 0.6], ['0%', '0%', '100%
 
 // Opacity - disappear only after going off screen
 const splitOpacity = useTransform(scrollYProgress, [0, 0.55, 0.65], [1, 1, 0])
+
+// Intro CTA bar (badge + subtitle + buttons) - fades out as the split begins
+// so it doesn't linger over the showcase columns.
+const ctaOpacity = useTransform(scrollYProgress, [0, 0.1, 0.25], [1, 1, 0])
+const ctaPointerEvents = useTransform(scrollYProgress, v => (v < 0.18 ? 'auto' : 'none'))
+
+const { global } = useAppConfig()
+const localePath = useLocalePath()
 </script>
 
 <template>
@@ -99,6 +107,61 @@ const splitOpacity = useTransform(scrollYProgress, [0, 0.55, 0.65], [1, 1, 0])
                 Frontend
               </h2>
             </div>
+          </div>
+        </div>
+      </Motion>
+
+      <!-- CTA bar: value prop + availability + primary actions, above the fold -->
+      <Motion
+        :style="{ opacity: ctaOpacity, pointerEvents: ctaPointerEvents }"
+        class="absolute inset-x-0 bottom-0 z-40 pb-6 sm:pb-8"
+      >
+        <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5">
+          <div class="max-w-md">
+            <p class="flex items-center gap-2 text-sm font-medium text-white">
+              <span class="relative flex size-2">
+                <span class="absolute inline-flex size-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                <span class="relative inline-flex size-2 rounded-full bg-emerald-400" />
+              </span>
+              {{ $t('hero.available') }}
+              <span class="text-neutral-500">·</span>
+              <span class="text-neutral-400">{{ $t('hero.spotsAvailable') }}</span>
+            </p>
+            <p class="mt-2 hidden sm:block text-sm text-neutral-400 leading-relaxed">
+              {{ $t('hero.subtitle') }}
+            </p>
+          </div>
+
+          <div class="flex items-center gap-3 shrink-0">
+            <UButton
+              :to="global.meetingLink"
+              target="_blank"
+              size="lg"
+              class="bg-white hover:bg-neutral-200 text-neutral-900 font-semibold rounded-full px-7 py-3 text-base"
+            >
+              {{ $t('hero.bookCall') }}
+              <template #trailing>
+                <UIcon
+                  name="i-lucide-arrow-up-right"
+                  class="size-4"
+                />
+              </template>
+            </UButton>
+
+            <UButton
+              :to="localePath('/projects')"
+              size="lg"
+              variant="ghost"
+              class="text-white hover:bg-white/10 font-semibold rounded-full px-6 py-3 text-base"
+            >
+              {{ $t('hero.seeWork') }}
+              <template #trailing>
+                <UIcon
+                  name="i-lucide-arrow-right"
+                  class="size-4"
+                />
+              </template>
+            </UButton>
           </div>
         </div>
       </Motion>

@@ -8,13 +8,12 @@ const { global } = useAppConfig()
     class="pt-24 pb-40 sm:pt-32 sm:pb-52 bg-background"
   >
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <ContactHeading :text="$t('contactCta.heading')" />
+
       <ScrollReveal
-        :y="24"
-        :blur="6"
+        :y="20"
+        :blur="4"
       >
-        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight uppercase text-heading dark:text-white">
-          {{ $t('contactCta.heading') }}
-        </h2>
         <p class="mt-6 max-w-2xl mx-auto text-lg text-muted">
           {{ $t('contactCta.subtitle') }}
         </p>
@@ -23,7 +22,7 @@ const { global } = useAppConfig()
       <ScrollReveal
         :y="20"
         :blur="4"
-        :delay="0.2"
+        :delay="0.15"
       >
         <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
           <UButton

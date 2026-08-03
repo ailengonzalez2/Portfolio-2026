@@ -12,14 +12,8 @@ const showContact = computed(() => route.path !== '/about')
       <slot />
     </main>
 
-    <!-- Contact prompt: white background, sits above the dark footer -->
-    <section
-      v-if="showContact"
-      id="contact"
-      class="relative z-10 bg-background px-4 sm:px-6 lg:px-8 pt-24 pb-40 sm:pt-32 sm:pb-56 text-center"
-    >
-      <ContactHeading :text="$t('contactCta.heading')" />
-    </section>
+    <!-- Contact prompt: heading + booking/email CTAs, sits above the dark footer -->
+    <LandingContactCta v-if="showContact" class="relative z-10" />
 
     <AppFooter />
 
