@@ -55,7 +55,7 @@ export const projects: Project[] = [
     id: 'codecave',
     title: 'codeCave — Studio Site',
     description: 'The site for codeCave, a Córdoba-based product studio. A distinctive terminal-inspired identity with a neon-on-dark aesthetic, built end to end in Nuxt — "from idea to production".',
-    image: '/projects/codecave.png',
+    image: '/projects/covers/codecave.jpg',
     tags: ['Frontend Development', 'Web Design', 'Branding'],
     date: '2025',
     links: {
@@ -86,7 +86,7 @@ export const projects: Project[] = [
     id: 'enter',
     title: 'Enter — Sell Tickets Online',
     description: 'A ticketing platform made in Argentina: signed QR codes, a web scanner that works on any phone, and a flat 2% fee via Mercado Pago. A bold, retro ticket-stub identity that stands out from corporate ticketing.',
-    image: '/projects/enter.png',
+    image: '/projects/covers/enter.jpg',
     tags: ['SaaS', 'Web App', 'Product Design'],
     date: '2026',
     links: {
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     id: 'docta',
     title: 'Docta — Córdoba Culture Agenda',
     description: 'A hand-curated cultural agenda for Córdoba — concerts, theatre, festivals and nightlife, refreshed daily. An editorial, print-inspired design that makes browsing what to do feel like reading a magazine.',
-    image: '/projects/docta.jpg',
+    image: '/projects/covers/docta.jpg',
     tags: ['Web Design', 'Frontend Development', 'Editorial'],
     date: '2025',
     links: {
@@ -144,7 +144,7 @@ export const projects: Project[] = [
     id: 'ef1',
     title: 'eF1 — Eficiencia Constructiva',
     description: 'The site for a Córdoba construction company specialized in BIM and Lean Construction. A confident editorial hero over real obra photography, built to signal order, clarity and results.',
-    image: '/projects/ef1.jpg',
+    image: '/projects/covers/ef1.jpg',
     tags: ['Web Design', 'Frontend Development', 'Branding'],
     date: '2026',
     links: {
@@ -170,7 +170,7 @@ export const projects: Project[] = [
     id: 'habito',
     title: 'Habito — AI Task Management',
     description: 'Task management for the AI era, where humans and AI agents share one workspace and coordinate as real teammates. Product design and frontend for a clean, focused SaaS interface.',
-    image: '/projects/habito.png',
+    image: '/projects/covers/habito.jpg',
     tags: ['Product Design', 'Web App', 'AI'],
     date: '2025',
     links: {
@@ -196,7 +196,7 @@ export const projects: Project[] = [
     id: 'asistente',
     title: 'Asistente — Tu agenda trabaja sola',
     description: 'A booking SaaS for independent professionals in Argentina: a shareable reservations page, deposit collection, and automatic reminders — so the calendar runs itself.',
-    image: '/projects/asistente.png',
+    image: '/projects/covers/asistente.jpg',
     tags: ['SaaS', 'Web App', 'Product Design'],
     date: '2026',
     links: {
