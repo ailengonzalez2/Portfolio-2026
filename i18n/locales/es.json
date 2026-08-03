@@ -85,7 +85,6 @@
     "support": "Esto significa entregas más limpias, iteraciones más rápidas y productos que de verdad coinciden con la visión."
   },
   "testimonials": {
-    "eyebrow": "Testimonios",
     "next": "Siguiente testimonio",
     "goTo": "Ver testimonio de {name}"
   },

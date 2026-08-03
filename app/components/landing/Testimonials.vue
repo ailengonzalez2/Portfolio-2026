@@ -90,21 +90,11 @@ const onMove = (e: MouseEvent) => {
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <ScrollReveal
-        :y="20"
-        :blur="4"
-      >
-        <SectionEyebrow
-          :label="$t('testimonials.eyebrow')"
-          class="mb-12"
-        />
-      </ScrollReveal>
-
-      <ScrollReveal
         :y="24"
         :blur="4"
       >
         <div
-          class="paper-stack relative mx-auto grid max-w-2xl"
+          class="paper-stack relative mx-auto grid max-w-3xl"
           :class="count > 1 ? 'cursor-pointer' : ''"
           :role="count > 1 ? 'button' : undefined"
           :tabindex="count > 1 ? 0 : undefined"
@@ -118,7 +108,7 @@ const onMove = (e: MouseEvent) => {
           <figure
             v-for="(t, i) in testimonials"
             :key="t.id"
-            class="paper-card glass-card group/card relative flex flex-col overflow-hidden rounded-2xl p-6 sm:p-8"
+            class="paper-card glass-card group/card relative flex flex-col overflow-hidden rounded-2xl p-8 sm:p-12"
             :style="cardStyle(i)"
             @mousemove="onMove"
           >
@@ -133,10 +123,10 @@ const onMove = (e: MouseEvent) => {
                 name="i-lucide-quote"
                 class="size-6 text-gray-300 mb-4 shrink-0"
               />
-              <blockquote class="flex-1 text-base sm:text-lg leading-relaxed text-heading dark:text-white/90">
+              <blockquote class="flex-1 text-lg sm:text-xl leading-relaxed text-heading dark:text-white/90">
                 {{ t.quote }}
               </blockquote>
-              <figcaption class="mt-6 text-sm">
+              <figcaption class="mt-8 text-sm sm:text-base">
                 <template v-if="t.author">
                   <span class="font-semibold text-heading dark:text-white/90">{{ t.author }}</span>
                   <span
