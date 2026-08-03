@@ -18,6 +18,12 @@ const props = defineProps<{
 const actionLink = computed(() => props.project.links.preview || props.project.links.figma)
 const actionIsFigma = computed(() => !props.project.links.preview && !!props.project.links.figma)
 
+// The whole card points at the live site; projects without one fall back
+// to the internal case study, which is otherwise reached via "More".
+const detailLink = computed(() => `/projects/${props.project.id}`)
+const cardLink = computed(() => actionLink.value || detailLink.value)
+const cardTarget = computed(() => actionLink.value ? '_blank' : undefined)
+
 const reduced = useReducedMotion()
 
 // Staggered entrance based on grid position
@@ -49,31 +55,43 @@ const imageY = useTransform(
       <!-- Header row: title + tag pill + action buttons -->
       <div class="flex items-center justify-between gap-2 sm:gap-3 px-1.5 py-2 sm:py-2.5">
         <NuxtLink
-          :to="`/projects/${project.id}`"
+          :to="cardLink"
+          :target="cardTarget"
           class="min-w-0 truncate text-sm sm:text-base font-semibold tracking-tight text-neutral-900 dark:text-white hover:opacity-70 transition-opacity"
         >
           {{ project.title }}
         </NuxtLink>
 
-        <!-- Live version / Figma button (top right) -->
-        <NuxtLink
-          v-if="actionLink"
-          :to="actionLink"
-          target="_blank"
-          :aria-label="actionIsFigma ? $t('projects.caseStudy.figma') : $t('projects.caseStudy.viewLive')"
-          :title="actionIsFigma ? $t('projects.caseStudy.figma') : $t('projects.caseStudy.viewLive')"
-          class="shrink-0 flex items-center justify-center size-8 sm:size-9 rounded-full bg-neutral-900 text-white hover:opacity-90 transition-opacity"
-        >
-          <UIcon
-            :name="actionIsFigma ? 'i-simple-icons-figma' : 'i-lucide-arrow-up-right'"
-            class="size-4"
-          />
-        </NuxtLink>
+        <div class="shrink-0 flex items-center gap-1.5 sm:gap-2">
+          <!-- Case study link -->
+          <NuxtLink
+            :to="detailLink"
+            class="flex items-center h-8 sm:h-9 px-3 sm:px-3.5 rounded-full border border-neutral-300 dark:border-neutral-700 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 transition-colors"
+          >
+            {{ $t('projects.more') }}
+          </NuxtLink>
+
+          <!-- Live version / Figma button (top right) -->
+          <NuxtLink
+            v-if="actionLink"
+            :to="actionLink"
+            target="_blank"
+            :aria-label="actionIsFigma ? $t('projects.caseStudy.figma') : $t('projects.caseStudy.viewLive')"
+            :title="actionIsFigma ? $t('projects.caseStudy.figma') : $t('projects.caseStudy.viewLive')"
+            class="flex items-center justify-center size-8 sm:size-9 rounded-full bg-neutral-900 text-white hover:opacity-90 transition-opacity"
+          >
+            <UIcon
+              :name="actionIsFigma ? 'i-simple-icons-figma' : 'i-lucide-arrow-up-right'"
+              class="size-4"
+            />
+          </NuxtLink>
+        </div>
       </div>
 
       <!-- Image -->
       <NuxtLink
-        :to="`/projects/${project.id}`"
+        :to="cardLink"
+        :target="cardTarget"
         class="block relative mt-1 rounded-2xl overflow-hidden aspect-4/3 bg-white"
       >
         <div
