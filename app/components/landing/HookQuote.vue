@@ -4,7 +4,7 @@
       <ScrollReveal
         :y="28"
         :blur="8"
-        :duration="0.7"
+        :duration="0.55"
       >
         <p class="max-w-4xl text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-heading dark:text-white">
           {{ $t('hookQuote.pre') }}<span class="btn-gradient-text">{{ $t('hookQuote.highlight') }}</span>{{ $t('hookQuote.post') }}
@@ -14,8 +14,8 @@
       <ScrollReveal
         :y="20"
         :blur="4"
-        :delay="0.25"
-        :duration="0.6"
+        :delay="0.15"
+        :duration="0.5"
       >
         <p class="mt-8 sm:mt-10 max-w-2xl text-lg sm:text-xl text-muted">
           {{ $t('hookQuote.support') }}

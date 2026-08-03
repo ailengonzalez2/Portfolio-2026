@@ -75,8 +75,9 @@ const handleScroll = () => {
   const windowHeight = window.innerHeight
   const blockquoteTop = blockquoteRect.top
 
-  // Start animation after text enters viewport
-  const scrollProgress = Math.max(0, Math.min(1, 1 - (blockquoteTop / (windowHeight * 1.1))))
+  // Start animation after text enters viewport; the shorter range makes the
+  // quote fully readable before it leaves the viewport, even on fast scrolls.
+  const scrollProgress = Math.max(0, Math.min(1, 1 - (blockquoteTop / (windowHeight * 0.8))))
 
   // Update each character's color based on its index in the text (linear flow)
   const newColors = text.value.split('').map((char, index) => {

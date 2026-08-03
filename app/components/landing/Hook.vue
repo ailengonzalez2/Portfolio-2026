@@ -9,7 +9,7 @@ const localePath = useLocalePath()
       <ScrollReveal
         :y="28"
         :blur="8"
-        :duration="0.7"
+        :duration="0.55"
       >
         <p class="mt-20 sm:mt-32 max-w-4xl text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-heading dark:text-white">
           {{ $t('hook.pre') }}<span class="btn-gradient-text">{{ $t('hook.highlight') }}</span>{{ $t('hook.post') }}
@@ -19,8 +19,8 @@ const localePath = useLocalePath()
       <ScrollReveal
         :y="20"
         :blur="4"
-        :delay="0.25"
-        :duration="0.6"
+        :delay="0.15"
+        :duration="0.5"
       >
         <div class="mt-10 sm:mt-12 flex flex-wrap items-center gap-4">
           <NuxtLink

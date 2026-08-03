@@ -13,13 +13,15 @@ const showContact = computed(() => route.path !== '/about')
     </main>
 
     <!-- Contact prompt: heading + booking/email CTAs, sits above the dark footer -->
-    <LandingContactCta v-if="showContact" class="relative z-10" />
+    <LandingContactCta
+      v-if="showContact"
+      class="relative z-10"
+    />
 
     <AppFooter />
 
     <!-- Brief generator: floating CTA available on every page + centered modal -->
-    <!-- TODO: hidden for now — re-enable when we resume work on the AI brief -->
-    <!-- <BriefFloatingButton /> -->
+    <BriefFloatingButton />
     <BriefModal />
   </div>
 </template>

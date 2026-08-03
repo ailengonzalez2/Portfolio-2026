@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<{
   delay: 0,
   y: 24,
   blur: 6,
-  duration: 0.6,
+  duration: 0.5,
   once: true
 })
 
@@ -39,7 +39,7 @@ const inView = computed(() =>
     :initial="initial"
     :while-in-view="inView"
     :transition="{ duration: reduced ? 0.3 : props.duration, delay: props.delay, ease: [0.22, 1, 0.36, 1] }"
-    :in-view-options="{ once: props.once, margin: '0px 0px -12% 0px' }"
+    :in-view-options="{ once: props.once, margin: '0px 0px -8% 0px' }"
   >
     <slot />
   </Motion>

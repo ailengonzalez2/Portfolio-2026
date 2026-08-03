@@ -13,17 +13,17 @@ const reduced = useReducedMotion()
 const target = ref<HTMLElement | null>(null)
 const { scrollYProgress } = useScroll({
   target,
-  offset: ['start 0.9', 'start 0.35']
+  offset: ['start 0.92', 'start 0.5']
 })
 
 const total = words.value.length
 // One opacity + blur MotionValue per word, each mapped to its own slice of
 // the scroll progress so words light up left-to-right.
 const opacities = words.value.map((_, i) =>
-  useTransform(scrollYProgress, [i / total, (i + 0.85) / total], [0.12, 1])
+  useTransform(scrollYProgress, [i / total, (i + 0.85) / total], [0.25, 1])
 )
 const filters = words.value.map((_, i) => {
-  const px = useTransform(scrollYProgress, [i / total, (i + 0.85) / total], [10, 0])
+  const px = useTransform(scrollYProgress, [i / total, (i + 0.85) / total], [8, 0])
   return useTransform(px, (v: number) => `blur(${v}px)`)
 })
 </script>
