@@ -85,7 +85,9 @@
     "support": "This means cleaner handoffs, faster iterations, and products that actually match the vision."
   },
   "testimonials": {
-    "eyebrow": "Kind words"
+    "eyebrow": "Kind words",
+    "next": "Next testimonial",
+    "goTo": "Show testimonial from {name}"
   },
   "contactCta": {
     "heading": "Let's work together",
