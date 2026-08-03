@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { global } = useAppConfig()
+const localePath = useLocalePath()
 </script>
 
 <template>
@@ -39,7 +40,7 @@ const { global } = useAppConfig()
           </NuxtLink>
 
           <UButton
-            to="/projects"
+            :to="localePath('/projects')"
             size="lg"
             variant="ghost"
             color="neutral"

@@ -1,4 +1,8 @@
 {
+  "seo": {
+    "homeTitle": "Ailen Gonzalez — AI Product Designer & Frontend Developer",
+    "homeDescription": "AI Product Engineer, frontend developer and product designer. I design and ship user-facing AI products end to end — chat UIs, streaming, RAG flows — in Vue/Nuxt."
+  },
   "nav": {
     "projects": "projects",
     "services": "services",

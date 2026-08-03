@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { projects } from '~/data/projects'
 
+const localePath = useLocalePath()
+
 // Show first 4 projects on landing page
 const selfProjects = computed(() => projects.slice(0, 4))
 </script>
@@ -50,7 +52,7 @@ const selfProjects = computed(() => projects.slice(0, 4))
         class="mt-12 text-center"
       >
         <NuxtLink
-          to="/projects"
+          :to="localePath('/projects')"
           class="group/btn relative inline-flex items-center bg-neutral-900 hover:bg-neutral-800 rounded-full py-4 pl-8 pr-16 transition-all duration-300 hover:pl-16 hover:pr-8"
         >
           <span class="absolute right-1.5 flex items-center justify-center size-10 bg-white rounded-full transition-all duration-300 ease-out group-hover/btn:right-[calc(100%-2.875rem)]">

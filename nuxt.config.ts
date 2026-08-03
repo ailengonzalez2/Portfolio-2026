@@ -31,7 +31,13 @@ export default defineNuxtConfig({
   site: {
     url: 'https://ailengonzalez.ar',
     name: 'Ailen Gonzalez',
-    description: 'Ailen Gonzalez — AI Product Engineer. I design and ship user-facing AI features and polished web experiences.'
+    description: 'Ailen Gonzalez — AI Product Engineer, frontend developer and product designer. I design and ship user-facing AI features and polished web experiences.'
+  },
+
+  sitemap: {
+    // The homepage sitemap was listing every project screenshot; keep the
+    // sitemap focused on URLs.
+    discoverImages: false
   },
 
   colorMode: {
@@ -53,7 +59,8 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: [
-        '/'
+        '/',
+        '/es'
       ],
       crawlLinks: true
     }
@@ -70,10 +77,13 @@ export default defineNuxtConfig({
 
   i18n: {
     defaultLocale: 'en',
-    strategy: 'no_prefix',
+    // Prefixed Spanish routes (/es/...) give each language its own indexable
+    // URL; @nuxtjs/seo picks this up and emits hreflang alternates.
+    strategy: 'prefix_except_default',
+    baseUrl: 'https://ailengonzalez.ar',
     locales: [
-      { code: 'en', name: 'English', file: 'en.json' },
-      { code: 'es', name: 'Español', file: 'es.json' }
+      { code: 'en', language: 'en', name: 'English', file: 'en.json' },
+      { code: 'es', language: 'es-AR', name: 'Español', file: 'es.json' }
     ],
     detectBrowserLanguage: {
       useCookie: true,
@@ -81,9 +91,6 @@ export default defineNuxtConfig({
       redirectOn: 'root',
       alwaysRedirect: false,
       fallbackLocale: 'en'
-    },
-    bundle: {
-      optimizeTranslationDirective: false
     }
   },
 

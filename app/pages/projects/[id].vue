@@ -4,6 +4,7 @@ import { projects } from '~/data/projects'
 definePageMeta({ colorMode: 'light' })
 
 const route = useRoute()
+const localizedTo = useLocalizedTo()
 const id = computed(() => route.params.id as string)
 
 const project = computed(() => projects.find(p => p.id === id.value))
@@ -14,13 +15,13 @@ if (!project.value) {
 }
 
 const seo = computed(() => ({
-  title: `${project.value!.title} — Ailen Gonzalez`,
+  title: project.value!.title,
   description: project.value!.caseStudy?.tagline || project.value!.description
 }))
 
 useSeoMeta({
   title: () => seo.value.title,
-  ogTitle: () => seo.value.title,
+  ogTitle: () => `${seo.value.title} — Ailen Gonzalez`,
   description: () => seo.value.description,
   ogDescription: () => seo.value.description,
   ogImage: () => project.value!.image
@@ -40,7 +41,7 @@ const related = computed(() =>
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Back link -->
         <NuxtLink
-          to="/projects"
+          :to="localizedTo('/projects')"
           class="inline-flex items-center gap-2 text-sm text-body dark:text-neutral-400 hover:text-primary transition-colors mb-8"
         >
           <UIcon
@@ -286,7 +287,7 @@ const related = computed(() =>
             {{ $t('projects.caseStudy.ctaText') }}
           </p>
           <UButton
-            to="/#brief"
+            :to="localizedTo('/#brief')"
             size="lg"
             class="btn-gradient text-white rounded-full px-6"
           >

@@ -6,7 +6,7 @@ definePageMeta({ colorMode: 'light' })
 const { t } = useI18n()
 
 useSeoMeta({
-  title: () => `${t('projects.pageTitle')} — Ailen Gonzalez`,
+  title: () => t('projects.pageTitle'),
   ogTitle: () => `${t('projects.pageTitle')} — Ailen Gonzalez`,
   description: () => t('projects.pageIntro'),
   ogDescription: () => t('projects.pageIntro')

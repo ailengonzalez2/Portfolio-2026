@@ -2,9 +2,10 @@
 definePageMeta({ colorMode: 'light' })
 
 const { t } = useI18n()
+const localizedTo = useLocalizedTo()
 
 useSeoMeta({
-  title: () => `${t('writing.title')} — Ailen Gonzalez`,
+  title: () => t('writing.title'),
   ogTitle: () => `${t('writing.title')} — Ailen Gonzalez`,
   description: () => t('writing.intro'),
   ogDescription: () => t('writing.intro')
@@ -85,7 +86,7 @@ const postKeys = ['streaming', 'ragEvals', 'figmaVue', 'defiUi'] as const
             {{ $t('writing.ctaText') }}
           </p>
           <UButton
-            to="/#contact"
+            :to="localizedTo('/#contact')"
             size="lg"
             class="btn-gradient text-white rounded-full px-6"
           >

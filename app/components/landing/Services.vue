@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 
 const { t, tm, rt } = useI18n()
+const localizedTo = useLocalizedTo()
 
 interface ServiceConfig {
   id: string
@@ -144,7 +145,7 @@ const getWordDelay = (wordIndex: number, baseDelay: number = 0) => {
                   <div class="mt-auto pt-8 flex flex-col items-end">
                     <div class="stagger-item stagger-separator h-px w-full bg-[#d4d4d4] dark:bg-gray-600 mb-5" />
                     <NuxtLink
-                      to="/#contact"
+                      :to="localizedTo('/#contact')"
                       class="stagger-item stagger-icon-1 inline-flex items-center gap-2 rounded-full bg-neutral-900 text-white text-sm font-medium px-5 py-2.5 hover:bg-neutral-800 transition-colors"
                     >
                       {{ $t('services.startProject') }}

@@ -20,7 +20,8 @@ const actionIsFigma = computed(() => !props.project.links.preview && !!props.pro
 
 // The whole card points at the live site; projects without one fall back
 // to the internal case study, which is otherwise reached via "More".
-const detailLink = computed(() => `/projects/${props.project.id}`)
+const localePath = useLocalePath()
+const detailLink = computed(() => localePath(`/projects/${props.project.id}`))
 const cardLink = computed(() => actionLink.value || detailLink.value)
 const cardTarget = computed(() => actionLink.value ? '_blank' : undefined)
 

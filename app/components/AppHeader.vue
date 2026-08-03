@@ -11,6 +11,7 @@ const { isIntroComplete } = useIntroAnimation()
 
 // i18n
 const { locale, setLocale, t } = useI18n()
+const localizedTo = useLocalizedTo()
 
 const toggleLocale = () => {
   setLocale(locale.value === 'en' ? 'es' : 'en')
@@ -27,7 +28,7 @@ const isPastRolls = computed(() => {
 // the header sits over light content / photos, so it gets the opaque light
 // surface with dark text.
 const route = useRoute()
-const overDarkHero = computed(() => route.path === '/' && !isPastRolls.value)
+const overDarkHero = computed(() => route.path === localizedTo('/') && !isPastRolls.value)
 
 // Full-width square bar only over the dark home hero; a centered pill everywhere
 // else (scrolled, or any non-hero page).
@@ -63,7 +64,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
       <div class="flex items-center justify-between">
         <!-- Logo -->
         <NuxtLink
-          to="/"
+          :to="localizedTo('/')"
           class="relative flex items-center justify-center group"
         >
           <div class="relative h-10">
@@ -98,7 +99,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
                 :key="String(link.to)"
               >
                 <NuxtLink
-                  :to="link.to"
+                  :to="localizedTo(String(link.to))"
                   class="text-xs tracking-wide transition-colors uppercase"
                   :class="overDarkHero ? 'text-white/75 hover:text-white' : 'text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white'"
                 >
@@ -123,7 +124,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
           </button>
 
           <NuxtLink
-            to="/#contact"
+            :to="localizedTo('/#contact')"
             class="group/btn relative hidden sm:inline-flex items-center bg-neutral-900 py-3.5 pl-8 pr-14 hover:pl-14 hover:pr-8 btn-transition"
             :class="isScrolled ? 'rounded-[50px]' : 'rounded-2xl'"
           >
@@ -169,7 +170,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
         <NuxtLink
           v-for="link in links"
           :key="String(link.to)"
-          :to="link.to"
+          :to="localizedTo(String(link.to))"
           class="text-2xl font-medium text-foreground hover:text-primary transition-colors uppercase"
           @click="closeMobileMenu"
         >
@@ -192,7 +193,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
 
         <!-- Mobile CTA Button -->
         <NuxtLink
-          to="/#contact"
+          :to="localizedTo('/#contact')"
           class="group/btn relative mt-4 inline-flex items-center bg-neutral-900 py-3.5 pl-8 pr-14 hover:pl-14 hover:pr-8 rounded-full btn-transition"
           @click="closeMobileMenu"
         >
