@@ -1,14 +1,34 @@
 <script setup lang="ts">
-import { projects } from '~/data/projects'
+import { projects, type ProjectKind } from '~/data/projects'
 
 definePageMeta({ colorMode: 'light' })
 
 const { t } = useI18n()
 
-// Client work first (that visitor is here to hire), Lab below (recruiters scroll).
-// A section renders nothing when empty.
 const clientProjects = computed(() => projects.filter(p => p.kind === 'client'))
 const labProjects = computed(() => projects.filter(p => p.kind === 'lab'))
+
+const tabs = computed(() => [
+  { value: 'client' as ProjectKind, label: t('projects.clientWork') },
+  { value: 'lab' as ProjectKind, label: t('projects.lab') }
+])
+
+// Client work is the default — that visitor is here to hire.
+const activeTab = ref<ProjectKind>('client')
+
+// The tab is mirrored in the URL hash so /projects#lab still opens Lab straight
+// away, which is the link that goes on a CV or a job application.
+const route = useRoute()
+
+onMounted(() => {
+  if (route.hash === '#lab') activeTab.value = 'lab'
+})
+
+watch(activeTab, (kind) => {
+  // replaceState rather than the router: swapping tabs shouldn't add history
+  // entries or make the page jump to the anchor.
+  history.replaceState(history.state, '', kind === 'lab' ? '#lab' : location.pathname)
+})
 
 useSeoMeta({
   title: () => t('projects.pageTitle'),
@@ -48,34 +68,36 @@ useSeoMeta({
           </h1>
         </Motion>
 
-        <!-- Client work -->
-        <section
-          v-if="clientProjects.length"
-          id="client-work"
-          class="scroll-mt-60"
-        >
-          <ProjectSectionHeading :title="$t('projects.clientWork')" />
+        <ProjectTabs
+          v-model="activeTab"
+          :tabs="tabs"
+        />
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            <ProjectCard
-              v-for="project in clientProjects"
-              :key="project.id"
-              :project="project"
-              no-animation
-            />
-          </div>
-        </section>
-
-        <!-- Lab: self-directed work. Deep-linkable via /projects#lab -->
-        <section
-          v-if="labProjects.length"
-          id="lab"
-          class="scroll-mt-60 mt-20 sm:mt-28"
+        <!-- Both panels stay in the DOM (v-show) so every project is present in
+             the HTML for search engines, and switching tabs is instant. -->
+        <div
+          v-show="activeTab === 'client'"
+          id="panel-client"
+          role="tabpanel"
+          class="mt-10 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
         >
-          <ProjectSectionHeading
-            :title="$t('projects.lab')"
-            :description="$t('projects.labIntro')"
+          <ProjectCard
+            v-for="project in clientProjects"
+            :key="project.id"
+            :project="project"
+            no-animation
           />
+        </div>
+
+        <div
+          v-show="activeTab === 'lab'"
+          id="panel-lab"
+          role="tabpanel"
+          class="mt-10 sm:mt-12"
+        >
+          <p class="mb-10 sm:mb-12 max-w-xl text-base sm:text-lg text-muted">
+            {{ $t('projects.labIntro') }}
+          </p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             <ProjectCard
@@ -85,7 +107,7 @@ useSeoMeta({
               no-animation
             />
           </div>
-        </section>
+        </div>
       </div>
     </section>
   </UPage>
