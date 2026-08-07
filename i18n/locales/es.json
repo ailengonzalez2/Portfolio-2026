@@ -83,6 +83,9 @@
   },
   "projects": {
     "latestSection": "Proyectos recientes",
+    "clientWork": "Trabajo con clientes",
+    "lab": "Lab",
+    "labIntro": "Proyectos propios — donde pruebo ideas y tecnología sin un brief de cliente que condicione la respuesta.",
     "more": "Más",
     "exploreAll": "Ver proyectos",
     "pageTitle": "Proyectos destacados",

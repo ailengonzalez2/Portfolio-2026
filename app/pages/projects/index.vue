@@ -5,6 +5,11 @@ definePageMeta({ colorMode: 'light' })
 
 const { t } = useI18n()
 
+// Client work first (that visitor is here to hire), Lab below (recruiters scroll).
+// A section renders nothing when empty.
+const clientProjects = computed(() => projects.filter(p => p.kind === 'client'))
+const labProjects = computed(() => projects.filter(p => p.kind === 'lab'))
+
 useSeoMeta({
   title: () => t('projects.pageTitle'),
   ogTitle: () => `${t('projects.pageTitle')} — Ailen Gonzalez`,
@@ -43,15 +48,44 @@ useSeoMeta({
           </h1>
         </Motion>
 
-        <!-- Project grid: two cards per row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          <ProjectCard
-            v-for="project in projects"
-            :key="project.id"
-            :project="project"
-            no-animation
+        <!-- Client work -->
+        <section
+          v-if="clientProjects.length"
+          id="client-work"
+          class="scroll-mt-60"
+        >
+          <ProjectSectionHeading :title="$t('projects.clientWork')" />
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <ProjectCard
+              v-for="project in clientProjects"
+              :key="project.id"
+              :project="project"
+              no-animation
+            />
+          </div>
+        </section>
+
+        <!-- Lab: self-directed work. Deep-linkable via /projects#lab -->
+        <section
+          v-if="labProjects.length"
+          id="lab"
+          class="scroll-mt-60 mt-20 sm:mt-28"
+        >
+          <ProjectSectionHeading
+            :title="$t('projects.lab')"
+            :description="$t('projects.labIntro')"
           />
-        </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <ProjectCard
+              v-for="project in labProjects"
+              :key="project.id"
+              :project="project"
+              no-animation
+            />
+          </div>
+        </section>
       </div>
     </section>
   </UPage>

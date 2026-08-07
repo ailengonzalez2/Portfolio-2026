@@ -60,6 +60,9 @@
   },
   "projects": {
     "latestSection": "Latest Projects",
+    "clientWork": "Client Work",
+    "lab": "Lab",
+    "labIntro": "Self-directed projects — where I try out ideas and technology without a client brief shaping the answer.",
     "more": "More",
     "exploreAll": "Explore Projects",
     "pageTitle": "Featured Projects",

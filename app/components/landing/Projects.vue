@@ -3,8 +3,9 @@ import { projects } from '~/data/projects'
 
 const localePath = useLocalePath()
 
-// Show first 4 projects on landing page
-const selfProjects = computed(() => projects.slice(0, 4))
+// Client work only — the landing page is the sales surface. Lab projects live
+// on /projects#lab, where the recruiter audience goes looking for them.
+const selfProjects = computed(() => projects.filter(p => p.kind === 'client').slice(0, 4))
 </script>
 
 <template>

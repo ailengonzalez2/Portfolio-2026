@@ -30,8 +30,11 @@ useSeoMeta({
 const cs = computed(() => project.value!.caseStudy)
 
 // Three other projects to surface at the bottom
+// Suggest work of the same kind, so each audience stays on its own track.
 const related = computed(() =>
-  projects.filter(p => p.id !== id.value).slice(0, 3)
+  projects
+    .filter(p => p.id !== id.value && p.kind === project.value?.kind)
+    .slice(0, 3)
 )
 </script>
 

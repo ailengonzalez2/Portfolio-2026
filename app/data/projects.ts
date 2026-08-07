@@ -21,8 +21,16 @@ export interface CaseStudy {
   outcomes?: string[]
 }
 
+/**
+ * Which section of the projects page a project belongs to.
+ * `client` — paid client and studio work. `lab` — self-directed projects.
+ * Required so a new project can't silently land in the wrong section.
+ */
+export type ProjectKind = 'client' | 'lab'
+
 export interface Project {
   id: string
+  kind: ProjectKind
   title: string
   description: string
   /** Path to image in /public/projects/ or external URL */
@@ -53,6 +61,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'codecave',
+    kind: 'client',
     title: 'codeCave — Studio Site',
     description: 'The site for codeCave, a Córdoba-based product studio. A distinctive terminal-inspired identity with a neon-on-dark aesthetic, built end to end in Nuxt — "from idea to production".',
     image: '/projects/covers/codecave.jpg',
@@ -84,6 +93,7 @@ export const projects: Project[] = [
   },
   {
     id: 'enter',
+    kind: 'client',
     title: 'Enter — Sell Tickets Online',
     description: 'A ticketing platform made in Argentina: signed QR codes, a web scanner that works on any phone, and a flat 2% fee via Mercado Pago. A bold, retro ticket-stub identity that stands out from corporate ticketing.',
     image: '/projects/covers/enter.jpg',
@@ -116,6 +126,7 @@ export const projects: Project[] = [
   },
   {
     id: 'docta',
+    kind: 'client',
     title: 'Docta — Córdoba Culture Agenda',
     description: 'A hand-curated cultural agenda for Córdoba — concerts, theatre, festivals and nightlife, refreshed daily. An editorial, print-inspired design that makes browsing what to do feel like reading a magazine.',
     image: '/projects/covers/docta.jpg',
@@ -142,6 +153,7 @@ export const projects: Project[] = [
   },
   {
     id: 'ef1',
+    kind: 'client',
     title: 'eF1 — Eficiencia Constructiva',
     description: 'The site for a Córdoba construction company specialized in BIM and Lean Construction. A confident editorial hero over real obra photography, built to signal order, clarity and results.',
     image: '/projects/covers/ef1.jpg',
@@ -168,6 +180,7 @@ export const projects: Project[] = [
   },
   {
     id: 'habito',
+    kind: 'client',
     title: 'Habito — AI Task Management',
     description: 'Task management for the AI era, where humans and AI agents share one workspace and coordinate as real teammates. Product design and frontend for a clean, focused SaaS interface.',
     image: '/projects/covers/habito.jpg',
@@ -194,6 +207,7 @@ export const projects: Project[] = [
   },
   {
     id: 'asistente',
+    kind: 'client',
     title: 'Asistente — Tu agenda trabaja sola',
     description: 'A booking SaaS for independent professionals in Argentina: a shareable reservations page, deposit collection, and automatic reminders — so the calendar runs itself.',
     image: '/projects/covers/asistente.jpg',
@@ -219,6 +233,7 @@ export const projects: Project[] = [
   },
   {
     id: 'yoga-wellness-app',
+    kind: 'client',
     title: 'Yoga & Wellness App',
     description: 'A mindful mobile experience designed to guide users through yoga practices, meditation sessions, and wellness tracking with an intuitive and calming interface.',
     image: '/projects/yogaapp.png',
@@ -240,6 +255,86 @@ export const projects: Project[] = [
       ],
       result: 'Delivered as a complete mobile product design in Figma — a cohesive system of screens, components, and flows ready for development.',
       stack: ['Figma', 'Prototyping', 'Design System', 'iOS / Android']
+    }
+  },
+  {
+    id: 'brand-spark',
+    kind: 'lab',
+    title: 'Brand Spark — Live Brand Identity',
+    description: 'Describe a brand in two or three sentences and watch a full identity generate live — name, palette, type pairings, voice and moodboard — restyling the page itself as it streams in.',
+    image: '/projects/covers/brand-spark.jpg',
+    tags: ['AI Product', 'LLM Integration', 'Product Design'],
+    date: '2026',
+    links: {
+      preview: 'https://brand-spark.up.railway.app/'
+    },
+    caseStudy: {
+      tagline: 'An AI brand generator that proves its own output by wearing it — the page adopts each identity as it streams in.',
+      role: 'AI Product Design + Frontend',
+      problem: 'Most AI branding tools hand back a static PDF or a grid of logos with no context. You see swatches, not a brand — nothing shows how the palette, typography and voice actually hold together in a real interface, which is the only thing that matters when you have to decide whether an identity works.',
+      approach: 'I built the demo so the output has to prove itself: as the model streams a brand back, the page restyles itself with the generated palette and typefaces in real time. Each identity comes as structured data — named color tokens, primary and body type pairings with rationale, a voice statement with do and don\'t lists, and a moodboard whose imagery is generated to match. Every section can be regenerated on its own without discarding the rest, and the whole identity exports as JSON so it can go straight into design tokens.',
+      highlights: [
+        'Live theming — the page adopts the generated identity as it streams',
+        'Structured output: color tokens, type pairings, voice, copy',
+        'Per-section regeneration without losing the rest',
+        'Generated moodboard imagery, plus mock site and social previews',
+        'Export to JSON for handoff into design tokens'
+      ],
+      result: 'Live and open to try. It doubles as a working demo of the pieces a production AI feature needs — streaming, structured outputs, generated imagery and a UI that responds to model output rather than just printing it.',
+      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'LLM streaming', 'fal.ai']
+    }
+  },
+  {
+    id: 'loft-3d',
+    kind: 'lab',
+    title: 'Interactive Loft — 3D Scene',
+    description: 'A loft you can orbit around in the browser. Everything that lights up on hover is clickable: furniture opens panels, objects on the table do their own thing, and a Shiba wanders through.',
+    image: '/projects/covers/loft-3d.jpg',
+    tags: ['3D / WebGL', 'Frontend Development', 'Interaction Design'],
+    date: '2026',
+    links: {
+      preview: 'https://livingroom-3d-production.up.railway.app/'
+    },
+    caseStudy: {
+      tagline: 'A hand-built 3D room where hovering teaches you what to click — no tutorial, no instructions overlay.',
+      role: 'Design + Frontend',
+      problem: 'Interactive 3D on the web usually fails in one of two ways: it looks good but you can\'t tell what you\'re allowed to touch, or it explains itself with an instructions overlay nobody reads. I wanted to see whether a scene could teach its own affordances through nothing but light.',
+      approach: 'I assembled a loft from CC-licensed models and made hover the entire tutorial — anything interactive lights up when the cursor crosses it, so exploration teaches the rules. Clicking furniture opens a detail panel; small objects on the table each have their own behaviour; a Shiba moves around the space. Orbit and wheel-zoom handle navigation, and zooming out backs you out of any object, so there is no dead end. Geometry is DRACO-compressed to keep the scene loadable over a normal connection.',
+      highlights: [
+        'Hover highlighting as the only tutorial',
+        'Clickable furniture with detail panels',
+        'Individually scripted objects and a wandering Shiba',
+        'Orbit + wheel navigation with zoom-out as universal escape',
+        'DRACO-compressed geometry for reasonable load times'
+      ],
+      result: 'Live in the browser, no plugin or install. The scene is a testbed for interaction patterns in 3D — how to signal affordance, how to let someone leave a state without a back button, and how to keep an asset-heavy scene loading fast.',
+      stack: ['Nuxt 4', 'Three.js', 'WebGL', 'GLTF / DRACO', 'TypeScript']
+    }
+  },
+  {
+    id: 'contap',
+    kind: 'lab',
+    title: 'Contap — NFC Nails',
+    description: 'Nails with an NFC chip: someone holds a phone near your hand and whatever link you chose opens. A self-initiated product with a store, pricing and an editable destination per chip.',
+    image: '/projects/covers/contap.jpg',
+    tags: ['Product Design', 'E-commerce', 'Frontend Development'],
+    date: '2026',
+    links: {
+      preview: 'https://nfc-website-production.up.railway.app/'
+    },
+    caseStudy: {
+      tagline: 'Turning a physical object into a link you can change whenever you want.',
+      role: 'Product Design + Frontend',
+      problem: 'NFC products are usually sold as cards or keychains and explained in technical language that assumes you already know what NFC is. The interesting version — wearing the chip, so sharing a contact takes no object and no typing — needed a product story that made the idea obvious to someone who has never heard of the technology.',
+      approach: 'I built the product site around the gesture rather than the technology: oversized type stating the promise ("tu contacto en tu mano"), a plain-language explainer for anyone asking what an NFC even is, and a shop where the chip and its destination are separate things — you buy the nail once and can point it anywhere afterwards. Accounts let each owner edit their own link.',
+      highlights: [
+        'Product story led by the gesture, not the technology',
+        'Plain-language "what is an NFC?" explainer',
+        'Store with product range and pricing',
+        'Per-user account to edit the chip\'s destination link'
+      ],
+      result: 'Live with the storefront, explainer and account flow in place. The project is where I work through commerce and product-narrative problems end to end without a client brief shaping the answer.',
+      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL']
     }
   }
 ]
