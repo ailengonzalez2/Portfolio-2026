@@ -25,7 +25,7 @@ useSeoMeta({
 })
 
 // Per-post social card: dark layout with category, title and reading time.
-defineOgImageComponent('BlogPost', {
+defineOgImageComponent('BlogPostSatori', {
   title: post.value.title,
   category: post.value.category,
   readingTime: post.value.readingTime || ''

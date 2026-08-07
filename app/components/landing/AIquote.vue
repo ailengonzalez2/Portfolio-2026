@@ -18,7 +18,7 @@ const gradientColors = [
   { r: 255, g: 177, b: 71 }, // #ffb147 - orange
   { r: 255, g: 108, b: 99 }, // #ff6c63 - pink/red
   { r: 184, g: 106, b: 223 } // #b86adf - purple
-]
+] as const
 
 // Calculate highlighted ranges with position info for gradient
 interface HighlightInfo {

@@ -28,13 +28,13 @@ let raf = 0
 let running = false
 
 // Brand gradient stops: orange → pink → purple (brightened / more saturated)
-const stops: [number, number, number][] = [
+const stops = [
   [255, 196, 84],
   [255, 96, 120],
   [205, 120, 255]
-]
+] as const
 
-const mix = (a: number[], b: number[], k: number) => [
+const mix = (a: readonly [number, number, number], b: readonly [number, number, number], k: number) => [
   Math.round(a[0] + k * (b[0] - a[0])),
   Math.round(a[1] + k * (b[1] - a[1])),
   Math.round(a[2] + k * (b[2] - a[2]))

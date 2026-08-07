@@ -15,30 +15,24 @@ export default defineNuxtConfig({
     enabled: true
   },
 
-  css: ['~/assets/css/main.css'],
-
   app: {
     head: {
       script: [
         {
-          src: 'https://umami.codecave.ar/script.js',
+          'src': 'https://umami.codecave.ar/script.js',
           'data-website-id': '3bdc851d-7f3e-402e-9712-cdb5a201091e',
-          defer: true
+          'defer': true
         }
       ]
     }
   },
 
+  css: ['~/assets/css/main.css'],
+
   site: {
     url: 'https://ailengonzalez.ar',
     name: 'Ailen Gonzalez',
     description: 'Ailen Gonzalez — AI Product Engineer, frontend developer and product designer. I design and ship user-facing AI features and polished web experiences.'
-  },
-
-  sitemap: {
-    // The homepage sitemap was listing every project screenshot; keep the
-    // sitemap focused on URLs.
-    discoverImages: false
   },
 
   colorMode: {
@@ -98,5 +92,11 @@ export default defineNuxtConfig({
   image: {
     quality: 80,
     format: ['webp', 'avif']
+  },
+
+  sitemap: {
+    // The homepage sitemap was listing every project screenshot; keep the
+    // sitemap focused on URLs.
+    discoverImages: false
   }
 })

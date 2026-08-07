@@ -50,9 +50,10 @@ const ITEMS_PER_COLUMN = 6
 
 const columns = COLUMN_DIRECTIONS.map((direction, i) => {
   const start = (i * 4) % heroImages.length
+  // The modulo keeps the index in range, so the lookup can never be undefined.
   const items = Array.from(
     { length: ITEMS_PER_COLUMN },
-    (_, k) => heroImages[(start + k) % heroImages.length]
+    (_, k) => heroImages[(start + k) % heroImages.length]!
   )
   return {
     direction,
