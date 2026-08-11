@@ -9,8 +9,8 @@ const clientProjects = computed(() => projects.filter(p => p.kind === 'client'))
 const labProjects = computed(() => projects.filter(p => p.kind === 'lab'))
 
 const tabs = computed(() => [
-  { value: 'client' as ProjectKind, label: t('projects.clientWork') },
-  { value: 'lab' as ProjectKind, label: t('projects.lab') }
+  { value: 'client' as ProjectKind, label: t('projects.clientWork'), count: clientProjects.value.length },
+  { value: 'lab' as ProjectKind, label: t('projects.lab'), count: labProjects.value.length }
 ])
 
 // Client work is the default — that visitor is here to hire.
