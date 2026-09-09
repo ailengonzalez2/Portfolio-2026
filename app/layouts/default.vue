@@ -20,8 +20,13 @@ const showContact = computed(() => route.path !== '/about')
 
     <AppFooter />
 
-    <!-- Brief generator: floating CTA available on every page + centered modal -->
-    <BriefFloatingButton />
-    <BriefModal />
+    <!--
+      Brief generator (floating CTA + modal). Hidden until it's ready to ship:
+      the feature is still in progress and must not be visible to visitors.
+      To bring it back, restore the two components below and point the
+      case-study CTA in pages/projects/[id].vue back to '/#brief'.
+    -->
+    <!-- <BriefFloatingButton /> -->
+    <!-- <BriefModal /> -->
   </div>
 </template>

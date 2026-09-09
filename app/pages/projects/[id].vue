@@ -290,7 +290,7 @@ const related = computed(() =>
             {{ $t('projects.caseStudy.ctaText') }}
           </p>
           <UButton
-            :to="localizedTo('/#brief')"
+            :to="localizedTo('/#contact')"
             size="lg"
             class="btn-gradient text-white rounded-full px-6"
           >
