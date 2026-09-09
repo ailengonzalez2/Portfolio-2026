@@ -86,6 +86,14 @@
     "clientWork": "Trabajo con clientes",
     "lab": "Lab",
     "labIntro": "Proyectos propios — donde pruebo ideas y tecnología sin un brief de cliente que condicione la respuesta.",
+    "labTeaser": {
+      "eyebrow": "El lab",
+      "title": "No todo lo que construyo tiene un cliente.",
+      "cta": "Jugá con mi portfolio",
+      "jellyCaption": "Dale, tocala.",
+      "jellyName": "Jelly — una estrella de mar en WebGPU",
+      "seeLab": "Ver todo el lab"
+    },
     "more": "Más",
     "exploreAll": "Ver proyectos",
     "pageTitle": "Proyectos destacados",
