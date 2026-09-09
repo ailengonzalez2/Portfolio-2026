@@ -336,5 +336,33 @@ export const projects: Project[] = [
       result: 'Live with the storefront, explainer and account flow in place. The project is where I work through commerce and product-narrative problems end to end without a client brief shaping the answer.',
       stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL']
     }
+  },
+  {
+    id: 'jelly',
+    kind: 'lab',
+    title: 'Jelly — Squishy WebGPU Starfish',
+    description: 'A translucent starfish that lives in your browser. Move to make a friend, grab an arm, stretch it and let go — a small experiment in soft-body physics and WebGPU rendering with Three.js.',
+    image: '/projects/covers/jelly.jpg',
+    tags: ['3D / WebGL', 'Creative Coding', 'Interaction Design'],
+    date: '2026',
+    links: {
+      preview: 'https://jelly-starfish-production.up.railway.app/'
+    },
+    caseStudy: {
+      tagline: 'A little ocean creature you can poke, stretch and release — no instructions beyond "go on, make waves".',
+      role: 'Design + Frontend',
+      problem: 'Most WebGPU demos are spinning cubes and particle counters — technically impressive, emotionally flat. I wanted to find out whether a single 3D object could feel alive enough that people play with it unprompted, and whether the new rendering path is ready for something that has to feel good, not just run fast.',
+      approach: 'The whole page is one creature. A translucent pink starfish sits in a dark, starry ocean and responds to the cursor: move nearby and it drifts toward you, grab an arm and it stretches like jelly, let go and it wobbles back into shape. The copy is deliberately minimal — an eyebrow, two lines of headline in sans and serif, and two hints at the bottom — so the interaction is the interface. It renders through WebGPU with Three.js, with a subsurface, speckled material that sells the "squishy" feel.',
+      highlights: [
+        'Soft-body stretch: grab an arm, pull, release',
+        'Cursor proximity makes the creature drift toward you',
+        'Keyboard controls: arrows move, space bounces, Escape releases',
+        'Translucent, speckled jelly material with WebGPU rendering',
+        'Minimal editorial copy so the interaction is the interface',
+        'Sans + serif type pairing on a dark, starry backdrop'
+      ],
+      result: 'Live in the browser. It works as a tiny playground for the questions I keep coming back to in 3D: how to make an object feel physical, how to invite touch without a tutorial, and what WebGPU changes for creative work on the web.',
+      stack: ['Three.js', 'WebGPU', 'React', 'Next.js', 'TypeScript']
+    }
   }
 ]
