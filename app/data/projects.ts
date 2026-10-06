@@ -45,6 +45,14 @@ export interface Project {
   }
   /** Optional case study content. When present, the project links to an internal case study page. */
   caseStudy?: CaseStudy
+  /** Present = shown in the home "Selected work" section, ascending order. */
+  featuredOrder?: number
+  /** Optional hand-made sketch/wireframe; replaces the auto-generated latent layer. */
+  latentImage?: string
+  /** The one project the home "Process" section walks through. */
+  processShowcase?: boolean
+  /** Code excerpt shown at the Process section's final "Code" stage. */
+  processSnippet?: string
 }
 
 /**
@@ -62,6 +70,7 @@ export const projects: Project[] = [
   {
     id: 'codecave',
     kind: 'client',
+    featuredOrder: 1,
     title: 'codeCave — Studio Site',
     description: 'The site for codeCave, a Córdoba-based product studio. A distinctive terminal-inspired identity with a neon-on-dark aesthetic, built end to end in Nuxt — "from idea to production".',
     image: '/projects/covers/codecave.jpg',
@@ -94,6 +103,7 @@ export const projects: Project[] = [
   {
     id: 'enter',
     kind: 'client',
+    featuredOrder: 2,
     title: 'Enter — Sell Tickets Online',
     description: 'A ticketing platform made in Argentina: signed QR codes, a web scanner that works on any phone, and a flat 2% fee via Mercado Pago. A bold, retro ticket-stub identity that stands out from corporate ticketing.',
     image: '/projects/covers/enter.jpg',
@@ -127,6 +137,7 @@ export const projects: Project[] = [
   {
     id: 'docta',
     kind: 'client',
+    featuredOrder: 4,
     title: 'Docta — Córdoba Culture Agenda',
     description: 'A hand-curated cultural agenda for Córdoba — concerts, theatre, festivals and nightlife, refreshed daily. An editorial, print-inspired design that makes browsing what to do feel like reading a magazine.',
     image: '/projects/covers/docta.jpg',
@@ -181,6 +192,7 @@ export const projects: Project[] = [
   {
     id: 'habito',
     kind: 'client',
+    featuredOrder: 3,
     title: 'Habito — AI Task Management',
     description: 'Task management for the AI era, where humans and AI agents share one workspace and coordinate as real teammates. Product design and frontend for a clean, focused SaaS interface.',
     image: '/projects/covers/habito.jpg',
@@ -208,6 +220,20 @@ export const projects: Project[] = [
   {
     id: 'asistente',
     kind: 'client',
+    processShowcase: true,
+    // TODO(Ailen): swap for a real excerpt from the Asistente codebase before launch.
+    processSnippet: `<script setup lang="ts">
+const { data: slots } = await useFetch('/api/slots', { query: { date } })
+</script>
+
+<template>
+  <UButton
+    v-for="slot in slots"
+    :key="slot.start"
+    :label="slot.label"
+    @click="book(slot)"
+  />
+</template>`,
     title: 'Asistente — Tu agenda trabaja sola',
     description: 'A booking SaaS for independent professionals in Argentina: a shareable reservations page, deposit collection, and automatic reminders — so the calendar runs itself.',
     image: '/projects/covers/asistente.jpg',
