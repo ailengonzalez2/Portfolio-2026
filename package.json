@@ -24,10 +24,12 @@
     "@vueuse/nuxt": "^13.9.0",
     "motion-v": "^1.7.3",
     "nuxt": "^4.2.2",
-    "satori": "^0.26.0"
+    "satori": "^0.26.0",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.10.0",
+    "@types/three": "^0.186.0",
     "better-sqlite3": "^11",
     "eslint": "^9.39.1",
     "typescript": "^5.9.3",
