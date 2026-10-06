@@ -36,8 +36,8 @@ const activeIndex = computed(() => fx.value ? Math.round(stage.value) : STAGES.l
     class="process-track relative"
   >
     <div class="lg:sticky lg:top-0 lg:h-svh lg:pt-20 flex items-center">
-      <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-10 py-24 lg:py-0">
-        <div class="lg:col-span-4">
+      <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 py-24 lg:py-0">
+        <div class="min-w-0 lg:col-span-4">
           <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
             {{ $t('process.eyebrow') }}
           </p>
@@ -62,7 +62,7 @@ const activeIndex = computed(() => fx.value ? Math.round(stage.value) : STAGES.l
           </ol>
         </div>
 
-        <div class="lg:col-span-8">
+        <div class="min-w-0 lg:col-span-8">
           <ResolveImage
             :src="showcase.image"
             :alt="showcase.title"

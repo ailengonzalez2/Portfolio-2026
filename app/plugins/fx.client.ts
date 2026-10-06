@@ -26,7 +26,19 @@ export default defineNuxtPlugin((nuxtApp) => {
   active.value = true
   document.documentElement.classList.add('fx-on')
 
+  // Start after the page has loaded and the main thread is idle, so three +
+  // particle setup never compete with first paint / LCP.
+  const whenIdle = () => new Promise<void>((resolve) => {
+    const go = () => {
+      if ('requestIdleCallback' in window) window.requestIdleCallback(() => resolve(), { timeout: 2000 })
+      else setTimeout(resolve, 200)
+    }
+    if (document.readyState === 'complete') go()
+    else window.addEventListener('load', go, { once: true })
+  })
+
   nuxtApp.hook('app:mounted', async () => {
+    await whenIdle()
     const [{ Stage }, { default: Lenis }] = await Promise.all([
       import('~/webgl/stage'),
       import('lenis')

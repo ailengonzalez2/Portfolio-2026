@@ -17,14 +17,14 @@ const linkFor = (p: Project) => p.caseStudy
     class="relative py-24 sm:py-32"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
+      <h2 class="font-mono font-normal text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
         {{ $t('work.eyebrow') }}
-      </p>
+      </h2>
 
       <article
         v-for="(p, i) in featured"
         :key="p.id"
-        class="grid lg:grid-cols-12 gap-8 lg:gap-12 py-16 lg:py-0 lg:min-h-[120vh] items-start"
+        class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 py-16 lg:py-0 lg:min-h-[120vh] items-start"
       >
         <div class="lg:col-span-7 lg:sticky lg:top-28">
           <ResolveImage
