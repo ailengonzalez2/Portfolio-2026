@@ -25,14 +25,6 @@
     "clientWork": "Trabajo con clientes",
     "lab": "Lab",
     "labIntro": "Proyectos propios — donde pruebo ideas y tecnología sin un brief de cliente que condicione la respuesta.",
-    "labTeaser": {
-      "eyebrow": "El lab",
-      "title": "No todo lo que construyo tiene un cliente.",
-      "cta": "Jugá con mi portfolio",
-      "jellyCaption": "Dale, tocala.",
-      "jellyName": "Jelly — una estrella de mar en WebGPU",
-      "seeLab": "Ver todo el lab"
-    },
     "more": "Más",
     "exploreAll": "Ver proyectos",
     "pageTitle": "Proyectos destacados",
@@ -71,6 +63,13 @@
       "ui": { "label": "Interfaz", "body": "El sistema visual: tipografía, ritmo, estados, cada pixel pensado." },
       "code": { "label": "Código", "body": "Lo llevo a producción en Vue y Nuxt. El diseño es el producto, no un handoff." }
     }
+  },
+  "lab": {
+    "eyebrow": "El lab",
+    "title": "No todo lo que construyo tiene un cliente.",
+    "intro": "Los experimentos quedan sueltos hasta que los tocás.",
+    "hint": "Pasá el mouse para armarlos · en el celular, tocá dos veces",
+    "seeAll": "Ver todo el lab"
   },
   "work": {
     "eyebrow": "Trabajo seleccionado",

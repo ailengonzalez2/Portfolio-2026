@@ -21,11 +21,7 @@ useSeoMeta({
     <LandingManifesto />
     <LandingWork />
     <LandingProcess />
-    <section class="pb-24 sm:pb-32">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <LandingLabTeaser />
-      </div>
-    </section>
+    <LandingLab />
     <LandingTestimonials />
   </UPage>
 </template>

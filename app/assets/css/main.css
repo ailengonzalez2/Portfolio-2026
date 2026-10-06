@@ -81,6 +81,46 @@
   .fx-on .process-track { height: 400vh; }
 }
 
+/* Halftone reveal: the DOM-only analog of particles. Content shows through a
+   grid of dots that grow until solid (see components/fx/HalftoneReveal.vue). */
+@property --dot {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 101%;
+}
+
+.halftone {
+  --dot: 101%;
+  -webkit-mask-image: radial-gradient(circle, #000 var(--dot), transparent calc(var(--dot) + 2%));
+  mask-image: radial-gradient(circle, #000 var(--dot), transparent calc(var(--dot) + 2%));
+  -webkit-mask-size: 7px 7px;
+  mask-size: 7px 7px;
+  transition: --dot 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.halftone--hidden {
+  --dot: 0%;
+}
+
+/* Testimonial (and other keyed) swaps */
+.halftone-enter-active,
+.halftone-leave-active {
+  -webkit-mask-image: radial-gradient(circle, #000 var(--dot), transparent calc(var(--dot) + 2%));
+  mask-image: radial-gradient(circle, #000 var(--dot), transparent calc(var(--dot) + 2%));
+  -webkit-mask-size: 7px 7px;
+  mask-size: 7px 7px;
+  transition: --dot 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.halftone-leave-active {
+  transition-duration: 0.35s;
+}
+
+.halftone-enter-from,
+.halftone-leave-to {
+  --dot: 0%;
+}
+
 /* WebGL stage canvas (created by plugins/fx.client.ts). Above content,
    below the header (z-50); never intercepts input. */
 .fx-canvas {

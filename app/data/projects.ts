@@ -53,6 +53,8 @@ export interface Project {
   processShowcase?: boolean
   /** Code excerpt shown at the Process section's final "Code" stage. */
   processSnippet?: string
+  /** Short tech label for Lab experiments on the home, e.g. 'WebGPU · soft-body'. */
+  labTag?: string
 }
 
 /**
@@ -286,6 +288,7 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
   {
     id: 'brand-spark',
     kind: 'lab',
+    labTag: 'LLM · streaming UI',
     title: 'Brand Spark — Live Brand Identity',
     description: 'Describe a brand in two or three sentences and watch a full identity generate live — name, palette, type pairings, voice and moodboard — restyling the page itself as it streams in.',
     image: '/projects/covers/brand-spark.jpg',
@@ -313,6 +316,7 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
   {
     id: 'loft-3d',
     kind: 'lab',
+    labTag: 'Three.js · 3D',
     title: 'Interactive Loft — 3D Scene',
     description: 'A loft you can orbit around in the browser. Everything that lights up on hover is clickable: furniture opens panels, objects on the table do their own thing, and a Shiba wanders through.',
     image: '/projects/covers/loft-3d.jpg',
@@ -340,6 +344,7 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
   {
     id: 'contap',
     kind: 'lab',
+    labTag: 'NFC · product',
     title: 'Contap — NFC Nails',
     description: 'Nails with an NFC chip: someone holds a phone near your hand and whatever link you chose opens. A self-initiated product with a store, pricing and an editable destination per chip.',
     image: '/projects/covers/contap.jpg',
@@ -366,6 +371,7 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
   {
     id: 'jelly',
     kind: 'lab',
+    labTag: 'WebGPU · soft-body',
     title: 'Jelly — Squishy WebGPU Starfish',
     description: 'A translucent starfish that lives in your browser. Move to make a friend, grab an arm, stretch it and let go — a small experiment in soft-body physics and WebGPU rendering with Three.js.',
     image: '/projects/covers/jelly.jpg',
