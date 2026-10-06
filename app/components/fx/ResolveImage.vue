@@ -18,13 +18,16 @@ const props = withDefaults(defineProps<{
   stage?: number
   sizes?: string
   eager?: boolean
+  /** particle columns (density) */
+  cols?: number
 }>(), {
   progress: undefined,
   latent: false,
   latentSrc: undefined,
   stage: undefined,
   sizes: '100vw lg:60vw',
-  eager: false
+  eager: false,
+  cols: 160
 })
 
 const root = ref<HTMLElement | null>(null)
@@ -40,7 +43,7 @@ const { ready } = useWebGLLayer(root, async () => {
   try {
     const src = await waitForImage(imgEl)
     const { createParticleImage } = await import('~/webgl/particles/image')
-    return await createParticleImage({ src, latentSrc: props.latentSrc, aspect: rect.width / rect.height })
+    return await createParticleImage({ src, latentSrc: props.latentSrc, aspect: rect.width / rect.height, cols: props.cols })
   } catch {
     return null
   }

@@ -43,17 +43,17 @@ function onArrow(event: KeyboardEvent, index: number, count: number) {
       @keydown.right.prevent="onArrow($event, i, tabs.length)"
     >
       <span
-        class="flex items-baseline gap-1.5 text-sm sm:text-base font-semibold uppercase tracking-[0.2em] transition-colors duration-300"
+        class="flex items-baseline gap-1.5 font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] transition-colors duration-300"
         :class="active === tab.value
-          ? 'text-heading dark:text-white'
-          : 'text-neutral-500 dark:text-neutral-400 group-hover:text-neutral-800 dark:group-hover:text-neutral-200'"
+          ? 'text-ink dark:text-paper'
+          : 'text-label group-hover:text-ink dark:group-hover:text-paper'"
       >
         {{ tab.label }}
         <span
-          class="text-[0.8em] font-medium tracking-normal tabular-nums transition-colors duration-300"
+          class="text-[0.9em] tracking-normal tabular-nums transition-colors duration-300"
           :class="active === tab.value
-            ? 'text-neutral-600 dark:text-neutral-300'
-            : 'text-neutral-400 dark:text-neutral-500'"
+            ? 'text-label'
+            : 'text-label/60'"
         >
           {{ tab.count }}
         </span>
@@ -62,14 +62,12 @@ function onArrow(event: KeyboardEvent, index: number, count: number) {
       <!-- Thick underline marks the active tab; a faint one appears on hover so
            the control announces itself as clickable. -->
       <span
-        class="absolute inset-x-0 bottom-0 h-0.5 rounded-full transition-colors duration-300"
-        :class="active === tab.value
-          ? 'bg-neutral-900 dark:bg-white'
-          : 'bg-transparent group-hover:bg-neutral-300 dark:group-hover:bg-neutral-700'"
+        class="absolute inset-x-0 bottom-0 h-px origin-left bg-ink dark:bg-paper transition-transform duration-500 ease-out"
+        :class="active === tab.value ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-25'"
       />
     </button>
 
     <!-- Trailing rule: carries the page's label-plus-line language. -->
-    <span class="h-px flex-1 bg-neutral-200 dark:bg-neutral-800 mb-2.5" />
+    <span class="h-px flex-1 bg-hairline mb-2.5" />
   </div>
 </template>
