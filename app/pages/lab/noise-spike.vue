@@ -10,13 +10,11 @@ useHead({
   }]
 })
 
-const nameEl = ref<HTMLElement | null>(null)
 const intro = ref(0)
 const step = ref(3)
 const size = ref(3.6)
 const scatter = ref(1)
 const mouseRadius = ref(110)
-const crossfade = ref(false)
 const manual = ref(false)
 const manualProgress = ref(1)
 const { y } = useWindowScroll()
@@ -35,8 +33,6 @@ const vh = () => (import.meta.client ? window.innerHeight : 800)
 const progress = computed(() => manual.value
   ? manualProgress.value
   : intro.value * (1 - Math.min(1, y.value / vh())))
-// Optional: once assembled, hand over to the crisp HTML text.
-const textShown = computed(() => crossfade.value && progress.value > 0.97)
 </script>
 
 <template>
@@ -48,14 +44,21 @@ const textShown = computed(() => crossfade.value && progress.value > 0.97)
       <p style="font-family:ui-monospace,monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.6">
         AI product design &amp; frontend
       </p>
-      <h1
-        ref="nameEl"
-        class="mt-6 leading-[0.88] transition-opacity duration-700"
-        :class="textShown ? 'btn-gradient-text opacity-100' : 'opacity-0'"
-        style="font-family:Fraunces,serif;font-size:clamp(3.5rem,13vw,12rem);font-weight:400"
+      <ParticleName
+        :progress="progress"
+        :step="step"
+        :point-size="size"
+        :scatter="scatter"
+        :mouse-radius="mouseRadius"
+        class="mt-6"
       >
-        Ailen<br>Gonzalez
-      </h1>
+        <h1
+          class="leading-[0.88]"
+          style="font-family:Fraunces,serif;font-size:clamp(3.5rem,13vw,12rem);font-weight:400"
+        >
+          Ailen<br>Gonzalez
+        </h1>
+      </ParticleName>
       <p
         class="mt-8 max-w-xl text-xl"
         style="opacity:.75"
@@ -63,16 +66,6 @@ const textShown = computed(() => crossfade.value && progress.value > 0.97)
         I design and build AI products end to end — from Figma to production code.
       </p>
     </section>
-
-    <SpikeParticleSpike
-      :text-el="nameEl"
-      :progress="progress"
-      :step="step"
-      :size="size"
-      :scatter="scatter"
-      :mouse-radius="mouseRadius"
-      :opacity="textShown ? 0.25 : 1"
-    />
 
     <div
       class="fixed bottom-4 left-4 z-50 w-72 rounded-lg p-4 text-xs space-y-2"
@@ -123,10 +116,6 @@ const textShown = computed(() => crossfade.value && progress.value > 0.97)
         max="300"
         step="5"
       ></label>
-      <label class="flex items-center gap-2"><input
-        v-model="crossfade"
-        type="checkbox"
-      > crossfade to real text when assembled</label>
     </div>
   </div>
 </template>

@@ -11,6 +11,12 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n'
   ],
 
+  // fx/ components are used by bare name (<ResolveImage>, <ParticleName>, ...)
+  components: [
+    { path: '~/components/fx', pathPrefix: false },
+    '~/components'
+  ],
+
   devtools: {
     enabled: true
   },
