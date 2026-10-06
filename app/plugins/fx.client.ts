@@ -1,5 +1,6 @@
 import { shouldUseWebGL } from '~/webgl/math'
-import { provideStage } from '~/webgl/runtime'
+import { provideStage, resetWipe } from '~/webgl/runtime'
+import { bootFx, frameLoop } from '~/webgl/loop'
 
 function hasWebGL() {
   try {
@@ -37,12 +38,25 @@ export default defineNuxtPlugin((nuxtApp) => {
     else window.addEventListener('load', go, { once: true })
   })
 
+  // Drop to the DOM fallback (no layers, normal tracks, native scroll).
+  const disableFx = () => {
+    document.documentElement.classList.remove('fx-on')
+    active.value = false
+  }
+
+  // A transition whose next page errors never gets its afterEnter: clear the wipe.
+  nuxtApp.hook('app:error', () => {
+    resetWipe()
+  })
+
   nuxtApp.hook('app:mounted', async () => {
     await whenIdle()
-    const [{ Stage }, { default: Lenis }] = await Promise.all([
+    const modules = await bootFx(() => Promise.all([
       import('~/webgl/stage'),
       import('lenis')
-    ])
+    ]), disableFx)
+    if (!modules) return
+    const [{ Stage }, { default: Lenis }] = modules
 
     const canvas = document.createElement('canvas')
     canvas.className = 'fx-canvas'
@@ -51,14 +65,12 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     const stage = new Stage(canvas)
     const lenis = new Lenis({ autoRaf: false, anchors: true })
+    let destroyed = false
 
-    let raf = 0
-    const tick = (t: number) => {
+    const stopLoop = frameLoop((t) => {
       lenis.raf(t)
       stage.render()
-      raf = requestAnimationFrame(tick)
-    }
-    raf = requestAnimationFrame(tick)
+    }, { onError: e => console.error('[fx] frame error', e) })
 
     const onResize = () => stage.resize()
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
@@ -69,25 +81,28 @@ export default defineNuxtPlugin((nuxtApp) => {
       window.addEventListener('pointermove', onPointer, { passive: true })
       document.addEventListener('pointerleave', onLeave)
     }
-    nuxtApp.hook('page:finish', () => lenis.resize())
+    nuxtApp.hook('page:finish', () => {
+      if (!destroyed) lenis.resize()
+    })
     // Lenis keeps its own scroll position; start each new page at the top
     // unless the route targets an anchor.
     nuxtApp.hook('page:transition:finish', () => {
-      if (!window.location.hash) lenis.scrollTo(0, { immediate: true })
+      if (!destroyed && !window.location.hash) lenis.scrollTo(0, { immediate: true })
     })
 
     // GPU reset / too many contexts: drop to the DOM fallback for good.
     canvas.addEventListener('webglcontextlost', (e) => {
       e.preventDefault()
-      cancelAnimationFrame(raf)
+      destroyed = true
+      stopLoop()
       window.removeEventListener('resize', onResize)
       window.removeEventListener('pointermove', onPointer)
       document.removeEventListener('pointerleave', onLeave)
       lenis.destroy()
       provideStage(null)
+      stage.dispose()
       canvas.remove()
-      document.documentElement.classList.remove('fx-on')
-      active.value = false
+      disableFx()
     }, { once: true })
 
     provideStage(stage)

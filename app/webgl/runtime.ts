@@ -19,6 +19,9 @@ export function whenStage(): Promise<Stage> {
   return current ? Promise.resolve(current) : new Promise(resolve => waiting.push(resolve))
 }
 
+/** Clear any wipe left covering the screen, e.g. when a transition never got its afterEnter (error page). */
+export const resetWipe = () => wipeTo(0, 300)
+
 /** Animate the particle wipe (0 clear → 1 covered); resolves at once without a stage. */
 export function wipeTo(target: number, ms: number): Promise<void> {
   const stage = current
