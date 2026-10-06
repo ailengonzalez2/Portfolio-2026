@@ -19,13 +19,13 @@ useSeoMeta({
   <UPage>
     <LandingHero />
     <LandingManifesto />
-    <section class="pb-20 sm:pb-28 bg-background">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <LandingWork />
+    <LandingProcess />
+    <section class="pb-24 sm:pb-32">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <LandingLabTeaser />
       </div>
     </section>
-    <LandingProcess />
-    <LandingWork />
     <LandingTestimonials />
   </UPage>
 </template>

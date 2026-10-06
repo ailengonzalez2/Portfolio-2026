@@ -30,14 +30,14 @@ const loftVideo = {
     :blur="6"
     :delay="0.1"
   >
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 rounded-3xl bg-neutral-950 p-3 sm:p-4 text-white">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 rounded-sm bg-ink p-3 sm:p-4 text-paper">
       <!-- Loft: the hero of the band. Muted looping video, whole tile is the link. -->
       <NuxtLink
         :to="loftLink"
         target="_blank"
         rel="noopener"
         :aria-label="$t('projects.labTeaser.cta')"
-        class="group relative md:col-span-2 block overflow-hidden rounded-2xl bg-neutral-900 aspect-[4/3] md:aspect-auto md:min-h-[400px]"
+        class="group relative md:col-span-2 block overflow-hidden rounded-sm bg-neutral-900 aspect-[4/3] md:aspect-auto md:min-h-[400px]"
       >
         <video
           class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
@@ -62,10 +62,10 @@ const loftVideo = {
         <div class="absolute inset-0 bg-linear-to-t from-neutral-950/85 via-neutral-950/20 to-transparent" />
 
         <div class="absolute inset-x-0 bottom-0 p-5 sm:p-7 flex flex-col items-start gap-4">
-          <span class="text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-300">
+          <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/70">
             {{ $t('projects.labTeaser.eyebrow') }}
           </span>
-          <h3 class="max-w-md text-2xl sm:text-3xl lg:text-4xl font-bold leading-[1.05] tracking-tight">
+          <h3 class="max-w-md text-2xl sm:text-3xl lg:text-4xl font-display font-normal leading-[1.02] tracking-[-0.01em]">
             {{ $t('projects.labTeaser.title') }}
           </h3>
           <span class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-neutral-900 transition-colors group-hover:bg-secondary">
@@ -85,7 +85,7 @@ const loftVideo = {
           target="_blank"
           rel="noopener"
           :aria-label="jelly?.title"
-          class="group relative flex-1 block overflow-hidden rounded-2xl bg-[#071120] aspect-[4/3] md:aspect-auto md:min-h-[280px]"
+          class="group relative flex-1 block overflow-hidden rounded-sm bg-[#071120] aspect-[4/3] md:aspect-auto md:min-h-[280px]"
         >
           <img
             src="/projects/lab/jelly-tile.jpg"
@@ -94,7 +94,7 @@ const loftVideo = {
           >
           <div class="absolute inset-0 bg-linear-to-t from-[#071120]/90 via-transparent to-transparent" />
           <div class="absolute inset-x-0 bottom-0 p-5 flex flex-col gap-1">
-            <span class="font-serif italic text-2xl sm:text-3xl leading-none text-pink-200">
+            <span class="font-display italic text-2xl sm:text-3xl leading-none text-pink-200">
               {{ $t('projects.labTeaser.jellyCaption') }}
             </span>
             <span class="text-xs text-neutral-400">
@@ -105,7 +105,7 @@ const loftVideo = {
 
         <NuxtLink
           :to="localePath('/projects#lab')"
-          class="group/lab flex items-center justify-between rounded-2xl border border-neutral-800 px-5 py-4 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-600 hover:text-white"
+          class="group/lab flex items-center justify-between rounded-sm border border-neutral-800 px-5 py-4 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-600 hover:text-white"
         >
           {{ $t('projects.labTeaser.seeLab') }}
           <UIcon

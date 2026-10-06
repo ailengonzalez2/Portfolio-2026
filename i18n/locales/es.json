@@ -80,8 +80,11 @@
     "all": "Todos los proyectos"
   },
   "testimonials": {
-    "next": "Siguiente testimonio",
-    "goTo": "Ver testimonio de {name}"
+    "eyebrow": "Lo que dicen",
+    "label": "Testimonios",
+    "prev": "Testimonio anterior",
+    "source": "Cliente",
+    "next": "Siguiente testimonio"
   },
   "contactCta": {
     "heading": "Trabajemos juntos",

@@ -5,62 +5,39 @@ const { global } = useAppConfig()
 <template>
   <section
     id="contact"
-    class="pt-24 pb-40 sm:pt-32 sm:pb-52 bg-background"
+    class="pt-24 pb-40 sm:pt-32 sm:pb-52"
   >
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <ContactHeading :text="$t('contactCta.heading')" />
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <ResolveText
+        :text="$t('contactCta.heading')"
+        :highlight="$t('contactCta.heading')"
+        tag="h2"
+        class="font-display font-normal text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.02em] text-ink dark:text-paper"
+      />
 
-      <ScrollReveal
-        :y="20"
-        :blur="4"
-      >
-        <p class="mt-6 max-w-2xl mx-auto text-lg text-muted">
-          {{ $t('contactCta.subtitle') }}
-        </p>
-      </ScrollReveal>
+      <p class="mt-8 max-w-2xl text-lg sm:text-xl text-body">
+        {{ $t('contactCta.subtitle') }}
+      </p>
 
-      <ScrollReveal
-        :y="20"
-        :blur="4"
-        :delay="0.15"
-      >
-        <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <UButton
-            :to="global.meetingLink"
-            target="_blank"
-            size="lg"
-            data-umami-event="book-call"
-            data-umami-event-location="contact"
-            class="btn-gradient text-white font-semibold rounded-full px-8 py-3 text-base"
-          >
-            {{ $t('contactCta.bookCall') }}
-            <template #trailing>
-              <UIcon
-                name="i-lucide-arrow-up-right"
-                class="size-4"
-              />
-            </template>
-          </UButton>
-
-          <UButton
-            :to="`mailto:${global.email}`"
-            size="lg"
-            variant="ghost"
-            color="neutral"
-            data-umami-event="email-click"
-            data-umami-event-location="contact"
-            class="font-semibold rounded-full px-8 py-3 text-base"
-          >
-            {{ $t('contactCta.email') }}
-            <template #trailing>
-              <UIcon
-                name="i-lucide-mail"
-                class="size-4"
-              />
-            </template>
-          </UButton>
-        </div>
-      </ScrollReveal>
+      <div class="mt-12 flex flex-wrap items-center gap-6">
+        <NuxtLink
+          :to="global.meetingLink"
+          target="_blank"
+          data-umami-event="book-call"
+          data-umami-event-location="contact"
+          class="btn-gradient inline-flex"
+        >
+          {{ $t('contactCta.bookCall') }}
+        </NuxtLink>
+        <NuxtLink
+          :to="`mailto:${global.email}`"
+          data-umami-event="email-click"
+          data-umami-event-location="contact"
+          class="font-mono text-xs uppercase tracking-[0.18em] text-label hover:text-ink transition-colors"
+        >
+          {{ global.email }}
+        </NuxtLink>
+      </div>
     </div>
   </section>
 </template>

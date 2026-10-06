@@ -80,8 +80,11 @@
     "all": "All projects"
   },
   "testimonials": {
-    "next": "Next testimonial",
-    "goTo": "Show testimonial from {name}"
+    "eyebrow": "Kind words",
+    "label": "Testimonials",
+    "prev": "Previous testimonial",
+    "source": "Client",
+    "next": "Next testimonial"
   },
   "contactCta": {
     "heading": "Let's work together",
