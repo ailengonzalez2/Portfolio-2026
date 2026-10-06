@@ -4,88 +4,72 @@
 @source "../../../content/**/*";
 
 @theme static {
-  --font-sans: 'Red Hat Display', sans-serif;
-  --font-display: 'Megrim', cursive;
-  --font-mono: 'Fira Code', monospace;
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
 
-  /* Primary - coherent purple ramp anchored on the brand gradient end (#b86adf) */
-  --color-primary-50: #faf6fe;
-  --color-primary-100: #f3e7fc;
-  --color-primary-200: #e8d0f8;
-  --color-primary-300: #d6aef0;
-  --color-primary-400: #c48ce8;
-  --color-primary-500: #b86adf;
-  --color-primary-600: #9d4ec6;
-  --color-primary-700: #8239a3;
-  --color-primary-800: #6b3083;
-  --color-primary-900: #58296b;
-  --color-primary-950: #390f47;
+  /* Surface */
+  --color-paper: #F2EFE9;
+  --color-ink: #121212;
+  --color-background: #F2EFE9;
 
-  /* Secondary - #FAC789 */
-  --color-secondary-50: #fffbf5;
-  --color-secondary-100: #fef3e2;
-  --color-secondary-200: #fde4c4;
-  --color-secondary-300: #fbd5a6;
-  --color-secondary-400: #FAC789;
-  --color-secondary-500: #f5a855;
-  --color-secondary-600: #e88c2d;
-  --color-secondary-700: #c46f1a;
-  --color-secondary-800: #9c571a;
-  --color-secondary-900: #7d4718;
-  --color-secondary-950: #44230a;
+  /* Primary - warm ink ramp (UI chrome, links, focus) */
+  --color-primary-50: #f7f6f3;
+  --color-primary-100: #eeece7;
+  --color-primary-200: #dcd9d1;
+  --color-primary-300: #c2beb3;
+  --color-primary-400: #9c978b;
+  --color-primary-500: #77736a;
+  --color-primary-600: #5c5951;
+  --color-primary-700: #47453f;
+  --color-primary-800: #2e2d29;
+  --color-primary-900: #1c1b19;
+  --color-primary-950: #121212;
 
-  /* Text Colors */
-  --color-text-primary: #45556c;
-  --color-text-primary-dark: #8a9bb5;
+  /* Secondary - coral, the middle stop of the brand gradient */
+  --color-secondary-50: #fff4f3;
+  --color-secondary-100: #ffe5e3;
+  --color-secondary-200: #ffcfcb;
+  --color-secondary-300: #ffaca5;
+  --color-secondary-400: #ff8a81;
+  --color-secondary-500: #ff6c63;
+  --color-secondary-600: #ed4a40;
+  --color-secondary-700: #c8362d;
+  --color-secondary-800: #a52f28;
+  --color-secondary-900: #882c26;
+  --color-secondary-950: #4a1310;
 
-  /* Semantic slate tokens (centralize the recurring hardcoded values) */
-  --color-heading: #0f172b; /* primary heading text */
-  --color-body: #62748e;    /* muted body text */
-  --color-label: #64748b;   /* eyebrows / small uppercase labels (AA) */
-  --color-surface: #f1f5f9; /* chip / tag backgrounds */
-  --color-hairline: #e2e8f0; /* subtle borders */
+  /* Semantic text tokens (AA on paper) */
+  --color-heading: #121212;
+  --color-body: #47453f;
+  --color-label: #5c5951;
+  --color-surface: #e7e3db;
+  --color-hairline: #d6d2c8;
+
+  /* Kept for pages not yet redesigned (Phase 2) */
+  --color-text-primary: #47453f;
+  --color-text-primary-dark: #c2beb3;
 }
 
 :root {
   --ui-container: var(--container-4xl);
+  --ui-bg: var(--color-paper);
+  --ui-text: var(--color-ink);
 
   ::selection {
-    color: #282a30;
-    background-color: #FAC789;
+    color: #121212;
+    background-color: #ffb147;
   }
 }
 
 .dark {
+  --color-background: #121212;
+  --ui-bg: #121212;
+  --ui-text: #F2EFE9;
+
   ::selection {
-    color: #ffffff;
-    background-color: #A11EE2;
-  }
-}
-
-/* Initial loading overlay - prevents flash before IntroAnimation mounts.
-   Suppressed via .intro-skip when the intro won't play (see plugins/intro.client.ts) */
-html.intro-skip::before {
-  display: none;
-}
-
-html::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: #000000;
-  z-index: 9998;
-  pointer-events: none;
-  animation: initial-overlay-fade 0.5s ease-out forwards;
-  animation-delay: 3.4s; /* Matches IntroAnimation timing: initialDelay(1) + signatureDraw(2) + hold(0.4) */
-}
-
-@keyframes initial-overlay-fade {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
+    color: #F2EFE9;
+    background-color: #b86adf;
   }
 }
 
@@ -107,11 +91,6 @@ html {
 
   html {
     scroll-behavior: auto !important;
-  }
-
-  /* Skip the initial black intro overlay entirely */
-  html::before {
-    display: none !important;
   }
 }
 
@@ -181,24 +160,24 @@ html {
   color: var(--color-text-primary-dark);
 }
 
-/* Primary Button - solid black */
+/* Primary button - ink at rest, resolves into the brand gradient on hover */
 .btn-gradient {
-  background: #0a0a0a;
-  color: #fff;
+  background-color: var(--color-ink);
+  background-image: linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  color: var(--color-paper);
   border: none;
-  position: relative;
   border-radius: 9999px;
   padding: 0.75rem 3.5rem;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.125rem;
-  text-transform: capitalize;
-  transition: all 0.3s ease;
+  transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
 }
 
 .btn-gradient:hover {
-  background: #262626;
-  transform: scale(1.05);
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  background-size: 100% 100%;
+  color: var(--color-ink);
 }
 
 .btn-gradient-text {

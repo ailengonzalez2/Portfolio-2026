@@ -23,6 +23,14 @@ export default defineNuxtConfig({
           'data-website-id': '3bdc851d-7f3e-402e-9712-cdb5a201091e',
           'defer': true
         }
+      ],
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&display=swap'
+        }
       ]
     }
   },
@@ -68,6 +76,14 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  // Fraunces is loaded with all its variable axes via the stylesheet link
+  // above; keep @nuxt/fonts from fetching a second copy.
+  fonts: {
+    families: [
+      { name: 'Fraunces', provider: 'none' }
+    ]
   },
 
   i18n: {

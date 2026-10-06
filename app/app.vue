@@ -79,11 +79,6 @@ useSchemaOrg([
 
 <template>
   <UApp>
-    <!-- Intro animation overlay -->
-    <ClientOnly>
-      <IntroAnimation />
-    </ClientOnly>
-
     <NuxtLayout>
       <UMain class="relative">
         <NuxtPage />

@@ -7,7 +7,6 @@ defineProps<{
 
 const { y: scrollY } = useWindowScroll()
 const isScrolled = computed(() => scrollY.value > 50)
-const { isIntroComplete } = useIntroAnimation()
 
 // i18n
 const { locale, setLocale, t } = useI18n()
@@ -74,7 +73,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
               alt="AG Signature"
               class="h-10 w-auto transition-opacity duration-500 ease-in-out group-hover:scale-105"
               :class="[
-                isIntroComplete ? (overDarkHero ? 'opacity-100' : 'opacity-0') : 'opacity-0'
+                overDarkHero ? 'opacity-100' : 'opacity-0'
               ]"
             >
             <!-- Black logo -->
@@ -83,7 +82,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
               alt="AG Signature"
               class="absolute top-0 left-0 h-10 w-auto transition-opacity duration-500 ease-in-out group-hover:scale-105"
               :class="[
-                isIntroComplete ? (overDarkHero ? 'opacity-0' : 'opacity-100') : 'opacity-0'
+                overDarkHero ? 'opacity-0' : 'opacity-100'
               ]"
             >
           </div>
