@@ -91,7 +91,7 @@
     "email": "Escribime"
   },
   "about": {
-    "badge": {"hint": "Arrastrala · click para darla vuelta", "based": "Desde Argentina", "remote": "Remoto, para todo el mundo", "languages": "ES · EN", "available": "Disponible para proyectos", "bookCall": "Agendar una llamada", "flip": "Dar vuelta la credencial"},
+    "portraitCaption": "Ailen Gonzalez · Córdoba, Argentina",
     "eyebrow": "Sobre mí",
     "statement": "Diseñadora por oficio, desarrolladora por costumbre. Hago que los productos de IA se sientan simples.",
     "statementHighlight": "se sientan simples.",
