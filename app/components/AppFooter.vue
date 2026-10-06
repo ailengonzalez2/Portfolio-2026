@@ -90,7 +90,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <footer class="relative z-10 min-h-screen flex flex-col bg-[#0a0a0a] text-white">
+  <footer class="relative z-10 min-h-screen flex flex-col bg-ink text-paper">
     <section
       ref="sectionRef"
       class="flex-1 flex flex-col items-center justify-center pt-14 sm:pt-20 pb-4 sm:pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden"
@@ -106,11 +106,11 @@ onUnmounted(() => {
         >
           <div class="relative inline-block">
             <!-- Base layer: solid white words, gray + -->
-            <h2 class="magic-heading flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] pb-[0.18em]">
+            <h2 class="magic-heading flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-display font-normal tracking-[-0.02em] leading-[0.95] pb-[0.18em]">
               <span
                 v-for="(seg, i) in segments"
                 :key="`b${i}`"
-                :class="seg.plus ? 'text-white/30 font-light' : 'magic-word'"
+                :class="seg.plus ? 'text-paper/30 font-light' : 'magic-word'"
               >{{ seg.text }}</span>
             </h2>
 
@@ -118,7 +118,7 @@ onUnmounted(() => {
             <h2
               ref="overlayRef"
               aria-hidden="true"
-              class="magic-overlay absolute inset-0 flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[0.95] pb-[0.18em]"
+              class="magic-overlay absolute inset-0 flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-display font-normal tracking-[-0.02em] leading-[0.95] pb-[0.18em]"
               :style="{ backgroundImage: trailBg }"
             >
               <span
@@ -159,10 +159,10 @@ onUnmounted(() => {
     </section>
 
     <!-- Footer Credits -->
-    <div class="py-8 border-t border-white/10">
+    <div class="py-8 border-t border-paper/10">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-center text-white/50">
-          <p class="font-sans text-xs sm:text-base text-center">
+        <div class="flex items-center justify-center text-paper/50">
+          <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.18em] text-center">
             <span>© {{ year }} – Designed &amp; Coded by </span>
             <NuxtLink
               to="https://www.linkedin.com/in/ailengonzalez/"
