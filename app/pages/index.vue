@@ -24,10 +24,7 @@ useSeoMeta({
         <LandingLabTeaser />
       </div>
     </section>
-    <LandingServices />
-    <section class="pt-10 sm:pt-14 pb-24 sm:pb-32 bg-background">
-      <TechMarquee />
-    </section>
+    <LandingProcess />
     <LandingWork />
     <LandingTestimonials />
   </UPage>

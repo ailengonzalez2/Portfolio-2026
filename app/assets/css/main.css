@@ -78,6 +78,7 @@
 .hero-work { display: none; }
 .fx-on .hero-work { display: flex; }
 .fx-on .hero-track { height: 220vh; }
+.fx-on .process-track { height: 400vh; }
 
 /* WebGL stage canvas (created by plugins/fx.client.ts). Above content,
    below the header (z-50); never intercepts input. */

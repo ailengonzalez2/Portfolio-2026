@@ -5,7 +5,6 @@
   },
   "nav": {
     "projects": "projects",
-    "services": "services",
     "process": "process",
     "writing": "writing",
     "about": "about",
@@ -20,37 +19,6 @@
     "subtitle": "I design and build AI products end to end — from Figma to production code.",
     "bookCall": "Book a call",
     "seeWork": "See work"
-  },
-  "services": {
-    "startProject": "Start a project",
-    "aiProduct": {
-      "title": "AI Product Design",
-      "description": "I design and ship the front of your AI product — chat UIs, streaming responses, tool-call surfaces, agent flows, and eval dashboards. From Figma to production code.",
-      "deliverables": ["Chat & streaming UI", "Tool-call rendering", "Prompt + flow design", "Eval dashboards", "Figma → production handoff"],
-      "priceFrom": "From $2.5k",
-      "timeline": "2–3 weeks"
-    },
-    "frontend": {
-      "title": "Frontend / Web3",
-      "description": "I build production-ready frontends in Vue / Nuxt + Tailwind + TypeScript — including clear, intuitive Web3 experiences like DeFi dashboards, NFT marketplaces, and wallet apps. From Figma handoff to deployed app.",
-      "deliverables": ["Vue / Nuxt 4 apps", "Wallet & DeFi UIs", "NFT marketplaces", "Responsive + a11y", "Performance-tuned"],
-      "priceFrom": "From $2k",
-      "timeline": "1–3 weeks"
-    },
-    "llmIntegration": {
-      "title": "AI Integration",
-      "description": "I wire LLMs into real product workflows — RAG, agents, tool calling, structured outputs, n8n automations. Built to ship, measured with evals.",
-      "deliverables": ["RAG pipelines", "Tool calling + agents", "n8n / workflow automation", "Structured outputs", "Evals + monitoring"],
-      "priceFrom": "From $3k",
-      "timeline": "2–4 weeks"
-    },
-    "web3": {
-      "title": "Web3 Frontend",
-      "description": "I craft clear, intuitive Web3 experiences — DeFi dashboards, NFT marketplaces, wallet apps. Built with Wagmi, Viem, and Reown.",
-      "deliverables": ["Wallet integrations", "DeFi / swap UIs", "NFT marketplaces", "Multi-chain support"],
-      "priceFrom": "From $3k",
-      "timeline": "2–4 weeks"
-    }
   },
   "projects": {
     "latestSection": "Latest Projects",
@@ -93,6 +61,16 @@
     "highlight": "the shape people actually use",
     "bookCall": "Book a call",
     "viewWork": "View work"
+  },
+  "process": {
+    "eyebrow": "Process",
+    "title": "From noise to form",
+    "stages": {
+      "sketch": { "label": "Sketch", "body": "Messy on purpose. Find the shape of the problem before the shape of the screen." },
+      "wireframe": { "label": "Wireframe", "body": "Structure without decoration — flows, hierarchy, what goes where." },
+      "ui": { "label": "Interface", "body": "The visual system: type, rhythm, states, every pixel considered." },
+      "code": { "label": "Code", "body": "Shipped in Vue and Nuxt. The design is the product, not a handoff." }
+    }
   },
   "work": {
     "eyebrow": "Selected work",
