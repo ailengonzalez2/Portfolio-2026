@@ -1,164 +1,90 @@
 <script setup lang="ts">
 import { Motion, useScroll, useTransform } from 'motion-v'
-import { ref } from 'vue'
+import { projects } from '~/data/projects'
+import { getFeaturedProjects } from '~/data/selectors'
+import { easeOutCubic, heroPhases } from '~/webgl/math'
 
-// Reference to scroll container
-const containerRef = ref<HTMLElement | null>(null)
+// Particles assemble into the name on load; on scroll the name disperses and
+// the lead project assembles from particles into its crisp image. The track
+// is 220vh only on the WebGL path (.fx-on, set by plugins/fx.client.ts);
+// otherwise the hero is a static first screen with the name already formed.
+const lead = getFeaturedProjects(projects)[0]
+const fx = useFxEnabled()
 
-// Track scroll progress - same timing as Rolls split
-const { scrollYProgress } = useScroll({
-  target: containerRef,
-  offset: ['start start', 'end start']
-})
+const track = ref<HTMLElement | null>(null)
+const scroll = ref(0)
+const intro = ref(1)
+const { scrollYProgress } = useScroll({ target: track, offset: ['start start', 'end end'] })
+const copyOpacity = useTransform(scrollYProgress, [0.05, 0.3], [1, 0])
 
-// Hero content animations - staggered reveal during the split
-const showcaseOpacity = useTransform(scrollYProgress, [0.25, 0.5], [0, 1])
-const showcaseY = useTransform(scrollYProgress, [0.25, 0.52], [40, 0])
+const phases = computed(() => heroPhases(scroll.value, intro.value))
 
-// Showcase images that scroll through the hero columns. The original project
-// covers plus the extra gallery shots, interleaved by project so adjacent
-// tiles belong to different work.
-const heroImages = [
-  { src: '/projects/codecave.png', alt: 'codeCave studio site' },
-  { src: '/projects/habito.png', alt: 'Habito AI task management' },
-  { src: '/projects/docta.jpg', alt: 'Docta culture agenda' },
-  { src: '/projects/asistente.png', alt: 'Asistente booking SaaS' },
-  { src: '/projects/yogaapp.png', alt: 'Yoga & wellness app' },
-  { src: '/projects/codecave1.png', alt: 'codeCave studio site' },
-  { src: '/projects/habito1.png', alt: 'Habito AI task management' },
-  { src: '/projects/docta1.jpg', alt: 'Docta culture agenda' },
-  { src: '/projects/asistente1.png', alt: 'Asistente booking SaaS' },
-  { src: '/projects/codecave2.png', alt: 'codeCave studio site' },
-  { src: '/projects/habito2.png', alt: 'Habito AI task management' },
-  { src: '/projects/docta2.jpg', alt: 'Docta culture agenda' },
-  { src: '/projects/asistente2.png', alt: 'Asistente booking SaaS' },
-  { src: '/projects/codecave3.png', alt: 'codeCave studio site' },
-  { src: '/projects/docta3.jpg', alt: 'Docta culture agenda' },
-  { src: '/projects/asistente3.png', alt: 'Asistente booking SaaS' },
-  { src: '/projects/codecave4.png', alt: 'codeCave studio site' },
-  { src: '/projects/codecave5.png', alt: 'codeCave studio site' },
-  { src: '/projects/codecave6.png', alt: 'codeCave studio site' },
-  { src: '/projects/codecave7.png', alt: 'codeCave studio site' }
-]
-
-// Vertical columns spanning the full width. Each column draws a different
-// rotation of the image list (so adjacent columns are NOT aligned) and scrolls
-// at its own speed/direction, looping infinitely.
-const COLUMN_DIRECTIONS = ['up', 'down', 'up', 'down', 'up'] as const
-const COLUMN_DURATIONS = ['34s', '27s', '40s', '24s', '31s']
-const ITEMS_PER_COLUMN = 6
-
-const columns = COLUMN_DIRECTIONS.map((direction, i) => {
-  const start = (i * 4) % heroImages.length
-  // The modulo keeps the index in range, so the lookup can never be undefined.
-  const items = Array.from(
-    { length: ITEMS_PER_COLUMN },
-    (_, k) => heroImages[(start + k) % heroImages.length]!
-  )
-  return {
-    direction,
-    duration: COLUMN_DURATIONS[i],
-    // Duplicate the slice for a seamless translateY(-50%) loop
-    loop: [...items, ...items]
+const INTRO_MS = 2400
+const playIntro = () => {
+  intro.value = 0
+  const start = performance.now()
+  const step = () => {
+    const k = Math.min(1, (performance.now() - start) / INTRO_MS)
+    intro.value = easeOutCubic(k)
+    if (k < 1) requestAnimationFrame(step)
   }
+  requestAnimationFrame(step)
+}
+
+let off: (() => void) | undefined
+onMounted(() => {
+  scroll.value = scrollYProgress.get()
+  off = scrollYProgress.on('change', (v) => {
+    scroll.value = v
+  })
 })
+onBeforeUnmount(() => off?.())
 </script>
 
 <template>
-  <!-- Scroll container matching Rolls height for synced animations -->
-  <div
-    ref="containerRef"
-    class="absolute inset-0 h-[200vh] z-10"
+  <section
+    ref="track"
+    class="hero-track relative -mt-20"
   >
-    <!-- Sticky Hero content - revealed during Rolls split -->
-    <section class="sticky top-0 h-screen bg-white dark:bg-[#0a0a0a] overflow-hidden">
-      <!-- Hidden heading kept for SEO / accessibility (banner is visual-only) -->
-      <h1 class="sr-only">
-        Ailen Gonzalez — AI Product Design & Frontend
-      </h1>
+    <div class="sticky top-0 h-svh">
+      <div class="absolute inset-0 flex flex-col justify-center px-6 sm:px-10 lg:pl-28 lg:pr-16 pt-20">
+        <Motion :style="fx ? { opacity: copyOpacity } : undefined">
+          <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
+            {{ $t('hero.eyebrow') }}
+          </p>
+        </Motion>
 
-      <!-- Full-viewport vertical project columns -->
-      <Motion
-        :style="{ opacity: showcaseOpacity, y: showcaseY }"
-        class="absolute inset-0 w-screen"
+        <ParticleName
+          :progress="phases.name"
+          class="mt-6 self-start"
+          @ready="playIntro"
+        >
+          <h1 class="font-display font-normal text-[clamp(3.5rem,13vw,12rem)] leading-[0.88] tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
+            Ailen<br>Gonzalez
+          </h1>
+        </ParticleName>
+
+        <Motion :style="fx ? { opacity: copyOpacity } : undefined">
+          <p class="mt-8 max-w-xl text-lg sm:text-xl text-body">
+            {{ $t('hero.subtitle') }}
+          </p>
+        </Motion>
+      </div>
+
+      <!-- Lead project: only on the WebGL path, hidden until its phase starts -->
+      <div
+        v-if="lead"
+        class="hero-work absolute inset-0 items-center justify-center px-4 sm:px-10 pt-20"
+        :style="{ opacity: phases.image > 0.001 ? 1 : 0 }"
       >
-        <div class="mask-vertical h-full overflow-hidden px-3 sm:px-4">
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 h-full">
-            <div
-              v-for="(col, i) in columns"
-              :key="i"
-              class="overflow-hidden"
-              :class="{ 'hidden sm:block': i === 2, 'hidden lg:block': i > 2 }"
-            >
-              <div
-                class="flex flex-col gap-3 sm:gap-4 will-change-transform"
-                :class="col.direction === 'up' ? 'animate-scroll-up' : 'animate-scroll-down'"
-                :style="{ animationDuration: col.duration }"
-              >
-                <div
-                  v-for="(image, idx) in col.loop"
-                  :key="`${i}-${idx}`"
-                  class="shrink-0 aspect-4/3 rounded-2xl overflow-hidden ring-1 ring-black/5 shadow-sm"
-                >
-                  <NuxtImg
-                    :src="image.src"
-                    :alt="image.alt"
-                    class="size-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Motion>
-    </section>
-  </div>
+        <ResolveImage
+          :src="lead.image"
+          :alt="lead.title"
+          :progress="phases.image"
+          sizes="100vw lg:1200px"
+          class="w-full max-w-6xl aspect-[16/10]"
+        />
+      </div>
+    </div>
+  </section>
 </template>
-
-<style scoped>
-.mask-vertical {
-  mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
-}
-
-/* Vertical project columns */
-.animate-scroll-up,
-.animate-scroll-down {
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-.animate-scroll-up {
-  animation-name: scroll-up;
-}
-
-.animate-scroll-down {
-  animation-name: scroll-down;
-}
-
-@keyframes scroll-up {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes scroll-down {
-  0% {
-    transform: translateY(-50%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-scroll-up,
-  .animate-scroll-down {
-    animation: none;
-  }
-}
-</style>

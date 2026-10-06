@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<{
   scatter?: number
   mouseRadius?: number
 }>(), { step: 3, pointSize: 3.6, scatter: 1, mouseRadius: 110 })
+const emit = defineEmits<{ ready: [] }>()
 
 const root = ref<HTMLElement | null>(null)
 
@@ -46,6 +47,10 @@ onMounted(() => {
   observer.observe(root.value)
 })
 watch(() => props.step, () => refresh())
+// Let the parent start its intro only once particles are actually on screen.
+watch(ready, (live) => {
+  if (live) emit('ready')
+})
 onBeforeUnmount(() => {
   observer?.disconnect()
   clearTimeout(timer)

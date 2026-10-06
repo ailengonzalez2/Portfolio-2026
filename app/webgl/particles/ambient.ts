@@ -22,7 +22,7 @@ void main() {
   vec2 d = p - uMouse;
   p += normalize(d + 0.0001) * smoothstep(110.0, 0.0, length(d)) * 30.0;
   vColor = aColor;
-  vAlpha = mix(0.35, 1.0, uWipe);
+  vAlpha = mix(0.22, 1.0, uWipe);
   gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 0.0, 1.0);
   float base = 2.4 + aRand * 1.6;
   gl_PointSize = mix(base, uCover, uWipe * uWipe) * uPixelRatio;

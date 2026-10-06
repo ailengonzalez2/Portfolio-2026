@@ -13,10 +13,11 @@
     "hireMe": "Hire Me"
   },
   "hero": {
+    "eyebrow": "AI product design & frontend",
     "available": "Available for work",
     "spotsAvailable": "2 spots available",
     "title": "AI Product Engineer",
-    "subtitle": "I design and ship user-facing AI features end to end — chat UIs, streaming, tool calls, RAG-backed flows.",
+    "subtitle": "I design and build AI products end to end — from Figma to production code.",
     "bookCall": "Book a call",
     "seeWork": "See work"
   },

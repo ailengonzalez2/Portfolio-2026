@@ -39,7 +39,9 @@ void main() {
   float delay = aRand * 0.4;
   float p = smoothstep(delay, delay + 0.6, uProgress);
   vec2 home = (aUv - 0.5) * uSize;
-  vec2 scattered = aStart * uViewport * 1.1
+  // Scatter around the element (not the whole viewport) so several images
+  // on screen never flood it.
+  vec2 scattered = aStart * (uSize * 1.8 + 160.0)
     + vec2(sin(uTime * 0.4 + aRand * 40.0), cos(uTime * 0.33 + aRand * 30.0)) * 22.0;
   vec2 pos = mix(scattered, home, p);
   vec3 col = mix(brandGradient(aUv.x), img, p);
@@ -66,7 +68,8 @@ void main() {
   pos += normalize(d + 0.0001) * smoothstep(uMouseRadius, 0.0, length(d)) * 24.0 * p;
 
   vColor = col;
-  vAlpha = keep * mix(0.45, 1.0, p);
+  // Invisible until the element starts entering, then fades in while converging.
+  vAlpha = keep * smoothstep(0.0, 0.25, uProgress) * mix(0.45, 1.0, p);
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 0.0, 1.0);
   float cell = uSize.x / uCols;
   gl_PointSize = cell * 1.25 * uPixelRatio * mix(0.6, 1.0, p) * mix(1.0, 0.8, edgeMode);

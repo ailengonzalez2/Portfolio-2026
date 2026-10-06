@@ -17,11 +17,7 @@ useSeoMeta({
 
 <template>
   <UPage>
-    <!-- Wrapper for Rolls split reveal effect -->
-    <div class="relative isolate">
-      <LandingRolls />
-      <LandingHero />
-    </div>
+    <LandingHero />
     <LandingHook />
     <section class="pb-20 sm:pb-28 bg-background">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

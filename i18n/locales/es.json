@@ -13,10 +13,11 @@
     "hireMe": "Contratame"
   },
   "hero": {
+    "eyebrow": "Diseño de producto IA & frontend",
     "available": "Disponible para nuevos proyectos",
     "spotsAvailable": "2 lugares disponibles",
     "title": "AI Product Engineer",
-    "subtitle": "Diseño y construyo features de IA de punta a punta — interfaces de chat, streaming, tool calls y flujos con RAG.",
+    "subtitle": "Diseño y construyo productos de IA de punta a punta — de Figma a código en producción.",
     "bookCall": "Agendar una llamada",
     "seeWork": "Ver trabajo"
   },
