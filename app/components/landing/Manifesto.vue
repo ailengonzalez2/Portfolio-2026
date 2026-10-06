@@ -12,7 +12,7 @@ const { global } = useAppConfig()
         class="font-display font-normal text-4xl sm:text-6xl lg:text-7xl leading-[1.02] tracking-[-0.02em] text-ink dark:text-paper"
       />
 
-      <div class="mt-14 flex flex-wrap items-center gap-6">
+      <HalftoneReveal class="mt-14 flex flex-wrap items-center gap-6">
         <NuxtLink
           :to="global.meetingLink"
           target="_blank"
@@ -30,7 +30,7 @@ const { global } = useAppConfig()
         >
           {{ $t('manifesto.viewWork') }} ↓
         </NuxtLink>
-      </div>
+      </HalftoneReveal>
     </div>
   </section>
 </template>

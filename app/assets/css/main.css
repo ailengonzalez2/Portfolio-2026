@@ -234,6 +234,12 @@
   color: var(--color-ink);
 }
 
+/* On ink surfaces (footer): paper at rest, same gradient on hover */
+.btn-gradient--light {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
 .btn-gradient-text {
   background: linear-gradient(-89deg, #ffb147 5.74%, #ff6c63 50.64%, #b86adf 92.05%);
   -webkit-background-clip: text;

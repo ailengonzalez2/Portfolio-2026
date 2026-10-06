@@ -49,11 +49,8 @@ onBeforeUnmount(stop)
         aria-live="polite"
       >
         <Transition
+          name="halftone"
           mode="out-in"
-          enter-active-class="transition duration-500 ease-out"
-          enter-from-class="opacity-0 blur-sm"
-          leave-active-class="transition duration-300 ease-in"
-          leave-to-class="opacity-0 blur-sm"
         >
           <figure :key="current.id">
             <blockquote class="font-display font-normal text-3xl sm:text-5xl leading-[1.08] tracking-[-0.01em] text-ink dark:text-paper">

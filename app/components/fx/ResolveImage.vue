@@ -79,6 +79,10 @@ const onDown = (e: PointerEvent) => {
 const onUp = (e: PointerEvent) => {
   if (e.pointerType !== 'mouse') onLeave()
 }
+// Android opens the image menu on long-press; the press is ours when latent.
+const onContextMenu = (e: Event) => {
+  if (props.latent) e.preventDefault()
+}
 onBeforeUnmount(() => clearTimeout(pressTimer))
 </script>
 
@@ -91,6 +95,7 @@ onBeforeUnmount(() => clearTimeout(pressTimer))
     @pointerdown="onDown"
     @pointerup="onUp"
     @pointercancel="onLeave"
+    @contextmenu="onContextMenu"
   >
     <NuxtImg
       :src="src"

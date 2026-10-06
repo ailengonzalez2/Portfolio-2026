@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useScroll } from 'motion-v'
+import { remap } from '~/webgl/math'
 
 const { t } = useI18n()
 const { global } = useAppConfig()
@@ -19,6 +21,18 @@ const segments = computed(() => [
 // painted as the overlay's background and clipped to the text, so it is only
 // visible over the white letters — never over the black background.
 const sectionRef = ref<HTMLElement | null>(null)
+
+// The statement assembles from particles as the footer scrolls into view.
+const { scrollYProgress: footerScroll } = useScroll({ target: sectionRef, offset: ['start end', 'end end'] })
+const statementProgress = ref(0)
+let offScroll: (() => void) | undefined
+onMounted(() => {
+  statementProgress.value = remap(footerScroll.get(), 0.25, 0.85)
+  offScroll = footerScroll.on('change', (v) => {
+    statementProgress.value = remap(v, 0.25, 0.85)
+  })
+})
+onUnmounted(() => offScroll?.())
 const overlayRef = ref<HTMLElement | null>(null)
 const trailBg = ref('none')
 
@@ -104,30 +118,36 @@ onUnmounted(() => {
           :in-view-options="{ once: true }"
           class="text-center"
         >
-          <div class="relative inline-block">
-            <!-- Base layer: solid white words, gray + -->
-            <h2 class="magic-heading flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-display font-normal tracking-[-0.02em] leading-[0.95] pb-[0.18em]">
-              <span
-                v-for="(seg, i) in segments"
-                :key="`b${i}`"
-                :class="seg.plus ? 'text-paper/30 font-light' : 'magic-word'"
-              >{{ seg.text }}</span>
-            </h2>
+          <ParticleName
+            :progress="statementProgress"
+            :point-size="3"
+            class="inline-block"
+          >
+            <div class="relative inline-block">
+              <!-- Base layer: solid white words, gray + -->
+              <h2 class="magic-heading flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-display font-normal tracking-[-0.02em] leading-[0.95] pb-[0.18em]">
+                <span
+                  v-for="(seg, i) in segments"
+                  :key="`b${i}`"
+                  :class="seg.plus ? 'text-paper/30' : 'magic-word'"
+                >{{ seg.text }}</span>
+              </h2>
 
-            <!-- Glow overlay: same words, gradient trail clipped to the letters -->
-            <h2
-              ref="overlayRef"
-              aria-hidden="true"
-              class="magic-overlay absolute inset-0 flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-display font-normal tracking-[-0.02em] leading-[0.95] pb-[0.18em]"
-              :style="{ backgroundImage: trailBg }"
-            >
-              <span
-                v-for="(seg, i) in segments"
-                :key="`o${i}`"
-                :class="seg.plus ? 'invisible font-light' : 'magic-word'"
-              >{{ seg.text }}</span>
-            </h2>
-          </div>
+              <!-- Glow overlay: same words, gradient trail clipped to the letters -->
+              <h2
+                ref="overlayRef"
+                aria-hidden="true"
+                class="magic-overlay absolute inset-0 flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-display font-normal tracking-[-0.02em] leading-[0.95] pb-[0.18em]"
+                :style="{ backgroundImage: trailBg }"
+              >
+                <span
+                  v-for="(seg, i) in segments"
+                  :key="`o${i}`"
+                  :class="seg.plus ? 'invisible' : 'magic-word'"
+                >{{ seg.text }}</span>
+              </h2>
+            </div>
+          </ParticleName>
         </Motion>
 
         <!-- Book a call -->
@@ -144,7 +164,7 @@ onUnmounted(() => {
             size="lg"
             data-umami-event="book-call"
             data-umami-event-location="footer"
-            class="btn-gradient text-white font-semibold rounded-full px-8 py-3 text-base"
+            class="btn-gradient btn-gradient--light font-medium rounded-full px-8 py-3 text-base"
           >
             {{ t('contactCta.bookCall') }}
             <template #trailing>

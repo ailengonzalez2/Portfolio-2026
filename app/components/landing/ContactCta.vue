@@ -15,29 +15,31 @@ const { global } = useAppConfig()
         class="font-display font-normal text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.02em] text-ink dark:text-paper"
       />
 
-      <p class="mt-8 max-w-2xl text-lg sm:text-xl text-body">
-        {{ $t('contactCta.subtitle') }}
-      </p>
+      <HalftoneReveal>
+        <p class="mt-8 max-w-2xl text-lg sm:text-xl text-body">
+          {{ $t('contactCta.subtitle') }}
+        </p>
 
-      <div class="mt-12 flex flex-wrap items-center gap-6">
-        <NuxtLink
-          :to="global.meetingLink"
-          target="_blank"
-          data-umami-event="book-call"
-          data-umami-event-location="contact"
-          class="btn-gradient inline-flex"
-        >
-          {{ $t('contactCta.bookCall') }}
-        </NuxtLink>
-        <NuxtLink
-          :to="`mailto:${global.email}`"
-          data-umami-event="email-click"
-          data-umami-event-location="contact"
-          class="font-mono text-xs uppercase tracking-[0.18em] text-label hover:text-ink transition-colors"
-        >
-          {{ global.email }}
-        </NuxtLink>
-      </div>
+        <div class="mt-12 flex flex-wrap items-center gap-6">
+          <NuxtLink
+            :to="global.meetingLink"
+            target="_blank"
+            data-umami-event="book-call"
+            data-umami-event-location="contact"
+            class="btn-gradient inline-flex"
+          >
+            {{ $t('contactCta.bookCall') }}
+          </NuxtLink>
+          <NuxtLink
+            :to="`mailto:${global.email}`"
+            data-umami-event="email-click"
+            data-umami-event-location="contact"
+            class="font-mono text-xs uppercase tracking-[0.18em] text-label hover:text-ink transition-colors"
+          >
+            {{ global.email }}
+          </NuxtLink>
+        </div>
+      </HalftoneReveal>
     </div>
   </section>
 </template>

@@ -5,6 +5,7 @@ import { getFeaturedProjects } from '~/data/selectors'
 
 const localePath = useLocalePath()
 const featured = getFeaturedProjects(projects)
+const fx = useFxEnabled()
 
 const linkFor = (p: Project) => p.caseStudy
   ? { to: localePath(`/projects/${p.id}`), external: false }
@@ -35,12 +36,15 @@ const linkFor = (p: Project) => p.caseStudy
             sizes="100vw lg:60vw"
             class="w-full aspect-[4/3]"
           />
-          <p class="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-label">
+          <p
+            v-if="fx"
+            class="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-label"
+          >
             {{ $t('work.latentHint') }}
           </p>
         </div>
 
-        <div class="lg:col-span-5 lg:pt-[30vh]">
+        <HalftoneReveal class="lg:col-span-5 lg:pt-[30vh]">
           <p class="font-mono text-xs text-label">
             {{ String(i + 1).padStart(2, '0') }} — {{ p.date }}
           </p>
@@ -71,7 +75,7 @@ const linkFor = (p: Project) => p.caseStudy
               class="size-4"
             />
           </NuxtLink>
-        </div>
+        </HalftoneReveal>
       </article>
 
       <div class="mt-16 lg:mt-24">

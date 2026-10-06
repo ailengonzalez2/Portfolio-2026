@@ -30,7 +30,8 @@ void main() {
   pos += normalize(d + 0.0001) * smoothstep(uMouseRadius, 0.0, length(d)) * 46.0;
 
   vColor = aColor;
-  vAlpha = mix(0.45, 1.0, p);
+  // Fade in as they start converging; fully dispersed text is invisible.
+  vAlpha = mix(0.45, 1.0, p) * smoothstep(0.0, 0.15, uProgress);
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 0.0, 1.0);
   gl_PointSize = uPointSize * uPixelRatio * mix(1.7, 1.0, p);
 }`
@@ -76,7 +77,16 @@ function sampleGlyphs(el: HTMLElement, step: number) {
       range.setStart(node, m.index)
       range.setEnd(node, m.index + m[0].length)
       const r = range.getClientRects()[0]
-      if (r) ctx.fillText(m[0], r.left - rect.left + PAD, r.top - rect.top + PAD + ascent)
+      if (!r) continue
+      // Canvas can't apply variable-font optical sizing, so widths drift from
+      // the DOM; squeeze each word to its on-screen width.
+      const measured = ctx.measureText(m[0]).width
+      const sx = measured > 0 ? r.width / measured : 1
+      ctx.save()
+      ctx.translate(r.left - rect.left + PAD, r.top - rect.top + PAD + ascent)
+      ctx.scale(sx, 1)
+      ctx.fillText(m[0], 0, 0)
+      ctx.restore()
     }
   }
   const data = ctx.getImageData(0, 0, w, h).data
