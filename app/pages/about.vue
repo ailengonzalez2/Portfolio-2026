@@ -13,32 +13,47 @@ useSeoMeta({
 
 <template>
   <UPage>
-    <section class="relative -mt-20 pt-40 sm:pt-52 pb-2 bg-[#f8fafc] dark:bg-[#0a0a0a] overflow-hidden">
+    <section class="relative -mt-20 pt-36 sm:pt-48 pb-16 sm:pb-24 overflow-hidden">
       <!-- Name tag dropping in on its lanyard -->
-      <div class="pointer-events-none absolute top-20 right-4 sm:right-10 lg:right-20 z-20 hidden sm:block">
+      <div class="pointer-events-none absolute top-20 right-4 sm:right-10 lg:right-24 z-20 hidden md:block">
         <NuxtImg
           src="/name-tag.png"
           alt="Ailen Gonzalez name tag"
           width="320"
           height="456"
-          class="name-tag w-44 sm:w-56 lg:w-72 h-auto select-none"
+          class="name-tag w-44 lg:w-64 h-auto select-none"
         />
       </div>
 
-      <ScrollReveal
-        :y="28"
-        :blur="8"
-        :duration="0.7"
-      >
-        <div class="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-[155px]">
-          <h1 class="max-w-4xl text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-[1.05] text-[#0f172b] dark:text-white">
-            {{ $t('about.pageTitle') }}
-          </h1>
-          <p class="mt-6 max-w-2xl text-[16px] sm:text-[18px] leading-relaxed text-[#62748e] dark:text-neutral-400">
+      <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16">
+        <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
+          {{ $t('about.eyebrow') }}
+        </p>
+        <ResolveText
+          :text="$t('about.statement')"
+          :highlight="$t('about.statementHighlight')"
+          tag="h1"
+          class="mt-6 max-w-[15em] md:max-w-[min(15em,calc(100%-16rem))] lg:max-w-[min(15em,calc(100%-20rem))] font-display font-normal text-4xl sm:text-5xl lg:text-6xl leading-[1.04] tracking-[-0.02em] text-ink dark:text-paper"
+        />
+        <HalftoneReveal>
+          <p class="mt-10 max-w-2xl text-lg leading-relaxed text-body">
             {{ $t('about.designCodeBody') }}
           </p>
-        </div>
-      </ScrollReveal>
+          <NuxtLink
+            to="https://cv.ailengonzalez.ar/"
+            target="_blank"
+            data-umami-event="view-cv"
+            data-umami-event-location="about"
+            class="btn-gradient inline-flex items-center gap-2 mt-10"
+          >
+            {{ $t('about.exploreCv') }}
+            <UIcon
+              name="i-lucide-arrow-up-right"
+              class="size-4"
+            />
+          </NuxtLink>
+        </HalftoneReveal>
+      </div>
     </section>
     <LandingAboutMe />
   </UPage>

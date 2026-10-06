@@ -27,7 +27,6 @@
     "labIntro": "Self-directed projects — where I try out ideas and technology without a client brief shaping the answer.",
     "more": "More",
     "exploreAll": "Explore Projects",
-    "pageTitle": "Featured Projects",
     "pageIntro": "A curated collection of my design and development work. Each project represents a unique challenge and a creative solution.",
     "caseStudy": {
       "back": "All projects",
@@ -92,14 +91,18 @@
     "email": "Email me"
   },
   "about": {
+    "eyebrow": "About",
+    "statement": "Designer by craft, developer by habit. I make AI products feel simple.",
+    "statementHighlight": "feel simple.",
+    "trajectory": "Trajectory",
+    "now": "Now",
+    "before": "Before tech",
+    "medicine": {"title": "Emergency physician", "period": "2011 – 2021", "place": "Argentina", "description": "Ten years in emergency departments after graduating from the Universidad Nacional de Córdoba. Still the best training I've had in deciding fast with incomplete information."},
+    "tools": "Tools",
+    "toolGroups": {"design": "Design", "frontend": "Frontend", "ai": "AI & automation", "web3": "Web3"},
     "heading": "About",
-    "pageTitle": "Frontend developer obsessed with AI and UI",
     "exploreCv": "View full CV",
-    "designCode": "Design + Code",
     "designCodeBody": "I mix solid design principles with practical, efficient development to create clean, responsive, and pixel-perfect interfaces. I take care of the whole process — from early research to prototypes to bringing everything to life with smooth, modern code.",
-    "workExperience": "Work Experience",
-    "skills": "Skills",
-    "technical": "Technical",
     "soft": "Soft",
     "softBody": "Autonomous work, active listening, attention to detail, clear communication, collaborative mindset, adaptability",
     "languages": "Languages",
@@ -108,10 +111,7 @@
     "spanish": "Spanish",
     "spanishLevel": "Native",
     "certifications": "Latest Certifications",
-    "funfactLabel": "My #funfact",
-    "funfactBody": "Before moving into tech I worked as a medical doctor from 2011 to 2021 in emergency departments across Argentina, after graduating from the Universidad Nacional de Córdoba — one of the country's leading universities. That experience shaped my analytical mindset and problem-solving approach in design and development.",
     "cert": {
-      "online": "Online",
       "ongoing": "Ongoing"
     },
     "work": {
