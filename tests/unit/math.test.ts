@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import {
   clamp01, remap, enterProgress, rectToPlane, isOnScreen, shouldUseWebGL,
-  splitWords, wordProgress, findPhrase, heroPhases, stageAt, hexToRgb01,
+  splitWords, wordProgress, findPhrase, heroName, stageAt, hexToRgb01,
   gradientAt, gridSize, crispAmount
 } from '../../app/webgl/math'
 
@@ -97,18 +97,17 @@ describe('wordProgress', () => {
   test('n = 0 is resolved', () => expect(wordProgress(0, 0, 0)).toBe(1))
 })
 
-describe('heroPhases', () => {
-  test('top of page: name follows the intro, image not started', () => {
-    expect(heroPhases(0, 0.5)).toEqual({ name: 0.5, image: 0 })
+describe('heroName', () => {
+  test('top of page: the name follows the intro', () => {
+    expect(heroName(0, 0.5)).toBe(0.5)
+    expect(heroName(0.1, 1)).toBe(1)
   })
-  test('name fully dispersed by p = 0.4, image starts after', () => {
-    const at = heroPhases(0.4, 1)
-    expect(at.name).toBeCloseTo(0)
-    expect(at.image).toBeCloseTo(0)
+  test('disperses while the hero is pinned', () => {
+    expect(heroName(0.5, 1)).toBeCloseTo(0.5)
   })
-  test('image assembled by p = 0.85', () => {
-    expect(heroPhases(0.85, 1).image).toBeCloseTo(1)
-    expect(heroPhases(1, 1).image).toBe(1)
+  test('fully dispersed by p = 0.85', () => {
+    expect(heroName(0.85, 1)).toBeCloseTo(0)
+    expect(heroName(1, 1)).toBe(0)
   })
 })
 

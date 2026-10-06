@@ -1,23 +1,20 @@
 <script setup lang="ts">
 import { Motion, useScroll, useTransform } from 'motion-v'
-import { projects } from '~/data/projects'
-import { getFeaturedProjects } from '~/data/selectors'
-import { easeOutCubic, heroPhases } from '~/webgl/math'
+import { easeOutCubic, heroName } from '~/webgl/math'
 
-// Particles assemble into the name on load; on scroll the name disperses and
-// the lead project assembles from particles into its crisp image. The track
-// is 220vh only on the WebGL path (.fx-on, set by plugins/fx.client.ts);
-// otherwise the hero is a static first screen with the name already formed.
-const lead = getFeaturedProjects(projects)[0]
+// Particles assemble into the name on load; scrolling disperses it back into
+// the ambient field before the manifesto. The track is 160vh only on the
+// WebGL path (.fx-on, set by plugins/fx.client.ts); otherwise the hero is a
+// static first screen with the name already formed.
 const fx = useFxEnabled()
 
 const track = ref<HTMLElement | null>(null)
 const scroll = ref(0)
 const intro = ref(1)
 const { scrollYProgress } = useScroll({ target: track, offset: ['start start', 'end end'] })
-const copyOpacity = useTransform(scrollYProgress, [0.05, 0.3], [1, 0])
+const copyOpacity = useTransform(scrollYProgress, [0.1, 0.5], [1, 0])
 
-const phases = computed(() => heroPhases(scroll.value, intro.value))
+const nameProgress = computed(() => heroName(scroll.value, intro.value))
 
 const INTRO_MS = 2400
 const playIntro = () => {
@@ -55,7 +52,7 @@ onBeforeUnmount(() => off?.())
         </Motion>
 
         <ParticleName
-          :progress="phases.name"
+          :progress="nameProgress"
           class="mt-6 self-start"
           @ready="playIntro"
         >
@@ -69,21 +66,6 @@ onBeforeUnmount(() => off?.())
             {{ $t('hero.subtitle') }}
           </p>
         </Motion>
-      </div>
-
-      <!-- Lead project: only on the WebGL path, hidden until its phase starts -->
-      <div
-        v-if="lead"
-        class="hero-work absolute inset-0 items-center justify-center px-4 sm:px-10 pt-20"
-        :style="{ opacity: phases.image > 0.001 ? 1 : 0 }"
-      >
-        <ResolveImage
-          :src="lead.image"
-          :alt="lead.title"
-          :progress="phases.image"
-          sizes="100vw lg:1200px"
-          class="w-full max-w-6xl aspect-[16/10]"
-        />
       </div>
     </div>
   </section>

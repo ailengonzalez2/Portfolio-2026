@@ -75,16 +75,10 @@ export function findPhrase(words: string[], phrase: string[]): [number, number] 
 }
 
 /**
- * Hero choreography for scroll progress p (0–1 over the hero track):
- * the name follows the intro and disperses by 0.4, then the lead image
- * assembles from 0.4 to 0.85.
+ * Hero name assembly for scroll progress p (0–1 over the pinned hero track):
+ * follows the intro at the top, then disperses between 0.15 and 0.85.
  */
-export function heroPhases(p: number, intro: number) {
-  return {
-    name: intro * (1 - remap(p, 0.05, 0.4)),
-    image: remap(p, 0.4, 0.85)
-  }
-}
+export const heroName = (p: number, intro: number) => intro * (1 - remap(p, 0.15, 0.85))
 
 /** Continuous stage index in [0, stages - 1] for progress p. */
 export const stageAt = (p: number, stages: number) => clamp01(p) * (stages - 1)

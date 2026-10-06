@@ -75,9 +75,7 @@
 }
 
 /* Scroll tracks only stretch when the WebGL path runs */
-.hero-work { display: none; }
-.fx-on .hero-work { display: flex; }
-.fx-on .hero-track { height: 220vh; }
+.fx-on .hero-track { height: 160vh; }
 @media (min-width: 1024px) {
   /* Process pins only on desktop (lg:sticky) */
   .fx-on .process-track { height: 400vh; }
