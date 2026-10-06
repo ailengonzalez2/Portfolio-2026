@@ -74,6 +74,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     }, { once: true })
 
     provideStage(stage)
-    if (import.meta.dev) (window as any).__fxStage = stage
+    if (import.meta.dev) {
+      (window as any).__fxStage = stage;
+      (window as any).__lenis = lenis
+    }
   })
 })
