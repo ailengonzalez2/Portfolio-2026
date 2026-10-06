@@ -45,3 +45,32 @@ export async function bootFx<T>(load: () => Promise<T>, fallback: (error: unknow
     return null
   }
 }
+
+const easeOutCubic = (t: number) => 1 - (1 - t) ** 3
+
+/**
+ * Animates a value from `from` to `to` over `ms`, calling `onUpdate` each
+ * frame. Always finishes (on a timer if frames are paused, e.g. hidden tab),
+ * and the last update is exactly `to`.
+ */
+export function tween(from: number, to: number, ms: number, onUpdate: (v: number) => void, ease = easeOutCubic): Promise<void> {
+  const start = performance.now()
+  return new Promise((resolve) => {
+    let finished = false
+    const finish = () => {
+      if (finished) return
+      finished = true
+      onUpdate(to)
+      resolve()
+    }
+    const step = () => {
+      if (finished) return
+      const k = Math.min(1, (performance.now() - start) / ms)
+      if (k >= 1) return finish()
+      onUpdate(from + (to - from) * ease(k))
+      requestAnimationFrame(step)
+    }
+    requestAnimationFrame(step)
+    setTimeout(finish, ms + 200)
+  })
+}

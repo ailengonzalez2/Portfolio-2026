@@ -69,11 +69,14 @@ function sampleGlyphs(el: HTMLElement, step: number) {
     const cs = getComputedStyle(parent)
     ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`
     const ascent = ctx.measureText(text).fontBoundingBoxAscent
-    range.selectNodeContents(node)
-    // One rect per line box, in case a text node wraps.
-    for (const r of range.getClientRects()) {
-      ctx.fillText(text, r.left - rect.left + PAD, r.top - rect.top + PAD + ascent)
-      break
+    // Draw word by word at each word's own rect, so wrapped text lands on the
+    // right line.
+    const content = node.textContent ?? ''
+    for (const m of content.matchAll(/\S+/g)) {
+      range.setStart(node, m.index)
+      range.setEnd(node, m.index + m[0].length)
+      const r = range.getClientRects()[0]
+      if (r) ctx.fillText(m[0], r.left - rect.left + PAD, r.top - rect.top + PAD + ascent)
     }
   }
   const data = ctx.getImageData(0, 0, w, h).data

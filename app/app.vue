@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { wipeTo } from '~/webgl/runtime'
+import { projects } from '~/data/projects'
+import { pageLabel } from '~/webgl/pageLabel'
 
 const colorMode = useColorMode()
 
@@ -35,18 +36,27 @@ useSeoMeta({
 })
 
 const fx = useFxEnabled()
-// WebGL path: the ambient particles swell to cover the screen, the route swaps,
-// then they shrink back. Fallback: a plain cross-fade.
+const router = useRouter()
+const { t } = useI18n()
+const curtain = usePageCurtain()
+
+// WebGL path: a paper curtain covers the page while particles assemble the
+// destination's name, the route swaps underneath, then they disperse and the
+// curtain lifts. Fallback: a plain cross-fade.
 const pageTransition = computed(() => fx.value
   ? {
-      name: 'particles',
+      name: 'curtain',
       mode: 'out-in' as const,
       css: false,
       onLeave: (_el: Element, done: () => void) => {
-        wipeTo(1, 420).then(done)
+        const label = pageLabel(router.currentRoute.value.path, {
+          t,
+          projectTitle: id => projects.find(p => p.id === id)?.title
+        })
+        curtain.cover(label).then(done)
       },
       onAfterEnter: () => {
-        wipeTo(0, 560)
+        curtain.reveal()
       }
     }
   : { name: 'fade', mode: 'out-in' as const })
@@ -98,6 +108,7 @@ useSchemaOrg([
 
 <template>
   <UApp>
+    <PageCurtain v-if="fx" />
     <NuxtLayout>
       <UMain class="relative">
         <NuxtPage :transition="pageTransition" />

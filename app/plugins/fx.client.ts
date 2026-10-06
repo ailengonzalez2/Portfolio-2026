@@ -44,9 +44,12 @@ export default defineNuxtPlugin((nuxtApp) => {
     active.value = false
   }
 
-  // A transition whose next page errors never gets its afterEnter: clear the wipe.
+  // A transition whose next page errors never gets its afterEnter: lift the
+  // curtain and clear the wipe.
+  const curtain = usePageCurtain()
   nuxtApp.hook('app:error', () => {
     resetWipe()
+    curtain.reveal()
   })
 
   nuxtApp.hook('app:mounted', async () => {

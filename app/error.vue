@@ -17,9 +17,12 @@ useSeoMeta({
   description: 'We are sorry but this page could not be found.'
 })
 
-// The page transition that led here may have left the particle wipe covering the screen.
+// The page transition that led here may have left the curtain or the particle
+// wipe covering the screen.
+const curtain = usePageCurtain()
 onMounted(() => {
   resetWipe()
+  curtain.reveal()
 })
 </script>
 

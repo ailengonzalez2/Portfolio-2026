@@ -8,7 +8,9 @@ const props = withDefaults(defineProps<{
   pointSize?: number
   scatter?: number
   mouseRadius?: number
-}>(), { step: 3, pointSize: 3.6, scatter: 1, mouseRadius: 110 })
+  /** particle layer opacity (e.g. fading with a curtain) */
+  opacity?: number
+}>(), { step: 3, pointSize: 3.6, scatter: 1, mouseRadius: 110, opacity: 1 })
 const emit = defineEmits<{ ready: [] }>()
 
 const root = ref<HTMLElement | null>(null)
@@ -28,6 +30,7 @@ const { ready, refresh } = useWebGLLayer(root, async () => {
   u.uPointSize!.value = props.pointSize
   u.uScatter!.value = props.scatter
   u.uMouseRadius!.value = props.mouseRadius
+  u.uOpacity!.value = props.opacity
 })
 
 // Glyph positions depend on layout: rebuild when the element resizes.

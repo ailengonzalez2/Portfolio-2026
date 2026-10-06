@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test'
-import { bootFx, frameLoop } from '../../app/webgl/loop'
+import { bootFx, frameLoop, tween } from '../../app/webgl/loop'
 
 test('frameLoop keeps scheduling frames after a step throws', () => {
   const queue: Array<(t: number) => void> = []
@@ -50,3 +50,10 @@ test('bootFx returns the loaded modules on success', async () => {
   const result = await bootFx(() => Promise.resolve(42), () => {})
   expect(result).toBe(42)
 })
+
+test('tween ends exactly at the target even when frames never fire', async () => {
+  globalThis.requestAnimationFrame = (() => 0) as unknown as typeof requestAnimationFrame
+  const seen: number[] = []
+  await tween(0, 1, 30, v => seen.push(v))
+  expect(seen.at(-1)).toBe(1)
+}, 1000)
