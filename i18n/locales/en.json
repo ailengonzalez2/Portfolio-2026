@@ -21,14 +21,6 @@
     "bookCall": "Book a call",
     "seeWork": "See work"
   },
-  "hook": {
-    "eyebrow": "What I do",
-    "pre": "I design and ship ",
-    "highlight": "user-facing AI products",
-    "post": " end to end — from the first sketch to production.",
-    "bookCall": "Book a call",
-    "viewWork": "View work"
-  },
   "services": {
     "startProject": "Start a project",
     "aiProduct": {
@@ -96,11 +88,11 @@
       "comingSoonBody": "For now, explore the work directly via Figma or the live preview above."
     }
   },
-  "hookQuote": {
-    "pre": "I help startups and product teams go from design concept to ",
-    "highlight": "scalable, pixel-perfect web products",
-    "post": " in a short time.",
-    "support": "This means cleaner handoffs, faster iterations, and products that actually match the vision."
+  "manifesto": {
+    "text": "I design and build AI products — from the first noisy idea to the shape people actually use.",
+    "highlight": "the shape people actually use",
+    "bookCall": "Book a call",
+    "viewWork": "View work"
   },
   "work": {
     "eyebrow": "Selected work",
@@ -118,11 +110,6 @@
     "subtitle": "Have an AI product or frontend in mind? Let's turn it into something real.",
     "bookCall": "Book a call",
     "email": "Email me"
-  },
-  "aiQuote": {
-    "quote": "Recently, I've been diving deeper into the AI ecosystem, building agent-driven workflows and intelligent UI experiences.",
-    "highlight": "agent-driven workflows and intelligent UI experiences",
-    "context": "I focus on crafting clear, intuitive AI-powered experiences with tools like the Claude API, LLM agents, and modern frontend frameworks. From conversational interfaces to AI dashboards and agentic apps, I'm always excited to collaborate on innovative ideas and projects."
   },
   "about": {
     "heading": "About",

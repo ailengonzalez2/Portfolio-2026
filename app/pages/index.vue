@@ -18,7 +18,7 @@ useSeoMeta({
 <template>
   <UPage>
     <LandingHero />
-    <LandingHook />
+    <LandingManifesto />
     <section class="pb-20 sm:pb-28 bg-background">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <LandingLabTeaser />
@@ -28,9 +28,7 @@ useSeoMeta({
     <section class="pt-10 sm:pt-14 pb-24 sm:pb-32 bg-background">
       <TechMarquee />
     </section>
-    <LandingHookQuote />
     <LandingWork />
-    <LandingAIquote />
     <LandingTestimonials />
   </UPage>
 </template>

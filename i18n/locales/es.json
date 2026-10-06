@@ -21,14 +21,6 @@
     "bookCall": "Agendar una llamada",
     "seeWork": "Ver trabajo"
   },
-  "hook": {
-    "eyebrow": "Qué hago",
-    "pre": "Diseño y desarrollo ",
-    "highlight": "productos de IA",
-    "post": " de punta a punta — del primer boceto a producción.",
-    "bookCall": "Agendar una llamada",
-    "viewWork": "Ver trabajo"
-  },
   "services": {
     "startProject": "Iniciar un proyecto",
     "aiProduct": {
@@ -119,11 +111,11 @@
       "comingSoonBody": "Por ahora podés explorar el trabajo directamente en Figma o en el preview arriba."
     }
   },
-  "hookQuote": {
-    "pre": "Ayudo a startups y equipos de producto a pasar del concepto de diseño a ",
-    "highlight": "productos web escalables y pixel-perfect",
-    "post": " en poco tiempo.",
-    "support": "Esto significa entregas más limpias, iteraciones más rápidas y productos que de verdad coinciden con la visión."
+  "manifesto": {
+    "text": "Diseño y construyo productos de IA: desde la primera idea con ruido hasta la forma que la gente realmente usa.",
+    "highlight": "la forma que la gente realmente usa",
+    "bookCall": "Agendar una llamada",
+    "viewWork": "Ver trabajo"
   },
   "work": {
     "eyebrow": "Trabajo seleccionado",
@@ -141,11 +133,6 @@
     "subtitle": "¿Tenés un producto de IA o un frontend en mente? Hagámoslo realidad.",
     "bookCall": "Agendar una llamada",
     "email": "Escribime"
-  },
-  "aiQuote": {
-    "quote": "Últimamente estoy explorando más a fondo el ecosistema de la IA, construyendo flujos impulsados por agentes y experiencias de UI inteligentes.",
-    "highlight": "flujos impulsados por agentes y experiencias de UI inteligentes",
-    "context": "Me enfoco en crear experiencias impulsadas por IA claras e intuitivas con herramientas como la API de Claude, agentes LLM y frameworks de frontend modernos. Desde interfaces conversacionales hasta dashboards de IA y apps con agentes, siempre me entusiasma colaborar en ideas y proyectos innovadores."
   },
   "about": {
     "heading": "Sobre mí",
