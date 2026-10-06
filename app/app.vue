@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { wipeTo } from '~/webgl/runtime'
+
 const colorMode = useColorMode()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
@@ -31,6 +33,23 @@ useSeoMeta({
   ogSiteName: 'Ailen Gonzalez',
   twitterCard: 'summary_large_image'
 })
+
+const fx = useFxEnabled()
+// WebGL path: the ambient particles swell to cover the screen, the route swaps,
+// then they shrink back. Fallback: a plain cross-fade.
+const pageTransition = computed(() => fx.value
+  ? {
+      name: 'particles',
+      mode: 'out-in' as const,
+      css: false,
+      onLeave: (_el: Element, done: () => void) => {
+        wipeTo(1, 420).then(done)
+      },
+      onAfterEnter: () => {
+        wipeTo(0, 560)
+      }
+    }
+  : { name: 'fade', mode: 'out-in' as const })
 
 // Default social-share image, auto-generated. Individual pages can override.
 defineOgImageComponent('Hero')
@@ -81,7 +100,7 @@ useSchemaOrg([
   <UApp>
     <NuxtLayout>
       <UMain class="relative">
-        <NuxtPage />
+        <NuxtPage :transition="pageTransition" />
       </UMain>
     </NuxtLayout>
   </UApp>

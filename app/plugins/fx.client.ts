@@ -58,6 +58,11 @@ export default defineNuxtPlugin((nuxtApp) => {
       document.addEventListener('pointerleave', onLeave)
     }
     nuxtApp.hook('page:finish', () => lenis.resize())
+    // Lenis keeps its own scroll position; start each new page at the top
+    // unless the route targets an anchor.
+    nuxtApp.hook('page:transition:finish', () => {
+      if (!window.location.hash) lenis.scrollTo(0, { immediate: true })
+    })
 
     // GPU reset / too many contexts: drop to the DOM fallback for good.
     canvas.addEventListener('webglcontextlost', (e) => {

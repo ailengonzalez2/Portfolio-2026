@@ -26,13 +26,23 @@ export function wipeTo(target: number, ms: number): Promise<void> {
   const from = stage.wipe
   const start = performance.now()
   return new Promise((resolve) => {
+    let finished = false
+    const finish = () => {
+      if (finished) return
+      finished = true
+      stage.setWipe(target)
+      resolve()
+    }
     const step = () => {
+      if (finished) return
       const k = Math.min(1, (performance.now() - start) / ms)
       const eased = k < 0.5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2
       stage.setWipe(from + (target - from) * eased)
       if (k < 1) requestAnimationFrame(step)
-      else resolve()
+      else finish()
     }
     requestAnimationFrame(step)
+    // Frames pause in hidden tabs; never leave a page transition hanging.
+    setTimeout(finish, ms + 200)
   })
 }
