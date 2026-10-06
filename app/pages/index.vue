@@ -29,7 +29,7 @@ useSeoMeta({
       <TechMarquee />
     </section>
     <LandingHookQuote />
-    <LandingProjects />
+    <LandingWork />
     <LandingAIquote />
     <LandingTestimonials />
   </UPage>

@@ -125,6 +125,13 @@
     "post": " en poco tiempo.",
     "support": "Esto significa entregas más limpias, iteraciones más rápidas y productos que de verdad coinciden con la visión."
   },
+  "work": {
+    "eyebrow": "Trabajo seleccionado",
+    "latentHint": "Pasá el mouse — o mantené presionado — para ver la capa latente",
+    "caseStudy": "Leer el caso de estudio",
+    "visit": "Ver el sitio",
+    "all": "Todos los proyectos"
+  },
   "testimonials": {
     "next": "Siguiente testimonio",
     "goTo": "Ver testimonio de {name}"

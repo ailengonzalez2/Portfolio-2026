@@ -102,6 +102,13 @@
     "post": " in a short time.",
     "support": "This means cleaner handoffs, faster iterations, and products that actually match the vision."
   },
+  "work": {
+    "eyebrow": "Selected work",
+    "latentHint": "Hover — or press and hold — to see the latent layer",
+    "caseStudy": "Read the case study",
+    "visit": "Visit the site",
+    "all": "All projects"
+  },
   "testimonials": {
     "next": "Next testimonial",
     "goTo": "Show testimonial from {name}"
