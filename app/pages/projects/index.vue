@@ -66,7 +66,10 @@ useSeoMeta({
           role="tabpanel"
           class="mt-10 sm:mt-12"
         >
-          <ProjectsList :projects="clientProjects" />
+          <ProjectsSpecimenTable
+            :projects="clientProjects"
+            kind="client"
+          />
         </div>
 
         <div
@@ -78,7 +81,10 @@ useSeoMeta({
           <p class="mb-10 sm:mb-12 max-w-xl text-lg text-body">
             {{ $t('projects.labIntro') }}
           </p>
-          <ProjectsLabTable :projects="labProjects" />
+          <ProjectsSpecimenTable
+            :projects="labProjects"
+            kind="lab"
+          />
         </div>
       </div>
     </section>

@@ -2,11 +2,19 @@
 import type { Project } from '~/data/projects'
 import { tween } from '~/webgl/loop'
 
-// The lab as specimen cards on a table (the "mesa de laboratorio" layout):
+// Projects as specimen cards on a table (the "mesa de laboratorio" layout):
 // each card rests slightly rotated; hovering straightens and lifts it while its
 // image re-assembles from particles. At rest the image is the crisp DOM one,
-// so the rotation never misaligns the particle layer.
-defineProps<{ projects: Project[] }>()
+// so the rotation never misaligns the particle layer. Client cards open their
+// case study; lab cards open the live experiment.
+const props = defineProps<{ projects: Project[], kind: 'client' | 'lab' }>()
+
+const localePath = useLocalePath()
+const linkFor = (p: Project) => p.caseStudy
+  ? { to: localePath(`/projects/${p.id}`), external: false }
+  : { to: p.links.preview ?? localePath('/projects'), external: true }
+const codeOf = (i: number) => `${props.kind === 'lab' ? 'EXP-' : ''}${String(i + 1).padStart(2, '0')}`
+const metaOf = (p: Project) => props.kind === 'lab' ? (p.labTag ?? p.tags[0] ?? '') : `${p.tags.slice(0, 2).join(' · ')} · ${p.date}`
 
 const TILTS = [-4, 3, -2, 5, -3, 4]
 const progress = ref<Record<string, number>>({})
@@ -32,10 +40,10 @@ const nameOf = (p: Project) => p.title.split(' — ')[0]
       v-for="(p, i) in projects"
       :key="p.id"
     >
-      <a
-        :href="p.links.preview"
-        target="_blank"
-        rel="noopener"
+      <NuxtLink
+        :to="linkFor(p).to"
+        :target="linkFor(p).external ? '_blank' : undefined"
+        :rel="linkFor(p).external ? 'noopener' : undefined"
         class="specimen group block bg-paper p-3 pb-5"
         :style="{ '--tilt': `${TILTS[i % TILTS.length]}deg` }"
         @pointerenter="enter(p.id)"
@@ -55,21 +63,21 @@ const nameOf = (p: Project) => p.title.split(' — ')[0]
           <p class="font-display font-normal text-xl sm:text-2xl text-ink">
             {{ nameOf(p) }}
             <UIcon
-              name="i-lucide-arrow-up-right"
+              :name="linkFor(p).external ? 'i-lucide-arrow-up-right' : 'i-lucide-arrow-right'"
               class="size-4 align-middle opacity-0 group-hover:opacity-100 transition-opacity"
             />
           </p>
           <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-label shrink-0">
-            EXP-{{ String(i + 1).padStart(2, '0') }}
+            {{ codeOf(i) }}
           </p>
         </div>
         <p class="mt-1 px-1 font-mono text-[10px] uppercase tracking-[0.18em] text-label">
-          {{ p.labTag ?? p.tags[0] }}
+          {{ metaOf(p) }}
         </p>
         <p class="mt-3 px-1 text-sm leading-relaxed text-body">
           {{ p.description }}
         </p>
-      </a>
+      </NuxtLink>
     </HalftoneReveal>
   </div>
 </template>
