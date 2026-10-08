@@ -92,6 +92,7 @@
     "email": "Email me"
   },
   "about": {
+    "badge": {"pass": "Speaker", "remote": "Remote · worldwide", "languages": "ES · EN", "hint": "Drag it · click to flip"},
     "portraitCaption": "Ailen Gonzalez · Córdoba, Argentina",
     "eyebrow": "About",
     "statement": "Designer by craft, developer by habit. I make AI products feel simple.",
