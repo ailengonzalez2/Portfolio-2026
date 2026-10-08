@@ -24,26 +24,56 @@ const roleLines = computed(() => {
   return i > 0 ? [title.slice(0, i), title.slice(i + 1)] : [title]
 })
 
+// Page load: the title stays hidden (html.fx-boot, set by an inline head
+// script) while a 2D swirl orbits it. Once the WebGL particles are on screen
+// they take over still swirling, the 2D swirl fades out, and they assemble.
 const INTRO_MS = 2400
+const HANDOFF_MS = 400
+const BOOT_TIMEOUT_MS = 10000
+const loading = ref(true)
+const swirl = ref(1)
+
+const endBoot = () => {
+  loading.value = false
+  document.documentElement.classList.remove('fx-boot')
+}
+
+let handoff: ReturnType<typeof setTimeout> | undefined
 const playIntro = () => {
   intro.value = 0
-  const start = performance.now()
-  const step = () => {
-    const k = Math.min(1, (performance.now() - start) / INTRO_MS)
-    intro.value = easeOutCubic(k)
-    if (k < 1) requestAnimationFrame(step)
-  }
-  requestAnimationFrame(step)
+  swirl.value = 1
+  endBoot()
+  clearTimeout(handoff)
+  handoff = setTimeout(() => {
+    const start = performance.now()
+    const step = () => {
+      const k = Math.min(1, (performance.now() - start) / INTRO_MS)
+      intro.value = easeOutCubic(k)
+      // Formed: later dispersal (scroll) scatters instead of swirling.
+      if (k < 1) requestAnimationFrame(step)
+      else swirl.value = 0
+    }
+    requestAnimationFrame(step)
+  }, HANDOFF_MS)
 }
 
 let off: (() => void) | undefined
+let bootTimer: ReturnType<typeof setTimeout> | undefined
 onMounted(() => {
+  // Particles never showed up (layer failed): show the plain title.
+  bootTimer = setTimeout(() => {
+    if (loading.value) endBoot()
+  }, BOOT_TIMEOUT_MS)
   scroll.value = scrollYProgress.get()
   off = scrollYProgress.on('change', (v) => {
     scroll.value = v
   })
 })
-onBeforeUnmount(() => off?.())
+onBeforeUnmount(() => {
+  off?.()
+  clearTimeout(bootTimer)
+  clearTimeout(handoff)
+})
 </script>
 
 <template>
@@ -59,20 +89,28 @@ onBeforeUnmount(() => off?.())
           </p>
         </Motion>
 
-        <ParticleName
-          :progress="nameProgress"
-          class="mt-6 self-start"
-          @ready="playIntro"
-        >
-          <h1 class="font-display font-normal text-[clamp(3rem,11vw,9rem)] leading-[0.88] tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
-            <template
-              v-for="(line, i) in roleLines"
-              :key="line"
-            >
-              <br v-if="i">{{ line }}
-            </template>
-          </h1>
-        </ParticleName>
+        <div class="relative mt-6 self-start">
+          <Transition
+            leave-active-class="transition-opacity duration-500"
+            leave-to-class="opacity-0"
+          >
+            <LoadingSwirl v-if="fx && loading" />
+          </Transition>
+          <ParticleName
+            :progress="nameProgress"
+            :swirl="swirl"
+            @ready="playIntro"
+          >
+            <h1 class="hero-title font-display font-normal text-[clamp(3rem,11vw,9rem)] leading-[0.88] tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
+              <template
+                v-for="(line, i) in roleLines"
+                :key="line"
+              >
+                <br v-if="i">{{ line }}
+              </template>
+            </h1>
+          </ParticleName>
+        </div>
 
         <Motion :style="fx ? { opacity: copyOpacity } : undefined">
           <p class="mt-8 max-w-xl text-lg sm:text-xl text-body">

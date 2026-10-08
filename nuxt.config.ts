@@ -24,6 +24,12 @@ export default defineNuxtConfig({
   app: {
     head: {
       script: [
+        // Mirrors the cheap checks of shouldUseWebGL before first paint, so the
+        // hero title starts hidden behind the loading swirl (see main.css).
+        {
+          innerHTML: 'try{var m=navigator.deviceMemory;if(!/[?&]fx=off/.test(location.search)&&!matchMedia(\'(prefers-reduced-motion: reduce)\').matches&&!(m<4))document.documentElement.classList.add(\'fx-boot\')}catch(e){}',
+          tagPosition: 'head'
+        },
         {
           'src': 'https://umami.codecave.ar/script.js',
           'data-website-id': '3bdc851d-7f3e-402e-9712-cdb5a201091e',

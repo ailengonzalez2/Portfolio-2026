@@ -1,10 +1,11 @@
 import * as THREE from 'three'
-import { gradientAt } from '../math'
+import { gradientAt, swirlAxes, swirlOrbit, SWIRL_SPEED } from '../math'
 import { pointFragment } from '../shaders/image'
 import { stageUniforms } from '../materials/common'
 
 const vertex = /* glsl */`
 attribute vec2 aStart;
+attribute vec2 aOrbit;
 attribute vec2 aTarget;
 attribute vec3 aColor;
 attribute float aRand;
@@ -15,6 +16,8 @@ uniform float uPixelRatio;
 uniform float uScatter;
 uniform float uMouseRadius;
 uniform vec2 uMouse;
+uniform float uSwirl;
+uniform vec2 uOrbit;
 varying vec3 vColor;
 varying float vAlpha;
 
@@ -24,14 +27,20 @@ void main() {
   p = p * p * (3.0 - 2.0 * p);
 
   vec2 drift = vec2(sin(uTime * 0.4 + aRand * 40.0), cos(uTime * 0.33 + aRand * 30.0)) * 22.0 * (1.0 - p);
-  vec2 pos = mix(aStart * uScatter + drift, aTarget, p);
+  // Before forming, particles either drift scattered over the viewport or
+  // orbit the title (uSwirl = 1, the page-load swirl; see swirlAt in math.ts).
+  float a = aOrbit.y + uTime * ${SWIRL_SPEED.toFixed(2)} / aOrbit.x;
+  vec2 orbit = vec2(cos(a), sin(a)) * aOrbit.x * uOrbit;
+  vec2 from = mix(aStart * uScatter + drift, orbit + drift * 0.3, uSwirl);
+  vec2 pos = mix(from, aTarget, p);
 
   vec2 d = pos - uMouse;
   pos += normalize(d + 0.0001) * smoothstep(uMouseRadius, 0.0, length(d)) * 46.0;
 
   vColor = aColor;
-  // Fade in as they start converging; fully dispersed text is invisible.
-  vAlpha = mix(0.45, 1.0, p) * smoothstep(0.0, 0.15, uProgress);
+  // Fade in as they start converging; fully dispersed text is invisible,
+  // the swirl is visible from the start.
+  vAlpha = mix(0.45, 1.0, p) * mix(smoothstep(0.0, 0.15, uProgress), 1.0, uSwirl);
   gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 0.0, 1.0);
   gl_PointSize = uPointSize * uPixelRatio * mix(1.7, 1.0, p);
 }`
@@ -120,11 +129,13 @@ export async function createParticleText(el: HTMLElement, opts: ParticleTextOpti
   const spanX = Math.max(1, Math.max(...xs) - minX)
   const aStart = new Float32Array(n * 2)
   const aTarget = new Float32Array(n * 2)
+  const aOrbit = new Float32Array(n * 2)
   const aColor = new Float32Array(n * 3)
   const aRand = new Float32Array(n)
   targets.forEach(([x, y], i) => {
     aStart.set([(Math.random() - 0.5) * vw * 1.1 - ex, (Math.random() - 0.5) * vh * 1.1 - ey], i * 2)
     aTarget.set([x, y], i * 2)
+    aOrbit.set(swirlOrbit(Math.random(), Math.random()), i * 2)
     aColor.set(gradientAt((x - minX) / spanX), i * 3)
     aRand[i] = Math.random()
   })
@@ -133,6 +144,7 @@ export async function createParticleText(el: HTMLElement, opts: ParticleTextOpti
   geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(n * 3), 3))
   geometry.setAttribute('aStart', new THREE.BufferAttribute(aStart, 2))
   geometry.setAttribute('aTarget', new THREE.BufferAttribute(aTarget, 2))
+  geometry.setAttribute('aOrbit', new THREE.BufferAttribute(aOrbit, 2))
   geometry.setAttribute('aColor', new THREE.BufferAttribute(aColor, 3))
   geometry.setAttribute('aRand', new THREE.BufferAttribute(aRand, 1))
 
@@ -148,7 +160,9 @@ export async function createParticleText(el: HTMLElement, opts: ParticleTextOpti
       uPointSize: { value: opts.pointSize ?? 3.6 },
       uScatter: { value: opts.scatter ?? 1 },
       uMouseRadius: { value: opts.mouseRadius ?? 110 },
-      uOpacity: { value: 1 }
+      uOpacity: { value: 1 },
+      uSwirl: { value: 0 },
+      uOrbit: { value: new THREE.Vector2(...swirlAxes(rect.width, rect.height)) }
     }
   })
   return new THREE.Points(geometry, material)

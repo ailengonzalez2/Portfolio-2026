@@ -2,7 +2,7 @@ import { describe, expect, test } from 'bun:test'
 import {
   clamp01, remap, enterProgress, rectToPlane, isOnScreen, shouldUseWebGL,
   splitWords, wordProgress, findPhrase, heroName, stageAt, hexToRgb01,
-  gradientAt, gridSize, crispAmount
+  gradientAt, gridSize, crispAmount, swirlAt, swirlAxes, swirlOrbit
 } from '../../app/webgl/math'
 
 describe('clamp01 / remap', () => {
@@ -155,4 +155,20 @@ describe('stageAt / hexToRgb01', () => {
     expect(hexToRgb01('#F2EFE9')).toEqual([242 / 255, 239 / 255, 233 / 255])
     expect(hexToRgb01('121212')).toEqual([18 / 255, 18 / 255, 18 / 255])
   })
+})
+
+test('swirl orbits stay in range and inner orbits turn faster', () => {
+  const [rMin] = swirlOrbit(0, 0)
+  const [rMax, aMax] = swirlOrbit(1, 1)
+  expect(rMin).toBeCloseTo(0.12)
+  expect(rMax).toBeCloseTo(0.9)
+  expect(aMax).toBeCloseTo(Math.PI * 2)
+  const [x0, y0] = swirlAt(1, 0, 0, 100, 50)
+  expect(x0).toBeCloseTo(100)
+  expect(y0).toBeCloseTo(0)
+  const turn = (r: number) => Math.atan2(swirlAt(r, 0, 0.5, 1, 1)[1], swirlAt(r, 0, 0.5, 1, 1)[0])
+  expect(turn(0.4)).toBeGreaterThan(turn(1))
+  const [ax, ay] = swirlAxes(200, 100)
+  expect(ax).toBeCloseTo(100)
+  expect(ay).toBeCloseTo(60)
 })

@@ -74,6 +74,17 @@
   }
 }
 
+/* Page load on the WebGL path: the hero title stays hidden while the loading
+   swirl orbits it, so its plain glyphs never flash before the particles.
+   html.fx-boot is set by an inline head script (nuxt.config) and removed once
+   particles take over or fx is off; if nothing ever removes it, the title
+   shows after 10s anyway. */
+.fx-boot .hero-title {
+  opacity: 0;
+  animation: fx-boot-reveal 0s 10s forwards;
+}
+@keyframes fx-boot-reveal { to { opacity: 1; } }
+
 /* Scroll tracks only stretch when the WebGL path runs */
 .fx-on .hero-track { height: 160vh; }
 @media (min-width: 1024px) {

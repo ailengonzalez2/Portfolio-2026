@@ -80,6 +80,26 @@ export function findPhrase(words: string[], phrase: string[]): [number, number] 
  */
 export const heroName = (p: number, intro: number) => intro * (1 - remap(p, 0.15, 0.85))
 
+/** Angular speed of the loading swirl, in radians per second at radius 1. */
+export const SWIRL_SPEED = 0.9
+
+/** Semi-axes of the loading swirl ellipse around a title box. */
+export const swirlAxes = (width: number, height: number): [number, number] => [width * 0.5, height * 0.6]
+
+/** Random orbit for one swirl particle: radius (denser toward the core) and start angle. */
+export const swirlOrbit = (u: number, v: number): [number, number] =>
+  [0.12 + 0.78 * u ** 0.85, v * Math.PI * 2]
+
+/**
+ * Position at time t (s) of a particle orbiting the title center on an ellipse
+ * with semi-axes (ax, ay). Inner orbits turn faster, like a vortex. The text
+ * shader mirrors this so the 2D loader hands off to WebGL in place.
+ */
+export function swirlAt(radius: number, angle: number, t: number, ax: number, ay: number): [number, number] {
+  const a = angle + (t * SWIRL_SPEED) / radius
+  return [Math.cos(a) * radius * ax, Math.sin(a) * radius * ay]
+}
+
 /** Continuous stage index in [0, stages - 1] for progress p. */
 export const stageAt = (p: number, stages: number) => clamp01(p) * (stages - 1)
 

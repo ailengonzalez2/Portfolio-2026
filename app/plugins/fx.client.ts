@@ -22,7 +22,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     deviceMemory: (navigator as any).deviceMemory as number | undefined,
     forcedOff: new URLSearchParams(window.location.search).get('fx') === 'off'
   })
-  if (!capable) return
+  if (!capable) {
+    document.documentElement.classList.remove('fx-boot')
+    return
+  }
 
   active.value = true
   document.documentElement.classList.add('fx-on')
@@ -40,7 +43,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   // Drop to the DOM fallback (no layers, normal tracks, native scroll).
   const disableFx = () => {
-    document.documentElement.classList.remove('fx-on')
+    document.documentElement.classList.remove('fx-on', 'fx-boot')
     active.value = false
   }
 
