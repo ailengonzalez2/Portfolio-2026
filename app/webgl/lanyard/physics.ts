@@ -142,6 +142,11 @@ export class LanyardSim {
     this.yawTarget = this.yawTarget === 0 ? Math.PI : 0
   }
 
+  /** Show the back (true) or the front. */
+  face(back: boolean) {
+    this.yawTarget = back ? Math.PI : 0
+  }
+
   private weight(i: number) {
     if (i === 0) return 0
     if (this.grab && (i === this.clip || i === this.bottom)) return 0

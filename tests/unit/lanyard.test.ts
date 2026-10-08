@@ -57,3 +57,13 @@ test('flip turns the badge to its back, and again to its front', () => {
   run(sim, 6)
   expect(sim.yaw).toBeCloseTo(0, 1)
 })
+
+test('face shows the back or the front explicitly', () => {
+  const sim = new LanyardSim([0, 2, 0], {}, false)
+  sim.face(true)
+  run(sim, 6)
+  expect(sim.yaw).toBeCloseTo(Math.PI, 1)
+  sim.face(false)
+  run(sim, 6)
+  expect(sim.yaw).toBeCloseTo(0, 1)
+})

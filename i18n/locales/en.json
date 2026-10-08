@@ -92,7 +92,7 @@
     "email": "Email me"
   },
   "about": {
-    "badge": {"roles": "AI Product Design · Frontend Development · UX/UI Design", "remote": "Remote · worldwide", "languages": "ES · EN", "hint": "Drag it · click to flip"},
+    "badge": {"roles": "AI Product Design · Frontend Development · UX/UI Design", "remote": "Remote · worldwide", "languages": "ES · EN", "hint": "Drag it · hover to flip", "hintTouch": "Drag it · tap to flip"},
     "portraitCaption": "Ailen Gonzalez · Córdoba, Argentina",
     "eyebrow": "About",
     "statement": "Designer by craft, developer by habit. I make AI products feel simple.",

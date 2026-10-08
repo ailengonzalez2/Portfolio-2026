@@ -200,6 +200,14 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
   const tangent = new THREE.Vector3()
   const side = new THREE.Vector3()
   const Z = new THREE.Vector3(0, 0, 1)
+  // Pointer target: a card-sized plane that follows the swing but not the
+  // twist, so hovering stays steady while the badge turns edge-on. Not in the
+  // scene, never drawn.
+  const proxy = new THREE.Mesh(
+    new THREE.PlaneGeometry(CARD_W * 1.08, CARD_H * 1.05),
+    new THREE.MeshBasicMaterial({ side: THREE.DoubleSide })
+  )
+  const proxyBasis = new THREE.Matrix4()
 
   const syncBadge = () => {
     const c = sim.get(sim.clip)
@@ -207,6 +215,10 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
     up.set(c[0] - b[0], c[1] - b[1], c[2] - b[2]).normalize()
     const r0 = tmp.crossVectors(up, Z).normalize()
     const f0 = fwd.crossVectors(r0, up).normalize()
+    proxyBasis.makeBasis(r0, up, f0)
+    proxy.quaternion.setFromRotationMatrix(proxyBasis)
+    proxy.position.set(c[0], c[1], c[2]).addScaledVector(up, -(CLIP_GAP + CARD_H / 2))
+    proxy.updateMatrixWorld()
     const cos = Math.cos(sim.yaw)
     const sin = Math.sin(sim.yaw)
     right.copy(r0).multiplyScalar(cos).addScaledVector(f0, -sin)
@@ -256,7 +268,8 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
   })
   observer.observe(container)
 
-  // Pointer: grab the badge, drag it around, fling it; a click flips it.
+  // Pointer: grab the badge, drag it around, fling it. With a mouse, hovering
+  // turns it to its back; on touch (no hover) a tap flips it.
   // Listens on window because the canvas lets the pointer through to the
   // content underneath except over the badge.
   const raycaster = new THREE.Raycaster()
@@ -266,6 +279,7 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
   let drag: { id: number, s: number, x: number, y: number, t: number, moved: boolean, vx: number, lastX: number, lastT: number } | null = null
   // The click that ends a press on the badge must not reach a link under it.
   let swallowClick = false
+  let hovering = false
 
   const inside = (e: PointerEvent | Touch) => {
     const r = canvas.getBoundingClientRect()
@@ -279,7 +293,7 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
   const hitsBadge = (e: PointerEvent | Touch) => {
     if (!inside(e)) return undefined
     toNdc(e)
-    return raycaster.intersectObject(card, true)[0]
+    return raycaster.intersectObject(proxy, false)[0]
   }
   const onTarget = (e: PointerEvent): Vec3 | null => {
     toNdc(e)
@@ -293,6 +307,9 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
   }
   const setHover = (on: boolean) => {
     canvas.style.pointerEvents = on ? 'auto' : 'none'
+    if (on === hovering) return
+    hovering = on
+    sim.face(on)
   }
 
   const onDown = (e: PointerEvent) => {
@@ -310,7 +327,8 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
     plane.setFromNormalAndCoplanarPoint(Z, h.point)
     const now = performance.now()
     drag = { id: e.pointerId, s, x: e.clientX, y: e.clientY, t: now, moved: false, vx: 0, lastX: e.clientX, lastT: now }
-    setHover(true)
+    if (e.pointerType === 'mouse') setHover(true)
+    else canvas.style.pointerEvents = 'auto'
     canvas.style.cursor = 'grabbing'
     const target = onTarget(e)
     if (target) sim.drag(target, s)
@@ -333,11 +351,16 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
     if (!drag || e.pointerId !== drag.id) return
     const click = !drag.moved && performance.now() - drag.t < 400
     sim.drag(null)
-    if (click) sim.flip()
-    else sim.spin(THREE.MathUtils.clamp(drag.vx * 6, -14, 14))
+    if (click && e.pointerType !== 'mouse') sim.flip()
+    else if (!click) sim.spin(THREE.MathUtils.clamp(drag.vx * 6, -14, 14))
     drag = null
     canvas.style.cursor = 'grab'
-    setHover(e.pointerType === 'mouse' && !!hitsBadge(e))
+    if (e.pointerType === 'mouse') setHover(!!hitsBadge(e))
+    else canvas.style.pointerEvents = 'none'
+  }
+  // Mouse left the window: back to the front.
+  const onOut = (e: PointerEvent) => {
+    if (!e.relatedTarget && !drag) setHover(false)
   }
   const onClick = (e: MouseEvent) => {
     if (!swallowClick) return
@@ -355,6 +378,7 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
   window.addEventListener('pointerup', onUp)
   window.addEventListener('pointercancel', onUp)
   window.addEventListener('click', onClick, { capture: true })
+  document.addEventListener('pointerout', onOut)
   window.addEventListener('touchstart', onTouchStart, { capture: true, passive: false })
 
   // Loop: fixed-step physics, render only while visible.
@@ -413,6 +437,7 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
       window.removeEventListener('pointerup', onUp)
       window.removeEventListener('pointercancel', onUp)
       window.removeEventListener('click', onClick, { capture: true })
+      document.removeEventListener('pointerout', onOut)
       window.removeEventListener('touchstart', onTouchStart, { capture: true })
       scene.traverse((o) => {
         if (o instanceof THREE.Mesh) {
@@ -421,6 +446,8 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
           ;(Array.isArray(m) ? m : [m]).forEach(x => x.dispose())
         }
       })
+      proxy.geometry.dispose()
+      proxy.material.dispose()
       ;[frontTex, backTex, strapTex, envMap].forEach(t => t.dispose())
       pmrem.dispose()
       renderer.dispose()

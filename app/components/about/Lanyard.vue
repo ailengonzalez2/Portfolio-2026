@@ -13,6 +13,8 @@ const { t, locale } = useI18n()
 const slot = ref<HTMLElement | null>(null)
 const stage = ref<HTMLElement | null>(null)
 const fallback = ref(false)
+// Hover flips with a mouse; touch screens tap. Read after mount (SSR has no media).
+const canHover = ref(true)
 let scene: LanyardScene | null = null
 let generation = 0
 
@@ -60,6 +62,7 @@ async function mount() {
 }
 
 onMounted(() => {
+  canHover.value = window.matchMedia('(hover: hover)').matches
   if (!hasWebGL()) fallback.value = true
   else mount()
 })
@@ -104,7 +107,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <figcaption class="pb-4 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-label">
-      {{ fallback ? $t('about.portraitCaption') : $t('about.badge.hint') }}
+      {{ fallback ? $t('about.portraitCaption') : $t(canHover ? 'about.badge.hint' : 'about.badge.hintTouch') }}
     </figcaption>
   </figure>
 </template>
