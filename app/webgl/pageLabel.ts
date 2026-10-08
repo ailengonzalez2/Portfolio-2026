@@ -19,5 +19,6 @@ export function pageLabel(path: string, ctx: PageLabelContext): string {
     if (title) return title.split(' — ')[0] ?? title
   }
   if (section && (SECTIONS as readonly string[]).includes(section)) return capitalize(ctx.t(`nav.${section}`))
+  if (clean === '/') return ctx.t('hero.title')
   return NAME
 }

@@ -2,14 +2,14 @@ import { expect, test } from 'bun:test'
 import { pageLabel } from '../../app/webgl/pageLabel'
 
 const ctx = {
-  t: (key: string) => ({ 'nav.projects': 'proyectos', 'nav.about': 'about', 'nav.writing': 'writing' } as Record<string, string>)[key] ?? key,
+  t: (key: string) => ({ 'nav.projects': 'proyectos', 'nav.about': 'about', 'nav.writing': 'writing', 'hero.title': 'AI Product Design & Frontend' } as Record<string, string>)[key] ?? key,
   projectTitle: (id: string) => (id === 'enter' ? 'Enter — Sell Tickets Online' : undefined)
 }
 
-test('home (any locale) shows the name', () => {
-  expect(pageLabel('/', ctx)).toBe('Ailen Gonzalez')
-  expect(pageLabel('/es', ctx)).toBe('Ailen Gonzalez')
-  expect(pageLabel('/es/', ctx)).toBe('Ailen Gonzalez')
+test('home (any locale) shows the role', () => {
+  expect(pageLabel('/', ctx)).toBe('AI Product Design & Frontend')
+  expect(pageLabel('/es', ctx)).toBe('AI Product Design & Frontend')
+  expect(pageLabel('/es/', ctx)).toBe('AI Product Design & Frontend')
 })
 
 test('sections use the translated, capitalized nav label', () => {
