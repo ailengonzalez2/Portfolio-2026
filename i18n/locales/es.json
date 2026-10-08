@@ -92,7 +92,7 @@
     "email": "Escribime"
   },
   "about": {
-    "badge": {"pass": "Speaker", "remote": "Remoto · todo el mundo", "languages": "ES · EN", "hint": "Arrastrala · click para darla vuelta"},
+    "badge": {"roles": "Diseño de producto IA · Desarrollo frontend · Diseño UX/UI", "remote": "Remoto · todo el mundo", "languages": "ES · EN", "hint": "Arrastrala · click para darla vuelta"},
     "portraitCaption": "Ailen Gonzalez · Córdoba, Argentina",
     "eyebrow": "Sobre mí",
     "statement": "Diseñadora por oficio, desarrolladora por costumbre. Hago que los productos de IA se sientan simples.",

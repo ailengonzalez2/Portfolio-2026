@@ -4,8 +4,13 @@ import type { LanyardScene } from '~/webgl/lanyard/scene'
 // Conference badge with Ailen's photo hanging from a lanyard (three.js, own
 // canvas). It drops in, swings, can be dragged and flung, and a click flips
 // it. Without WebGL it is a static badge.
+//
+// The component is the badge's slot in the layout; the canvas fills the
+// nearest positioned ancestor (the page section), so the swing passes over
+// the text next to it instead of being clipped.
 const { t, locale } = useI18n()
 
+const slot = ref<HTMLElement | null>(null)
 const stage = ref<HTMLElement | null>(null)
 const fallback = ref(false)
 let scene: LanyardScene | null = null
@@ -32,13 +37,17 @@ async function mount() {
         first: 'Ailen',
         last: 'Gonzalez',
         role: t('hero.title'),
-        pass: t('about.badge.pass'),
         site: 'ailengonzalez.ar',
         facts: ['Córdoba, Argentina', t('about.badge.remote'), t('about.badge.languages')]
       },
       photo: '/about/badge-photo.jpg',
       signature: '/signature.png',
-      label: 'Ailen Gonzalez · Portfolio 2026 ·',
+      label: t('about.badge.roles'),
+      frame: () => {
+        const s = slot.value!.getBoundingClientRect()
+        const c = stage.value!.getBoundingClientRect()
+        return { x: s.left + s.width / 2 - c.left, height: s.height }
+      },
       still: window.matchMedia('(prefers-reduced-motion: reduce)').matches
     })
     // Unmounted or remounted (locale change) while loading.
@@ -65,18 +74,20 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <figure class="relative h-full w-full">
+  <figure
+    ref="slot"
+    class="flex flex-col justify-end"
+  >
     <div
       v-if="!fallback"
       ref="stage"
-      class="absolute inset-0"
+      class="absolute inset-0 z-10 pointer-events-none"
     />
     <div
       v-else
-      class="flex h-full items-center justify-center"
+      class="flex flex-1 items-center justify-center"
     >
       <div class="w-56 rounded-2xl bg-white shadow-xl overflow-hidden">
-        <div class="h-8 bg-linear-to-r from-[#b86adf] via-[#ff6c63] to-[#ffb147]" />
         <NuxtImg
           src="/about/badge-photo.jpg"
           alt="Ailen Gonzalez"
@@ -92,7 +103,7 @@ onBeforeUnmount(() => {
         </p>
       </div>
     </div>
-    <figcaption class="absolute bottom-4 inset-x-0 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-label pointer-events-none">
+    <figcaption class="pb-4 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-label">
       {{ fallback ? $t('about.portraitCaption') : $t('about.badge.hint') }}
     </figcaption>
   </figure>

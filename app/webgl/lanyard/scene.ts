@@ -9,10 +9,16 @@ export interface LanyardSceneOptions {
   text: BadgeText
   photo: string
   signature: string
-  /** strap print */
+  /** strap print, repeated along it */
   label: string
   /** start hanging still instead of dropping in (reduced motion) */
   still?: boolean
+  /**
+   * Where the badge hangs inside the container, in px: the anchor's x from the
+   * container's left, and the height of its layout slot (the badge is sized
+   * to that). The container can be larger so the swing is never clipped.
+   */
+  frame?: () => { x: number, height: number }
 }
 
 // World units: the badge is 1 wide. The view is sized so it takes ~1/3 of the
@@ -76,7 +82,8 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
   renderer.outputColorSpace = THREE.SRGBColorSpace
   const canvas = renderer.domElement
   canvas.setAttribute('aria-hidden', 'true')
-  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab'
+  // Covers neighbouring content: only takes the pointer while over the badge.
+  canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;cursor:grab'
   container.appendChild(canvas)
 
   const scene = new THREE.Scene()
@@ -89,15 +96,35 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
   key.position.set(2, 3, 5)
   scene.add(key)
 
-  const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 100)
-  camera.position.set(0, 0, VIEW_H / 2 / Math.tan(THREE.MathUtils.degToRad(FOV / 2)))
+  // Layout: the slot is VIEW_H world units tall; the camera looks straight at
+  // the anchor column (a window into a wider virtual view), so the badge stays
+  // frontal wherever the anchor sits in a wide container.
+  const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 200)
+  const tanHalf = Math.tan(THREE.MathUtils.degToRad(FOV / 2))
+  let width = 1
+  let height = 1
+  let visibleH = VIEW_H
+  const layout = () => {
+    width = Math.max(1, container.clientWidth)
+    height = Math.max(1, container.clientHeight)
+    const f = opts.frame?.() ?? { x: width / 2, height }
+    visibleH = height * (VIEW_H / Math.max(1, f.height))
+    camera.position.set(0, 0, visibleH / 2 / tanHalf)
+    const half = Math.max(f.x, width - f.x, 1)
+    camera.aspect = (2 * half) / height
+    camera.setViewOffset(2 * half, height, half - f.x, 0, width, height)
+    camera.updateProjectionMatrix()
+    renderer.setSize(width, height, false)
+  }
+  layout()
+  // Anchor just above the top edge.
+  const anchor = (): Vec3 => [0, visibleH / 2 + 0.3, 0]
 
-  // Strap length so the badge hangs a bit above center.
-  const anchorY = VIEW_H / 2 + 0.3
+  // Strap length so the badge hangs a bit above the slot's center.
   const clipRestY = CARD_H * 0.5 + 0.05
   const segments = DEFAULT_LANYARD.segments
-  const segmentLength = (anchorY - clipRestY) / segments
-  const sim = new LanyardSim([0, anchorY, 0], { segmentLength, badgeLength: CLIP_GAP + CARD_H }, !opts.still)
+  const segmentLength = (VIEW_H / 2 + 0.3 - clipRestY) / segments
+  const sim = new LanyardSim(anchor(), { segmentLength, badgeLength: CLIP_GAP + CARD_H }, !opts.still)
 
   // Badge: plastic body plus printed front and back faces.
   const shape = roundedRect(CARD_W, CARD_H, 0.05)
@@ -139,7 +166,10 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
 
   // Strap: two ribbons that meet at the clip and part toward the top, like a
   // lanyard around a neck. Rebuilt along the rope every frame.
-  const strapTex = texture(drawStrap(opts.label), renderer)
+  const strapCanvas = drawStrap(opts.label)
+  // Strap length covered by one tile of the print.
+  const strapTile = STRAP_W * (strapCanvas.height / strapCanvas.width)
+  const strapTex = texture(strapCanvas, renderer)
   strapTex.wrapS = THREE.RepeatWrapping
   strapTex.wrapT = THREE.RepeatWrapping
   const strapMat = new THREE.MeshStandardMaterial({ map: strapTex, roughness: 0.75, side: THREE.DoubleSide })
@@ -209,7 +239,7 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
         const half = STRAP_W / 2
         pos.setXYZ(i * 2, tmp.x - side.x * half, tmp.y - side.y * half, tmp.z - side.z * half)
         pos.setXYZ(i * 2 + 1, tmp.x + side.x * half, tmp.y + side.y * half, tmp.z + side.z * half)
-        const v = (t * length) / (STRAP_W * 8)
+        const v = (t * length) / strapTile
         // u runs right → left so the print reads the right way round.
         uv.setXY(i * 2, 1, v)
         uv.setXY(i * 2 + 1, 0, v)
@@ -220,33 +250,34 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
     })
   }
 
-  // Layout.
-  let width = 1
-  let height = 1
-  const resize = () => {
-    width = Math.max(1, container.clientWidth)
-    height = Math.max(1, container.clientHeight)
-    renderer.setSize(width, height, false)
-    camera.aspect = width / height
-    camera.updateProjectionMatrix()
-  }
-  resize()
-  const observer = new ResizeObserver(resize)
+  const observer = new ResizeObserver(() => {
+    layout()
+    sim.setAnchor(anchor())
+  })
   observer.observe(container)
 
   // Pointer: grab the badge, drag it around, fling it; a click flips it.
+  // Listens on window because the canvas lets the pointer through to the
+  // content underneath except over the badge.
   const raycaster = new THREE.Raycaster()
   const ndc = new THREE.Vector2()
   const plane = new THREE.Plane()
   const hit = new THREE.Vector3()
   let drag: { id: number, s: number, x: number, y: number, t: number, moved: boolean, vx: number, lastX: number, lastT: number } | null = null
+  // The click that ends a press on the badge must not reach a link under it.
+  let swallowClick = false
 
+  const inside = (e: PointerEvent | Touch) => {
+    const r = canvas.getBoundingClientRect()
+    return e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom
+  }
   const toNdc = (e: PointerEvent | Touch) => {
     const rect = canvas.getBoundingClientRect()
     ndc.set(((e.clientX - rect.left) / rect.width) * 2 - 1, -((e.clientY - rect.top) / rect.height) * 2 + 1)
     raycaster.setFromCamera(ndc, camera)
   }
   const hitsBadge = (e: PointerEvent | Touch) => {
+    if (!inside(e)) return undefined
     toNdc(e)
     return raycaster.intersectObject(card, true)[0]
   }
@@ -260,24 +291,33 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
     if (tmp.length() > reach) tmp.setLength(reach)
     return [a[0] + tmp.x, a[1] + tmp.y, a[2] + tmp.z]
   }
+  const setHover = (on: boolean) => {
+    canvas.style.pointerEvents = on ? 'auto' : 'none'
+  }
 
   const onDown = (e: PointerEvent) => {
+    swallowClick = false
+    if (e.button !== 0) return
     const h = hitsBadge(e)
     if (!h) return
+    // No text selection, focus or link press underneath.
+    e.preventDefault()
+    swallowClick = true
     const c = sim.get(sim.clip)
     const b = sim.get(sim.bottom)
     tmp.set(b[0] - c[0], b[1] - c[1], b[2] - c[2])
     const s = tmp.dot(hit.copy(h.point).sub(new THREE.Vector3(...c))) / tmp.lengthSq()
     plane.setFromNormalAndCoplanarPoint(Z, h.point)
-    drag = { id: e.pointerId, s, x: e.clientX, y: e.clientY, t: performance.now(), moved: false, vx: 0, lastX: e.clientX, lastT: performance.now() }
-    canvas.setPointerCapture(e.pointerId)
+    const now = performance.now()
+    drag = { id: e.pointerId, s, x: e.clientX, y: e.clientY, t: now, moved: false, vx: 0, lastX: e.clientX, lastT: now }
+    setHover(true)
     canvas.style.cursor = 'grabbing'
     const target = onTarget(e)
     if (target) sim.drag(target, s)
   }
   const onMove = (e: PointerEvent) => {
     if (!drag || e.pointerId !== drag.id) {
-      if (e.pointerType === 'mouse') canvas.style.cursor = hitsBadge(e) ? 'grab' : 'default'
+      if (e.pointerType === 'mouse') setHover(!!hitsBadge(e))
       return
     }
     if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 6) drag.moved = true
@@ -297,17 +337,25 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
     else sim.spin(THREE.MathUtils.clamp(drag.vx * 6, -14, 14))
     drag = null
     canvas.style.cursor = 'grab'
+    setHover(e.pointerType === 'mouse' && !!hitsBadge(e))
+  }
+  const onClick = (e: MouseEvent) => {
+    if (!swallowClick) return
+    swallowClick = false
+    e.preventDefault()
+    e.stopPropagation()
   }
   // Touching the badge must not scroll the page; elsewhere it scrolls.
   const onTouchStart = (e: TouchEvent) => {
     const t = e.touches[0]
     if (t && hitsBadge(t)) e.preventDefault()
   }
-  canvas.addEventListener('pointerdown', onDown)
-  canvas.addEventListener('pointermove', onMove)
-  canvas.addEventListener('pointerup', onUp)
-  canvas.addEventListener('pointercancel', onUp)
-  canvas.addEventListener('touchstart', onTouchStart, { passive: false })
+  window.addEventListener('pointerdown', onDown, { capture: true })
+  window.addEventListener('pointermove', onMove, { passive: true })
+  window.addEventListener('pointerup', onUp)
+  window.addEventListener('pointercancel', onUp)
+  window.addEventListener('click', onClick, { capture: true })
+  window.addEventListener('touchstart', onTouchStart, { capture: true, passive: false })
 
   // Loop: fixed-step physics, render only while visible.
   let raf = 0
@@ -360,11 +408,12 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
       stop()
       visibility.disconnect()
       observer.disconnect()
-      canvas.removeEventListener('pointerdown', onDown)
-      canvas.removeEventListener('pointermove', onMove)
-      canvas.removeEventListener('pointerup', onUp)
-      canvas.removeEventListener('pointercancel', onUp)
-      canvas.removeEventListener('touchstart', onTouchStart)
+      window.removeEventListener('pointerdown', onDown, { capture: true })
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+      window.removeEventListener('pointercancel', onUp)
+      window.removeEventListener('click', onClick, { capture: true })
+      window.removeEventListener('touchstart', onTouchStart, { capture: true })
       scene.traverse((o) => {
         if (o instanceof THREE.Mesh) {
           o.geometry.dispose()

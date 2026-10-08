@@ -8,8 +8,6 @@ export interface BadgeText {
   first: string
   last: string
   role: string
-  /** ribbon at the bottom of the front, e.g. "Speaker" */
-  pass: string
   site: string
   /** short lines on the back */
   facts: string[]
@@ -79,20 +77,12 @@ export function drawBadgeFront(text: BadgeText, photo: HTMLImageElement | null) 
   ctx.fillStyle = PAPER
   ctx.fillRect(0, 0, BADGE_W, BADGE_H)
 
-  // Header band with the brand gradient.
-  ctx.fillStyle = brandGradient(ctx, 0, BADGE_W)
-  ctx.fillRect(0, 110, BADGE_W, 150)
-  ctx.fillStyle = '#fff'
-  ctx.font = `400 30px ${MONO}`
-  ctx.textBaseline = 'middle'
-  spaced(ctx, 'PORTFOLIO · 2026', 70, 185, 6)
-  spaced(ctx, 'ARG', BADGE_W - 70, 185, 6, 'right')
   slot(ctx)
 
   // Photo, cover-cropped into a rounded square.
-  const size = 540
+  const size = 760
   const px = (BADGE_W - size) / 2
-  const py = 320
+  const py = 130
   ctx.save()
   roundRect(ctx, px, py, size, size, 28)
   ctx.clip()
@@ -111,22 +101,19 @@ export function drawBadgeFront(text: BadgeText, photo: HTMLImageElement | null) 
   ctx.fillStyle = INK
   ctx.font = `400 128px ${DISPLAY}`
   ctx.textAlign = 'center'
-  ctx.fillText(text.first, BADGE_W / 2, 1010)
-  ctx.fillText(text.last, BADGE_W / 2, 1125)
+  ctx.fillText(text.first, BADGE_W / 2, 1018)
+  ctx.fillText(text.last, BADGE_W / 2, 1126)
   ctx.fillStyle = BODY
   ctx.font = `500 38px ${SANS}`
-  ctx.fillText(text.role, BADGE_W / 2, 1200)
+  ctx.fillText(text.role, BADGE_W / 2, 1204)
 
   // Pass ribbon.
   ctx.fillStyle = INK
   ctx.fillRect(0, BADGE_H - 150, BADGE_W, 150)
-  ctx.fillStyle = '#fff'
-  ctx.font = `400 32px ${MONO}`
+  ctx.fillStyle = 'rgba(255,255,255,0.75)'
+  ctx.font = `400 30px ${MONO}`
   ctx.textBaseline = 'middle'
-  spaced(ctx, text.pass.toUpperCase(), 70, BADGE_H - 75, 8)
-  ctx.fillStyle = 'rgba(255,255,255,0.6)'
-  ctx.font = `400 26px ${MONO}`
-  spaced(ctx, text.site, BADGE_W - 70, BADGE_H - 75, 3, 'right')
+  spaced(ctx, text.site, BADGE_W / 2, BADGE_H - 75, 4, 'center')
   return c
 }
 
@@ -152,27 +139,35 @@ export function drawBadgeBack(text: BadgeText, signature: HTMLImageElement | nul
   return c
 }
 
-/** Strap print: dark woven band with the name repeating along it (runs along y). */
+/**
+ * Strap print: dark woven band with `label` repeating along it (runs along y).
+ * The tile is as long as the label, so text keeps its size at any length and
+ * the repeat has no seam.
+ */
 export function drawStrap(label: string) {
-  const [c, ctx] = canvas(128, 1024)
+  const W = 128
+  const font = `500 44px ${MONO}`
+  const text = `${label.toUpperCase()}  ·  `
+  const [probe, pctx] = canvas(1, 1)
+  pctx.font = font
+  pctx.letterSpacing = '8px'
+  const H = Math.min(4096, Math.ceil(pctx.measureText(text).width))
+  probe.remove()
+  const [c, ctx] = canvas(W, H)
   ctx.fillStyle = '#141414'
-  ctx.fillRect(0, 0, 128, 1024)
+  ctx.fillRect(0, 0, W, H)
   // Fine weave lines.
   ctx.fillStyle = 'rgba(255,255,255,0.035)'
-  for (let y = 0; y < 1024; y += 6) ctx.fillRect(0, y, 128, 2)
+  for (let y = 0; y < H; y += 6) ctx.fillRect(0, y, W, 2)
   ctx.save()
-  ctx.translate(64, 0)
+  ctx.translate(W / 2, 0)
   ctx.rotate(Math.PI / 2)
-  ctx.fillStyle = brandGradient(ctx, 0, 1024)
+  ctx.fillStyle = brandGradient(ctx, 0, H)
   ctx.textBaseline = 'middle'
-  ctx.textAlign = 'center'
-  ctx.letterSpacing = '10px'
-  // Fit the label to exactly one tile so the repeat has no seam.
-  const text = `${label.toUpperCase()}   `
-  ctx.font = `500 46px ${MONO}`
-  const size = Math.min(56, 46 * (1000 / ctx.measureText(text).width))
-  ctx.font = `500 ${size.toFixed(1)}px ${MONO}`
-  ctx.fillText(text, 512, 0)
+  ctx.textAlign = 'left'
+  ctx.letterSpacing = '8px'
+  ctx.font = font
+  ctx.fillText(text, 0, 0)
   ctx.restore()
   return c
 }

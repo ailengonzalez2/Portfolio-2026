@@ -48,10 +48,9 @@ useSeoMeta({
           </HalftoneReveal>
         </div>
 
-        <!-- Badge on a lanyard: hangs from the top edge of the page -->
-        <div class="lg:col-span-5 order-1 lg:order-2 -mt-32 sm:-mt-40 lg:mt-0 h-[34rem] sm:h-[38rem] lg:h-auto">
-          <AboutLanyard class="lg:absolute! lg:top-0 lg:right-0 lg:w-[44%]! lg:h-full!" />
-        </div>
+        <!-- Badge on a lanyard: its slot spans from the page top (and the
+             full section height on desktop); the canvas covers the section -->
+        <AboutLanyard class="lg:col-span-5 order-1 lg:order-2 -mt-32 sm:-mt-40 h-[34rem] sm:h-[38rem] lg:h-auto lg:self-stretch lg:-mb-28" />
       </div>
     </section>
     <LandingAboutMe />
