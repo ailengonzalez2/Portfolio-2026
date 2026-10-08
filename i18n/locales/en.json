@@ -58,10 +58,22 @@
     "eyebrow": "Process",
     "title": "From noise to form",
     "stages": {
-      "sketch": { "label": "Sketch", "body": "Messy on purpose. Find the shape of the problem before the shape of the screen." },
-      "wireframe": { "label": "Wireframe", "body": "Structure without decoration — flows, hierarchy, what goes where." },
-      "ui": { "label": "Interface", "body": "The visual system: type, rhythm, states, every pixel considered." },
-      "code": { "label": "Code", "body": "Shipped in Vue and Nuxt. The design is the product, not a handoff." }
+      "sketch": {
+        "label": "Sketch",
+        "body": "Messy on purpose. Find the shape of the problem before the shape of the screen."
+      },
+      "wireframe": {
+        "label": "Wireframe",
+        "body": "Structure without decoration — flows, hierarchy, what goes where."
+      },
+      "ui": {
+        "label": "Interface",
+        "body": "The visual system: type, rhythm, states, every pixel considered."
+      },
+      "code": {
+        "label": "Code",
+        "body": "Shipped in Vue and Nuxt. The design is the product, not a handoff."
+      }
     }
   },
   "lab": {
@@ -92,7 +104,20 @@
     "email": "Email me"
   },
   "about": {
-    "badge": {"roles": "AI Product Design · Frontend Development · UX/UI Design", "remote": "Remote · worldwide", "languages": "ES · EN", "hint": "Drag it · hover to flip", "hintTouch": "Drag it · tap to flip"},
+    "badge": {
+      "roles": "AI Product Design · Frontend Development · UX/UI Design",
+      "remote": "Remote · worldwide",
+      "languages": "ES · EN",
+      "hint": "Drag it · hover to flip",
+      "hintTouch": "Drag it · tap to flip"
+    },
+    "stats": {
+      "heading": "In numbers",
+      "medicine": "years in emergency medicine before design and code",
+      "years": "years designing and building digital products",
+      "shipped": "products shipped end to end, from Figma to production",
+      "faster": "faster delivery than splitting design and development"
+    },
     "portraitCaption": "Ailen Gonzalez · Córdoba, Argentina",
     "eyebrow": "About",
     "statement": "Designer by craft, developer by habit. I make AI products feel simple.",
@@ -100,19 +125,22 @@
     "trajectory": "Trajectory",
     "now": "Now",
     "before": "Before tech",
-    "medicine": {"title": "Emergency physician", "period": "2011 – 2021", "place": "Argentina", "description": "Ten years in emergency departments after graduating from the Universidad Nacional de Córdoba. Still the best training I've had in deciding fast with incomplete information."},
+    "medicine": {
+      "title": "Emergency physician",
+      "period": "2011 – 2021",
+      "place": "Argentina",
+      "description": "Ten years in emergency departments after graduating from the Universidad Nacional de Córdoba. Still the best training I've had in deciding fast with incomplete information."
+    },
     "tools": "Tools",
-    "toolGroups": {"design": "Design", "frontend": "Frontend", "ai": "AI & automation", "web3": "Web3"},
+    "toolGroups": {
+      "design": "Design",
+      "frontend": "Frontend",
+      "ai": "AI & automation",
+      "web3": "Web3"
+    },
     "heading": "About",
     "exploreCv": "View full CV",
     "designCodeBody": "I mix solid design principles with practical, efficient development to create clean, responsive, and pixel-perfect interfaces. I take care of the whole process — from early research to prototypes to bringing everything to life with smooth, modern code.",
-    "soft": "Soft",
-    "softBody": "Autonomous work, active listening, attention to detail, clear communication, collaborative mindset, adaptability",
-    "languages": "Languages",
-    "english": "English",
-    "englishLevel": "C1 Advanced • Fluent communication",
-    "spanish": "Spanish",
-    "spanishLevel": "Native",
     "certifications": "Latest Certifications",
     "cert": {
       "ongoing": "Ongoing"
@@ -137,6 +165,56 @@
         "title": "Web Developer",
         "period": "Feb 2021 – Sep 2022 (REMOTE)",
         "description": "Built e-commerce platforms, landing pages, and corporate websites with custom features and styling, while managing maintenance and security optimizations."
+      }
+    },
+    "principles": {
+      "heading": "How I work",
+      "noHandoff": {
+        "title": "Design and code, no handoff",
+        "body": "I design in Figma and take it to production myself. What gets decided in design reaches the product intact, without back-and-forth between teams."
+      },
+      "ai": {
+        "title": "AI where it actually saves time",
+        "body": "I build automations and agents with n8n and LLMs to take repetitive work out of the way, and I design AI products that feel simple to the people using them."
+      },
+      "decide": {
+        "title": "Deciding with incomplete information",
+        "body": "Ten years in emergency rooms taught me to prioritize fast, ask just enough, and move without waiting for certainty that isn't coming."
+      },
+      "remote": {
+        "title": "Remote, with teams anywhere",
+        "body": "Since 2021 I've worked remotely with international teams and clients, in Spanish and English."
+      }
+    },
+    "closing": {
+      "clients": {
+        "eyebrow": "For clients",
+        "title": "Have a project?",
+        "body": "Tell me what you want to build. In a short call we'll see if it's a fit and how to start."
+      },
+      "teams": {
+        "eyebrow": "For companies",
+        "title": "Building a team?",
+        "body": "If you're looking for someone who designs and builds product, here's my full track record."
+      }
+    },
+    "offScreen": {
+      "heading": "Off screen",
+      "dogs": {
+        "title": "Spock and Mina",
+        "body": "My two dogs: Spock is 12 and Mina is 6 months old. They're my favorite models."
+      },
+      "photo": {
+        "title": "Photography",
+        "body": "I'm an amateur photographer. I study photography and go out shooting around Córdoba, the city I love."
+      },
+      "print": {
+        "title": "3D, from screen to hand",
+        "body": "I model in 3D and turn it into real objects with my printer, which is almost never off."
+      },
+      "design": {
+        "title": "Design everywhere",
+        "body": "Interiors, graphic, web: I'm always looking at how others design. And when I travel, I soak up everything I can from each culture."
       }
     }
   },

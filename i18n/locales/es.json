@@ -58,10 +58,22 @@
     "eyebrow": "Proceso",
     "title": "Del ruido a la forma",
     "stages": {
-      "sketch": { "label": "Boceto", "body": "Desprolijo a propósito. Encontrar la forma del problema antes que la de la pantalla." },
-      "wireframe": { "label": "Wireframe", "body": "Estructura sin decoración: flujos, jerarquía, qué va dónde." },
-      "ui": { "label": "Interfaz", "body": "El sistema visual: tipografía, ritmo, estados, cada pixel pensado." },
-      "code": { "label": "Código", "body": "Lo llevo a producción en Vue y Nuxt. El diseño es el producto, no un handoff." }
+      "sketch": {
+        "label": "Boceto",
+        "body": "Desprolijo a propósito. Encontrar la forma del problema antes que la de la pantalla."
+      },
+      "wireframe": {
+        "label": "Wireframe",
+        "body": "Estructura sin decoración: flujos, jerarquía, qué va dónde."
+      },
+      "ui": {
+        "label": "Interfaz",
+        "body": "El sistema visual: tipografía, ritmo, estados, cada pixel pensado."
+      },
+      "code": {
+        "label": "Código",
+        "body": "Lo llevo a producción en Vue y Nuxt. El diseño es el producto, no un handoff."
+      }
     }
   },
   "lab": {
@@ -92,7 +104,20 @@
     "email": "Escribime"
   },
   "about": {
-    "badge": {"roles": "Diseño de producto IA · Desarrollo frontend · Diseño UX/UI", "remote": "Remoto · todo el mundo", "languages": "ES · EN", "hint": "Arrastrala · pasá el mouse para darla vuelta", "hintTouch": "Arrastrala · tocala para darla vuelta"},
+    "badge": {
+      "roles": "Diseño de producto IA · Desarrollo frontend · Diseño UX/UI",
+      "remote": "Remoto · todo el mundo",
+      "languages": "ES · EN",
+      "hint": "Arrastrala · pasá el mouse para darla vuelta",
+      "hintTouch": "Arrastrala · tocala para darla vuelta"
+    },
+    "stats": {
+      "heading": "En números",
+      "medicine": "años en guardias de emergencia antes de diseñar y programar",
+      "years": "años diseñando y programando productos digitales",
+      "shipped": "productos entregados de punta a punta, de Figma a producción",
+      "faster": "menos tiempo de entrega que separando diseño y desarrollo"
+    },
     "portraitCaption": "Ailen Gonzalez · Córdoba, Argentina",
     "eyebrow": "Sobre mí",
     "statement": "Diseñadora por oficio, desarrolladora por costumbre. Hago que los productos de IA se sientan simples.",
@@ -100,19 +125,22 @@
     "trajectory": "Trayectoria",
     "now": "Ahora",
     "before": "Antes de la tecnología",
-    "medicine": {"title": "Médica de guardia", "period": "2011 – 2021", "place": "Argentina", "description": "Diez años en guardias de emergencia, después de recibirme en la Universidad Nacional de Córdoba. Sigue siendo el mejor entrenamiento que tuve para decidir rápido con información incompleta."},
+    "medicine": {
+      "title": "Médica de guardia",
+      "period": "2011 – 2021",
+      "place": "Argentina",
+      "description": "Diez años en guardias de emergencia, después de recibirme en la Universidad Nacional de Córdoba. Sigue siendo el mejor entrenamiento que tuve para decidir rápido con información incompleta."
+    },
     "tools": "Herramientas",
-    "toolGroups": {"design": "Diseño", "frontend": "Frontend", "ai": "IA y automatización", "web3": "Web3"},
+    "toolGroups": {
+      "design": "Diseño",
+      "frontend": "Frontend",
+      "ai": "IA y automatización",
+      "web3": "Web3"
+    },
     "heading": "Sobre mí",
     "exploreCv": "Ver CV completo",
     "designCodeBody": "Combino principios sólidos de diseño con desarrollo práctico y eficiente para crear interfaces limpias, responsive y pixel-perfect. Me ocupo del proceso completo: desde la investigación inicial y los prototipos hasta llevarlo todo a la vida con código moderno y prolijo.",
-    "soft": "Blandas",
-    "softBody": "Trabajo autónomo, escucha activa, atención al detalle, comunicación clara, mentalidad colaborativa, adaptabilidad",
-    "languages": "Idiomas",
-    "english": "Inglés",
-    "englishLevel": "C1 Avanzado • Comunicación fluida",
-    "spanish": "Español",
-    "spanishLevel": "Nativo",
     "certifications": "Últimas certificaciones",
     "cert": {
       "ongoing": "En curso"
@@ -137,6 +165,56 @@
         "title": "Desarrolladora Web",
         "period": "Feb 2021 – Sep 2022 (REMOTO)",
         "description": "Construí plataformas de e-commerce, landing pages y sitios corporativos con funcionalidades y estilos a medida, gestionando además el mantenimiento y las optimizaciones de seguridad."
+      }
+    },
+    "principles": {
+      "heading": "Cómo trabajo",
+      "noHandoff": {
+        "title": "Diseño y código, sin handoff",
+        "body": "Diseño en Figma y lo llevo a producción yo misma. Lo que se decide en el diseño llega intacto al producto, sin idas y vueltas entre equipos."
+      },
+      "ai": {
+        "title": "IA donde ahorra tiempo de verdad",
+        "body": "Armo automatizaciones y agentes con n8n y LLMs para sacar del medio el trabajo repetitivo, y diseño productos con IA que se sienten simples para quien los usa."
+      },
+      "decide": {
+        "title": "Decidir con información incompleta",
+        "body": "Diez años de guardia me enseñaron a priorizar rápido, preguntar lo justo y avanzar sin esperar certezas que no van a llegar."
+      },
+      "remote": {
+        "title": "Remoto, con equipos de cualquier lado",
+        "body": "Desde 2021 trabajo en remoto con equipos y clientes internacionales, en español y en inglés."
+      }
+    },
+    "closing": {
+      "clients": {
+        "eyebrow": "Para clientes",
+        "title": "¿Tenés un proyecto?",
+        "body": "Contame qué querés construir. En una llamada corta vemos si encaja y cómo arrancar."
+      },
+      "teams": {
+        "eyebrow": "Para empresas",
+        "title": "¿Estás armando un equipo?",
+        "body": "Si buscás a alguien que diseñe y programe producto, acá está mi recorrido completo."
+      }
+    },
+    "offScreen": {
+      "heading": "Fuera de la pantalla",
+      "dogs": {
+        "title": "Spock y Mina",
+        "body": "Mis dos perros: Spock tiene 12 años y Mina, 6 meses. Son mis modelos favoritos."
+      },
+      "photo": {
+        "title": "Fotografía",
+        "body": "Soy fotógrafa aficionada. Estudio fotografía y salgo a sacar fotos por Córdoba, la ciudad que amo."
+      },
+      "print": {
+        "title": "3D, de la pantalla a la mano",
+        "body": "Modelo en 3D y lo convierto en objetos reales con mi impresora, que casi nunca está apagada."
+      },
+      "design": {
+        "title": "Diseño en todas partes",
+        "body": "Interiores, gráfica, web: siempre estoy mirando cómo diseñan otros. Y cuando viajo, absorbo todo lo que puedo de cada cultura."
       }
     }
   },

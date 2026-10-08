@@ -8,7 +8,7 @@ const { t } = useI18n()
 const jobs = computed(() => [
   { key: 'productDesign', company: 'Codecave', current: true },
   { key: 'uiDeveloper', company: 'Freelance', current: true },
-  { key: 'webDesigner', company: 'Loymar S.A.', current: false },
+  { key: 'webDesigner', company: 'Loymark S.A.', current: false },
   { key: 'webDeveloper', company: 'CodeCave', current: false }
 ].map(job => ({
   ...job,
@@ -25,10 +25,10 @@ const toolGroups = [
 ] as const
 
 const certifications = computed(() => [
-  { title: 'Motion Design in Figma', organization: 'Memorisely', when: '2025' },
-  { title: 'JavaScript Algorithms and Data Structures', organization: 'freeCodeCamp', when: '2025' },
-  { title: 'Intro to Vue 3', organization: 'Vue Mastery', when: t('about.cert.ongoing') },
-  { title: 'Programación con JavaScript — Meta', organization: 'Coursera', when: t('about.cert.ongoing') }
+  { title: 'Claude Code in Action', organization: 'Anthropic', when: '2026' },
+  { title: 'Introduction to Agent Skills', organization: 'Anthropic', when: '2026' },
+  { title: 'AI Prototyping', organization: 'Memorisely', when: '2025' },
+  { title: 'Vue Mastery', organization: 'Vue Mastery', when: t('about.cert.ongoing') }
 ])
 
 // The trajectory line draws itself as the list scrolls through the viewport.
@@ -120,7 +120,7 @@ onBeforeUnmount(() => off?.())
         </ol>
       </div>
 
-      <!-- Tools, languages, soft skills, certifications -->
+      <!-- Tools and certifications -->
       <div class="lg:col-span-5 min-w-0 space-y-16">
         <HalftoneReveal>
           <h2 class="font-mono font-normal text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
@@ -151,39 +151,6 @@ onBeforeUnmount(() => off?.())
               </dd>
             </div>
           </dl>
-        </HalftoneReveal>
-
-        <HalftoneReveal>
-          <h2 class="font-mono font-normal text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
-            {{ $t('about.languages') }}
-          </h2>
-          <dl class="mt-8 space-y-3">
-            <div class="flex items-baseline justify-between gap-4 border-t border-hairline pt-3">
-              <dt class="font-display text-xl text-ink dark:text-paper">
-                {{ $t('about.spanish') }}
-              </dt>
-              <dd class="font-mono text-[11px] uppercase tracking-[0.18em] text-label">
-                {{ $t('about.spanishLevel') }}
-              </dd>
-            </div>
-            <div class="flex items-baseline justify-between gap-4 border-t border-hairline pt-3">
-              <dt class="font-display text-xl text-ink dark:text-paper">
-                {{ $t('about.english') }}
-              </dt>
-              <dd class="font-mono text-[11px] uppercase tracking-[0.18em] text-label text-right">
-                {{ $t('about.englishLevel') }}
-              </dd>
-            </div>
-          </dl>
-        </HalftoneReveal>
-
-        <HalftoneReveal>
-          <h2 class="font-mono font-normal text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
-            {{ $t('about.soft') }}
-          </h2>
-          <p class="mt-6 text-body leading-relaxed">
-            {{ $t('about.softBody') }}
-          </p>
         </HalftoneReveal>
 
         <HalftoneReveal>

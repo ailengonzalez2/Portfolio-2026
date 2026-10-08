@@ -53,6 +53,10 @@ useSeoMeta({
         <AboutLanyard class="lg:col-span-5 order-1 lg:order-2 -mt-32 sm:-mt-40 h-[34rem] sm:h-[38rem] lg:h-auto lg:self-stretch lg:-mb-28" />
       </div>
     </section>
+    <AboutStats />
     <LandingAboutMe />
+    <AboutPrinciples />
+    <AboutOffScreen />
+    <AboutClosing />
   </UPage>
 </template>
