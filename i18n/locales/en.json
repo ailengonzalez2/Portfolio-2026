@@ -79,9 +79,11 @@
   },
   "lab": {
     "eyebrow": "The lab",
-    "title": "Not everything I build has a client.",
-    "intro": "Experiments stay loose until you touch them.",
-    "hint": "Hover to assemble · tap twice on touch",
+    "title": "Play with my animations",
+    "intro": "Interactive experiments I build on my own. Watch them move, then open one and play.",
+    "play": "Play",
+    "prev": "Previous animation",
+    "next": "Next animation",
     "seeAll": "See the whole lab"
   },
   "work": {

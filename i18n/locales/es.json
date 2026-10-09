@@ -79,9 +79,11 @@
   },
   "lab": {
     "eyebrow": "El lab",
-    "title": "No todo lo que construyo tiene un cliente.",
-    "intro": "Los experimentos quedan sueltos hasta que los tocás.",
-    "hint": "Pasá el mouse para armarlos · en el celular, tocá dos veces",
+    "title": "Jugá con mis animaciones",
+    "intro": "Experimentos interactivos que hago por mi cuenta. Mirá cómo se mueven y abrí uno para jugar.",
+    "play": "Jugar",
+    "prev": "Animación anterior",
+    "next": "Animación siguiente",
     "seeAll": "Ver todo el lab"
   },
   "work": {

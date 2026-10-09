@@ -19,9 +19,9 @@ useSeoMeta({
   <UPage>
     <LandingHero />
     <LandingManifesto />
+    <LandingPlayground />
     <LandingWork />
     <LandingProcess />
-    <LandingLab />
     <LandingTestimonials />
   </UPage>
 </template>

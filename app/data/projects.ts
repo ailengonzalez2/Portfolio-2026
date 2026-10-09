@@ -55,6 +55,10 @@ export interface Project {
   processSnippet?: string
   /** Short tech label for Lab experiments on the home, e.g. 'WebGPU · soft-body'. */
   labTag?: string
+  /** An interactive animation: shown in the home "play with my animations" rail */
+  playable?: boolean
+  /** Looping preview video for the rail (mp4/webm in /public); the cover image is its poster */
+  video?: string
 }
 
 /**
@@ -316,6 +320,7 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
   {
     id: 'loft-3d',
     kind: 'lab',
+    playable: true,
     labTag: 'Three.js · 3D',
     title: 'Interactive Loft — 3D Scene',
     description: 'A loft you can orbit around in the browser. Everything that lights up on hover is clickable: furniture opens panels, objects on the table do their own thing, and a Shiba wanders through.',
@@ -343,10 +348,9 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
   },
   {
     id: 'contap',
-    kind: 'lab',
-    labTag: 'NFC · product',
+    kind: 'client',
     title: 'Contap — NFC Nails',
-    description: 'Nails with an NFC chip: someone holds a phone near your hand and whatever link you chose opens. A self-initiated product with a store, pricing and an editable destination per chip.',
+    description: 'Nails with an NFC chip: someone holds a phone near your hand and whatever link you chose opens. A product with a store, pricing and an editable destination per chip.',
     image: '/projects/covers/contap.jpg',
     tags: ['Product Design', 'E-commerce', 'Frontend Development'],
     date: '2026',
@@ -364,13 +368,14 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
         'Store with product range and pricing',
         'Per-user account to edit the chip\'s destination link'
       ],
-      result: 'Live with the storefront, explainer and account flow in place. The project is where I work through commerce and product-narrative problems end to end without a client brief shaping the answer.',
+      result: 'Live with the storefront, explainer and account flow in place.',
       stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL']
     }
   },
   {
     id: 'jelly',
     kind: 'lab',
+    playable: true,
     labTag: 'WebGPU · soft-body',
     title: 'Jelly — Squishy WebGPU Starfish',
     description: 'A translucent starfish that lives in your browser. Move to make a friend, grab an arm, stretch it and let go — a small experiment in soft-body physics and WebGPU rendering with Three.js.',
