@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { Project } from '~/data/projects'
-import { projects } from '~/data/projects'
 import { getFeaturedProjects } from '~/data/selectors'
 
 const localePath = useLocalePath()
-const featured = getFeaturedProjects(projects)
+const allProjects = useProjects()
+const featured = computed(() => getFeaturedProjects(allProjects.value))
 const fx = useFxEnabled()
 
 const linkFor = (p: Project) => p.caseStudy

@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { projects, type ProjectKind } from '~/data/projects'
+import type { ProjectKind } from '~/data/projects'
 
 definePageMeta({ colorMode: 'light' })
 
 const { t } = useI18n()
 
-const clientProjects = computed(() => projects.filter(p => p.kind === 'client'))
-const labProjects = computed(() => projects.filter(p => p.kind === 'lab'))
+const allProjects = useProjects()
+const clientProjects = computed(() => allProjects.value.filter(p => p.kind === 'client'))
+const labProjects = computed(() => allProjects.value.filter(p => p.kind === 'lab'))
 
 const tabs = computed(() => [
   { value: 'client' as ProjectKind, label: t('projects.clientWork'), count: clientProjects.value.length },

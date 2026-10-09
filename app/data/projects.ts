@@ -74,6 +74,28 @@ export interface Project {
  *
  * See /public/projects/README.md for detailed image guidelines
  */
+/**
+ * Translated text for one project (see projects.es.ts). Every field is
+ * optional: whatever is missing falls back to the English in `projects`.
+ * Arrays replace the English arrays item by item; `metricLabels` are the
+ * metric labels in the same order as `caseStudy.metrics`.
+ */
+export interface ProjectTranslation {
+  title?: string
+  description?: string
+  labTag?: string
+  caseStudy?: {
+    tagline?: string
+    role?: string
+    problem?: string
+    approach?: string
+    result?: string
+    highlights?: string[]
+    outcomes?: string[]
+    metricLabels?: string[]
+  }
+}
+
 export const projects: Project[] = [
   {
     id: 'codecave',

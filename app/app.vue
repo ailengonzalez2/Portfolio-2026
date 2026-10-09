@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { projects } from '~/data/projects'
 import { pageLabel } from '~/webgl/pageLabel'
 
 const colorMode = useColorMode()
@@ -43,6 +42,7 @@ const curtain = usePageCurtain()
 // WebGL path: a paper curtain covers the page while particles assemble the
 // destination's name, the route swaps underneath, then they disperse and the
 // curtain lifts. Fallback: a plain cross-fade.
+const allProjects = useProjects()
 const pageTransition = computed(() => fx.value
   ? {
       name: 'curtain',
@@ -51,7 +51,7 @@ const pageTransition = computed(() => fx.value
       onLeave: (_el: Element, done: () => void) => {
         const label = pageLabel(router.currentRoute.value.path, {
           t,
-          projectTitle: id => projects.find(p => p.id === id)?.title
+          projectTitle: id => allProjects.value.find(p => p.id === id)?.title
         })
         curtain.cover(label).then(done)
       },

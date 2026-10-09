@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { projects } from '~/data/projects'
 import { getProcessShowcase } from '~/data/selectors'
 import { clamp01, remap, stageAt } from '~/webgl/math'
 
@@ -9,7 +8,8 @@ import { clamp01, remap, stageAt } from '~/webgl/math'
 // idea is visible without touching anything.
 const STAGES = ['sketch', 'wireframe', 'ui', 'code'] as const
 const LAST = STAGES.length - 1
-const showcase = getProcessShowcase(projects)
+const allProjects = useProjects()
+const showcase = computed(() => getProcessShowcase(allProjects.value))
 const fx = useFxEnabled()
 
 const section = ref<HTMLElement | null>(null)

@@ -8,9 +8,12 @@ const localizedTo = useLocalizedTo()
 // Content lives at /writing/<slug> regardless of the locale prefix on the route.
 const slug = computed(() => route.params.slug as string)
 
-const { data: post } = await useAsyncData(`writing-${slug.value}`, () =>
-  queryCollection('writing').path(`/writing/${slug.value}`).first()
-)
+// Spanish when a translation exists, English otherwise.
+const { data: post } = await useAsyncData(`writing-${locale.value}-${slug.value}`, async () => {
+  const path = `/writing/${slug.value}`
+  const translated = locale.value === 'es' ? await queryCollection('writing_es').path(path).first() : null
+  return translated ?? await queryCollection('writing').path(path).first()
+}, { watch: [locale] })
 
 if (!post.value) {
   throw createError({ statusCode: 404, statusMessage: 'Post not found', fatal: true })

@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { projects } from '~/data/projects'
-
 // The Lab: self-directed experiments. Client work arrives "formed"; these stay
 // loose particle clouds until you touch them. What's playable live higher up
 // the page (the "play" section) isn't repeated here.
-const lab = projects.filter(p => p.kind === 'lab' && !p.playable)
+const allProjects = useProjects()
+const lab = computed(() => allProjects.value.filter(p => p.kind === 'lab' && !p.playable))
 const fx = useFxEnabled()
 const localePath = useLocalePath()
 </script>

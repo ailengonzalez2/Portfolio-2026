@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { projects } from '~/data/projects'
+import type { Project } from '~/data/projects'
 
 definePageMeta({ colorMode: 'light' })
 
@@ -7,7 +7,8 @@ const route = useRoute()
 const localizedTo = useLocalizedTo()
 const id = computed(() => route.params.id as string)
 
-const project = computed(() => projects.find(p => p.id === id.value))
+const allProjects = useProjects()
+const project = computed(() => allProjects.value.find(p => p.id === id.value))
 
 // If the project doesn't exist, send back to the index.
 if (!project.value) {
@@ -29,7 +30,7 @@ useSeoMeta({
 
 const cs = computed(() => project.value!.caseStudy)
 const localePath = useLocalePath()
-const linkFor = (p: typeof projects[number]) => p.caseStudy
+const linkFor = (p: Project) => p.caseStudy
   ? { to: localePath(`/projects/${p.id}`), external: false }
   : { to: p.links.preview ?? localePath('/projects'), external: true }
 
@@ -45,7 +46,7 @@ const chapters = computed(() => cs.value
 // Three other projects at the bottom, of the same kind, so each audience
 // stays on its own track.
 const related = computed(() =>
-  projects
+  allProjects.value
     .filter(p => p.id !== id.value && p.kind === project.value?.kind)
     .slice(0, 3)
 )

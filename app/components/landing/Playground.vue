@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { Project } from '~/data/projects'
-import { projects } from '~/data/projects'
 
 // "Play with my animations": light interactive pieces embedded live, so you
 // play right on the page. A piece only runs while its frame is near the
 // viewport (and is unloaded when far away, to free the GPU), on desktop, and
 // — when it needs it — with WebGPU. Elsewhere it's the cover/video and
 // "Play" opens it in a new tab. Heavier experiments live in the Lab below.
-const items = projects.filter(p => p.playable)
+const allProjects = useProjects()
+const items = computed(() => allProjects.value.filter(p => p.playable))
 const localePath = useLocalePath()
 const notesKey = (p: Project) => p.id.replace(/-/g, '')
 
@@ -19,7 +19,7 @@ let observer: IntersectionObserver | undefined
 onMounted(() => {
   const desktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches && window.innerWidth >= 1024
   const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  for (const p of items) canEmbed.value[p.id] = desktop && !still && (!p.webgpu || 'gpu' in navigator)
+  for (const p of items.value) canEmbed.value[p.id] = desktop && !still && (!p.webgpu || 'gpu' in navigator)
   observer = new IntersectionObserver((entries) => {
     for (const e of entries) {
       const id = (e.target as HTMLElement).dataset.id!
