@@ -69,7 +69,11 @@ export default defineNuxtConfig({
         '/',
         '/es'
       ],
-      crawlLinks: true
+      crawlLinks: true,
+      // Nuxt's default (4 per core) runs ~30 renders at once. OG images are
+      // CPU-bound on one thread and their 15s timeout starts on arrival, so
+      // the tail of that queue timed out whenever the machine was busy.
+      concurrency: 8
     }
   },
 
