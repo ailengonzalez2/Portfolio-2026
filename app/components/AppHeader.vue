@@ -37,11 +37,8 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
         class="flex items-center"
         aria-label="Ailen Gonzalez — home"
       >
-        <img
-          src="/signature.png"
-          alt=""
-          class="h-9 w-auto dark:invert"
-        >
+        <!-- Wordmark: the name in the display face, part of the type system -->
+        <span class="font-display font-normal text-[1.35rem] leading-none tracking-[-0.02em] text-ink dark:text-paper whitespace-nowrap">Ailen Gonzalez</span>
       </NuxtLink>
 
       <div class="flex items-center gap-6">
