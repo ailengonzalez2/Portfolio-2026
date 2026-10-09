@@ -45,7 +45,9 @@
       "ctaText": "¿Estás construyendo algo similar?",
       "ctaButton": "Hablemos",
       "comingSoonTitle": "Caso de estudio en camino",
-      "comingSoonBody": "Por ahora podés explorar el trabajo directamente en Figma o en el preview arriba."
+      "comingSoonBody": "Por ahora podés explorar el trabajo directamente en Figma o en el preview arriba.",
+      "year": "Año",
+      "disciplines": "Disciplinas"
     }
   },
   "manifesto": {

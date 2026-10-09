@@ -45,7 +45,9 @@
       "ctaText": "Building something similar?",
       "ctaButton": "Let's talk",
       "comingSoonTitle": "Case study coming soon",
-      "comingSoonBody": "For now, explore the work directly via Figma or the live preview above."
+      "comingSoonBody": "For now, explore the work directly via Figma or the live preview above.",
+      "year": "Year",
+      "disciplines": "Disciplines"
     }
   },
   "manifesto": {
