@@ -108,9 +108,9 @@ export function hexToRgb01(hex: string): [number, number, number] {
   return [0, 2, 4].map(i => Number.parseInt(h.slice(i, i + 2), 16) / 255) as [number, number, number]
 }
 
-const VIOLET = hexToRgb01('#b86adf')
-const CORAL = hexToRgb01('#ff6c63')
-const ORANGE = hexToRgb01('#ffb147')
+const VIOLET = hexToRgb01('#2B3BFF')
+const CORAL = hexToRgb01('#4453FF')
+const ORANGE = hexToRgb01('#5B6BFF')
 
 /** Brand gradient as particles use it: violet (left, 0) → coral → orange (right, 1). */
 export function gradientAt(t: number): [number, number, number] {

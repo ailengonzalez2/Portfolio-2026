@@ -49,7 +49,7 @@ const visible = computed(() => isPastHero.value && !isOpen.value)
       <!-- Pulse ring (one-shot on first appearance) -->
       <span
         v-if="pulseActive"
-        class="absolute inset-0 rounded-full bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] opacity-50 animate-ping-once"
+        class="absolute inset-0 rounded-full bg-linear-to-r from-[#5B6BFF] via-[#4453FF] to-[#2B3BFF] opacity-50 animate-ping-once"
         aria-hidden="true"
       />
 
@@ -57,7 +57,7 @@ const visible = computed(() => isPastHero.value && !isOpen.value)
         type="button"
         data-umami-event="brief-open"
         data-umami-event-location="fab"
-        class="brief-fab group relative inline-flex items-center gap-2 bg-linear-to-r from-[#ffb147] via-[#ff6c63] to-[#b86adf] text-white font-semibold rounded-full pl-3 pr-4 sm:pl-4 sm:pr-5 py-3 shadow-[0_8px_30px_rgba(184,106,223,0.35)] hover:shadow-[0_12px_40px_rgba(184,106,223,0.45)] transition-all hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
+        class="brief-fab group relative inline-flex items-center gap-2 bg-linear-to-r from-[#5B6BFF] via-[#4453FF] to-[#2B3BFF] text-white font-semibold rounded-full pl-3 pr-4 sm:pl-4 sm:pr-5 py-3 shadow-[0_8px_30px_rgba(43,59,255,0.35)] hover:shadow-[0_12px_40px_rgba(43,59,255,0.45)] transition-all hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
         :aria-label="$t('brief.floatingCta')"
         @click="open()"
       >

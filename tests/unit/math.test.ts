@@ -114,13 +114,13 @@ describe('heroName', () => {
 describe('gradientAt', () => {
   const close = (a: number[], b: number[]) => a.forEach((v, i) => expect(v).toBeCloseTo(b[i]!))
   test('violet → coral → orange', () => {
-    close(gradientAt(0), hexToRgb01('#b86adf'))
-    close(gradientAt(0.5), hexToRgb01('#ff6c63'))
-    close(gradientAt(1), hexToRgb01('#ffb147'))
+    close(gradientAt(0), hexToRgb01('#2B3BFF'))
+    close(gradientAt(0.5), hexToRgb01('#4453FF'))
+    close(gradientAt(1), hexToRgb01('#5B6BFF'))
   })
   test('clamps outside [0, 1]', () => {
-    close(gradientAt(-1), hexToRgb01('#b86adf'))
-    close(gradientAt(2), hexToRgb01('#ffb147'))
+    close(gradientAt(-1), hexToRgb01('#2B3BFF'))
+    close(gradientAt(2), hexToRgb01('#5B6BFF'))
   })
 })
 

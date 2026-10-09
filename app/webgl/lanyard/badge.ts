@@ -16,7 +16,7 @@ export interface BadgeText {
 const PAPER = '#F7F4EE'
 const INK = '#121212'
 const BODY = '#47453f'
-const GRADIENT = ['#b86adf', '#ff6c63', '#ffb147']
+const GRADIENT = ['#2B3BFF', '#4453FF', '#5B6BFF']
 
 const DISPLAY = '\'Fraunces\', Georgia, serif'
 const SANS = '\'Geist\', system-ui, sans-serif'

@@ -21,7 +21,7 @@ defineProps({
       >
       <div
         v-if="category"
-        class="flex items-center rounded-full border border-[#a11ee2] px-5 py-2"
+        class="flex items-center rounded-full border border-[#2B3BFF] px-5 py-2"
       >
         <span class="text-[20px] tracking-[0.2em] uppercase text-[#c77df0]">{{ category }}</span>
       </div>

@@ -44,7 +44,7 @@ const principles = ['noHandoff', 'ai', 'decide', 'remote'] as const
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #b86adf, #ff6c63 50%, #ffb147);
+  background: linear-gradient(90deg, #2B3BFF, #4453FF 50%, #5B6BFF);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
