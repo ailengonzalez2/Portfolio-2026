@@ -75,7 +75,7 @@
 }
 
 /* Page load on the WebGL path: the hero title stays hidden while the loading
-   swirl orbits it, so its plain glyphs never flash before the particles.
+   particle field fills in, so its plain glyphs never flash before the particles.
    html.fx-boot is set by an inline head script (nuxt.config) and removed once
    particles take over or fx is off; if nothing ever removes it, the title
    shows after 10s anyway. */

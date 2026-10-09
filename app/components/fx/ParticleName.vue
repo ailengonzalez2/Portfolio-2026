@@ -10,9 +10,11 @@ const props = withDefaults(defineProps<{
   mouseRadius?: number
   /** particle layer opacity (e.g. fading with a curtain) */
   opacity?: number
-  /** 1 = unformed particles orbit the title (page-load swirl) instead of drifting scattered */
-  swirl?: number
-}>(), { step: 3, pointSize: 3.6, scatter: 1, mouseRadius: 110, opacity: 1, swirl: 0 })
+  /** 1 = page-load field: unformed particles float visibly, shown by `density` */
+  field?: number
+  /** 0–1, how many field particles show and how bright/big */
+  density?: number
+}>(), { step: 3, pointSize: 3.6, scatter: 1, mouseRadius: 110, opacity: 1, field: 0, density: 1 })
 const emit = defineEmits<{ ready: [] }>()
 
 const root = ref<HTMLElement | null>(null)
@@ -33,7 +35,8 @@ const { ready, refresh } = useWebGLLayer(root, async () => {
   u.uScatter!.value = props.scatter
   u.uMouseRadius!.value = props.mouseRadius
   u.uOpacity!.value = props.opacity
-  u.uSwirl!.value = props.swirl
+  u.uField!.value = props.field
+  u.uDensity!.value = props.density
 })
 
 // Glyph positions depend on layout: rebuild when the element resizes.

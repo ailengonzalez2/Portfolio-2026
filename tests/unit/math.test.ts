@@ -2,7 +2,7 @@ import { describe, expect, test } from 'bun:test'
 import {
   clamp01, remap, enterProgress, rectToPlane, isOnScreen, shouldUseWebGL,
   splitWords, wordProgress, findPhrase, heroName, stageAt, hexToRgb01,
-  gradientAt, gridSize, crispAmount, swirlAt, swirlAxes, swirlOrbit
+  gradientAt, gridSize, crispAmount, loadingDensity, LOADING_DENSITY
 } from '../../app/webgl/math'
 
 describe('clamp01 / remap', () => {
@@ -163,18 +163,10 @@ describe('stageAt / hexToRgb01', () => {
   })
 })
 
-test('swirl orbits stay in range and inner orbits turn faster', () => {
-  const [rMin] = swirlOrbit(0, 0)
-  const [rMax, aMax] = swirlOrbit(1, 1)
-  expect(rMin).toBeCloseTo(0.12)
-  expect(rMax).toBeCloseTo(0.9)
-  expect(aMax).toBeCloseTo(Math.PI * 2)
-  const [x0, y0] = swirlAt(1, 0, 0, 100, 50)
-  expect(x0).toBeCloseTo(100)
-  expect(y0).toBeCloseTo(0)
-  const turn = (r: number) => Math.atan2(swirlAt(r, 0, 0.5, 1, 1)[1], swirlAt(r, 0, 0.5, 1, 1)[0])
-  expect(turn(0.4)).toBeGreaterThan(turn(1))
-  const [ax, ay] = swirlAxes(200, 100)
-  expect(ax).toBeCloseTo(100)
-  expect(ay).toBeCloseTo(60)
+test('the loading field starts empty and fills to LOADING_DENSITY', () => {
+  expect(loadingDensity(0)).toBe(0)
+  expect(loadingDensity(1)).toBeGreaterThan(0)
+  expect(loadingDensity(1)).toBeLessThan(LOADING_DENSITY)
+  expect(loadingDensity(2.5)).toBeCloseTo(LOADING_DENSITY)
+  expect(loadingDensity(10)).toBeCloseTo(LOADING_DENSITY)
 })
