@@ -246,23 +246,6 @@ const related = computed(() =>
           </div>
         </section>
 
-        <!-- Close -->
-        <section class="mt-24 sm:mt-32 border-t border-hairline pt-12 flex flex-wrap items-end justify-between gap-8">
-          <p class="max-w-xl font-display font-normal text-4xl sm:text-5xl leading-[1.05] tracking-[-0.02em] text-ink dark:text-paper">
-            {{ $t('projects.caseStudy.ctaText') }}
-          </p>
-          <NuxtLink
-            :to="localizedTo('/#contact')"
-            class="btn-gradient inline-flex items-center gap-2"
-          >
-            {{ $t('projects.caseStudy.ctaButton') }}
-            <UIcon
-              name="i-lucide-arrow-up-right"
-              class="size-4"
-            />
-          </NuxtLink>
-        </section>
-
         <!-- More projects: same rows and hover as the blog index -->
         <section
           v-if="related.length"

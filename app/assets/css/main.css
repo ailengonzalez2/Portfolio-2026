@@ -130,6 +130,11 @@
 
 /* WebGL stage canvas (created by plugins/fx.client.ts). Above content,
    below the header (z-50); never intercepts input. */
+/* A modal is open: particles must not draw over it (see brief/Modal.vue) */
+.modal-open .fx-canvas {
+  visibility: hidden;
+}
+
 .fx-canvas {
   position: fixed;
   inset: 0;

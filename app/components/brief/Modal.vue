@@ -20,31 +20,37 @@ function checkHash() {
 
 onMounted(checkHash)
 watch(() => route.fullPath, () => checkHash())
+
+// The WebGL particle layer sits above page content; hide it while the modal
+// is open so particles never draw over the form.
+watch(isOpen, (value) => {
+  if (import.meta.client) document.documentElement.classList.toggle('modal-open', !!value)
+}, { immediate: true })
 </script>
 
 <template>
   <UModal
     v-model:open="isOpen"
     :ui="{
-      content: 'sm:max-w-2xl !rounded-3xl',
+      content: 'sm:max-w-2xl !rounded-lg',
       body: 'p-0',
-      header: 'border-b border-surface dark:border-neutral-800'
+      header: 'border-b border-hairline dark:border-neutral-800'
     }"
     :close="{ class: 'rounded-full' }"
   >
     <template #header>
       <div class="flex items-center gap-3">
-        <div class="flex items-center justify-center size-9 rounded-full bg-linear-to-br from-violet-400 to-orange-400 shrink-0">
+        <div class="flex items-center justify-center size-9 rounded-full bg-linear-to-br from-[#2B3BFF] to-[#C04BFF] shrink-0">
           <UIcon
             name="i-lucide-sparkles"
             class="size-4 text-white"
           />
         </div>
         <div>
-          <h3 class="text-base sm:text-lg font-semibold text-heading dark:text-white leading-tight">
+          <h3 class="font-display text-xl sm:text-2xl text-ink dark:text-paper leading-tight">
             {{ $t('brief.title') }}
           </h3>
-          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mt-0.5">
+          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label mt-1">
             {{ $t('brief.section') }}
           </p>
         </div>

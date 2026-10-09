@@ -211,7 +211,7 @@ async function submitEmail() {
     </p>
 
     <!-- Input card -->
-    <div class="rounded-2xl border border-hairline dark:border-neutral-800 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm p-4 sm:p-5">
+    <div class="rounded-md border border-hairline dark:border-neutral-800 bg-paper dark:bg-ink p-4 sm:p-5 focus-within:border-ink dark:focus-within:border-paper transition-colors">
       <label
         for="brief-description"
         class="sr-only"
@@ -225,7 +225,7 @@ async function submitEmail() {
         rows="4"
         :aria-label="$t('brief.inputLabel')"
         aria-describedby="brief-footnote"
-        class="brief-textarea w-full resize-none bg-transparent border-0 text-heading dark:text-white text-base leading-relaxed placeholder:text-label dark:placeholder:text-neutral-500 focus:outline-none focus:ring-0 disabled:opacity-60"
+        class="brief-textarea w-full resize-none bg-transparent border-0 text-ink dark:text-paper text-base leading-relaxed placeholder:text-label dark:placeholder:text-neutral-500 focus:outline-none focus:ring-0 disabled:opacity-60"
       />
 
       <!-- Counter -->
@@ -238,7 +238,7 @@ async function submitEmail() {
         </p>
         <span
           class="text-[11px] font-medium tabular-nums"
-          :class="charCount > MAX - 30 ? 'text-orange-500' : 'text-label dark:text-neutral-500'"
+          :class="charCount > MAX - 30 ? 'text-[#C04BFF]' : 'text-label dark:text-neutral-500'"
         >
           {{ $t('brief.counter', { count: charCount, max: MAX }) }}
         </span>
@@ -315,7 +315,7 @@ async function submitEmail() {
     >
       <div
         v-if="status === 'streaming' || status === 'done'"
-        class="mt-5 rounded-2xl border border-hairline dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 sm:p-6"
+        class="mt-6 border-t border-hairline dark:border-neutral-800 pt-6"
       >
         <!-- Summary chip row -->
         <Transition
@@ -325,17 +325,17 @@ async function submitEmail() {
         >
           <div
             v-if="sections.SERVICE || sections.PRICE_RANGE || sections.TIMELINE"
-            class="flex flex-wrap items-center gap-2 mb-5 pb-5 border-b border-surface dark:border-neutral-800"
+            class="flex flex-wrap items-center gap-2 mb-6 pb-6 border-b border-hairline dark:border-neutral-800"
           >
             <span
               v-if="sections.SERVICE"
-              class="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-[0.5px] bg-violet-100 text-violet-700 dark:bg-violet-950/40 dark:text-violet-300"
+              class="inline-flex items-center font-mono text-[11px] uppercase tracking-[0.18em] btn-gradient-text"
             >
               {{ sections.SERVICE }}
             </span>
             <span
               v-if="sections.PRICE_RANGE"
-              class="text-[14px] font-semibold text-heading dark:text-white tabular-nums"
+              class="font-display text-2xl text-ink dark:text-paper tabular-nums"
             >
               {{ sections.PRICE_RANGE }}
             </span>
@@ -353,10 +353,10 @@ async function submitEmail() {
           v-if="sections.WHAT_I_HEARD"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-2">
+          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label mb-2">
             {{ $t('brief.sections.whatIHeard') }}
           </p>
-          <p class="text-[15px] text-heading dark:text-neutral-200 leading-relaxed">
+          <p class="text-[15px] text-ink dark:text-paper leading-relaxed">
             {{ sections.WHAT_I_HEARD }}
           </p>
         </div>
@@ -366,7 +366,7 @@ async function submitEmail() {
           v-if="phasesList.length"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-3">
+          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label mb-3">
             {{ $t('brief.sections.phases') }}
           </p>
           <ol class="space-y-2.5">
@@ -375,10 +375,10 @@ async function submitEmail() {
               :key="idx"
               class="flex items-start gap-3"
             >
-              <span class="flex items-center justify-center size-6 rounded-full bg-surface dark:bg-neutral-800 text-[12px] font-semibold text-heading dark:text-neutral-200 shrink-0 mt-0.5">
-                {{ idx + 1 }}
+              <span class="w-6 shrink-0 pt-0.5 font-mono text-xs text-label">
+                {{ String(idx + 1).padStart(2, '0') }}
               </span>
-              <span class="text-[14px] text-heading dark:text-neutral-200 leading-relaxed">{{ phase }}</span>
+              <span class="text-[14px] text-ink dark:text-paper leading-relaxed">{{ phase }}</span>
             </li>
           </ol>
         </div>
@@ -388,14 +388,14 @@ async function submitEmail() {
           v-if="stackList.length"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-3">
+          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label mb-3">
             {{ $t('brief.sections.stack') }}
           </p>
           <div class="flex flex-wrap gap-1.5">
             <span
               v-for="tech in stackList"
               :key="tech"
-              class="px-2.5 py-1 rounded-full text-[12px] font-medium bg-surface dark:bg-neutral-800 text-heading dark:text-neutral-200"
+              class="px-2 py-0.5 rounded-sm border border-hairline dark:border-neutral-700 text-[12px] text-ink dark:text-paper"
             >
               {{ tech }}
             </span>
@@ -407,20 +407,20 @@ async function submitEmail() {
           v-if="sections.BUILD_FIRST"
           class="mb-5"
         >
-          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-2">
+          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label mb-2">
             {{ $t('brief.sections.buildFirst') }}
           </p>
-          <p class="text-[15px] text-heading dark:text-neutral-200 leading-relaxed">
+          <p class="text-[15px] text-ink dark:text-paper leading-relaxed">
             {{ sections.BUILD_FIRST }}
           </p>
         </div>
 
         <!-- Why fit -->
         <div v-if="sections.WHY_FIT">
-          <p class="text-[11px] uppercase tracking-[1px] text-label font-bold mb-2">
+          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label mb-2">
             {{ $t('brief.sections.whyFit') }}
           </p>
-          <p class="text-[15px] text-heading dark:text-neutral-200 leading-relaxed">
+          <p class="text-[15px] text-ink dark:text-paper leading-relaxed">
             {{ sections.WHY_FIT }}
           </p>
         </div>
@@ -435,17 +435,17 @@ async function submitEmail() {
     >
       <div
         v-if="status === 'done' && hasFullBrief"
-        class="mt-5 rounded-2xl bg-linear-to-br from-violet-50 to-orange-50 dark:from-violet-950/30 dark:to-orange-950/20 border border-violet-100 dark:border-violet-900/50 p-5 sm:p-6"
+        class="email-box relative mt-6 rounded-md border border-hairline dark:border-neutral-800 p-5 sm:p-6"
       >
         <div class="flex items-start gap-3 mb-4">
-          <div class="flex items-center justify-center size-9 rounded-full bg-white dark:bg-neutral-900 shrink-0">
+          <div class="flex items-center justify-center size-9 rounded-full border border-hairline dark:border-neutral-700 shrink-0">
             <UIcon
               name="i-lucide-mail"
-              class="size-4 text-violet-600 dark:text-violet-400"
+              class="size-4 text-ink dark:text-paper"
             />
           </div>
           <div>
-            <h4 class="text-base font-semibold text-heading dark:text-white mb-1">
+            <h4 class="font-display text-xl text-ink dark:text-paper mb-1">
               {{ $t('brief.email.headline') }}
             </h4>
             <p class="text-sm text-body dark:text-neutral-400 leading-relaxed">
@@ -472,7 +472,7 @@ async function submitEmail() {
               :aria-label="$t('brief.email.label')"
               :aria-invalid="emailStatus === 'error'"
               :aria-describedby="emailError ? 'brief-email-error' : undefined"
-              class="grow rounded-full bg-white dark:bg-neutral-900 border border-hairline dark:border-neutral-700 px-4 py-2.5 text-sm text-heading dark:text-white placeholder:text-label dark:placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-violet-400 disabled:opacity-60"
+              class="grow rounded-full bg-white dark:bg-neutral-900 border border-hairline dark:border-neutral-700 px-4 py-2.5 text-sm text-ink dark:text-paper placeholder:text-label dark:placeholder:text-neutral-500 focus:outline-none focus:border-ink dark:focus:border-paper disabled:opacity-60"
             >
             <UButton
               type="submit"
@@ -534,12 +534,12 @@ async function submitEmail() {
           </template>
           {{ $t('brief.bookCall') }}
         </UButton>
-        <span class="text-label dark:text-neutral-500 uppercase text-[11px] tracking-[1px]">
+        <span class="font-mono text-label dark:text-neutral-500 uppercase text-[11px] tracking-[0.18em]">
           {{ $t('brief.or') }}
         </span>
         <button
           type="button"
-          class="text-sm text-body dark:text-neutral-400 hover:text-primary transition-colors underline underline-offset-2 cursor-pointer"
+          class="text-sm text-body dark:text-neutral-400 hover:text-ink dark:hover:text-paper transition-colors underline underline-offset-4 cursor-pointer"
           @click="reset"
         >
           {{ $t('brief.another') }}
@@ -563,17 +563,16 @@ async function submitEmail() {
   padding: 0.375rem 0.875rem;
   border-radius: 9999px;
   font-size: 0.8rem;
-  font-weight: 500;
-  background: rgba(241, 245, 249, 0.8);
-  color: #475569;
-  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-body);
+  border: 1px solid var(--color-hairline);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .brief-chip:hover:not(:disabled) {
-  background: rgba(241, 245, 249, 1);
-  border-color: #cbd5e1;
+  border-color: var(--color-ink);
+  color: var(--color-ink);
 }
 
 .brief-chip:disabled {
@@ -581,13 +580,30 @@ async function submitEmail() {
   cursor: not-allowed;
 }
 
+.brief-chip:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
 :global(.dark) .brief-chip {
-  background: rgba(38, 38, 38, 0.6);
   color: #d4d4d8;
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 :global(.dark) .brief-chip:hover:not(:disabled) {
-  background: rgba(64, 64, 64, 0.8);
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+/* Email step: the brand gradient as a thin rule on top */
+.email-box::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  height: 2px;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(90deg, #2B3BFF, #C04BFF);
 }
 </style>

@@ -55,59 +55,41 @@ const formattedDate = computed(() =>
 
 <template>
   <UPage>
-    <article class="pt-24 sm:pt-32 pb-24">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Back link -->
-        <NuxtLink
-          :to="localizedTo('/writing')"
-          class="inline-flex items-center gap-2 text-sm text-body dark:text-neutral-400 hover:text-primary transition-colors mb-8"
-        >
-          <UIcon
-            name="i-lucide-arrow-left"
-            class="size-4"
-          />
-          {{ $t('writing.back') }}
-        </NuxtLink>
-
-        <!-- Header -->
-        <header class="mb-12">
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-[0.5px] font-medium text-primary bg-primary/10 mb-5">
-            {{ post!.category }}
-          </span>
-          <h1 class="text-3xl sm:text-5xl font-bold text-heading dark:text-white tracking-tight leading-[1.1] mb-5">
-            {{ post!.title }}
-          </h1>
-          <p class="text-sm text-label uppercase tracking-[0.5px] font-medium">
-            Ailen Gonzalez · {{ formattedDate }}<template v-if="post!.readingTime">
-              · {{ post!.readingTime }}
-            </template>
-          </p>
-        </header>
-
-        <!-- Body -->
-        <ContentRenderer
-          :value="post!"
-          class="prose-post"
-        />
-
-        <!-- CTA -->
-        <div class="mt-16 p-8 rounded-2xl bg-linear-to-br from-violet-50 to-orange-50 dark:from-violet-950/30 dark:to-orange-950/20 border border-violet-100 dark:border-violet-900/50 text-center">
-          <p class="text-base sm:text-lg text-primary-custom mb-4">
-            {{ $t('writing.ctaText') }}
-          </p>
-          <UButton
-            :to="localizedTo('/#contact')"
-            size="lg"
-            class="btn-gradient text-white rounded-full px-6"
+    <article class="pt-32 sm:pt-44 pb-24 sm:pb-32">
+      <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16">
+        <div class="max-w-2xl">
+          <!-- Back link -->
+          <NuxtLink
+            :to="localizedTo('/writing')"
+            class="inline-flex items-center gap-2 text-sm text-label hover:text-ink transition-colors mb-10"
           >
-            {{ $t('writing.ctaButton') }}
-            <template #trailing>
-              <UIcon
-                name="i-lucide-arrow-up-right"
-                class="size-4"
-              />
-            </template>
-          </UButton>
+            <UIcon
+              name="i-lucide-arrow-left"
+              class="size-4"
+            />
+            {{ $t('writing.back') }}
+          </NuxtLink>
+
+          <!-- Header -->
+          <header class="mb-12">
+            <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label mb-5">
+              {{ post!.category }}
+            </p>
+            <h1 class="text-balance font-display font-normal text-4xl sm:text-6xl leading-[1.02] tracking-[-0.02em] text-ink dark:text-paper mb-6">
+              {{ post!.title }}
+            </h1>
+            <p class="text-sm text-label">
+              Ailen Gonzalez · {{ formattedDate }}<template v-if="post!.readingTime">
+                · {{ post!.readingTime }}
+              </template>
+            </p>
+          </header>
+
+          <!-- Body -->
+          <ContentRenderer
+            :value="post!"
+            class="prose-post"
+          />
         </div>
       </div>
     </article>
@@ -117,12 +99,13 @@ const formattedDate = computed(() =>
 <style scoped>
 /* Editorial type for the article body — spacing and rhythm tuned to the site */
 .prose-post :deep(h2) {
-  font-size: 1.5rem;
-  line-height: 1.25;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin: 2.5rem 0 1rem;
-  color: var(--color-heading, #0f172b);
+  font-family: var(--font-display);
+  font-size: 1.875rem;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  margin: 3rem 0 1rem;
+  color: var(--color-ink);
 }
 
 .dark .prose-post :deep(h2) {
@@ -133,7 +116,7 @@ const formattedDate = computed(() =>
   margin: 0 0 1.25rem;
   font-size: 1.0625rem;
   line-height: 1.75;
-  color: var(--color-body, #45556c);
+  color: var(--color-body);
 }
 
 .dark .prose-post :deep(p) {
@@ -142,7 +125,7 @@ const formattedDate = computed(() =>
 
 .prose-post :deep(strong) {
   font-weight: 600;
-  color: var(--color-heading, #0f172b);
+  color: var(--color-ink);
 }
 
 .dark .prose-post :deep(strong) {
@@ -150,9 +133,10 @@ const formattedDate = computed(() =>
 }
 
 .prose-post :deep(a) {
-  color: var(--ui-primary, #a11ee2);
+  color: var(--color-ink);
   text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration-color: #7643FF;
+  text-underline-offset: 4px;
 }
 
 /* Headings get automatic anchor links — keep them looking like headings */
@@ -174,7 +158,7 @@ const formattedDate = computed(() =>
 .prose-post :deep(li) {
   font-size: 1.0625rem;
   line-height: 1.7;
-  color: var(--color-body, #45556c);
+  color: var(--color-body);
   list-style: disc;
 }
 
@@ -185,8 +169,8 @@ const formattedDate = computed(() =>
 .prose-post :deep(pre) {
   margin: 0 0 1.5rem;
   padding: 1.25rem;
-  border-radius: 1rem;
-  background: #0f172b;
+  border-radius: 6px;
+  background: #121212;
   overflow-x: auto;
   font-size: 0.875rem;
   line-height: 1.6;
@@ -201,9 +185,9 @@ const formattedDate = computed(() =>
 .prose-post :deep(:not(pre) > code) {
   font-size: 0.875em;
   padding: 0.15em 0.4em;
-  border-radius: 0.375rem;
-  background: rgba(161, 30, 226, 0.08);
-  color: var(--color-heading, #0f172b);
+  border-radius: 4px;
+  background: rgba(43, 59, 255, 0.08);
+  color: var(--color-ink);
 }
 
 .dark .prose-post :deep(:not(pre) > code) {

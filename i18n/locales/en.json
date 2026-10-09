@@ -42,8 +42,6 @@
       "result": "Result",
       "stack": "Stack",
       "relatedProjects": "More projects",
-      "ctaText": "Building something similar?",
-      "ctaButton": "Let's talk",
       "comingSoonTitle": "Case study coming soon",
       "comingSoonBody": "For now, explore the work directly via Figma or the live preview above.",
       "year": "Year",
@@ -235,8 +233,6 @@
     "intro": "Practical lessons from designing and shipping LLM-powered features, frontend craft, and Web3 product work.",
     "comingSoon": "Coming soon",
     "back": "All posts",
-    "ctaText": "Want first dibs on new posts?",
-    "ctaButton": "Get in touch",
     "posts": {
       "streaming": {
         "title": "Designing streaming responses in Vue",
@@ -337,5 +333,11 @@
         "c": "A translucent, speckled material that makes it feel like jelly."
       }
     }
+  },
+  "error": {
+    "notFound": "This page doesn't exist.",
+    "generic": "Something went wrong.",
+    "body": "The link may be broken or the page may have moved. Head back home and pick it up from there.",
+    "home": "Back to home"
   }
 }
