@@ -107,9 +107,7 @@
     "badge": {
       "roles": "Diseño de producto IA · Desarrollo frontend · Diseño UX/UI",
       "remote": "Remoto · todo el mundo",
-      "languages": "ES · EN",
-      "hint": "Arrastrala · pasá el mouse para darla vuelta",
-      "hintTouch": "Arrastrala · tocala para darla vuelta"
+      "languages": "ES · EN"
     },
     "stats": {
       "heading": "En números",

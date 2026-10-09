@@ -9,14 +9,14 @@ const principles = ['noHandoff', 'ai', 'decide', 'remote'] as const
     <h2 class="font-mono font-normal text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
       {{ $t('about.principles.heading') }}
     </h2>
-    <ol class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-14">
+    <ol class="principles mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-14">
       <li
         v-for="(key, i) in principles"
         :key="key"
-        class="border-t border-hairline pt-6"
+        class="principle relative border-t border-hairline pt-6"
       >
         <HalftoneReveal>
-          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label">
+          <p class="principle-num font-mono text-[11px] uppercase tracking-[0.18em] text-label">
             {{ String(i + 1).padStart(2, '0') }}
           </p>
           <h3 class="mt-3 font-display font-normal text-2xl sm:text-3xl leading-tight text-ink dark:text-paper">
@@ -30,3 +30,44 @@ const principles = ['noHandoff', 'ai', 'decide', 'remote'] as const
     </ol>
   </section>
 </template>
+
+<style scoped>
+/* Hover: the brand gradient draws across the item's top rule, its number
+   darkens, and the other principles step back. */
+.principle {
+  transition: opacity 0.3s ease;
+}
+.principle::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #b86adf, #ff6c63 50%, #ffb147);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.principle:hover::before {
+  transform: scaleX(1);
+}
+.principle-num {
+  transition: color 0.3s ease;
+}
+.principle:hover .principle-num {
+  color: var(--color-ink);
+}
+@media (hover: hover) {
+  .principles:has(.principle:hover) .principle:not(:hover) {
+    opacity: 0.45;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .principle,
+  .principle::before,
+  .principle-num {
+    transition: none;
+  }
+}
+</style>

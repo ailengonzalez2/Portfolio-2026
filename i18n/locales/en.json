@@ -107,9 +107,7 @@
     "badge": {
       "roles": "AI Product Design · Frontend Development · UX/UI Design",
       "remote": "Remote · worldwide",
-      "languages": "ES · EN",
-      "hint": "Drag it · hover to flip",
-      "hintTouch": "Drag it · tap to flip"
+      "languages": "ES · EN"
     },
     "stats": {
       "heading": "In numbers",
