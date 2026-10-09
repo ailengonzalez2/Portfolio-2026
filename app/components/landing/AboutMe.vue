@@ -80,7 +80,7 @@ onBeforeUnmount(() => off?.())
           >
             <span
               class="absolute -left-8 top-2 size-[7px] rounded-full"
-              :class="job.current ? 'bg-linear-to-r from-[#2B3BFF] to-[#5B6BFF]' : 'bg-ink dark:bg-paper'"
+              :class="job.current ? 'bg-linear-to-r from-[#2B3BFF] to-[#C04BFF]' : 'bg-ink dark:bg-paper'"
               aria-hidden="true"
             />
             <HalftoneReveal>
