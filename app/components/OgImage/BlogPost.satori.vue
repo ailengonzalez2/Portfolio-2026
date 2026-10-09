@@ -1,4 +1,6 @@
 <script setup>
+// Social-share image for blog posts, in the site's identity: paper,
+// Fraunces title, Geist details, the brand gradient as a thin rule.
 defineProps({
   title: { type: String, required: true },
   category: { type: String, required: false, default: '' },
@@ -9,33 +11,35 @@ defineProps({
 
 <template>
   <div
-    class="w-full h-full flex flex-col justify-between bg-[#0a0a0a] text-white p-[70px]"
-    style="font-family: 'Inter'"
+    class="w-full h-full flex flex-col justify-between bg-[#F2EFE9] text-[#121212] p-[72px]"
+    style="font-family: 'FrauncesOG'"
   >
-    <!-- Top row: wordmark + category pill -->
     <div class="w-full flex items-center justify-between">
-      <img
-        src="/signature-withe.png"
-        height="46"
-        style="height: 46px;"
-      >
-      <div
+      <span class="text-[34px] leading-none">Ailen Gonzalez</span>
+      <span
         v-if="category"
-        class="flex items-center rounded-full border border-[#2B3BFF] px-5 py-2"
-      >
-        <span class="text-[20px] tracking-[0.2em] uppercase text-[#c77df0]">{{ category }}</span>
-      </div>
+        class="text-[24px] text-[#5c5951]"
+        style="font-family: 'Geist'"
+      >{{ category }}</span>
     </div>
 
-    <!-- Title -->
     <div class="flex flex-col">
-      <span class="text-[64px] font-bold leading-[1.08] tracking-tight">{{ title }}</span>
+      <div
+        class="w-[160px] h-[6px] mb-[36px]"
+        style="background-image: linear-gradient(90deg, #2B3BFF, #C04BFF);"
+      />
+      <span
+        class="text-[76px] leading-[1.02]"
+        style="letter-spacing: -0.02em;"
+      >{{ title }}</span>
     </div>
 
-    <!-- Bottom row: url + byline -->
-    <div class="w-full flex items-center justify-between">
-      <span class="text-[26px] text-white/60">{{ url }}</span>
-      <span class="text-[26px] text-white/60">Ailen Gonzalez{{ readingTime ? ` · ${readingTime}` : '' }}</span>
+    <div
+      class="w-full flex items-center justify-between text-[24px] text-[#5c5951]"
+      style="font-family: 'Geist'"
+    >
+      <span>{{ url }}</span>
+      <span>{{ readingTime }}</span>
     </div>
   </div>
 </template>

@@ -44,7 +44,7 @@ export default defineNuxtConfig({
   site: {
     url: 'https://ailengonzalez.ar',
     name: 'Ailen Gonzalez',
-    description: 'Ailen Gonzalez — AI Product Engineer, frontend developer and product designer. I design and ship user-facing AI features and polished web experiences.'
+    description: 'Ailen Gonzalez — AI product design and frontend. I design and build AI products end to end, from Figma to production code.'
   },
 
   colorMode: {
@@ -102,7 +102,10 @@ export default defineNuxtConfig({
             }
           }
         }
-      }
+      },
+      // Static Fraunces for the social-share images only: their renderer
+      // (Satori) can't use variable fonts. Local file in public/fonts.
+      { name: 'FrauncesOG', provider: 'local', weights: [400], global: true }
     ]
   },
 

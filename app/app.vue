@@ -68,8 +68,8 @@ defineOgImageComponent('Hero')
 useSchemaOrg([
   definePerson({
     name: 'Ailen Gonzalez',
-    jobTitle: ['AI Product Engineer', 'Frontend Developer', 'Product Designer'],
-    description: 'AI Product Engineer, frontend developer and product designer from Argentina. Designs and ships user-facing AI products end to end — from Figma to production Vue/Nuxt code.',
+    jobTitle: ['AI Product Designer', 'Frontend Developer'],
+    description: 'AI product designer and frontend developer from Argentina. Designs and ships user-facing AI products end to end — from Figma to production Vue/Nuxt code.',
     url: 'https://ailengonzalez.ar',
     knowsAbout: [
       'Frontend Development',
