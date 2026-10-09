@@ -1,19 +1,40 @@
 <script setup lang="ts">
+import { useScroll } from 'motion-v'
+import { remap } from '~/webgl/math'
+
 const { global } = useAppConfig()
+
+// The heading assembles from particles as the section scrolls in, fully
+// formed before it reaches the middle of the screen (same language as the
+// hero and the footer). Without WebGL it is the plain gradient heading.
+const section = ref<HTMLElement | null>(null)
+const { scrollYProgress } = useScroll({ target: section, offset: ['start end', 'center center'] })
+const headingProgress = ref(0)
+let off: (() => void) | undefined
+onMounted(() => {
+  headingProgress.value = remap(scrollYProgress.get(), 0.15, 0.85)
+  off = scrollYProgress.on('change', (v) => {
+    headingProgress.value = remap(v, 0.15, 0.85)
+  })
+})
+onBeforeUnmount(() => off?.())
 </script>
 
 <template>
   <section
     id="contact"
+    ref="section"
     class="pt-24 pb-40 sm:pt-32 sm:pb-52"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <ResolveText
-        :text="$t('contactCta.heading')"
-        :highlight="$t('contactCta.heading')"
-        tag="h2"
-        class="font-display font-normal text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.02em] text-ink dark:text-paper"
-      />
+      <ParticleName
+        :progress="headingProgress"
+        class="inline-block"
+      >
+        <h2 class="font-display font-normal text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
+          {{ $t('contactCta.heading') }}
+        </h2>
+      </ParticleName>
 
       <HalftoneReveal>
         <p class="mt-8 max-w-2xl text-lg sm:text-xl text-body">
