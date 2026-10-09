@@ -27,18 +27,18 @@
   --color-primary-900: #1c1b19;
   --color-primary-950: #121212;
 
-  /* Secondary - coral, the middle stop of the brand gradient */
-  --color-secondary-50: #fff4f3;
-  --color-secondary-100: #ffe5e3;
-  --color-secondary-200: #ffcfcb;
-  --color-secondary-300: #ffaca5;
-  --color-secondary-400: #ff8a81;
-  --color-secondary-500: #7643FF;
-  --color-secondary-600: #ed4a40;
-  --color-secondary-700: #c8362d;
-  --color-secondary-800: #a52f28;
-  --color-secondary-900: #882c26;
-  --color-secondary-950: #4a1310;
+  /* Secondary - brand violet (the end stop of the cobalt → violet gradient) */
+  --color-secondary-50: #faf3ff;
+  --color-secondary-100: #f3e3ff;
+  --color-secondary-200: #e8c8ff;
+  --color-secondary-300: #d9a0ff;
+  --color-secondary-400: #ca74ff;
+  --color-secondary-500: #C04BFF;
+  --color-secondary-600: #a630e6;
+  --color-secondary-700: #8b23c2;
+  --color-secondary-800: #721f9c;
+  --color-secondary-900: #5e1c7e;
+  --color-secondary-950: #3e0858;
 
   /* Semantic text tokens (AA on paper) */
   --color-heading: #121212;
@@ -47,9 +47,6 @@
   --color-surface: #e7e3db;
   --color-hairline: #d6d2c8;
 
-  /* Kept for pages not yet redesigned (Phase 2) */
-  --color-text-primary: #47453f;
-  --color-text-primary-dark: #c2beb3;
 }
 
 :root {
@@ -217,14 +214,7 @@
   outline-offset: 2px;
 }
 
-/* Text Primary Classes */
-.text-primary-custom {
-  color: var(--color-text-primary);
-}
 
-.dark .text-primary-custom-dark {
-  color: var(--color-text-primary-dark);
-}
 
 /* Primary button - ink at rest, resolves into the brand gradient on hover */
 .btn-gradient {

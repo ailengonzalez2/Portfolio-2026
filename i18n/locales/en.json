@@ -12,21 +12,13 @@
     "hireMe": "Hire Me"
   },
   "hero": {
-    "eyebrow": "AI product design & frontend",
-    "available": "Available for work",
-    "spotsAvailable": "2 spots available",
     "title": "AI Product Design & Frontend",
-    "subtitle": "I design and build AI products end to end — from Figma to production code.",
-    "bookCall": "Book a call",
-    "seeWork": "See work"
+    "subtitle": "I design and build AI products end to end — from Figma to production code."
   },
   "projects": {
-    "latestSection": "Latest Projects",
     "clientWork": "Client Work",
     "lab": "Lab",
     "labIntro": "Self-directed projects — where I try out ideas and technology without a client brief shaping the answer.",
-    "more": "More",
-    "exploreAll": "Explore Projects",
     "pageTitle": "Projects",
     "pageIntro": "Client work I designed and built end to end, and the lab where I try things without a brief.",
     "caseStudy": {
@@ -102,8 +94,7 @@
   "contactCta": {
     "heading": "Let's work together",
     "subtitle": "Have an AI product or frontend in mind? Let's turn it into something real.",
-    "bookCall": "Book a call",
-    "email": "Email me"
+    "bookCall": "Book a call"
   },
   "about": {
     "badge": {
@@ -218,18 +209,13 @@
       }
     }
   },
-  "footer": {
-    "availableForProjects": "Available for projects",
-    "notAvailable": "Not available",
-    "timezone": "GMT-3"
-  },
+  "footer": {},
   "prefooter": {
     "design": "Design",
     "code": "Code",
     "ai": "AI"
   },
   "writing": {
-    "section": "Writing",
     "title": "Notes from shipping AI products",
     "intro": "Practical lessons from designing and shipping LLM-powered features, frontend craft, and Web3 product work.",
     "comingSoon": "Coming soon",

@@ -73,8 +73,9 @@ Uses new import syntax in main.css:
 @import "@nuxt/ui";
 
 @theme static {
-  --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Instrument Serif', serif;
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces', ui-serif, Georgia, serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
 }
 ```
 
@@ -82,10 +83,11 @@ Uses new import syntax in main.css:
 - Use `bg-linear-to-*` instead of `bg-gradient-to-*`
 - Use `shrink-0` instead of `flex-shrink-0`
 
-### Theme Colors
-- Primary: Purple (#A11EE2)
-- Secondary: Peach (#FAC789)
-- Custom classes: `.btn-gradient`, `.btn-gradient-text`
+### Theme
+- Paper `#F2EFE9` (background), ink `#121212` (text); body `#47453f`, label `#5c5951`, hairline `#d6d2c8`
+- Brand gradient: cobalt `#2B3BFF` → `#7643FF` → violet `#C04BFF` (`.btn-gradient`, `.btn-gradient-text`, particles via `gradientAt()` in `app/webgl/math.ts`)
+- Type: Fraunces for display (variable; a static `FrauncesOG` TTF exists only for OG images), Geist body, Geist Mono for small uppercase labels
+- Editorial layout: left-aligned, `max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16`, hairline rules instead of cards
 
 ## Code Conventions
 

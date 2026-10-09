@@ -12,21 +12,13 @@
     "hireMe": "Contratame"
   },
   "hero": {
-    "eyebrow": "Diseño de producto IA & frontend",
-    "available": "Disponible para nuevos proyectos",
-    "spotsAvailable": "2 lugares disponibles",
     "title": "Diseño de Producto IA & Frontend",
-    "subtitle": "Diseño y construyo productos de IA de punta a punta — de Figma a código en producción.",
-    "bookCall": "Agendar una llamada",
-    "seeWork": "Ver trabajo"
+    "subtitle": "Diseño y construyo productos de IA de punta a punta — de Figma a código en producción."
   },
   "projects": {
-    "latestSection": "Proyectos recientes",
     "clientWork": "Trabajo con clientes",
     "lab": "Lab",
     "labIntro": "Proyectos propios — donde pruebo ideas y tecnología sin un brief de cliente que condicione la respuesta.",
-    "more": "Más",
-    "exploreAll": "Ver proyectos",
     "pageTitle": "Proyectos",
     "pageIntro": "Trabajo con clientes que diseñé y construí de punta a punta, y el lab donde pruebo cosas sin un brief.",
     "caseStudy": {
@@ -102,8 +94,7 @@
   "contactCta": {
     "heading": "Trabajemos juntos",
     "subtitle": "¿Tenés un producto de IA o un frontend en mente? Hagámoslo realidad.",
-    "bookCall": "Agendar una llamada",
-    "email": "Escribime"
+    "bookCall": "Agendar una llamada"
   },
   "about": {
     "badge": {
@@ -218,18 +209,13 @@
       }
     }
   },
-  "footer": {
-    "availableForProjects": "Disponible para proyectos",
-    "notAvailable": "No disponible",
-    "timezone": "GMT-3"
-  },
+  "footer": {},
   "prefooter": {
     "design": "Diseño",
     "code": "Código",
     "ai": "IA"
   },
   "writing": {
-    "section": "Blog",
     "title": "Notas de construir productos con IA",
     "intro": "Lecciones prácticas de diseñar y shippear features con LLMs, frontend y productos Web3.",
     "comingSoon": "Próximamente",

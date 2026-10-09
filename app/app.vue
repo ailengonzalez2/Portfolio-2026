@@ -62,7 +62,7 @@ const pageTransition = computed(() => fx.value
   : { name: 'fade', mode: 'out-in' as const })
 
 // Default social-share image, auto-generated. Individual pages can override.
-defineOgImageComponent('Hero')
+defineOgImage('Hero')
 
 // Structured data for search engines and rich results
 useSchemaOrg([
