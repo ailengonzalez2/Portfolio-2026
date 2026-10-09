@@ -59,9 +59,18 @@ async function mount() {
   }
 }
 
+// Start the 3D scene once the main thread is idle, so loading three.js and
+// building the scene doesn't block the first interactions with the page.
+const whenIdle = () => new Promise<void>((resolve) => {
+  if ('requestIdleCallback' in window) window.requestIdleCallback(() => resolve(), { timeout: 1500 })
+  else setTimeout(resolve, 200)
+})
+
 onMounted(() => {
-  if (!hasWebGL()) fallback.value = true
-  else mount()
+  whenIdle().then(() => {
+    if (!hasWebGL()) fallback.value = true
+    else mount()
+  })
 })
 watch(locale, () => {
   if (!fallback.value) mount()
