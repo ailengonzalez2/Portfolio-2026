@@ -6,7 +6,7 @@ const { global } = useAppConfig()
 <template>
   <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16 pb-32 sm:pb-40">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-hairline border border-hairline rounded-2xl overflow-hidden">
-      <HalftoneReveal class="bg-paper dark:bg-ink p-8 sm:p-12 flex flex-col">
+      <HalftoneReveal class="bg-paper dark:bg-ink p-6 sm:p-12 flex flex-col">
         <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label">
           {{ $t('about.closing.clients.eyebrow') }}
         </p>
@@ -21,12 +21,12 @@ const { global } = useAppConfig()
           target="_blank"
           data-umami-event="book-call"
           data-umami-event-location="about"
-          class="btn-gradient inline-flex self-start mt-10"
+          class="btn-gradient inline-flex self-start mt-10 whitespace-nowrap px-8! sm:px-14!"
         >
           {{ $t('contactCta.bookCall') }}
         </NuxtLink>
       </HalftoneReveal>
-      <HalftoneReveal class="bg-paper dark:bg-ink p-8 sm:p-12 flex flex-col">
+      <HalftoneReveal class="bg-paper dark:bg-ink p-6 sm:p-12 flex flex-col">
         <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label">
           {{ $t('about.closing.teams.eyebrow') }}
         </p>

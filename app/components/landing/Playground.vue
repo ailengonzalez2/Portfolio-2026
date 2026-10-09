@@ -47,7 +47,7 @@ onBeforeUnmount(() => observer?.disconnect())
         <!-- The piece itself: live where it can run, the cover elsewhere -->
         <div
           :data-id="p.id"
-          class="lg:col-span-8 relative aspect-[16/10] overflow-hidden rounded-lg bg-black"
+          class="order-2 lg:order-1 lg:col-span-8 relative aspect-[16/10] overflow-hidden rounded-lg bg-black"
         >
           <video
             v-if="p.video"
@@ -105,7 +105,7 @@ onBeforeUnmount(() => observer?.disconnect())
           </a>
         </div>
 
-        <div class="lg:col-span-4">
+        <div class="order-1 lg:order-2 lg:col-span-4">
           <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-paper/60">
             {{ $t('play.eyebrow') }}
           </p>

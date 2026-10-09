@@ -75,7 +75,8 @@
         "body": "Shipped in Vue and Nuxt. The design is the product, not a handoff."
       }
     },
-    "hint": "Move down the image, or drag the ruler, to watch it go from sketch to code."
+    "hint": "Move down the image, or drag the ruler, to watch it go from sketch to code.",
+    "hintTouch": "Drag the ruler to watch it go from sketch to code."
   },
   "lab": {
     "eyebrow": "The lab",

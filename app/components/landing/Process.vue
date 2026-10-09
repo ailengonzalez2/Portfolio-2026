@@ -18,6 +18,8 @@ const ruler = ref<HTMLElement | null>(null)
 const target = ref(LAST)
 const stage = ref(LAST)
 const activeIndex = computed(() => Math.round(stage.value))
+// Touch screens get a hint about the ruler, not the mouse (read after mount).
+const canHover = ref(true)
 
 let raf = 0
 let still = false
@@ -78,6 +80,7 @@ const onRulerKey = (e: KeyboardEvent) => {
 let played = false
 let observer: IntersectionObserver | undefined
 onMounted(() => {
+  canHover.value = window.matchMedia('(hover: hover)').matches
   still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (still || !fx.value || !section.value) return
   stage.value = 0
@@ -112,7 +115,8 @@ onBeforeUnmount(() => {
     class="py-24 sm:py-32"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-      <div class="min-w-0 lg:col-span-7">
+      <!-- Mobile: title → image → ruler. Desktop: image left (two rows), title and ruler right. -->
+      <div class="min-w-0 order-2 lg:order-none lg:col-span-7 lg:row-span-2 lg:row-start-1">
         <ResolveImage
           :src="showcase.image"
           :alt="showcase.title"
@@ -129,7 +133,7 @@ onBeforeUnmount(() => {
         ><code>{{ showcase.processSnippet }}</code></pre>
       </div>
 
-      <div class="min-w-0 lg:col-span-5">
+      <div class="min-w-0 order-1 lg:order-none lg:col-span-5 lg:col-start-8 lg:row-start-1">
         <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
           {{ $t('process.eyebrow') }}
         </p>
@@ -137,9 +141,11 @@ onBeforeUnmount(() => {
           {{ $t('process.title') }}
         </h2>
         <p class="mt-6 text-body">
-          {{ $t('process.hint') }}
+          {{ $t(canHover ? 'process.hint' : 'process.hintTouch') }}
         </p>
+      </div>
 
+      <div class="min-w-0 order-3 lg:order-none lg:col-span-5 lg:col-start-8 lg:row-start-2">
         <!-- Vertical ruler: four stops top to bottom, each with its text; a
              handle slides along the line with the stage -->
         <div
@@ -152,7 +158,7 @@ onBeforeUnmount(() => {
           :aria-valuemax="LAST"
           :aria-valuenow="activeIndex"
           :aria-valuetext="$t(`process.stages.${STAGES[activeIndex]}.label`)"
-          class="ruler relative mt-10 pl-8 cursor-ns-resize select-none touch-none"
+          class="ruler relative lg:mt-0 pl-8 cursor-ns-resize select-none touch-none"
           @pointerdown="onRulerDown"
           @pointermove="onRulerMove"
           @pointerup="onRulerUp"

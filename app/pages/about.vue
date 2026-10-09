@@ -50,7 +50,7 @@ useSeoMeta({
 
         <!-- Badge on a lanyard: its slot spans from the page top (and the
              full section height on desktop); the canvas covers the section -->
-        <AboutLanyard class="lg:col-span-5 order-1 lg:order-2 -mt-32 sm:-mt-40 h-[34rem] sm:h-[38rem] lg:h-auto lg:self-stretch lg:-mb-28" />
+        <AboutLanyard class="lg:col-span-5 order-1 lg:order-2 -mt-32 sm:-mt-40 h-[38rem] -mb-32 sm:h-[40rem] sm:-mb-36 lg:h-auto lg:self-stretch lg:-mb-28" />
       </div>
     </section>
     <AboutStats />
