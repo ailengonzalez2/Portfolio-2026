@@ -1,93 +1,27 @@
 <script setup lang="ts">
 // Off screen: the personal side, in Ailen's own words — dogs, photography,
-// 3D printing, and an eye for design everywhere. Hovering a block shows a
-// related photo as a polaroid that trails the cursor (tap on touch).
+// 3D printing, and an eye for design everywhere. Each block has its own
+// polaroid pinned above it, half over the title; hover (or focus, or a tap on
+// touch) sets it down. Angle, offset and size differ per block so they read
+// as photos dropped on a table, not copies.
 const items = [
-  { key: 'dogs', icon: 'i-lucide-dog', photo: '/about/off/dogs.jpg' },
-  // Placeholder photo until the per-topic ones arrive.
-  { key: 'photo', icon: 'i-lucide-camera', photo: '/about/off/dogs.jpg' },
-  { key: 'print', icon: 'i-lucide-box', photo: '/about/off/dogs.jpg' },
-  { key: 'design', icon: 'i-lucide-eye', photo: '/about/off/dogs.jpg' }
+  { key: 'dogs', icon: 'i-lucide-dog', photo: '/about/off/dogs.jpg', rot: -6, x: '4%', w: '11.5rem' },
+  // Placeholder photos until the per-topic ones arrive.
+  { key: 'photo', icon: 'i-lucide-camera', photo: '/about/off/dogs.jpg', rot: 4, x: '34%', w: '10rem' },
+  { key: 'print', icon: 'i-lucide-box', photo: '/about/off/dogs.jpg', rot: -2.5, x: '18%', w: '12rem' },
+  { key: 'design', icon: 'i-lucide-eye', photo: '/about/off/dogs.jpg', rot: 7, x: '26%', w: '10.5rem' }
 ] as const
-type Item = typeof items[number]
-const photos = [...new Set(items.map(i => i.photo))]
-// The polaroid sits centered above the cursor, kept inside the section.
-const CARD = 216
-const GAP = 20
 
-const section = ref<HTMLElement | null>(null)
-const active = ref<Item | null>(null)
-// Where the pointer is (target) and where the polaroid is (eased toward it).
-const target = { x: 0, y: 0 }
-const pos = reactive({ x: 0, y: 0, tilt: 0 })
-const width = ref(0)
-const x = computed(() => Math.min(Math.max(pos.x, CARD / 2), Math.max(CARD / 2, width.value - CARD / 2)))
-let raf = 0
-let still = false
-
-const local = (e: PointerEvent) => {
-  const r = section.value!.getBoundingClientRect()
-  width.value = r.width
-  return { x: e.clientX - r.left, y: e.clientY - r.top }
-}
-
-const follow = () => {
-  const dx = target.x - pos.x
-  pos.x += dx * 0.16
-  pos.y += (target.y - pos.y) * 0.16
-  // Lean into horizontal movement, settle back to a slight resting angle.
-  pos.tilt += (Math.max(-12, Math.min(12, dx * 0.08)) - 3 - pos.tilt) * 0.12
-  raf = requestAnimationFrame(follow)
-}
-
-function show(item: Item, e: PointerEvent) {
-  if (!('photo' in item)) return
-  const p = local(e)
-  target.x = p.x
-  target.y = p.y
-  if (!active.value) {
-    pos.x = p.x
-    pos.y = p.y
-    pos.tilt = -3
-  }
-  active.value = item
-  cancelAnimationFrame(raf)
-  if (!still) raf = requestAnimationFrame(follow)
-}
-
-function onEnter(item: Item, e: PointerEvent) {
-  if (e.pointerType === 'mouse') show(item, e)
-}
-function onMove(item: Item, e: PointerEvent) {
-  if (e.pointerType !== 'mouse' || active.value !== item) return
-  const p = local(e)
-  target.x = p.x
-  target.y = p.y
-  if (still) Object.assign(pos, p)
-}
-function onLeave(e: PointerEvent) {
-  if (e.pointerType !== 'mouse') return
-  active.value = null
-  cancelAnimationFrame(raf)
-}
-// Touch: tap a block to show its photo, tap again (or another block) to hide.
-function onTap(item: Item, e: PointerEvent) {
+// Touch has no hover: a tap opens a block's photo, another tap closes it.
+const open = ref<string | null>(null)
+function onTap(key: string, e: PointerEvent) {
   if (e.pointerType === 'mouse') return
-  if (active.value === item) active.value = null
-  else show(item, e)
+  open.value = open.value === key ? null : key
 }
-
-onMounted(() => {
-  still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-})
-onBeforeUnmount(() => cancelAnimationFrame(raf))
 </script>
 
 <template>
-  <section
-    ref="section"
-    class="relative max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16 pb-24 sm:pb-32"
-  >
+  <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16 pb-24 sm:pb-32">
     <h2 class="font-mono font-normal text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
       {{ $t('about.offScreen.heading') }}
     </h2>
@@ -95,12 +29,27 @@ onBeforeUnmount(() => cancelAnimationFrame(raf))
       <li
         v-for="item in items"
         :key="item.key"
-        class="border-t border-hairline pt-6"
-        @pointerenter="onEnter(item, $event)"
-        @pointermove="onMove(item, $event)"
-        @pointerleave="onLeave"
-        @pointerup="onTap(item, $event)"
+        class="off-item relative border-t border-hairline pt-6 outline-none"
+        :class="{ 'is-open': open === item.key }"
+        :style="{ '--rot': `${item.rot}deg`, '--x': item.x, '--w': item.w }"
+        tabindex="0"
+        @pointerup="onTap(item.key, $event)"
       >
+        <!-- Decorative: the text below says what the photo shows -->
+        <figure
+          class="polaroid"
+          aria-hidden="true"
+        >
+          <NuxtImg
+            :src="item.photo"
+            alt=""
+            width="400"
+            height="500"
+            fit="cover"
+            loading="lazy"
+            class="block w-full aspect-[4/5] object-cover"
+          />
+        </figure>
         <HalftoneReveal>
           <UIcon
             :name="item.icon"
@@ -115,79 +64,47 @@ onBeforeUnmount(() => cancelAnimationFrame(raf))
         </HalftoneReveal>
       </li>
     </ul>
-
-    <!-- Polaroid that trails the pointer; decorative, the text says it all -->
-    <div
-      class="pointer-events-none absolute left-0 top-0 z-20"
-      :style="{ transform: `translate3d(${x}px, ${pos.y - GAP}px, 0)` }"
-      aria-hidden="true"
-    >
-      <Transition name="polaroid">
-        <figure
-          v-if="active && 'photo' in active"
-          :key="active.key"
-          class="polaroid"
-          :style="{ '--tilt': `${pos.tilt}deg` }"
-        >
-          <NuxtImg
-            :src="active.photo"
-            alt=""
-            width="440"
-            height="550"
-            fit="cover"
-            class="block w-full aspect-[4/5] object-cover"
-          />
-        </figure>
-      </Transition>
-    </div>
-    <!-- Preload so the first hover shows the photo right away -->
-    <NuxtImg
-      v-for="src in photos"
-      :key="src"
-      :src="src"
-      alt=""
-      width="440"
-      height="550"
-      fit="cover"
-      loading="eager"
-      class="hidden"
-    />
   </section>
 </template>
 
 <style scoped>
+.off-item:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+/* Bottom edge sits about halfway down the title. */
 .polaroid {
-  width: 216px;
-  padding: 0.6rem 0.6rem 2.6rem;
+  position: absolute;
+  z-index: 20;
+  left: var(--x);
+  bottom: calc(100% - 5.25rem);
+  width: var(--w);
+  padding: 0.55rem 0.55rem 2.4rem;
   background: #fbfaf7;
   border-radius: 3px;
   box-shadow:
     0 1px 1px rgb(18 18 18 / 0.08),
-    0 12px 28px -8px rgb(18 18 18 / 0.35);
-  /* Bottom edge just above the cursor, horizontally centered on it. */
-  transform: translate(-50%, -100%) rotate(var(--tilt, -3deg));
-  transform-origin: 50% 100%;
-}
-.polaroid-enter-active,
-.polaroid-leave-active {
-  transition: opacity 0.25s ease, scale 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-/* Rises up out of the cursor. */
-.polaroid-enter-from,
-.polaroid-leave-to {
+    0 14px 30px -10px rgb(18 18 18 / 0.4);
+  pointer-events: none;
   opacity: 0;
-  scale: 0.85;
-  translate: 0 16px;
+  transform: translateY(14px) rotate(calc(var(--rot) + 5deg)) scale(0.9);
+  transform-origin: 50% 100%;
+  transition:
+    opacity 0.2s ease,
+    transform 0.4s cubic-bezier(0.2, 0.9, 0.25, 1.15);
+}
+.off-item:hover .polaroid,
+.off-item:focus-visible .polaroid,
+.off-item.is-open .polaroid {
+  opacity: 1;
+  transform: translateY(0) rotate(var(--rot)) scale(1);
 }
 @media (prefers-reduced-motion: reduce) {
-  .polaroid-enter-active,
-  .polaroid-leave-active {
+  .polaroid {
+    transform: rotate(var(--rot));
     transition: opacity 0.15s ease;
-  }
-  .polaroid-enter-from,
-  .polaroid-leave-to {
-    scale: 1;
-    translate: none;
   }
 }
 </style>
