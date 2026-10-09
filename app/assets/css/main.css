@@ -87,10 +87,6 @@
 
 /* Scroll tracks only stretch when the WebGL path runs */
 .fx-on .hero-track { height: 160vh; }
-@media (min-width: 1024px) {
-  /* Process pins only on desktop (lg:sticky) */
-  .fx-on .process-track { height: 400vh; }
-}
 
 /* Halftone reveal: the DOM-only analog of particles. Content shows through a
    grid of dots that grow until solid (see components/fx/HalftoneReveal.vue). */

@@ -74,7 +74,8 @@
         "label": "Código",
         "body": "Lo llevo a producción en Vue y Nuxt. El diseño es el producto, no un handoff."
       }
-    }
+    },
+    "hint": "Pasá el mouse por la imagen de arriba hacia abajo, o arrastrá la regla, para verla pasar de boceto a código."
   },
   "lab": {
     "eyebrow": "El lab",
