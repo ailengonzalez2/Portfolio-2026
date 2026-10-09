@@ -79,11 +79,9 @@
   },
   "lab": {
     "eyebrow": "The lab",
-    "title": "Play with my animations",
-    "intro": "Interactive experiments I build on my own. Watch them move, then open one and play.",
-    "play": "Play",
-    "prev": "Previous animation",
-    "next": "Next animation",
+    "title": "Not everything I build has a client.",
+    "intro": "Experiments stay loose until you touch them.",
+    "hint": "Hover to assemble · tap twice on touch",
     "seeAll": "See the whole lab"
   },
   "work": {
@@ -320,5 +318,22 @@
   },
   "common": {
     "switchLanguage": "Switch language"
+  },
+  "play": {
+    "eyebrow": "Interactive",
+    "title": "Play with my animations",
+    "intro": "One of my animations, live. Move closer, grab an arm and stretch it.",
+    "play": "Play",
+    "newTab": "Open in a new tab",
+    "howItsMade": "How it's made",
+    "loading": "Loading the animation…",
+    "seeAll": "See the whole lab",
+    "notes": {
+      "jelly": {
+        "a": "Soft-body physics: grab an arm, stretch it, and it wobbles back.",
+        "b": "Rendered with WebGPU through Three.js.",
+        "c": "A translucent, speckled material that makes it feel like jelly."
+      }
+    }
   }
 }

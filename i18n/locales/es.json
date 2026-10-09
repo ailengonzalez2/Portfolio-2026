@@ -79,11 +79,9 @@
   },
   "lab": {
     "eyebrow": "El lab",
-    "title": "Jugá con mis animaciones",
-    "intro": "Experimentos interactivos que hago por mi cuenta. Mirá cómo se mueven y abrí uno para jugar.",
-    "play": "Jugar",
-    "prev": "Animación anterior",
-    "next": "Animación siguiente",
+    "title": "No todo lo que construyo tiene un cliente.",
+    "intro": "Los experimentos quedan sueltos hasta que los tocás.",
+    "hint": "Pasá el mouse para armarlos · en el celular, tocá dos veces",
     "seeAll": "Ver todo el lab"
   },
   "work": {
@@ -320,5 +318,22 @@
   },
   "common": {
     "switchLanguage": "Cambiar idioma"
+  },
+  "play": {
+    "eyebrow": "Interactivo",
+    "title": "Jugá con mis animaciones",
+    "intro": "Una de mis animaciones, en vivo. Acercá el cursor, agarrá un brazo y estirala.",
+    "play": "Jugar",
+    "newTab": "Abrir en otra pestaña",
+    "howItsMade": "Cómo está hecho",
+    "loading": "Cargando la animación…",
+    "seeAll": "Ver todo el lab",
+    "notes": {
+      "jelly": {
+        "a": "Física de cuerpo blando: agarrás un brazo, lo estirás y vuelve a su forma.",
+        "b": "Renderizada con WebGPU a través de Three.js.",
+        "c": "Un material translúcido y moteado que la hace sentir de gelatina."
+      }
+    }
   }
 }

@@ -1,232 +1,207 @@
 <script setup lang="ts">
+import type { Project } from '~/data/projects'
 import { projects } from '~/data/projects'
 
-// "Play with my animations": the interactive experiments on a horizontal
-// shelf. Each frame loops its preview video while on screen (the cover image
-// stands in until a video exists); "Play" opens the live piece.
+// "Play with my animations": light interactive pieces embedded live, so you
+// play right on the page. A piece only runs while its frame is near the
+// viewport (and is unloaded when far away, to free the GPU), on desktop, and
+// — when it needs it — with WebGPU. Elsewhere it's the cover/video and
+// "Play" opens it in a new tab. Heavier experiments live in the Lab below.
 const items = projects.filter(p => p.playable)
 const localePath = useLocalePath()
+const notesKey = (p: Project) => p.id.replace(/-/g, '')
 
-const rail = ref<HTMLElement | null>(null)
-const canPrev = ref(false)
-const canNext = ref(true)
-// Arrows only when the shelf actually overflows (two pieces fit side by side).
-const scrollable = ref(false)
-const updateArrows = () => {
-  const el = rail.value
-  if (!el) return
-  scrollable.value = el.scrollWidth - el.clientWidth > 4
-  canPrev.value = el.scrollLeft > 4
-  canNext.value = el.scrollLeft + el.clientWidth < el.scrollWidth - 4
-}
-// One card per click, so the arrows step through the shelf.
-const page = (dir: 1 | -1) => {
-  const el = rail.value
-  const card = el?.querySelector('li')
-  if (!el || !card) return
-  el.scrollBy({ left: dir * (card.getBoundingClientRect().width + 32), behavior: 'smooth' })
-}
+const canEmbed = ref<Record<string, boolean>>({})
+const live = ref<Record<string, boolean>>({})
+const loaded = ref<Record<string, boolean>>({})
 
-// Videos play only while visible (and never with reduced motion).
 let observer: IntersectionObserver | undefined
 onMounted(() => {
-  updateArrows()
-  window.addEventListener('resize', updateArrows)
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const desktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches && window.innerWidth >= 1024
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  for (const p of items) canEmbed.value[p.id] = desktop && !still && (!p.webgpu || 'gpu' in navigator)
   observer = new IntersectionObserver((entries) => {
     for (const e of entries) {
-      const v = e.target as HTMLVideoElement
-      if (e.isIntersecting) v.play().catch(() => {})
-      else v.pause()
+      const id = (e.target as HTMLElement).dataset.id!
+      if (!canEmbed.value[id]) continue
+      live.value[id] = e.isIntersecting
+      if (!e.isIntersecting) loaded.value[id] = false
     }
-  }, { threshold: 0.4 })
-  rail.value?.querySelectorAll('video').forEach(v => observer!.observe(v))
+  }, { rootMargin: '300px 0px' })
+  document.querySelectorAll<HTMLElement>('#play [data-id]').forEach(el => observer!.observe(el))
 })
-onBeforeUnmount(() => {
-  observer?.disconnect()
-  window.removeEventListener('resize', updateArrows)
-})
+onBeforeUnmount(() => observer?.disconnect())
 </script>
 
 <template>
   <section
-    id="lab"
-    class="bg-ink text-paper py-24 sm:py-32 overflow-hidden"
+    id="play"
+    class="bg-ink text-paper py-24 sm:py-32"
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-wrap items-end justify-between gap-8">
-        <div class="max-w-2xl">
-          <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-paper/60">
-            {{ $t('lab.eyebrow') }}
-          </p>
-          <h2 class="mt-4 font-display font-normal text-4xl sm:text-6xl leading-[0.98] tracking-[-0.02em]">
-            {{ $t('lab.title') }}
-          </h2>
-          <p class="mt-6 text-lg text-paper/70">
-            {{ $t('lab.intro') }}
-          </p>
-        </div>
-        <div
-          v-if="scrollable"
-          class="flex gap-2"
-        >
-          <button
-            type="button"
-            class="rail-arrow"
-            :disabled="!canPrev"
-            :aria-label="$t('lab.prev')"
-            @click="page(-1)"
-          >
-            <UIcon
-              name="i-lucide-arrow-left"
-              class="size-5"
-            />
-          </button>
-          <button
-            type="button"
-            class="rail-arrow"
-            :disabled="!canNext"
-            :aria-label="$t('lab.next')"
-            @click="page(1)"
-          >
-            <UIcon
-              name="i-lucide-arrow-right"
-              class="size-5"
-            />
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- The shelf: scrolls sideways, snaps to each piece, bleeds off the right edge -->
-    <ul
-      ref="rail"
-      class="rail mt-14 sm:mt-16 flex gap-8 overflow-x-auto snap-x snap-mandatory pb-4"
-      @scroll.passive="updateArrows"
-    >
-      <li
+      <article
         v-for="p in items"
         :key="p.id"
-        class="snap-start shrink-0 w-[82vw] sm:w-[60vw] lg:w-[calc((min(100vw,80rem)-6rem)/2)]"
+        class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center"
       >
-        <a
-          :href="p.links.preview"
-          target="_blank"
-          rel="noopener"
-          class="group block"
-          data-umami-event="play-animation"
-          :data-umami-event-project="p.id"
+        <!-- The piece itself: live where it can run, the cover elsewhere -->
+        <div
+          :data-id="p.id"
+          class="lg:col-span-8 relative aspect-[16/10] overflow-hidden rounded-lg bg-black"
         >
-          <div class="relative aspect-[16/10] overflow-hidden rounded-md bg-paper/5">
-            <video
-              v-if="p.video"
-              :src="p.video"
-              :poster="p.image"
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              class="size-full object-cover"
-            />
-            <NuxtImg
-              v-else
-              :src="p.image"
-              :alt="p.title"
-              sizes="82vw sm:60vw lg:44vw"
-              loading="lazy"
-              class="size-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-            />
-          </div>
-        </a>
-        <div class="mt-5 flex items-start justify-between gap-6">
-          <div>
-            <h3 class="font-display font-normal text-2xl sm:text-3xl leading-tight">
+          <video
+            v-if="p.video"
+            :src="p.video"
+            :poster="p.image"
+            muted
+            loop
+            autoplay
+            playsinline
+            class="absolute inset-0 size-full object-cover transition-opacity duration-500"
+            :class="{ 'opacity-0': loaded[p.id] }"
+          />
+          <NuxtImg
+            v-else
+            :src="p.image"
+            :alt="p.title"
+            sizes="100vw lg:66vw"
+            loading="lazy"
+            class="absolute inset-0 size-full object-cover transition-opacity duration-500"
+            :class="{ 'opacity-0': loaded[p.id] }"
+          />
+          <iframe
+            v-if="live[p.id] && p.links.preview"
+            :src="p.links.preview"
+            :title="p.title"
+            allow="fullscreen; gamepad"
+            scrolling="no"
+            class="absolute inset-0 size-full border-0 transition-opacity duration-500"
+            :class="loaded[p.id] ? 'opacity-100' : 'opacity-0'"
+            @load="loaded[p.id] = true"
+          />
+          <p
+            v-if="live[p.id] && !loaded[p.id]"
+            class="absolute inset-0 grid place-items-center font-mono text-xs uppercase tracking-[0.18em] text-paper/80 pointer-events-none"
+          >
+            {{ $t('play.loading') }}
+          </p>
+          <!-- Where it can't run inline: a clear way to open it -->
+          <a
+            v-if="!canEmbed[p.id]"
+            :href="p.links.preview"
+            target="_blank"
+            rel="noopener"
+            class="absolute inset-0 grid place-items-center"
+            data-umami-event="play-animation"
+            :data-umami-event-project="p.id"
+          >
+            <span class="play-link">
+              {{ $t('play.play') }}
+              <UIcon
+                name="i-lucide-arrow-up-right"
+                class="size-4"
+              />
+            </span>
+          </a>
+        </div>
+
+        <div class="lg:col-span-4">
+          <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-paper/60">
+            {{ $t('play.eyebrow') }}
+          </p>
+          <h2 class="mt-4 font-display font-normal text-4xl sm:text-5xl leading-[0.98] tracking-[-0.02em]">
+            {{ $t('play.title') }}
+          </h2>
+          <p class="mt-6 text-lg text-paper/70">
+            {{ $t('play.intro') }}
+          </p>
+
+          <div class="mt-10 border-t border-paper/15 pt-5">
+            <h3 class="font-display font-normal text-2xl">
               {{ p.title.split(' — ')[0] }}
             </h3>
             <p class="mt-1 text-sm text-paper/60">
               {{ p.labTag }}
             </p>
+            <details class="made mt-4">
+              <summary class="flex items-center gap-2 text-sm text-paper/70 hover:text-paper cursor-pointer select-none">
+                <UIcon
+                  name="i-lucide-plus"
+                  class="made-icon size-4"
+                />
+                {{ $t('play.howItsMade') }}
+              </summary>
+              <ul class="mt-3 space-y-2 text-sm text-paper/75 leading-relaxed">
+                <li
+                  v-for="n in ['a', 'b', 'c']"
+                  :key="n"
+                  class="flex gap-3"
+                >
+                  <span class="mt-2 size-1 shrink-0 rounded-full bg-paper/50" />
+                  {{ $t(`play.notes.${notesKey(p)}.${n}`) }}
+                </li>
+              </ul>
+            </details>
           </div>
-          <a
-            :href="p.links.preview"
-            target="_blank"
-            rel="noopener"
-            class="play-link shrink-0"
-            data-umami-event="play-animation"
-            :data-umami-event-project="p.id"
-          >
-            {{ $t('lab.play') }}
-            <UIcon
-              name="i-lucide-arrow-up-right"
-              class="size-4"
-            />
-          </a>
-        </div>
-      </li>
-    </ul>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <NuxtLink
-        :to="localePath('/projects#lab')"
-        class="mt-14 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-paper/70 hover:text-paper transition-colors"
-      >
-        {{ $t('lab.seeAll') }}
-        <UIcon
-          name="i-lucide-arrow-right"
-          class="size-4"
-        />
-      </NuxtLink>
+          <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <a
+              v-if="p.links.preview"
+              :href="p.links.preview"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 text-sm text-paper/80 hover:text-paper underline underline-offset-4 decoration-paper/30 hover:decoration-paper transition-colors"
+            >
+              {{ $t('play.newTab') }}
+              <UIcon
+                name="i-lucide-arrow-up-right"
+                class="size-4"
+              />
+            </a>
+            <NuxtLink
+              :to="localePath('/projects#lab')"
+              class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-paper/70 hover:text-paper transition-colors"
+            >
+              {{ $t('play.seeAll') }}
+              <UIcon
+                name="i-lucide-arrow-right"
+                class="size-4"
+              />
+            </NuxtLink>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 </template>
 
 <style scoped>
-/* Shelf starts aligned with the page content and runs off the right edge. */
-.rail {
-  padding-left: max(1rem, calc((100vw - 80rem) / 2 + 2rem));
-  scroll-padding-left: max(1rem, calc((100vw - 80rem) / 2 + 2rem));
-  padding-right: 2rem;
-  scrollbar-width: none;
-}
-.rail::-webkit-scrollbar {
-  display: none;
-}
-.rail-arrow {
-  display: grid;
-  place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 9999px;
-  border: 1px solid rgb(242 239 233 / 0.25);
-  transition: background-color 0.2s, opacity 0.2s, border-color 0.2s;
-  cursor: pointer;
-}
-.rail-arrow:hover:not(:disabled) {
-  background: rgb(242 239 233 / 0.1);
-  border-color: rgb(242 239 233 / 0.5);
-}
-.rail-arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
 .play-link {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.55rem 1.1rem;
+  padding: 0.7rem 1.4rem;
   border-radius: 9999px;
   background: linear-gradient(90deg, #2B3BFF, #C04BFF);
   color: #fff;
-  font-size: 0.9rem;
   font-weight: 500;
-  transition: filter 0.2s;
+  box-shadow: 0 10px 30px -10px rgb(43 59 255 / 0.6);
 }
-.play-link:hover {
-  filter: brightness(1.12);
+.made summary {
+  list-style: none;
 }
-.play-link:focus-visible,
-.rail-arrow:focus-visible {
+.made summary::-webkit-details-marker {
+  display: none;
+}
+.made-icon {
+  transition: transform 0.25s ease;
+}
+.made[open] .made-icon {
+  transform: rotate(45deg);
+}
+.made summary:focus-visible {
   outline: 2px solid #fff;
   outline-offset: 3px;
+  border-radius: 2px;
 }
 </style>

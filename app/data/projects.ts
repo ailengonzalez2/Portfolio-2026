@@ -55,9 +55,11 @@ export interface Project {
   processSnippet?: string
   /** Short tech label for Lab experiments on the home, e.g. 'WebGPU · soft-body'. */
   labTag?: string
-  /** An interactive animation: shown in the home "play with my animations" rail */
+  /** Light interactive piece embedded live on the home ("play with my animations") */
   playable?: boolean
-  /** Looping preview video for the rail (mp4/webm in /public); the cover image is its poster */
+  /** Needs WebGPU: only embedded live where the browser supports it */
+  webgpu?: boolean
+  /** Looping preview video (mp4/webm in /public); the cover image is its poster */
   video?: string
 }
 
@@ -320,7 +322,6 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
   {
     id: 'loft-3d',
     kind: 'lab',
-    playable: true,
     labTag: 'Three.js · 3D',
     title: 'Interactive Loft — 3D Scene',
     description: 'A loft you can orbit around in the browser. Everything that lights up on hover is clickable: furniture opens panels, objects on the table do their own thing, and a Shiba wanders through.',
@@ -376,6 +377,7 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
     id: 'jelly',
     kind: 'lab',
     playable: true,
+    webgpu: true,
     labTag: 'WebGPU · soft-body',
     title: 'Jelly — Squishy WebGPU Starfish',
     description: 'A translucent starfish that lives in your browser. Move to make a friend, grab an arm, stretch it and let go — a small experiment in soft-body physics and WebGPU rendering with Three.js.',
