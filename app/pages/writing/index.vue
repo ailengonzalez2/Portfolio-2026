@@ -1,8 +1,7 @@
 <script setup lang="ts">
 definePageMeta({ colorMode: 'light' })
 
-const { t, locale } = useI18n()
-const localizedTo = useLocalizedTo()
+const { t } = useI18n()
 const localePath = useLocalePath()
 
 useSeoMeta({
@@ -21,137 +20,141 @@ const postKeys = ['streaming', 'ragEvals', 'figmaVue', 'defiUi'] as const
 const publishedKeys = computed(() => new Set((posts.value || []).map(p => p.i18nKey)))
 const comingSoonKeys = computed(() => postKeys.filter(k => !publishedKeys.value.has(k)))
 
-const formatDate = (date: string) =>
-  new Date(date).toLocaleDateString(locale.value === 'es' ? 'es-AR' : 'en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    timeZone: 'UTC'
-  })
+// "7 min read" → "7 min" (reads the same in both languages).
+const minutes = (readingTime?: string) => readingTime?.match(/\d+/)?.[0]
 </script>
 
 <template>
   <UPage>
-    <section class="pt-24 pb-24 sm:pt-32 relative min-h-screen">
-      <!-- Background decorations -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-        <div class="absolute top-1/4 right-0 w-[600px] h-[600px] bg-linear-to-bl from-violet-300/10 to-transparent rounded-full blur-3xl" />
-        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-linear-to-tr from-cyan-300/10 to-transparent rounded-full blur-3xl" />
-      </div>
+    <section class="pt-32 sm:pt-44 pb-24 sm:pb-32">
+      <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16">
+        <ResolveText
+          :text="$t('writing.title')"
+          tag="h1"
+          on="load"
+          class="max-w-[14em] text-balance font-display font-normal text-5xl sm:text-7xl leading-[0.95] tracking-[-0.03em] text-ink dark:text-paper"
+        />
+        <p class="mt-8 max-w-xl text-lg text-body">
+          {{ $t('writing.intro') }}
+        </p>
 
-      <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Motion
-          :initial="{ opacity: 0, y: 20 }"
-          :while-in-view="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.5 }"
-          :in-view-options="{ once: true }"
-        >
-          <SectionEyebrow
-            :label="$t('writing.section')"
-            class="mb-8"
-          />
-
-          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold text-heading dark:text-white tracking-tight mb-4">
-            {{ $t('writing.title') }}
-          </h1>
-          <p class="text-base sm:text-lg text-body dark:text-neutral-400 leading-relaxed mb-16 max-w-2xl">
-            {{ $t('writing.intro') }}
-          </p>
-        </Motion>
-
-        <div class="space-y-3">
-          <!-- Published posts -->
-          <Motion
-            v-for="(post, index) in posts"
+        <!-- Editorial index: one row per post. Titles and blurbs come from
+             i18n so the list reads in the page's language. -->
+        <ol class="posts mt-16 sm:mt-24 border-b border-hairline">
+          <li
+            v-for="post in posts"
             :key="post.path"
-            :initial="{ opacity: 0, y: 20 }"
-            :while-in-view="{ opacity: 1, y: 0 }"
-            :transition="{ duration: 0.4, delay: 0.1 + index * 0.05 }"
-            :in-view-options="{ once: true }"
           >
             <NuxtLink
               :to="localePath(post.path)"
-              class="group flex flex-col sm:flex-row gap-3 sm:gap-6 p-5 sm:p-6 rounded-2xl border border-hairline dark:border-neutral-800 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"
+              class="post group"
             >
-              <div class="shrink-0">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-[0.5px] font-medium text-primary bg-primary/10">
-                  {{ post.category }}
-                </span>
-              </div>
-              <div class="grow">
-                <h3 class="text-lg sm:text-xl font-semibold text-heading dark:text-white mb-1.5 leading-snug group-hover:text-primary transition-colors">
-                  {{ post.title }}
-                </h3>
-                <p class="text-sm text-body dark:text-neutral-400 leading-relaxed mb-2">
-                  {{ post.description }}
-                </p>
-                <p class="text-[11px] uppercase tracking-[0.5px] font-medium text-label">
-                  {{ formatDate(post.date) }}<template v-if="post.readingTime"> · {{ post.readingTime }}</template>
+              <p class="text-sm text-label">
+                {{ $t(`writing.posts.${post.i18nKey}.category`) }}
+                <span
+                  v-if="minutes(post.readingTime)"
+                  class="block mt-1"
+                >{{ minutes(post.readingTime) }} min</span>
+              </p>
+              <div>
+                <h2 class="font-display font-normal text-2xl sm:text-3xl leading-tight text-ink dark:text-paper">
+                  {{ $t(`writing.posts.${post.i18nKey}.title`) }}
+                </h2>
+                <p class="mt-3 max-w-xl text-body leading-relaxed">
+                  {{ $t(`writing.posts.${post.i18nKey}.blurb`) }}
                 </p>
               </div>
               <UIcon
                 name="i-lucide-arrow-up-right"
-                class="hidden sm:block size-5 shrink-0 self-start text-label group-hover:text-primary transition-colors"
+                class="post-arrow hidden sm:block size-5 text-ink dark:text-paper"
               />
             </NuxtLink>
-          </Motion>
+          </li>
 
-          <!-- Coming soon teasers -->
-          <Motion
-            v-for="(key, index) in comingSoonKeys"
+          <!-- Planned posts without an article yet: same row, no link -->
+          <li
+            v-for="key in comingSoonKeys"
             :key="key"
-            :initial="{ opacity: 0, y: 20 }"
-            :while-in-view="{ opacity: 1, y: 0 }"
-            :transition="{ duration: 0.4, delay: 0.1 + ((posts?.length || 0) + index) * 0.05 }"
-            :in-view-options="{ once: true }"
           >
-            <article class="group flex flex-col sm:flex-row gap-3 sm:gap-6 p-5 sm:p-6 rounded-2xl border border-hairline dark:border-neutral-800 bg-white/40 dark:bg-neutral-900/40 backdrop-blur-sm">
-              <div class="shrink-0">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] uppercase tracking-[0.5px] font-medium text-primary-custom dark:text-neutral-300 bg-surface dark:bg-neutral-800">
-                  {{ $t(`writing.posts.${key}.category`) }}
-                </span>
-              </div>
-              <div class="grow">
-                <h3 class="text-lg sm:text-xl font-semibold text-heading dark:text-white mb-1.5 leading-snug">
+            <div class="post post--soon">
+              <p class="text-sm text-label">
+                {{ $t(`writing.posts.${key}.category`) }}
+                <span class="block mt-1">{{ $t('writing.comingSoon') }}</span>
+              </p>
+              <div>
+                <h2 class="font-display font-normal text-2xl sm:text-3xl leading-tight text-label">
                   {{ $t(`writing.posts.${key}.title`) }}
-                </h3>
-                <p class="text-sm text-body dark:text-neutral-400 leading-relaxed mb-2">
+                </h2>
+                <p class="mt-3 max-w-xl text-body leading-relaxed">
                   {{ $t(`writing.posts.${key}.blurb`) }}
                 </p>
-                <p class="text-[11px] uppercase tracking-[0.5px] font-medium text-label">
-                  {{ $t('writing.comingSoon') }}
-                </p>
               </div>
-            </article>
-          </Motion>
-        </div>
-
-        <!-- CTA -->
-        <Motion
-          :initial="{ opacity: 0 }"
-          :while-in-view="{ opacity: 1 }"
-          :transition="{ duration: 0.5, delay: 0.4 }"
-          :in-view-options="{ once: true }"
-          class="mt-16 p-8 rounded-2xl bg-linear-to-br from-violet-50 to-orange-50 dark:from-violet-950/30 dark:to-orange-950/20 border border-violet-100 dark:border-violet-900/50 text-center"
-        >
-          <p class="text-base sm:text-lg text-primary-custom mb-4">
-            {{ $t('writing.ctaText') }}
-          </p>
-          <UButton
-            :to="localizedTo('/#contact')"
-            size="lg"
-            class="btn-gradient text-white rounded-full px-6"
-          >
-            {{ $t('writing.ctaButton') }}
-            <template #trailing>
-              <UIcon
-                name="i-lucide-arrow-up-right"
-                class="size-4"
-              />
-            </template>
-          </UButton>
-        </Motion>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
   </UPage>
 </template>
+
+<style scoped>
+.post {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  padding: 2rem 0 2.25rem;
+  border-top: 1px solid var(--color-hairline);
+  transition: opacity 0.3s ease;
+}
+@media (min-width: 640px) {
+  .post {
+    grid-template-columns: 10rem 1fr auto;
+    gap: 2.5rem;
+  }
+}
+.post:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 4px;
+}
+/* Hover, same gesture as the about page: the brand gradient draws across the
+   row's top rule, the arrow comes in, the other rows step back. */
+.post::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #2B3BFF, #7643FF 50%, #C04BFF);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.post-arrow {
+  opacity: 0;
+  translate: -6px 6px;
+  transition: opacity 0.3s ease, translate 0.3s ease;
+}
+a.post:hover::before,
+a.post:focus-visible::before {
+  transform: scaleX(1);
+}
+a.post:hover .post-arrow,
+a.post:focus-visible .post-arrow {
+  opacity: 1;
+  translate: 0 0;
+}
+@media (hover: hover) {
+  .posts:has(a.post:hover) li:not(:has(a.post:hover)) .post {
+    opacity: 0.45;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .post,
+  .post::before,
+  .post-arrow {
+    transition: none;
+  }
+}
+</style>
