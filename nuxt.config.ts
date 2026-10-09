@@ -7,7 +7,6 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@vueuse/nuxt',
     '@nuxtjs/seo',
-    'motion-v/nuxt',
     '@nuxtjs/i18n'
   ],
 

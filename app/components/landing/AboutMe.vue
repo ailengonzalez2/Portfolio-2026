@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useScroll } from 'motion-v'
 import { remap } from '~/webgl/math'
 
 const { t } = useI18n()
@@ -33,17 +32,14 @@ const certifications = computed(() => [
 
 // The trajectory line draws itself as the list scrolls through the viewport.
 const timeline = ref<HTMLElement | null>(null)
-const { scrollYProgress } = useScroll({ target: timeline, offset: ['start 0.75', 'end 0.6'] })
+const scrolled = useScrollProgress(timeline, ['start 0.75', 'end 0.6'])
 const drawn = ref(1)
-let off: (() => void) | undefined
 onMounted(() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-  drawn.value = remap(scrollYProgress.get(), 0, 1)
-  off = scrollYProgress.on('change', (v) => {
+  watch(scrolled, (v) => {
     drawn.value = remap(v, 0, 1)
-  })
+  }, { immediate: true })
 })
-onBeforeUnmount(() => off?.())
 </script>
 
 <template>

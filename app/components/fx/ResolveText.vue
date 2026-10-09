@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useScroll } from 'motion-v'
 import { findPhrase, splitWords, wordProgress } from '~/webgl/math'
 import { tween } from '~/webgl/loop'
 
@@ -21,8 +20,7 @@ const progress = ref(1)
 const words = computed(() => splitWords(props.text))
 const range = computed(() => props.highlight ? findPhrase(words.value, splitWords(props.highlight)) : null)
 
-const { scrollYProgress } = useScroll({ target: root, offset: ['start 0.85', 'end 0.45'] })
-let off: (() => void) | undefined
+const scrolled = useScrollProgress(root, ['start 0.85', 'end 0.45'])
 onMounted(() => {
   if (props.on === 'load') {
     progress.value = 0
@@ -31,12 +29,10 @@ onMounted(() => {
     })
     return
   }
-  progress.value = scrollYProgress.get()
-  off = scrollYProgress.on('change', (v) => {
+  watch(scrolled, (v) => {
     progress.value = v
-  })
+  }, { immediate: true })
 })
-onBeforeUnmount(() => off?.())
 
 const wp = (i: number) => fx.value ? wordProgress(progress.value, i, words.value.length) : 1
 

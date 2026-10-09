@@ -116,3 +116,20 @@ export const gridSize = (cols: number, aspect: number) => ({ cols, rows: Math.ma
 
 /** Opacity of the crisp DOM image over its particle layer (particles get 1 - this). */
 export const crispAmount = (progress: number, latent: number) => remap(progress, 0.92, 1) * (1 - clamp01(latent))
+
+/** "start" | "center" | "end" | a 0–1 fraction → fraction. */
+const edgeFactor = (e: string) => (e === 'start' ? 0 : e === 'center' ? 0.5 : e === 'end' ? 1 : Number(e))
+
+/**
+ * Scroll progress (0–1) of an element, with motion-style offsets: each entry
+ * is "<element edge> <viewport edge>", e.g. ['start end', 'end start'] runs
+ * from the element's top meeting the viewport bottom until its bottom meets
+ * the viewport top. `top` is the element's top in document coordinates.
+ */
+export function scrollProgress(scrollY: number, top: number, height: number, viewportHeight: number, offset: [string, string]) {
+  const [s, e] = offset.map((o) => {
+    const [el, vp] = o.split(' ') as [string, string]
+    return top + edgeFactor(el) * height - edgeFactor(vp) * viewportHeight
+  }) as [number, number]
+  return remap(scrollY, s, e)
+}

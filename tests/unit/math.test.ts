@@ -2,7 +2,7 @@ import { describe, expect, test } from 'bun:test'
 import {
   clamp01, remap, enterProgress, rectToPlane, isOnScreen, shouldUseWebGL,
   splitWords, wordProgress, findPhrase, heroName, stageAt, hexToRgb01,
-  gradientAt, gridSize, crispAmount, loadingDensity, LOADING_DENSITY
+  gradientAt, gridSize, crispAmount, loadingDensity, LOADING_DENSITY, scrollProgress
 } from '../../app/webgl/math'
 
 describe('clamp01 / remap', () => {
@@ -169,4 +169,27 @@ test('the loading field starts empty and fills to LOADING_DENSITY', () => {
   expect(loadingDensity(1)).toBeLessThan(LOADING_DENSITY)
   expect(loadingDensity(2.5)).toBeCloseTo(LOADING_DENSITY)
   expect(loadingDensity(10)).toBeCloseTo(LOADING_DENSITY)
+})
+
+describe('scrollProgress (motion-style offsets)', () => {
+  // Element 400px tall at document y=1000, viewport 800px.
+  const p = (y: number, offset: [string, string]) => scrollProgress(y, 1000, 400, 800, offset)
+  test('start end → end start runs from entering to leaving', () => {
+    expect(p(200, ['start end', 'end start'])).toBe(0) // top meets bottom
+    expect(p(1400, ['start end', 'end start'])).toBe(1) // bottom meets top
+    expect(p(800, ['start end', 'end start'])).toBeCloseTo(0.5)
+  })
+  test('start start → end end (a pinned track taller than the viewport)', () => {
+    const track = (y: number) => scrollProgress(y, 1000, 2000, 800, ['start start', 'end end'])
+    expect(track(1000)).toBe(0)
+    expect(track(1600)).toBeCloseTo(0.5)
+    expect(track(2200)).toBe(1)
+  })
+  test('fractions of the viewport', () => {
+    expect(p(1000 - 0.85 * 800, ['start 0.85', 'end 0.45'])).toBe(0)
+    expect(p(1400 - 0.45 * 800, ['start 0.85', 'end 0.45'])).toBe(1)
+  })
+  test('center center', () => {
+    expect(p(1000 + 200 - 400, ['start end', 'center center'])).toBe(1)
+  })
 })

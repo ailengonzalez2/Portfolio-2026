@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Motion, useScroll, useTransform } from 'motion-v'
-import { easeOutCubic, heroName, LOADING_DENSITY } from '~/webgl/math'
+import { easeOutCubic, heroName, LOADING_DENSITY, remap } from '~/webgl/math'
 
 // Particles assemble into the name on load; scrolling disperses it back into
 // the ambient field before the manifesto. The track is 160vh only on the
@@ -9,10 +8,10 @@ import { easeOutCubic, heroName, LOADING_DENSITY } from '~/webgl/math'
 const fx = useFxEnabled()
 
 const track = ref<HTMLElement | null>(null)
-const scroll = ref(0)
 const intro = ref(1)
-const { scrollYProgress } = useScroll({ target: track, offset: ['start start', 'end end'] })
-const copyOpacity = useTransform(scrollYProgress, [0.1, 0.5], [1, 0])
+const scroll = useScrollProgress(track, ['start start', 'end end'])
+// Eyebrow and subtitle fade out as the title disperses.
+const copyOpacity = computed(() => 1 - remap(scroll.value, 0.1, 0.5))
 
 const nameProgress = computed(() => heroName(scroll.value, intro.value))
 
@@ -70,20 +69,14 @@ const playIntro = async () => {
   if (mine === run) field.value = 0
 }
 
-let off: (() => void) | undefined
 let bootTimer: ReturnType<typeof setTimeout> | undefined
 onMounted(() => {
   // Particles never showed up (layer failed): show the plain title.
   bootTimer = setTimeout(() => {
     if (loading.value) endBoot()
   }, BOOT_TIMEOUT_MS)
-  scroll.value = scrollYProgress.get()
-  off = scrollYProgress.on('change', (v) => {
-    scroll.value = v
-  })
 })
 onBeforeUnmount(() => {
-  off?.()
   clearTimeout(bootTimer)
   run++
 })
@@ -103,11 +96,11 @@ onBeforeUnmount(() => {
         <LoadingField v-if="fx && loading" />
       </Transition>
       <div class="absolute inset-0 flex flex-col justify-center px-6 sm:px-10 lg:pl-28 lg:pr-16 pt-20">
-        <Motion :style="fx ? { opacity: copyOpacity } : undefined">
+        <div :style="fx ? { opacity: copyOpacity } : undefined">
           <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
             Ailen Gonzalez
           </p>
-        </Motion>
+        </div>
 
         <div class="relative mt-6 self-start">
           <ParticleName
@@ -127,11 +120,11 @@ onBeforeUnmount(() => {
           </ParticleName>
         </div>
 
-        <Motion :style="fx ? { opacity: copyOpacity } : undefined">
+        <div :style="fx ? { opacity: copyOpacity } : undefined">
           <p class="mt-8 max-w-xl text-lg sm:text-xl text-body">
             {{ $t('hero.subtitle') }}
           </p>
-        </Motion>
+        </div>
       </div>
     </div>
   </section>

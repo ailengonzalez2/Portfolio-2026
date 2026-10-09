@@ -33,7 +33,7 @@ bun run typecheck
 
 - **Framework**: Nuxt 4 with TypeScript
 - **UI**: Nuxt UI 4 (Tailwind CSS v4 + Reka UI)
-- **Animations**: motion-v (`<Motion>` component)
+- **Animations**: own lightweight pieces — `<Reveal>` (fade/rise in on first view) and `useScrollProgress()` (scroll progress 0–1 with motion-style offsets); WebGL particles in `app/webgl/`
 - **Icons**: Iconify (lucide & simple-icons sets)
 - **Images**: @nuxt/image
 - **Package Manager**: Bun
@@ -99,14 +99,14 @@ Uses new import syntax in main.css:
 - Use `defineProps<T>()` with TypeScript generics
 - Prefer Nuxt UI components: UButton, UIcon, UCard, UPage, UPageHero, etc.
 
-### Animations with motion-v
+### Animations
 ```vue
-<Motion
-  :initial="{ opacity: 0, y: 20 }"
-  :while-in-view="{ opacity: 1, y: 0 }"
-  :transition="{ duration: 0.5 }"
-  :in-view-options="{ once: true }"
->
+<!-- Fade + rise in the first time it scrolls into view -->
+<Reveal :y="20" :duration="0.5" :delay="0.1">…</Reveal>
+```
+```ts
+// Scroll progress of an element, 0 → 1 (offsets like motion's useScroll)
+const progress = useScrollProgress(el, ['start end', 'end start'])
 ```
 
 ## Configuration

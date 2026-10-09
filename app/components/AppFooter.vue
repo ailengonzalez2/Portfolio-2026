@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { useScroll } from 'motion-v'
 import { remap } from '~/webgl/math'
 
 const { t } = useI18n()
@@ -23,16 +22,8 @@ const segments = computed(() => [
 const sectionRef = ref<HTMLElement | null>(null)
 
 // The statement assembles from particles as the footer scrolls into view.
-const { scrollYProgress: footerScroll } = useScroll({ target: sectionRef, offset: ['start end', 'end end'] })
-const statementProgress = ref(0)
-let offScroll: (() => void) | undefined
-onMounted(() => {
-  statementProgress.value = remap(footerScroll.get(), 0.25, 0.85)
-  offScroll = footerScroll.on('change', (v) => {
-    statementProgress.value = remap(v, 0.25, 0.85)
-  })
-})
-onUnmounted(() => offScroll?.())
+const footerScroll = useScrollProgress(sectionRef, ['start end', 'end end'])
+const statementProgress = computed(() => remap(footerScroll.value, 0.25, 0.85))
 const overlayRef = ref<HTMLElement | null>(null)
 const trailBg = ref('none')
 
@@ -111,11 +102,9 @@ onUnmounted(() => {
     >
       <div class="w-full max-w-6xl mx-auto">
         <!-- Brand statement: Design + Code + AI -->
-        <Motion
-          :initial="{ opacity: 0, y: 30 }"
-          :while-in-view="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6 }"
-          :in-view-options="{ once: true }"
+        <Reveal
+          :y="30"
+          :duration="0.6"
           class="text-center"
         >
           <ParticleName
@@ -148,14 +137,13 @@ onUnmounted(() => {
               </h2>
             </div>
           </ParticleName>
-        </Motion>
+        </Reveal>
 
         <!-- Book a call -->
-        <Motion
-          :initial="{ opacity: 0, y: 20 }"
-          :while-in-view="{ opacity: 1, y: 0 }"
-          :transition="{ duration: 0.6, delay: 0.15 }"
-          :in-view-options="{ once: true }"
+        <Reveal
+          :y="20"
+          :duration="0.6"
+          :delay="0.15"
           class="mt-8 sm:mt-10 flex items-center justify-center"
         >
           <UButton
@@ -174,7 +162,7 @@ onUnmounted(() => {
               />
             </template>
           </UButton>
-        </Motion>
+        </Reveal>
       </div>
     </section>
 

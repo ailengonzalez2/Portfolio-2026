@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
-
 // Four figures that tell the arc: where she comes from, how long she has
 // been at it, how much she has shipped, and what clients gain. All from the
 // CV — no invented numbers.
@@ -18,13 +16,12 @@ const stats = [
     :aria-label="$t('about.stats.heading')"
   >
     <dl class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 sm:gap-x-10 border-t border-hairline pt-12 sm:pt-16">
-      <Motion
+      <Reveal
         v-for="(stat, i) in stats"
         :key="stat.key"
-        :initial="{ opacity: 0, y: 20 }"
-        :while-in-view="{ opacity: 1, y: 0 }"
-        :transition="{ duration: 0.5, delay: i * 0.08 }"
-        :in-view-options="{ once: true }"
+        :y="20"
+        :duration="0.5"
+        :delay="i * 0.08"
         class="flex flex-col-reverse justify-end gap-3"
       >
         <dt class="max-w-[16rem] text-sm sm:text-base leading-snug text-body">
@@ -33,7 +30,7 @@ const stats = [
         <dd class="font-display font-normal text-4xl sm:text-6xl lg:text-7xl leading-none tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
           {{ stat.value }}
         </dd>
-      </Motion>
+      </Reveal>
     </dl>
   </section>
 </template>

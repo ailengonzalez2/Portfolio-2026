@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useScroll } from 'motion-v'
 import { remap } from '~/webgl/math'
 
 const { global } = useAppConfig()
@@ -8,16 +7,8 @@ const { global } = useAppConfig()
 // formed before it reaches the middle of the screen (same language as the
 // hero and the footer). Without WebGL it is the plain gradient heading.
 const section = ref<HTMLElement | null>(null)
-const { scrollYProgress } = useScroll({ target: section, offset: ['start end', 'center center'] })
-const headingProgress = ref(0)
-let off: (() => void) | undefined
-onMounted(() => {
-  headingProgress.value = remap(scrollYProgress.get(), 0.15, 0.85)
-  off = scrollYProgress.on('change', (v) => {
-    headingProgress.value = remap(v, 0.15, 0.85)
-  })
-})
-onBeforeUnmount(() => off?.())
+const scrolled = useScrollProgress(section, ['start end', 'center center'])
+const headingProgress = computed(() => remap(scrolled.value, 0.15, 0.85))
 </script>
 
 <template>
