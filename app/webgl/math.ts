@@ -21,10 +21,14 @@ export const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 
 export const easeOutCubic = (t: number) => 1 - (1 - clamp01(t)) ** 3
 
-/** 0 when the element's top touches the viewport bottom, 1 once it is centered. */
+/**
+ * 0 when the element's top touches the viewport bottom, 1 once it is centered
+ * — or, for tall elements that never center (e.g. pinned with sticky near the
+ * top), once their top reaches a quarter of the viewport.
+ */
 export function enterProgress(rect: Rect, viewportHeight: number) {
   const start = viewportHeight
-  const end = viewportHeight / 2 - rect.height / 2
+  const end = Math.max(viewportHeight / 2 - rect.height / 2, viewportHeight * 0.25)
   return remap(start - rect.top, 0, start - end)
 }
 

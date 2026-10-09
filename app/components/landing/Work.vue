@@ -25,7 +25,7 @@ const linkFor = (p: Project) => p.caseStudy
       <article
         v-for="(p, i) in featured"
         :key="p.id"
-        class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 py-16 lg:py-0 lg:min-h-[120vh] items-start"
+        class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 py-16 lg:py-0 lg:pb-[16vh] lg:min-h-[120vh] items-start"
       >
         <div class="lg:col-span-7 lg:sticky lg:top-28">
           <ResolveImage

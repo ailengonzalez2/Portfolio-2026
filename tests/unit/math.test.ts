@@ -31,6 +31,12 @@ describe('enterProgress', () => {
   test('halfway', () => {
     expect(enterProgress({ top: 650, left: 0, width: 10, height: h }, vh)).toBeCloseTo(0.5)
   })
+  test('a tall element is complete once its top reaches a quarter of the viewport', () => {
+    // 740px viewport, 525px image pinned (sticky) at top 112: it never gets
+    // centered, but it must still finish forming while on screen.
+    expect(enterProgress({ top: 185, left: 0, width: 10, height: 525 }, 740)).toBe(1)
+    expect(enterProgress({ top: 112, left: 0, width: 10, height: 525 }, 740)).toBe(1)
+  })
   test('clamped past center and before entering', () => {
     expect(enterProgress({ top: -500, left: 0, width: 10, height: h }, vh)).toBe(1)
     expect(enterProgress({ top: 3000, left: 0, width: 10, height: h }, vh)).toBe(0)
