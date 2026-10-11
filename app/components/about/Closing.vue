@@ -41,7 +41,7 @@ const { global } = useAppConfig()
           target="_blank"
           data-umami-event="view-cv"
           data-umami-event-location="about-closing"
-          class="inline-flex items-center gap-2 self-start mt-10 rounded-full border border-ink dark:border-paper px-6 py-3 text-ink dark:text-paper hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink transition-colors"
+          class="inline-flex items-center gap-2 self-start mt-10 rounded-(--radius-btn) border border-ink dark:border-paper px-6 py-3 text-ink dark:text-paper hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink transition-colors"
         >
           {{ $t('about.exploreCv') }}
           <UIcon

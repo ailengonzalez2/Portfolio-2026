@@ -152,7 +152,7 @@ onUnmounted(() => {
             size="lg"
             data-umami-event="book-call"
             data-umami-event-location="footer"
-            class="btn-gradient btn-gradient--light font-medium rounded-full px-8 py-3 text-base"
+            class="btn-gradient btn-gradient--light font-medium px-8 py-3 text-base"
           >
             {{ t('contactCta.bookCall') }}
             <template #trailing>

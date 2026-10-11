@@ -7,11 +7,11 @@ export const navLinks: NavigationMenuItem[] = [{
   label: 'process',
   to: '/#process'
 }, {
-  label: 'writing',
-  to: '/writing'
-}, {
   label: 'about',
   to: '/about'
+}, {
+  label: 'writing',
+  to: '/writing'
 }, {
   label: 'contact',
   to: '/#contact'

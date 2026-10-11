@@ -50,6 +50,8 @@
 }
 
 :root {
+  /* One corner radius for every button, so the shape is set in one place */
+  --radius-btn: 4px;
   --ui-container: var(--container-4xl);
   --ui-bg: var(--color-paper);
   --ui-text: var(--color-ink);
@@ -224,7 +226,7 @@
   background-repeat: no-repeat;
   color: var(--color-paper);
   border: none;
-  border-radius: 9999px;
+  border-radius: var(--radius-btn);
   padding: 0.75rem 3.5rem;
   font-weight: 500;
   font-size: 1.125rem;

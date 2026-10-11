@@ -326,5 +326,12 @@
     "generic": "Something went wrong.",
     "body": "The link may be broken or the page may have moved. Head back home and pick it up from there.",
     "home": "Back to home"
+  },
+  "social": {
+    "nav": "Social links",
+    "linkedin": "LinkedIn profile",
+    "cv": "Read my CV",
+    "github": "GitHub repositories",
+    "upwork": "Hire me on Upwork"
   }
 }

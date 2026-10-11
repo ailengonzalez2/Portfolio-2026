@@ -5,34 +5,16 @@ interface SocialLink {
   name: string
   icon: string
   url: string
-  label: string
+  key: string
 }
 
+const { t } = useI18n()
+
 const socialLinks: SocialLink[] = [
-  {
-    name: 'LinkedIn',
-    icon: 'i-mdi-linkedin',
-    url: 'https://www.linkedin.com/in/ailengonzalez/',
-    label: 'Visitar perfil de LinkedIn'
-  },
-  {
-    name: 'CV',
-    icon: 'i-simple-icons-readdotcv',
-    url: 'https://cv.ailengonzalez.ar/',
-    label: 'Leer mi cv en Read.cv'
-  },
-  {
-    name: 'GitHub',
-    icon: 'i-mdi-github',
-    url: 'https://github.com/ailengonzalez2',
-    label: 'Ver repositorios en GitHub'
-  },
-  {
-    name: 'Upwork',
-    icon: 'i-simple-icons-upwork',
-    url: 'https://www.upwork.com/freelancers/ailengonzalez?mp_source=share',
-    label: 'Contratar en Upwork'
-  }
+  { name: 'LinkedIn', icon: 'i-mdi-linkedin', url: 'https://www.linkedin.com/in/ailengonzalez/', key: 'linkedin' },
+  { name: 'CV', icon: 'i-lucide-file-text', url: 'https://cv.ailengonzalez.ar/', key: 'cv' },
+  { name: 'GitHub', icon: 'i-mdi-github', url: 'https://github.com/ailengonzalez2', key: 'github' },
+  { name: 'Upwork', icon: 'i-simple-icons-upwork', url: 'https://www.upwork.com/freelancers/ailengonzalez?mp_source=share', key: 'upwork' }
 ]
 
 // Near the bottom the sidebar sits over the ink footer: switch to paper.
@@ -72,12 +54,11 @@ const mobileBottom = computed(() => {
 
 <template>
   <aside
-    class="fixed bottom-8 left-8 z-50 hidden lg:flex flex-col items-center gap-5"
-    aria-label="Enlaces a redes sociales"
+    class="fixed bottom-8 left-8 z-50 hidden lg:flex flex-col items-center gap-6"
   >
     <nav
-      class="flex flex-col items-center gap-4"
-      aria-label="Redes sociales"
+      class="flex flex-col items-center gap-1"
+      :aria-label="t('social.nav')"
     >
       <ULink
         v-for="social in socialLinks"
@@ -85,16 +66,16 @@ const mobileBottom = computed(() => {
         :to="social.url"
         target="_blank"
         rel="noopener noreferrer"
-        :aria-label="social.label"
-        class="group relative flex items-center justify-center size-8 transition-colors duration-300"
+        :aria-label="t(`social.${social.key}`)"
+        class="group relative flex items-center justify-center size-10 transition-colors duration-300"
         :class="isExpanded ? 'text-paper/60 hover:text-paper' : 'text-label hover:text-ink'"
       >
         <UIcon
           :name="social.icon"
-          class="size-[18px]"
+          class="size-[22px]"
         />
         <span
-          class="absolute left-full top-1/2 -translate-y-1/2 ml-3 font-mono text-[10px] uppercase tracking-[0.18em] whitespace-nowrap opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 pointer-events-none"
+          class="absolute left-full top-1/2 -translate-y-1/2 ml-2 font-mono text-[11px] uppercase tracking-[0.18em] whitespace-nowrap opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 pointer-events-none"
           :class="isExpanded ? 'text-paper' : 'text-ink'"
         >
           {{ social.name }}
@@ -102,7 +83,7 @@ const mobileBottom = computed(() => {
       </ULink>
     </nav>
     <div
-      class="w-px h-16 transition-colors duration-300"
+      class="w-px h-20 transition-colors duration-300"
       :class="isExpanded ? 'bg-paper/30' : 'bg-hairline'"
       aria-hidden="true"
     />
@@ -116,7 +97,7 @@ const mobileBottom = computed(() => {
     <nav
       class="flex items-center gap-1 px-3 py-1.5 rounded-full border backdrop-blur-md transition-colors duration-300"
       :class="isMobileExpanded ? 'bg-ink/90 border-paper/15' : 'bg-paper/90 border-hairline'"
-      aria-label="Redes sociales"
+      :aria-label="t('social.nav')"
     >
       <ULink
         v-for="social in socialLinks"
@@ -124,7 +105,7 @@ const mobileBottom = computed(() => {
         :to="social.url"
         target="_blank"
         rel="noopener noreferrer"
-        :aria-label="social.label"
+        :aria-label="t(`social.${social.key}`)"
         class="flex items-center justify-center size-9 rounded-full transition-colors active:scale-95"
         :class="isMobileExpanded ? 'text-paper/70' : 'text-label'"
       >

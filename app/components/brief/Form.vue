@@ -275,7 +275,7 @@ async function submitEmail() {
 
         <UButton
           size="lg"
-          class="btn-gradient text-white font-medium rounded-full px-6 self-end sm:self-auto"
+          class="btn-gradient text-white font-medium px-6 self-end sm:self-auto"
           :disabled="!canSubmit"
           :loading="status === 'streaming'"
           @click="generate"
@@ -472,12 +472,12 @@ async function submitEmail() {
               :aria-label="$t('brief.email.label')"
               :aria-invalid="emailStatus === 'error'"
               :aria-describedby="emailError ? 'brief-email-error' : undefined"
-              class="grow rounded-full bg-white dark:bg-neutral-900 border border-hairline dark:border-neutral-700 px-4 py-2.5 text-sm text-ink dark:text-paper placeholder:text-label dark:placeholder:text-neutral-500 focus:outline-none focus:border-ink dark:focus:border-paper disabled:opacity-60"
+              class="grow rounded-(--radius-btn) bg-white dark:bg-neutral-900 border border-hairline dark:border-neutral-700 px-4 py-2.5 text-sm text-ink dark:text-paper placeholder:text-label dark:placeholder:text-neutral-500 focus:outline-none focus:border-ink dark:focus:border-paper disabled:opacity-60"
             >
             <UButton
               type="submit"
               size="lg"
-              class="btn-gradient text-white font-medium rounded-full px-5"
+              class="btn-gradient text-white font-medium px-5"
               :disabled="!emailValid || emailStatus === 'sending'"
               :loading="emailStatus === 'sending'"
             >

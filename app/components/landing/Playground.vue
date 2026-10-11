@@ -181,7 +181,7 @@ onBeforeUnmount(() => observer?.disconnect())
   align-items: center;
   gap: 0.4rem;
   padding: 0.7rem 1.4rem;
-  border-radius: 9999px;
+  border-radius: var(--radius-btn);
   background: linear-gradient(90deg, #2B3BFF, #C04BFF);
   color: #fff;
   font-weight: 500;

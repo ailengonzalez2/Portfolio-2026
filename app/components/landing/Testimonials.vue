@@ -80,7 +80,7 @@ onBeforeUnmount(stop)
           icon="i-lucide-arrow-left"
           variant="outline"
           color="neutral"
-          class="rounded-full"
+          class="rounded-(--radius-btn)"
           :aria-label="$t('testimonials.prev')"
           @click="go(-1)"
         />
@@ -88,7 +88,7 @@ onBeforeUnmount(stop)
           icon="i-lucide-arrow-right"
           variant="outline"
           color="neutral"
-          class="rounded-full"
+          class="rounded-(--radius-btn)"
           :aria-label="$t('testimonials.next')"
           @click="go(1)"
         />
