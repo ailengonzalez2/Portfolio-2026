@@ -43,7 +43,7 @@ const clips = computed(() => [
     :y="24"
     :delay="0.1"
   >
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 rounded-3xl bg-neutral-950 p-3 sm:p-4 text-white font-display">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 rounded-3xl bg-neutral-950 p-3 sm:p-4 text-white">
       <!-- Loft: the hero of the band. Muted looping video, whole tile is the link. -->
       <NuxtLink
         :to="loftLink"
@@ -75,13 +75,13 @@ const clips = computed(() => [
         <div class="absolute inset-0 bg-linear-to-t from-neutral-950/85 via-neutral-950/20 to-transparent" />
 
         <div class="absolute inset-x-0 bottom-0 p-5 sm:p-7 flex flex-col items-start gap-4">
-          <span class="text-[11px] font-medium uppercase tracking-[0.2em] text-neutral-300">
+          <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-neutral-300">
             {{ $t('projects.labTeaser.eyebrow') }}
           </span>
-          <h3 class="max-w-md text-2xl sm:text-3xl lg:text-4xl font-bold leading-[1.05] tracking-tight">
+          <h3 class="max-w-md font-display font-medium text-3xl sm:text-4xl lg:text-5xl leading-[0.98] tracking-[-0.04em]">
             {{ $t('projects.labTeaser.title') }}
           </h3>
-          <span class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-neutral-900 transition-colors group-hover:bg-secondary">
+          <span class="inline-flex items-center gap-2 rounded-(--radius-btn) bg-white px-5 py-2.5 text-sm font-medium text-neutral-900 transition-colors group-hover:bg-secondary">
             {{ $t('projects.labTeaser.cta') }}
             <UIcon
               name="i-lucide-arrow-up-right"
@@ -107,7 +107,7 @@ const clips = computed(() => [
           >
           <div class="absolute inset-0 bg-linear-to-t from-[#071120]/90 via-transparent to-transparent" />
           <div class="absolute inset-x-0 bottom-0 p-5 flex flex-col gap-1">
-            <span class="font-serif italic text-2xl sm:text-3xl leading-none text-pink-200">
+            <span class="font-display font-medium text-2xl sm:text-3xl leading-none tracking-[-0.03em] text-pink-200">
               {{ $t('projects.labTeaser.jellyCaption') }}
             </span>
             <span class="text-xs text-neutral-400">
@@ -158,7 +158,7 @@ const clips = computed(() => [
         </video>
         <div class="absolute inset-0 bg-linear-to-t from-neutral-950/85 via-transparent to-transparent" />
         <div class="absolute inset-x-0 bottom-0 p-5 flex flex-col gap-1">
-          <span class="font-serif italic text-2xl sm:text-3xl leading-none text-white">
+          <span class="font-display font-medium text-2xl sm:text-3xl leading-none tracking-[-0.03em] text-white">
             {{ $t(`projects.labTeaser.${c.key}Caption`) }}
           </span>
           <span class="text-xs text-neutral-300">
