@@ -14,16 +14,16 @@ useSeoMeta({
 <template>
   <UPage>
     <section
-      class="relative -mt-20 pt-32 sm:pt-40 pb-20 sm:pb-28"
+      class="relative -mt-20 pt-32 sm:pt-40 lg:pt-64 pb-20 sm:pb-28"
     >
-      <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+      <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center lg:items-start">
         <div class="lg:col-span-7 min-w-0 order-2 lg:order-1">
           <ResolveText
             :text="$t('about.statement')"
             :highlight="$t('about.statementHighlight')"
             tag="h1"
             on="load"
-            class="max-w-[15em] font-display font-medium text-4xl sm:text-5xl lg:text-6xl leading-[1.04] tracking-[-0.04em] text-ink dark:text-paper"
+            class="max-w-[14em] text-balance font-display font-medium text-5xl sm:text-7xl leading-[0.95] tracking-[-0.04em] text-ink dark:text-paper"
           />
           <HalftoneReveal>
             <p class="mt-10 max-w-2xl text-lg leading-relaxed text-body">
@@ -47,7 +47,7 @@ useSeoMeta({
 
         <!-- Badge on a lanyard: its slot spans from the page top (and the
              full section height on desktop); the canvas covers the section -->
-        <AboutLanyard class="lg:col-span-5 order-1 lg:order-2 -mt-32 sm:-mt-40 h-[38rem] -mb-32 sm:h-[40rem] sm:-mb-36 lg:h-auto lg:self-stretch lg:-mb-28" />
+        <AboutLanyard class="lg:col-span-5 order-1 lg:order-2 -mt-32 sm:-mt-40 lg:-mt-64 h-[38rem] -mb-32 sm:h-[40rem] sm:-mb-36 lg:h-auto lg:self-stretch lg:-mb-28" />
       </div>
     </section>
     <AboutStats />

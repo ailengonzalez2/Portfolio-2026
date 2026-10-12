@@ -47,7 +47,7 @@ useSeoMeta({
           :text="$t('projects.pageTitle')"
           tag="h1"
           on="load"
-          class="font-display font-medium text-6xl sm:text-8xl lg:text-9xl leading-[0.9] tracking-[-0.04em] text-ink dark:text-paper"
+          class="max-w-[14em] text-balance font-display font-medium text-5xl sm:text-7xl leading-[0.95] tracking-[-0.04em] text-ink dark:text-paper"
         />
         <p class="mt-8 max-w-xl text-lg text-body">
           {{ $t('projects.pageIntro') }}
