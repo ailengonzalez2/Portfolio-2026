@@ -32,5 +32,10 @@ useSeoMeta({
       class="pt-8 sm:pt-12 scroll-mt-24"
     />
     <LandingTestimonials />
+    <!-- Same two-way close as the about page: clients / companies -->
+    <AboutClosing
+      inset="home"
+      class="pt-8 sm:pt-12"
+    />
   </UPage>
 </template>
