@@ -54,37 +54,6 @@
     "bookCall": "Agendar una llamada",
     "viewWork": "Ver trabajo"
   },
-  "process": {
-    "eyebrow": "Proceso",
-    "title": "Del ruido a la forma",
-    "stages": {
-      "sketch": {
-        "label": "Boceto",
-        "body": "Desprolijo a propósito. Encontrar la forma del problema antes que la de la pantalla."
-      },
-      "wireframe": {
-        "label": "Wireframe",
-        "body": "Estructura sin decoración: flujos, jerarquía, qué va dónde."
-      },
-      "ui": {
-        "label": "Interfaz",
-        "body": "El sistema visual: tipografía, ritmo, estados, cada pixel pensado."
-      },
-      "code": {
-        "label": "Código",
-        "body": "Lo llevo a producción en Vue y Nuxt. El diseño es el producto, no un handoff."
-      }
-    },
-    "hint": "Pasá el mouse por la imagen de arriba hacia abajo, o arrastrá la regla, para verla pasar de boceto a código.",
-    "hintTouch": "Arrastrá la regla para verla pasar de boceto a código."
-  },
-  "lab": {
-    "eyebrow": "El lab",
-    "title": "No todo lo que construyo tiene un cliente.",
-    "intro": "Los experimentos quedan sueltos hasta que los tocás.",
-    "hint": "Pasá el mouse para armarlos · en el celular, tocá dos veces",
-    "seeAll": "Ver todo el lab"
-  },
   "work": {
     "eyebrow": "Trabajo seleccionado",
     "latentHint": "Pasá el mouse — o mantené presionado — para ver la capa latente",

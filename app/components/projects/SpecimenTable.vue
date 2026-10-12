@@ -5,14 +5,17 @@ import { tween } from '~/webgl/loop'
 // Projects as specimen cards on a table (the "mesa de laboratorio" layout):
 // each card rests slightly rotated; hovering straightens and lifts it while its
 // image re-assembles from particles. At rest the image is the crisp DOM one,
-// so the rotation never misaligns the particle layer. Client cards open their
-// case study; lab cards open the live experiment.
+// so the rotation never misaligns the particle layer. A card opens the live
+// product (or the case study when there's no site); a separate button opens
+// the case study.
 const props = defineProps<{ projects: Project[], kind: 'client' | 'lab' }>()
 
 const localePath = useLocalePath()
-const linkFor = (p: Project) => p.caseStudy
-  ? { to: localePath(`/projects/${p.id}`), external: false }
-  : { to: p.links.preview ?? localePath('/projects'), external: true }
+const linkFor = (p: Project) => p.links.preview
+  ? { to: p.links.preview, external: true }
+  : { to: localePath(p.caseStudy ? `/projects/${p.id}` : '/projects'), external: false }
+// Only needed when the card itself goes to the live site.
+const hasCaseButton = (p: Project) => !!(p.caseStudy && p.links.preview)
 const codeOf = (i: number) => `${props.kind === 'lab' ? 'EXP-' : ''}${String(i + 1).padStart(2, '0')}`
 const metaOf = (p: Project) => props.kind === 'lab' ? (p.labTag ?? p.tags[0] ?? '') : `${p.tags.slice(0, 2).join(' · ')} · ${p.date}`
 
@@ -40,16 +43,13 @@ const nameOf = (p: Project) => p.title.split(' — ')[0]
       v-for="(p, i) in projects"
       :key="p.id"
     >
-      <NuxtLink
-        :to="linkFor(p).to"
-        :target="linkFor(p).external ? '_blank' : undefined"
-        :rel="linkFor(p).external ? 'noopener' : undefined"
-        class="specimen group block bg-paper p-3 pb-5"
+      <div
+        class="specimen group relative bg-paper p-3 pb-5"
         :style="{ '--tilt': `${TILTS[i % TILTS.length]}deg` }"
         @pointerenter="enter(p.id)"
         @pointerleave="leave(p.id)"
-        @focus="enter(p.id)"
-        @blur="leave(p.id)"
+        @focusin="enter(p.id)"
+        @focusout="leave(p.id)"
       >
         <ResolveImage
           :src="p.image"
@@ -61,7 +61,15 @@ const nameOf = (p: Project) => p.title.split(' — ')[0]
         />
         <div class="mt-4 flex items-baseline justify-between gap-4 px-1">
           <p class="font-display font-medium text-xl sm:text-2xl text-ink">
-            {{ nameOf(p) }}
+            <!-- The whole card is this link (its ::after covers the card) -->
+            <NuxtLink
+              :to="linkFor(p).to"
+              :target="linkFor(p).external ? '_blank' : undefined"
+              :rel="linkFor(p).external ? 'noopener' : undefined"
+              class="card-link focus-visible:outline-none"
+            >
+              {{ nameOf(p) }}
+            </NuxtLink>
             <UIcon
               :name="linkFor(p).external ? 'i-lucide-arrow-up-right' : 'i-lucide-arrow-right'"
               class="size-4 align-middle opacity-0 group-hover:opacity-100 transition-opacity"
@@ -77,7 +85,18 @@ const nameOf = (p: Project) => p.title.split(' — ')[0]
         <p class="mt-3 px-1 text-sm leading-relaxed text-body">
           {{ p.description }}
         </p>
-      </NuxtLink>
+        <NuxtLink
+          v-if="hasCaseButton(p)"
+          :to="localePath(`/projects/${p.id}`)"
+          class="relative z-10 mt-5 mx-1 inline-flex items-center gap-2 rounded-(--radius-btn) border border-ink px-4 py-2 text-sm font-medium text-ink hover:bg-ink hover:text-paper transition-colors"
+        >
+          {{ $t('work.caseStudy') }}
+          <UIcon
+            name="i-lucide-arrow-right"
+            class="size-4"
+          />
+        </NuxtLink>
+      </div>
     </HalftoneReveal>
   </div>
 </template>
@@ -93,8 +112,19 @@ const nameOf = (p: Project) => p.title.split(' — ')[0]
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
 }
 
+.card-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.specimen:has(.card-link:focus-visible) {
+  outline: 2px solid var(--ui-color-primary-600);
+  outline-offset: 4px;
+}
+
 .specimen:hover,
-.specimen:focus-visible {
+.specimen:focus-within {
   transform: rotate(0deg) translateY(-10px) scale(1.03);
   box-shadow: 0 4px 6px rgb(0 0 0 / 0.08), 0 30px 50px rgb(0 0 0 / 0.16);
 }

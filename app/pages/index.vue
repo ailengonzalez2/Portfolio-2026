@@ -25,8 +25,12 @@ useSeoMeta({
       </div>
     </section>
     <LandingWork />
-    <LandingProcess />
-    <LandingLab />
+    <!-- "How I work" from the about page; #process keeps the menu link working -->
+    <AboutPrinciples
+      id="process"
+      inset="home"
+      class="pt-8 sm:pt-12 scroll-mt-24"
+    />
     <LandingTestimonials />
   </UPage>
 </template>

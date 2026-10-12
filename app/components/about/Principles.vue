@@ -2,10 +2,20 @@
 // How Ailen works: four principles, each grounded in the CV (dual-skill
 // ownership, AI automation, emergency medicine, remote international teams).
 const principles = ['noHandoff', 'ai', 'decide', 'remote'] as const
+
+// The about page indents its content; the home page uses the wider grid of
+// the sections around it.
+const props = withDefaults(defineProps<{ inset?: 'about' | 'home' }>(), { inset: 'about' })
+const container = computed(() => props.inset === 'home'
+  ? 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'
+  : 'max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16')
 </script>
 
 <template>
-  <section class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16 pb-24 sm:pb-32">
+  <section
+    class="pb-24 sm:pb-32"
+    :class="container"
+  >
     <h2 class="font-mono font-normal text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
       {{ $t('about.principles.heading') }}
     </h2>

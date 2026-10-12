@@ -54,37 +54,6 @@
     "bookCall": "Book a call",
     "viewWork": "View work"
   },
-  "process": {
-    "eyebrow": "Process",
-    "title": "From noise to form",
-    "stages": {
-      "sketch": {
-        "label": "Sketch",
-        "body": "Messy on purpose. Find the shape of the problem before the shape of the screen."
-      },
-      "wireframe": {
-        "label": "Wireframe",
-        "body": "Structure without decoration — flows, hierarchy, what goes where."
-      },
-      "ui": {
-        "label": "Interface",
-        "body": "The visual system: type, rhythm, states, every pixel considered."
-      },
-      "code": {
-        "label": "Code",
-        "body": "Shipped in Vue and Nuxt. The design is the product, not a handoff."
-      }
-    },
-    "hint": "Move down the image, or drag the ruler, to watch it go from sketch to code.",
-    "hintTouch": "Drag the ruler to watch it go from sketch to code."
-  },
-  "lab": {
-    "eyebrow": "The lab",
-    "title": "Not everything I build has a client.",
-    "intro": "Experiments stay loose until you touch them.",
-    "hint": "Hover to assemble · tap twice on touch",
-    "seeAll": "See the whole lab"
-  },
   "work": {
     "eyebrow": "Selected work",
     "latentHint": "Hover — or press and hold — to see the latent layer",

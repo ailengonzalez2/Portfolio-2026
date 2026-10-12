@@ -7,9 +7,10 @@ const allProjects = useProjects()
 const featured = computed(() => getFeaturedProjects(allProjects.value))
 const fx = useFxEnabled()
 
-const linkFor = (p: Project) => p.caseStudy
-  ? { to: localePath(`/projects/${p.id}`), external: false }
-  : { to: p.links.preview ?? localePath('/projects'), external: true }
+// Each row goes to the live site; the case study only when there's no site.
+const linkFor = (p: Project) => p.links.preview
+  ? { to: p.links.preview, external: true }
+  : { to: localePath(p.caseStudy ? `/projects/${p.id}` : '/projects'), external: false }
 </script>
 
 <template>
@@ -69,7 +70,7 @@ const linkFor = (p: Project) => p.caseStudy
             :rel="linkFor(p).external ? 'noopener' : undefined"
             class="mt-10 inline-flex items-center gap-2 font-medium text-ink dark:text-paper underline underline-offset-4 decoration-hairline hover:decoration-current transition-colors"
           >
-            {{ p.caseStudy ? $t('work.caseStudy') : $t('work.visit') }}
+            {{ p.links.preview ? $t('work.visit') : $t('work.caseStudy') }}
             <UIcon
               name="i-lucide-arrow-up-right"
               class="size-4"
