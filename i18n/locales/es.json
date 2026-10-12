@@ -38,6 +38,14 @@
       "comingSoonBody": "Por ahora podés explorar el trabajo directamente en Figma o en el preview arriba.",
       "year": "Año",
       "disciplines": "Disciplinas"
+    },
+    "labTeaser": {
+      "eyebrow": "El lab",
+      "title": "No todo lo que construyo tiene un cliente.",
+      "cta": "Jugá con mi portfolio",
+      "jellyCaption": "Dale, tocala.",
+      "jellyName": "Jelly — una estrella de mar en WebGPU",
+      "seeLab": "Ver todo el lab"
     }
   },
   "manifesto": {
@@ -303,23 +311,6 @@
   },
   "common": {
     "switchLanguage": "Cambiar idioma"
-  },
-  "play": {
-    "eyebrow": "Interactivo",
-    "title": "Jugá con mis animaciones",
-    "intro": "Una de mis animaciones, en vivo. Acercá el cursor, agarrá un brazo y estirala.",
-    "play": "Jugar",
-    "newTab": "Abrir en otra pestaña",
-    "howItsMade": "Cómo está hecho",
-    "loading": "Cargando la animación…",
-    "seeAll": "Ver todo el lab",
-    "notes": {
-      "jelly": {
-        "a": "Física de cuerpo blando: agarrás un brazo, lo estirás y vuelve a su forma.",
-        "b": "Renderizada con WebGPU a través de Three.js.",
-        "c": "Un material translúcido y moteado que la hace sentir de gelatina."
-      }
-    }
   },
   "error": {
     "notFound": "Esta página no existe.",
