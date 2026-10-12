@@ -33,7 +33,8 @@ const linkFor = (p: Project) => p.links.preview
             :src="p.image"
             :alt="p.title"
             :latent-src="p.latentImage"
-            latent
+            :swap-src="p.altImage"
+            :latent="!p.altImage"
             sizes="100vw lg:60vw"
             class="w-full aspect-[4/3]"
           />

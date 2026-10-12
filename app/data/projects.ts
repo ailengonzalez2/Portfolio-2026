@@ -49,6 +49,8 @@ export interface Project {
   featuredOrder?: number
   /** Optional hand-made sketch/wireframe; replaces the auto-generated latent layer. */
   latentImage?: string
+  /** Second screen of the product; the home row's particles change into it on hover */
+  altImage?: string
   /** The one project the home "Process" section walks through. */
   processShowcase?: boolean
   /** Code excerpt shown at the Process section's final "Code" stage. */
@@ -104,6 +106,7 @@ export const projects: Project[] = [
     title: 'codeCave — Studio Site',
     description: 'The site for codeCave, a Córdoba-based product studio. A distinctive terminal-inspired identity with a neon-on-dark aesthetic, built end to end in Nuxt — "from idea to production".',
     image: '/projects/covers/codecave.jpg',
+    altImage: '/projects/alt/codecave.jpg',
     tags: ['Frontend Development', 'Web Design', 'Branding'],
     date: '2025',
     links: {
@@ -137,6 +140,7 @@ export const projects: Project[] = [
     title: 'Enter — Sell Tickets Online',
     description: 'A ticketing platform made in Argentina: signed QR codes, a web scanner that works on any phone, and a flat 2% fee via Mercado Pago. A bold, retro ticket-stub identity that stands out from corporate ticketing.',
     image: '/projects/covers/enter.jpg',
+    altImage: '/projects/alt/enter.jpg',
     tags: ['SaaS', 'Web App', 'Product Design'],
     date: '2026',
     links: {
@@ -171,6 +175,7 @@ export const projects: Project[] = [
     title: 'Docta — Córdoba Culture Agenda',
     description: 'A hand-curated cultural agenda for Córdoba — concerts, theatre, festivals and nightlife, refreshed daily. An editorial, print-inspired design that makes browsing what to do feel like reading a magazine.',
     image: '/projects/covers/docta.jpg',
+    altImage: '/projects/alt/docta.jpg',
     tags: ['Web Design', 'Frontend Development', 'Editorial'],
     date: '2025',
     links: {
@@ -226,6 +231,7 @@ export const projects: Project[] = [
     title: 'Habito — AI Task Management',
     description: 'Task management for the AI era, where humans and AI agents share one workspace and coordinate as real teammates. Product design and frontend for a clean, focused SaaS interface.',
     image: '/projects/covers/habito.jpg',
+    altImage: '/projects/alt/habito.jpg',
     tags: ['Product Design', 'Web App', 'AI'],
     date: '2025',
     links: {

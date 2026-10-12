@@ -11,6 +11,8 @@ attribute float aRand;
 uniform sampler2D uTexture;
 uniform sampler2D uLatentTexture;
 uniform float uHasLatentTex;
+uniform sampler2D uAltTexture;
+uniform float uSwap;
 uniform vec2 uImageSize;
 uniform vec2 uSize;
 uniform vec2 uViewport;
@@ -44,6 +46,11 @@ void main() {
   vec2 scattered = aStart * (uSize * 1.8 + 160.0)
     + vec2(sin(uTime * 0.4 + aRand * 40.0), cos(uTime * 0.33 + aRand * 30.0)) * 22.0;
   vec2 pos = mix(scattered, home, p);
+  // Swap to the second image: each particle changes over on its own beat and
+  // drifts out and back while it does, so the picture re-forms rather than fades.
+  float sw = smoothstep(aRand * 0.5, aRand * 0.5 + 0.5, uSwap);
+  img = mix(img, texture2D(uAltTexture, uv).rgb, sw);
+  pos += (vec2(vnoise(aUv * 30.0 + 7.0), vnoise(aUv * 30.0 - 3.0)) - 0.5) * 70.0 * sin(3.14159 * sw);
   vec3 col = mix(brandGradient(aUv.x), img, p);
   float keep = 1.0;
   float edgeMode = uLatent;
@@ -78,6 +85,8 @@ void main() {
 export interface ParticleImageOptions {
   src: string
   latentSrc?: string
+  /** second image the particles can change into (uSwap 0 → 1) */
+  altSrc?: string
   /** element width / height when built */
   aspect: number
   cols?: number
@@ -85,9 +94,10 @@ export interface ParticleImageOptions {
 
 /** A grid of particles that samples an image in the vertex shader. */
 export async function createParticleImage(opts: ParticleImageOptions) {
-  const [texture, latentTexture] = await Promise.all([
+  const [texture, latentTexture, altTexture] = await Promise.all([
     loadTexture(opts.src),
-    opts.latentSrc ? loadTexture(opts.latentSrc) : Promise.resolve(null)
+    opts.latentSrc ? loadTexture(opts.latentSrc) : Promise.resolve(null),
+    opts.altSrc ? loadTexture(opts.altSrc) : Promise.resolve(null)
   ])
   const image = texture.image as HTMLImageElement
   const { cols, rows } = gridSize(opts.cols ?? 160, opts.aspect)
@@ -123,6 +133,8 @@ export async function createParticleImage(opts: ParticleImageOptions) {
       uImageSize: { value: new THREE.Vector2(image.width, image.height) },
       uLatentTexture: { value: latentTexture ?? texture },
       uHasLatentTex: { value: latentTexture ? 1 : 0 },
+      uAltTexture: { value: altTexture ?? texture },
+      uSwap: { value: 0 },
       uProgress: { value: 0 },
       uLatent: { value: 0 },
       uStage: { value: -1 },
