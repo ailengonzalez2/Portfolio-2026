@@ -3,45 +3,40 @@ import { remap } from '~/webgl/math'
 
 const { global } = useAppConfig()
 
-// The heading assembles from particles as the section scrolls in, fully
-// formed before it reaches the middle of the screen (same language as the
-// hero and the footer). Without WebGL it is the plain gradient heading.
-const section = ref<HTMLElement | null>(null)
-const scrolled = useScrollProgress(section, ['start end', 'center center'])
+// The two ways forward (clients / companies) come first; the heading under
+// them assembles from particles as it scrolls in, fully formed before it
+// reaches the middle of the screen. Without WebGL it is the plain gradient
+// heading.
+const heading = ref<HTMLElement | null>(null)
+const scrolled = useScrollProgress(heading, ['start end', 'center center'])
 const headingProgress = computed(() => remap(scrolled.value, 0.15, 0.85))
 </script>
 
 <template>
   <section
     id="contact"
-    ref="section"
-    class="pt-24 pb-40 sm:pt-32 sm:pb-52"
+    class="pt-24 pb-24 sm:pt-32 sm:pb-32"
   >
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <ParticleName
-        :progress="headingProgress"
-        class="inline-block"
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- One close for every page: the two ways forward (clients / companies) -->
+      <AboutClosing />
+
+      <div
+        ref="heading"
+        class="mt-20 sm:mt-28"
       >
-        <h2 class="font-display font-medium text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.04em] btn-gradient-text pb-[0.08em]">
-          {{ $t('contactCta.heading') }}
-        </h2>
-      </ParticleName>
+        <ParticleName
+          :progress="headingProgress"
+          class="inline-block"
+        >
+          <h2 class="font-display font-medium text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.04em] btn-gradient-text pb-[0.08em]">
+            {{ $t('contactCta.heading') }}
+          </h2>
+        </ParticleName>
+      </div>
 
       <HalftoneReveal>
-        <p class="mt-8 max-w-2xl text-lg sm:text-xl text-body">
-          {{ $t('contactCta.subtitle') }}
-        </p>
-
-        <div class="mt-12 flex flex-wrap items-center gap-6">
-          <NuxtLink
-            :to="global.meetingLink"
-            target="_blank"
-            data-umami-event="book-call"
-            data-umami-event-location="contact"
-            class="btn-gradient inline-flex"
-          >
-            {{ $t('contactCta.bookCall') }}
-          </NuxtLink>
+        <div class="mt-8 flex flex-wrap items-center gap-6">
           <NuxtLink
             :to="`mailto:${global.email}`"
             data-umami-event="email-click"

@@ -57,6 +57,5 @@ useSeoMeta({
     <LandingAboutMe />
     <AboutPrinciples />
     <AboutOffScreen />
-    <AboutClosing />
   </UPage>
 </template>

@@ -11,7 +11,7 @@ const go = (delta: number) => {
   active.value = (active.value + delta + count) % count
 }
 
-const AUTOPLAY_MS = 7000
+const AUTOPLAY_MS = 4500
 let timer: ReturnType<typeof setInterval> | undefined
 const paused = ref(false)
 const stop = () => clearInterval(timer)
