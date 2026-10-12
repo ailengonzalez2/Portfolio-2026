@@ -16,11 +16,16 @@ const copyOpacity = computed(() => 1 - remap(scroll.value, 0.1, 0.5))
 const nameProgress = computed(() => heroName(scroll.value, intro.value))
 
 // The role is the headline; break before the "&" so it stacks in two lines.
+// The first half splits again so the title keeps its size in the column left
+// free by the screens wall.
 const { t } = useI18n()
 const roleLines = computed(() => {
   const title = t('hero.title')
   const i = title.indexOf(' & ')
-  return i > 0 ? [title.slice(0, i), title.slice(i + 1)] : [title]
+  if (i <= 0) return [title]
+  const words = title.slice(0, i).split(' ')
+  const cut = Math.ceil(words.length / 2)
+  return [words.slice(0, cut).join(' '), words.slice(cut).join(' '), title.slice(i + 1)]
 })
 
 // Page load: the title stays hidden (html.fx-boot, set by an inline head
@@ -95,6 +100,9 @@ onBeforeUnmount(() => {
       >
         <LoadingField v-if="fx && loading" />
       </Transition>
+      <!-- Real project screens beside the title: they arrive as the title
+           forms and leave with it on scroll -->
+      <LandingHeroScreens :style="fx ? { opacity: loading ? 0 : intro * copyOpacity } : undefined" />
       <div class="absolute inset-0 flex flex-col justify-center px-6 sm:px-10 lg:pl-28 lg:pr-16 pt-20">
         <div class="relative self-start">
           <ParticleName
