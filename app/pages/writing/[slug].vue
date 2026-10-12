@@ -78,7 +78,7 @@ const formattedDate = computed(() =>
             <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label mb-5">
               {{ post!.category }}
             </p>
-            <h1 class="text-balance font-display font-normal text-4xl sm:text-6xl leading-[1.02] tracking-[-0.02em] text-ink dark:text-paper mb-6">
+            <h1 class="text-balance font-display font-medium text-4xl sm:text-6xl leading-[1.02] tracking-[-0.04em] text-ink dark:text-paper mb-6">
               {{ post!.title }}
             </h1>
             <p class="text-sm text-label">
@@ -105,8 +105,8 @@ const formattedDate = computed(() =>
   font-family: var(--font-display);
   font-size: 1.875rem;
   line-height: 1.2;
-  font-weight: 400;
-  letter-spacing: -0.015em;
+  font-weight: 500;
+  letter-spacing: -0.03em;
   margin: 3rem 0 1rem;
   color: var(--color-ink);
 }

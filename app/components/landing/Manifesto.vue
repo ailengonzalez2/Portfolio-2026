@@ -10,7 +10,7 @@ const { global } = useAppConfig()
         :highlight="$t('manifesto.highlight')"
         tag="p"
         :finish-at="0.7"
-        class="font-display font-normal text-4xl sm:text-6xl lg:text-7xl leading-[1.02] tracking-[-0.02em] text-ink dark:text-paper"
+        class="font-display font-medium text-4xl sm:text-6xl lg:text-7xl leading-[1.02] tracking-[-0.04em] text-ink dark:text-paper"
       />
 
       <HalftoneReveal class="mt-14 flex flex-wrap items-center gap-6">

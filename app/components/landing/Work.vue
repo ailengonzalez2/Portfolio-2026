@@ -48,7 +48,7 @@ const linkFor = (p: Project) => p.caseStudy
           <p class="font-mono text-xs text-label">
             {{ String(i + 1).padStart(2, '0') }} — {{ p.date }}
           </p>
-          <h3 class="mt-4 font-display font-normal text-4xl sm:text-5xl leading-[0.95] tracking-[-0.01em] text-ink dark:text-paper">
+          <h3 class="mt-4 font-display font-medium text-4xl sm:text-5xl leading-[0.95] tracking-[-0.04em] text-ink dark:text-paper">
             {{ p.title }}
           </h3>
           <p class="mt-6 text-lg text-body">

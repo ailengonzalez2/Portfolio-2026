@@ -85,23 +85,11 @@ export default defineNuxtConfig({
     }
   },
 
-  // Self-hosted variable Fraunces (no render-blocking third-party stylesheet),
-  // keeping the optical-size and SOFT/WONK axes the display type relies on.
+  // Self-hosted variable Red Hat Display for display type (no render-blocking
+  // third-party stylesheet); the wght axis drives the resolve effect.
   fonts: {
     families: [
-      {
-        name: 'Fraunces',
-        provider: 'google',
-        weights: ['100 900'],
-        styles: ['normal', 'italic'],
-        providerOptions: {
-          google: {
-            experimental: {
-              variableAxis: { opsz: [['9', '144']], SOFT: [['0', '100']], WONK: [['0', '1']] }
-            }
-          }
-        }
-      },
+      { name: 'Red Hat Display', provider: 'google', weights: ['300 900'], styles: ['normal'] },
       // Static Fraunces for the social-share images only: their renderer
       // (Satori) can't use variable fonts. Local file in public/fonts.
       { name: 'FrauncesOG', provider: 'local', weights: [400], global: true }

@@ -86,6 +86,11 @@ function sampleGlyphs(el: HTMLElement, step: number) {
     if (!text || !parent || parent.closest('[aria-hidden="true"]')) continue
     const cs = getComputedStyle(parent)
     ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`
+    ctx.letterSpacing = cs.letterSpacing === 'normal' ? '0px' : cs.letterSpacing
+    // Draw what's on screen: CSS text-transform isn't in the text node.
+    const shown = (word: string) => cs.textTransform === 'uppercase'
+      ? word.toUpperCase()
+      : cs.textTransform === 'lowercase' ? word.toLowerCase() : word
     const ascent = ctx.measureText(text).fontBoundingBoxAscent
     // Draw word by word at each word's own rect, so wrapped text lands on the
     // right line.
@@ -97,12 +102,13 @@ function sampleGlyphs(el: HTMLElement, step: number) {
       if (!r) continue
       // Canvas can't apply variable-font optical sizing, so widths drift from
       // the DOM; squeeze each word to its on-screen width.
-      const measured = ctx.measureText(m[0]).width
+      const word = shown(m[0])
+      const measured = ctx.measureText(word).width
       const sx = measured > 0 ? r.width / measured : 1
       ctx.save()
       ctx.translate(r.left - rect.left + PAD, r.top - rect.top + PAD + ascent)
       ctx.scale(sx, 1)
-      ctx.fillText(m[0], 0, 0)
+      ctx.fillText(word, 0, 0)
       ctx.restore()
     }
   }

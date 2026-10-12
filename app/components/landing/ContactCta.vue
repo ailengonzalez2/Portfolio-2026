@@ -22,7 +22,7 @@ const headingProgress = computed(() => remap(scrolled.value, 0.15, 0.85))
         :progress="headingProgress"
         class="inline-block"
       >
-        <h2 class="font-display font-normal text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
+        <h2 class="font-display font-medium text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-[-0.04em] btn-gradient-text pb-[0.08em]">
           {{ $t('contactCta.heading') }}
         </h2>
       </ParticleName>

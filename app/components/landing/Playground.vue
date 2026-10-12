@@ -109,7 +109,7 @@ onBeforeUnmount(() => observer?.disconnect())
           <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-paper/60">
             {{ $t('play.eyebrow') }}
           </p>
-          <h2 class="mt-4 font-display font-normal text-4xl sm:text-5xl leading-[0.98] tracking-[-0.02em]">
+          <h2 class="mt-4 font-display font-medium text-4xl sm:text-5xl leading-[0.98] tracking-[-0.04em]">
             {{ $t('play.title') }}
           </h2>
           <p class="mt-6 text-lg text-paper/70">
@@ -117,7 +117,7 @@ onBeforeUnmount(() => observer?.disconnect())
           </p>
 
           <div class="mt-10 border-t border-paper/15 pt-5">
-            <h3 class="font-display font-normal text-2xl">
+            <h3 class="font-display font-medium text-2xl">
               {{ p.title.split(' — ')[0] }}
             </h3>
             <p class="mt-1 text-sm text-paper/60">

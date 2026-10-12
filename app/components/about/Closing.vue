@@ -10,7 +10,7 @@ const { global } = useAppConfig()
         <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label">
           {{ $t('about.closing.clients.eyebrow') }}
         </p>
-        <h2 class="mt-4 font-display font-normal text-3xl sm:text-4xl leading-tight text-ink dark:text-paper">
+        <h2 class="mt-4 font-display font-medium text-3xl sm:text-4xl leading-tight text-ink dark:text-paper">
           {{ $t('about.closing.clients.title') }}
         </h2>
         <p class="mt-4 max-w-md text-body leading-relaxed">
@@ -30,7 +30,7 @@ const { global } = useAppConfig()
         <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label">
           {{ $t('about.closing.teams.eyebrow') }}
         </p>
-        <h2 class="mt-4 font-display font-normal text-3xl sm:text-4xl leading-tight text-ink dark:text-paper">
+        <h2 class="mt-4 font-display font-medium text-3xl sm:text-4xl leading-tight text-ink dark:text-paper">
           {{ $t('about.closing.teams.title') }}
         </h2>
         <p class="mt-4 max-w-md text-body leading-relaxed">

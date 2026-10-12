@@ -53,7 +53,7 @@ onBeforeUnmount(stop)
           mode="out-in"
         >
           <figure :key="current.id">
-            <blockquote class="font-display font-normal text-3xl sm:text-5xl leading-[1.08] tracking-[-0.01em] text-ink dark:text-paper">
+            <blockquote class="font-display font-medium text-3xl sm:text-5xl leading-[1.08] tracking-[-0.04em] text-ink dark:text-paper">
               “{{ current.quote }}”
             </blockquote>
             <figcaption class="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-label">

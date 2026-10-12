@@ -18,7 +18,7 @@ const INK = '#121212'
 const BODY = '#47453f'
 const GRADIENT = ['#2B3BFF', '#7643FF', '#C04BFF']
 
-const DISPLAY = '\'Fraunces\', Georgia, serif'
+const DISPLAY = '\'Red Hat Display\', system-ui, sans-serif'
 const SANS = '\'Geist\', system-ui, sans-serif'
 const MONO = '\'Geist Mono\', ui-monospace, monospace'
 

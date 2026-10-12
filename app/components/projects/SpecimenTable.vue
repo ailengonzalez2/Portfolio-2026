@@ -60,7 +60,7 @@ const nameOf = (p: Project) => p.title.split(' — ')[0]
           class="w-full aspect-[4/3]"
         />
         <div class="mt-4 flex items-baseline justify-between gap-4 px-1">
-          <p class="font-display font-normal text-xl sm:text-2xl text-ink">
+          <p class="font-display font-medium text-xl sm:text-2xl text-ink">
             {{ nameOf(p) }}
             <UIcon
               :name="linkFor(p).external ? 'i-lucide-arrow-up-right' : 'i-lucide-arrow-right'"

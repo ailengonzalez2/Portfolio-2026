@@ -85,7 +85,7 @@ onMounted(() => {
                   · {{ $t('about.now') }}
                 </template>
               </p>
-              <h3 class="mt-2 font-display font-normal text-3xl sm:text-4xl leading-tight text-ink dark:text-paper">
+              <h3 class="mt-2 font-display font-medium text-3xl sm:text-4xl leading-tight text-ink dark:text-paper">
                 {{ job.title }}
                 <span class="text-label"> — {{ job.company }}</span>
               </h3>
@@ -105,7 +105,7 @@ onMounted(() => {
               <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-label">
                 {{ $t('about.before') }} · {{ $t('about.medicine.period') }}
               </p>
-              <h3 class="mt-2 font-display font-normal text-xl sm:text-2xl leading-tight text-label">
+              <h3 class="mt-2 font-display font-medium text-xl sm:text-2xl leading-tight text-label">
                 {{ $t('about.medicine.title') }} — {{ $t('about.medicine.place') }}
               </h3>
               <p class="mt-2 max-w-lg text-sm text-label leading-relaxed">

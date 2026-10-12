@@ -72,7 +72,7 @@ const related = computed(() =>
           :text="project!.title"
           tag="h1"
           on="load"
-          class="mt-10 max-w-[16em] text-balance font-display font-normal text-5xl sm:text-7xl leading-[0.95] tracking-[-0.03em] text-ink dark:text-paper"
+          class="mt-10 max-w-[16em] text-balance font-display font-medium text-5xl sm:text-7xl leading-[0.95] tracking-[-0.04em] text-ink dark:text-paper"
         />
         <p class="mt-8 max-w-2xl text-lg sm:text-xl text-body leading-relaxed">
           {{ cs?.tagline || project!.description }}
@@ -127,7 +127,7 @@ const related = computed(() =>
             <dt class="text-sm text-body">
               {{ metric.label }}
             </dt>
-            <dd class="font-display font-normal text-5xl sm:text-6xl leading-none tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
+            <dd class="font-display font-medium text-5xl sm:text-6xl leading-none tracking-[-0.04em] btn-gradient-text pb-[0.08em]">
               {{ metric.value }}
             </dd>
           </div>
@@ -195,7 +195,7 @@ const related = computed(() =>
                 <p class="font-mono text-xs text-label">
                   {{ String(i + 1).padStart(2, '0') }}
                 </p>
-                <h2 class="mt-2 font-display font-normal text-3xl sm:text-4xl leading-tight text-ink dark:text-paper">
+                <h2 class="mt-2 font-display font-medium text-3xl sm:text-4xl leading-tight text-ink dark:text-paper">
                   {{ $t(`projects.caseStudy.${ch.key}`) }}
                 </h2>
               </div>
@@ -234,7 +234,7 @@ const related = computed(() =>
           v-else
           class="mt-20 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 border-t border-hairline pt-8"
         >
-          <h2 class="lg:col-span-4 font-display font-normal text-3xl text-ink dark:text-paper">
+          <h2 class="lg:col-span-4 font-display font-medium text-3xl text-ink dark:text-paper">
             {{ $t('projects.caseStudy.overview') }}
           </h2>
           <div class="lg:col-span-8 max-w-2xl">
@@ -269,7 +269,7 @@ const related = computed(() =>
                   {{ item.date }}
                 </p>
                 <div>
-                  <h3 class="font-display font-normal text-2xl sm:text-3xl leading-tight text-ink dark:text-paper">
+                  <h3 class="font-display font-medium text-2xl sm:text-3xl leading-tight text-ink dark:text-paper">
                     {{ item.title }}
                   </h3>
                   <p class="mt-2 max-w-xl text-body leading-relaxed line-clamp-2">

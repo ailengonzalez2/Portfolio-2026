@@ -35,7 +35,7 @@ onMounted(() => {
           <p class="font-mono text-xs text-label">
             {{ error.statusCode }}
           </p>
-          <h1 class="mt-4 max-w-[14em] text-balance font-display font-normal text-5xl sm:text-7xl leading-[0.95] tracking-[-0.03em] btn-gradient-text pb-[0.08em]">
+          <h1 class="mt-4 max-w-[14em] text-balance font-display font-medium text-5xl sm:text-7xl leading-[0.95] tracking-[-0.04em] btn-gradient-text pb-[0.08em]">
             {{ error.statusCode === 404 ? $t('error.notFound') : $t('error.generic') }}
           </h1>
           <p class="mt-8 max-w-xl text-lg text-body">

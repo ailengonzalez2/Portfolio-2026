@@ -78,7 +78,7 @@ const onClick = (e: MouseEvent) => {
         {{ label }}
       </p>
       <p
-        class="mt-2 font-display font-normal text-2xl sm:text-3xl leading-tight transition-opacity duration-500"
+        class="mt-2 font-display font-medium text-2xl sm:text-3xl leading-tight transition-opacity duration-500"
         :class="formed ? 'opacity-100' : 'opacity-40'"
       >
         {{ name }}

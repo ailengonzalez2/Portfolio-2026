@@ -137,7 +137,7 @@ onBeforeUnmount(() => {
         <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
           {{ $t('process.eyebrow') }}
         </p>
-        <h2 class="mt-4 font-display font-normal text-4xl sm:text-5xl leading-[0.95] tracking-[-0.02em] text-ink dark:text-paper">
+        <h2 class="mt-4 font-display font-medium text-4xl sm:text-5xl leading-[0.95] tracking-[-0.04em] text-ink dark:text-paper">
           {{ $t('process.title') }}
         </h2>
         <p class="mt-6 text-body">

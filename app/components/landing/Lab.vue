@@ -22,7 +22,7 @@ const localePath = useLocalePath()
           <ResolveText
             :text="$t('lab.title')"
             tag="h2"
-            class="mt-4 font-display font-normal text-4xl sm:text-6xl leading-[0.98] tracking-[-0.02em]"
+            class="mt-4 font-display font-medium text-4xl sm:text-6xl leading-[0.98] tracking-[-0.04em]"
           />
           <p class="mt-6 text-lg text-paper/70">
             {{ $t('lab.intro') }}

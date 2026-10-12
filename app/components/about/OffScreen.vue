@@ -55,7 +55,7 @@ function onTap(key: string, e: PointerEvent) {
             :name="item.icon"
             class="size-5 text-label"
           />
-          <h3 class="mt-4 font-display font-normal text-2xl leading-tight text-ink dark:text-paper">
+          <h3 class="mt-4 font-display font-medium text-2xl leading-tight text-ink dark:text-paper">
             {{ $t(`about.offScreen.${item.key}.title`) }}
           </h3>
           <p class="mt-3 text-body leading-relaxed">

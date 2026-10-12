@@ -32,7 +32,7 @@ const minutes = (readingTime?: string) => readingTime?.match(/\d+/)?.[0]
           :text="$t('writing.title')"
           tag="h1"
           on="load"
-          class="max-w-[14em] text-balance font-display font-normal text-5xl sm:text-7xl leading-[0.95] tracking-[-0.03em] text-ink dark:text-paper"
+          class="max-w-[14em] text-balance font-display font-medium text-5xl sm:text-7xl leading-[0.95] tracking-[-0.04em] text-ink dark:text-paper"
         />
         <p class="mt-8 max-w-xl text-lg text-body">
           {{ $t('writing.intro') }}
@@ -57,7 +57,7 @@ const minutes = (readingTime?: string) => readingTime?.match(/\d+/)?.[0]
                 >{{ minutes(post.readingTime) }} min</span>
               </p>
               <div>
-                <h2 class="font-display font-normal text-2xl sm:text-3xl leading-tight text-ink dark:text-paper">
+                <h2 class="font-display font-medium text-2xl sm:text-3xl leading-tight text-ink dark:text-paper">
                   {{ $t(`writing.posts.${post.i18nKey}.title`) }}
                 </h2>
                 <p class="mt-3 max-w-xl text-body leading-relaxed">
@@ -82,7 +82,7 @@ const minutes = (readingTime?: string) => readingTime?.match(/\d+/)?.[0]
                 <span class="block mt-1">{{ $t('writing.comingSoon') }}</span>
               </p>
               <div>
-                <h2 class="font-display font-normal text-2xl sm:text-3xl leading-tight text-label">
+                <h2 class="font-display font-medium text-2xl sm:text-3xl leading-tight text-label">
                   {{ $t(`writing.posts.${key}.title`) }}
                 </h2>
                 <p class="mt-3 max-w-xl text-body leading-relaxed">

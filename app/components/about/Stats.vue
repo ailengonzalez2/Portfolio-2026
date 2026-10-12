@@ -27,7 +27,7 @@ const stats = [
         <dt class="max-w-[16rem] text-sm sm:text-base leading-snug text-body">
           {{ $t(`about.stats.${stat.key}`) }}
         </dt>
-        <dd class="font-display font-normal text-4xl sm:text-6xl lg:text-7xl leading-none tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
+        <dd class="font-display font-medium text-4xl sm:text-6xl lg:text-7xl leading-none tracking-[-0.04em] btn-gradient-text pb-[0.08em]">
           {{ stat.value }}
         </dd>
       </Reveal>

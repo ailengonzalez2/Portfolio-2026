@@ -103,7 +103,7 @@ onBeforeUnmount(() => {
             :density="density"
             @ready="playIntro"
           >
-            <h1 class="hero-title font-display font-normal text-[clamp(3rem,11vw,9rem)] leading-[0.88] tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
+            <h1 class="hero-title font-display font-medium uppercase text-[clamp(3rem,7.2vw,8rem)] leading-[0.95] tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
               <template
                 v-for="(line, i) in roleLines"
                 :key="line"

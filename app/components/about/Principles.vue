@@ -19,7 +19,7 @@ const principles = ['noHandoff', 'ai', 'decide', 'remote'] as const
           <p class="principle-num font-mono text-[11px] uppercase tracking-[0.18em] text-label">
             {{ String(i + 1).padStart(2, '0') }}
           </p>
-          <h3 class="mt-3 font-display font-normal text-2xl sm:text-3xl leading-tight text-ink dark:text-paper">
+          <h3 class="mt-3 font-display font-medium text-2xl sm:text-3xl leading-tight text-ink dark:text-paper">
             {{ $t(`about.principles.${key}.title`) }}
           </h3>
           <p class="mt-3 max-w-lg text-body leading-relaxed">

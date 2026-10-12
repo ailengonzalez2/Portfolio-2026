@@ -2,8 +2,8 @@
 import { findPhrase, splitWords, wordProgress } from '~/webgl/math'
 import { tween } from '~/webgl/loop'
 
-// Real text that resolves word by word: blur → sharp, light → firm (Fraunces
-// wght/SOFT axes). DOM only. `on="scroll"` ties it to the scroll position;
+// Real text that resolves word by word: blur → sharp, light → firm (the display
+// face's wght axis). DOM only. `on="scroll"` ties it to the scroll position;
 // `on="load"` plays it once on mount (for headings visible at first paint).
 // The highlighted phrase turns gradient once resolved.
 const props = withDefaults(defineProps<{
@@ -44,7 +44,7 @@ const wordStyle = (i: number) => {
   return {
     opacity: 0.12 + 0.88 * w,
     filter: `blur(${((1 - w) * 6).toFixed(2)}px)`,
-    fontVariationSettings: `'wght' ${Math.round(300 + 200 * w)}, 'SOFT' ${Math.round(100 * (1 - w))}`
+    fontVariationSettings: `'wght' ${Math.round(300 + 200 * w)}`
   }
 }
 

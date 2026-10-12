@@ -26,7 +26,7 @@ useSeoMeta({
             :highlight="$t('about.statementHighlight')"
             tag="h1"
             on="load"
-            class="mt-6 max-w-[15em] font-display font-normal text-4xl sm:text-5xl lg:text-6xl leading-[1.04] tracking-[-0.02em] text-ink dark:text-paper"
+            class="mt-6 max-w-[15em] font-display font-medium text-4xl sm:text-5xl lg:text-6xl leading-[1.04] tracking-[-0.04em] text-ink dark:text-paper"
           />
           <HalftoneReveal>
             <p class="mt-10 max-w-2xl text-lg leading-relaxed text-body">
