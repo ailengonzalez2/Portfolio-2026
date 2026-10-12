@@ -45,7 +45,11 @@
       "cta": "Play around with my portfolio",
       "jellyCaption": "Go on, poke it.",
       "jellyName": "Jelly — a squishy WebGPU starfish",
-      "seeLab": "See the whole lab"
+      "seeLab": "See the whole lab",
+      "vinylCaption": "Drop the needle.",
+      "vinylName": "Vinyl Room — a 3D turntable",
+      "cubeCaption": "Give it a twist.",
+      "cubeName": "Project Cube — a portfolio you solve"
     }
   },
   "manifesto": {

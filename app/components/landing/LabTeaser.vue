@@ -23,6 +23,19 @@ const loftVideo = {
   webm: '/projects/lab/loft.webm',
   mp4: '/projects/lab/loft.mp4'
 }
+
+// Second row: two more experiments, each a muted looping screen recording.
+// The cube gets the wide tile, mirroring the loft above.
+const clips = computed(() => [
+  { id: 'vinyl-room', key: 'vinyl', video: 'vinyl', wide: false },
+  { id: 'project-cube', key: 'cube', video: 'cube', wide: true }
+].map(c => ({
+  ...c,
+  link: projects.value.find(p => p.id === c.id)?.links.preview ?? localePath('/projects#lab'),
+  poster: `/projects/lab/${c.video}-poster.jpg`,
+  webm: `/projects/lab/${c.video}.webm`,
+  mp4: `/projects/lab/${c.video}.mp4`
+})))
 </script>
 
 <template>
@@ -105,7 +118,7 @@ const loftVideo = {
 
         <NuxtLink
           :to="localePath('/projects#lab')"
-          class="group/lab flex items-center justify-between rounded-2xl border border-neutral-800 px-5 py-4 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-600 hover:text-white"
+          class="group/lab hidden md:flex items-center justify-between rounded-2xl border border-neutral-800 px-5 py-4 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-600 hover:text-white"
         >
           {{ $t('projects.labTeaser.seeLab') }}
           <UIcon
@@ -114,6 +127,57 @@ const loftVideo = {
           />
         </NuxtLink>
       </div>
+
+      <NuxtLink
+        v-for="c in clips"
+        :key="c.id"
+        :to="c.link"
+        target="_blank"
+        rel="noopener"
+        :aria-label="$t(`projects.labTeaser.${c.key}Name`)"
+        class="group relative block overflow-hidden rounded-2xl bg-neutral-900 aspect-[4/3] md:aspect-auto md:min-h-[300px]"
+        :class="c.wide ? 'md:col-span-2' : ''"
+      >
+        <video
+          class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          :autoplay="!reduced"
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          :poster="c.poster"
+        >
+          <source
+            :src="c.webm"
+            type="video/webm"
+          >
+          <source
+            :src="c.mp4"
+            type="video/mp4"
+          >
+        </video>
+        <div class="absolute inset-0 bg-linear-to-t from-neutral-950/85 via-transparent to-transparent" />
+        <div class="absolute inset-x-0 bottom-0 p-5 flex flex-col gap-1">
+          <span class="font-serif italic text-2xl sm:text-3xl leading-none text-white">
+            {{ $t(`projects.labTeaser.${c.key}Caption`) }}
+          </span>
+          <span class="text-xs text-neutral-300">
+            {{ $t(`projects.labTeaser.${c.key}Name`) }}
+          </span>
+        </div>
+      </NuxtLink>
+
+      <!-- Phones: the link to the whole lab comes after every tile -->
+      <NuxtLink
+        :to="localePath('/projects#lab')"
+        class="group/lab flex md:hidden items-center justify-between rounded-2xl border border-neutral-800 px-5 py-4 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-600 hover:text-white"
+      >
+        {{ $t('projects.labTeaser.seeLab') }}
+        <UIcon
+          name="i-lucide-arrow-right"
+          class="size-4 transition-transform group-hover/lab:translate-x-1"
+        />
+      </NuxtLink>
     </div>
   </Reveal>
 </template>
