@@ -320,31 +320,55 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
     }
   },
   {
-    id: 'brand-spark',
-    kind: 'lab',
-    labTag: 'LLM · streaming UI',
-    title: 'Brand Spark — Live Brand Identity',
-    description: 'Describe a brand in two or three sentences and watch a full identity generate live — name, palette, type pairings, voice and moodboard — restyling the page itself as it streams in.',
-    image: '/projects/covers/brand-spark.jpg',
-    tags: ['AI Product', 'LLM Integration', 'Product Design'],
+    id: 'contap',
+    kind: 'client',
+    title: 'Contap — NFC Nails',
+    description: 'Nails with an NFC chip: someone holds a phone near your hand and whatever link you chose opens. A product with a store, pricing and an editable destination per chip.',
+    image: '/projects/covers/contap.jpg',
+    tags: ['Product Design', 'E-commerce', 'Frontend Development'],
     date: '2026',
     links: {
-      preview: 'https://brand-spark.up.railway.app/'
+      preview: 'https://nfc-website-production.up.railway.app/'
     },
     caseStudy: {
-      tagline: 'An AI brand generator that proves its own output by wearing it — the page adopts each identity as it streams in.',
-      role: 'AI Product Design + Frontend',
-      problem: 'Most AI branding tools hand back a static PDF or a grid of logos with no context. You see swatches, not a brand — nothing shows how the palette, typography and voice actually hold together in a real interface, which is the only thing that matters when you have to decide whether an identity works.',
-      approach: 'I built the demo so the output has to prove itself: as the model streams a brand back, the page restyles itself with the generated palette and typefaces in real time. Each identity comes as structured data — named color tokens, primary and body type pairings with rationale, a voice statement with do and don\'t lists, and a moodboard whose imagery is generated to match. Every section can be regenerated on its own without discarding the rest, and the whole identity exports as JSON so it can go straight into design tokens.',
+      tagline: 'Turning a physical object into a link you can change whenever you want.',
+      role: 'Product Design + Frontend',
+      problem: 'NFC products are usually sold as cards or keychains and explained in technical language that assumes you already know what NFC is. The interesting version — wearing the chip, so sharing a contact takes no object and no typing — needed a product story that made the idea obvious to someone who has never heard of the technology.',
+      approach: 'I built the product site around the gesture rather than the technology: oversized type stating the promise ("tu contacto en tu mano"), a plain-language explainer for anyone asking what an NFC even is, and a shop where the chip and its destination are separate things — you buy the nail once and can point it anywhere afterwards. Accounts let each owner edit their own link.',
       highlights: [
-        'Live theming — the page adopts the generated identity as it streams',
-        'Structured output: color tokens, type pairings, voice, copy',
-        'Per-section regeneration without losing the rest',
-        'Generated moodboard imagery, plus mock site and social previews',
-        'Export to JSON for handoff into design tokens'
+        'Product story led by the gesture, not the technology',
+        'Plain-language "what is an NFC?" explainer',
+        'Store with product range and pricing',
+        'Per-user account to edit the chip\'s destination link'
       ],
-      result: 'Live and open to try. It doubles as a working demo of the pieces a production AI feature needs — streaming, structured outputs, generated imagery and a UI that responds to model output rather than just printing it.',
-      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'LLM streaming', 'fal.ai']
+      result: 'Live with the storefront, explainer and account flow in place.',
+      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL']
+    }
+  },
+  {
+    id: 'vinyl-room',
+    kind: 'lab',
+    labTag: 'Three.js · Audio',
+    title: 'Vinyl Room — 3D Turntable',
+    description: 'A record crate and a turntable in 3D. Pick a record, drop it on the platter and its 30-second preview plays while it spins.',
+    image: '/projects/covers/vinyl-room.jpg',
+    tags: ['3D / WebGL', 'Frontend Development', 'Interaction Design'],
+    date: '2026',
+    links: {
+      preview: 'https://vinyl-turntable-production.up.railway.app/'
+    }
+  },
+  {
+    id: 'project-cube',
+    kind: 'lab',
+    labTag: 'Three.js · Puzzle',
+    title: 'Project Cube — Puzzle Portfolio',
+    description: 'A puzzle cube whose six faces are six of my projects. Drag a face to turn it, solve the cube in a few moves or jump straight to a project.',
+    image: '/projects/covers/project-cube.jpg',
+    tags: ['3D / WebGL', 'Frontend Development', 'Interaction Design'],
+    date: '2026',
+    links: {
+      preview: 'https://cubo-proyectos-production.up.railway.app/'
     }
   },
   {
@@ -376,32 +400,6 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
     }
   },
   {
-    id: 'contap',
-    kind: 'client',
-    title: 'Contap — NFC Nails',
-    description: 'Nails with an NFC chip: someone holds a phone near your hand and whatever link you chose opens. A product with a store, pricing and an editable destination per chip.',
-    image: '/projects/covers/contap.jpg',
-    tags: ['Product Design', 'E-commerce', 'Frontend Development'],
-    date: '2026',
-    links: {
-      preview: 'https://nfc-website-production.up.railway.app/'
-    },
-    caseStudy: {
-      tagline: 'Turning a physical object into a link you can change whenever you want.',
-      role: 'Product Design + Frontend',
-      problem: 'NFC products are usually sold as cards or keychains and explained in technical language that assumes you already know what NFC is. The interesting version — wearing the chip, so sharing a contact takes no object and no typing — needed a product story that made the idea obvious to someone who has never heard of the technology.',
-      approach: 'I built the product site around the gesture rather than the technology: oversized type stating the promise ("tu contacto en tu mano"), a plain-language explainer for anyone asking what an NFC even is, and a shop where the chip and its destination are separate things — you buy the nail once and can point it anywhere afterwards. Accounts let each owner edit their own link.',
-      highlights: [
-        'Product story led by the gesture, not the technology',
-        'Plain-language "what is an NFC?" explainer',
-        'Store with product range and pricing',
-        'Per-user account to edit the chip\'s destination link'
-      ],
-      result: 'Live with the storefront, explainer and account flow in place.',
-      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL']
-    }
-  },
-  {
     id: 'jelly',
     kind: 'lab',
     playable: true,
@@ -430,6 +428,34 @@ const { data: slots } = await useFetch('/api/slots', { query: { date } })
       ],
       result: 'Live in the browser. It works as a tiny playground for the questions I keep coming back to in 3D: how to make an object feel physical, how to invite touch without a tutorial, and what WebGPU changes for creative work on the web.',
       stack: ['Three.js', 'WebGPU', 'React', 'Next.js', 'TypeScript']
+    }
+  },
+  {
+    id: 'brand-spark',
+    kind: 'lab',
+    labTag: 'LLM · streaming UI',
+    title: 'Brand Spark — Live Brand Identity',
+    description: 'Describe a brand in two or three sentences and watch a full identity generate live — name, palette, type pairings, voice and moodboard — restyling the page itself as it streams in.',
+    image: '/projects/covers/brand-spark.jpg',
+    tags: ['AI Product', 'LLM Integration', 'Product Design'],
+    date: '2026',
+    links: {
+      preview: 'https://brand-spark.up.railway.app/'
+    },
+    caseStudy: {
+      tagline: 'An AI brand generator that proves its own output by wearing it — the page adopts each identity as it streams in.',
+      role: 'AI Product Design + Frontend',
+      problem: 'Most AI branding tools hand back a static PDF or a grid of logos with no context. You see swatches, not a brand — nothing shows how the palette, typography and voice actually hold together in a real interface, which is the only thing that matters when you have to decide whether an identity works.',
+      approach: 'I built the demo so the output has to prove itself: as the model streams a brand back, the page restyles itself with the generated palette and typefaces in real time. Each identity comes as structured data — named color tokens, primary and body type pairings with rationale, a voice statement with do and don\'t lists, and a moodboard whose imagery is generated to match. Every section can be regenerated on its own without discarding the rest, and the whole identity exports as JSON so it can go straight into design tokens.',
+      highlights: [
+        'Live theming — the page adopts the generated identity as it streams',
+        'Structured output: color tokens, type pairings, voice, copy',
+        'Per-section regeneration without losing the rest',
+        'Generated moodboard imagery, plus mock site and social previews',
+        'Export to JSON for handoff into design tokens'
+      ],
+      result: 'Live and open to try. It doubles as a working demo of the pieces a production AI feature needs — streaming, structured outputs, generated imagery and a UI that responds to model output rather than just printing it.',
+      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'LLM streaming', 'fal.ai']
     }
   }
 ]

@@ -199,5 +199,15 @@ export const projectsEs: Record<string, ProjectTranslation> = {
         'Combinación tipográfica sans + serif sobre un fondo oscuro y estrellado'
       ]
     }
+  },
+  'vinyl-room': {
+    title: 'Vinyl Room — Tocadiscos 3D',
+    labTag: 'Three.js · Audio',
+    description: 'Una caja de discos y un tocadiscos en 3D. Elegís un disco, lo ponés en el plato y suena su preview de 30 segundos mientras gira.'
+  },
+  'project-cube': {
+    title: 'Cubo de proyectos — Portfolio para resolver',
+    labTag: 'Three.js · Puzzle',
+    description: 'Un cubo tipo Rubik donde cada una de sus seis caras es uno de mis proyectos. Arrastrá una cara para girarla, resolvelo en pocos movimientos o saltá directo a un proyecto.'
   }
 }
