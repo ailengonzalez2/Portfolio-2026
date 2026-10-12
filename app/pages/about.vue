@@ -18,15 +18,12 @@ useSeoMeta({
     >
       <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
         <div class="lg:col-span-7 min-w-0 order-2 lg:order-1">
-          <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
-            {{ $t('about.eyebrow') }}
-          </p>
           <ResolveText
             :text="$t('about.statement')"
             :highlight="$t('about.statementHighlight')"
             tag="h1"
             on="load"
-            class="mt-6 max-w-[15em] font-display font-medium text-4xl sm:text-5xl lg:text-6xl leading-[1.04] tracking-[-0.04em] text-ink dark:text-paper"
+            class="max-w-[15em] font-display font-medium text-4xl sm:text-5xl lg:text-6xl leading-[1.04] tracking-[-0.04em] text-ink dark:text-paper"
           />
           <HalftoneReveal>
             <p class="mt-10 max-w-2xl text-lg leading-relaxed text-body">

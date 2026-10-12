@@ -85,15 +85,13 @@
     },
     "stats": {
       "heading": "En números",
-      "medicine": "años en guardias de emergencia antes de diseñar y programar",
       "years": "años diseñando y programando productos digitales",
       "shipped": "productos entregados de punta a punta, de Figma a producción",
       "faster": "menos tiempo de entrega que separando diseño y desarrollo"
     },
     "portraitCaption": "Ailen Gonzalez · Córdoba, Argentina",
-    "eyebrow": "Sobre mí",
-    "statement": "Diseñadora por oficio, desarrolladora por costumbre. Hago que los productos de IA se sientan simples.",
-    "statementHighlight": "se sientan simples.",
+    "statement": "Desarrolladora frontend obsesionada con la IA y la UI.",
+    "statementHighlight": "la IA y la UI.",
     "trajectory": "Trayectoria",
     "now": "Ahora",
     "before": "Antes de la tecnología",
@@ -173,8 +171,8 @@
     "offScreen": {
       "heading": "Fuera de la pantalla",
       "dogs": {
-        "title": "Spock y Mina",
-        "body": "Mis dos perros: Spock tiene 12 años y Mina, 6 meses. Son mis modelos favoritos."
+        "title": "Spock",
+        "body": "Mi perro Spock tiene 12 años. Es mi modelo favorito."
       },
       "photo": {
         "title": "Fotografía",
@@ -184,9 +182,9 @@
         "title": "3D, de la pantalla a la mano",
         "body": "Modelo en 3D y lo convierto en objetos reales con mi impresora, que casi nunca está apagada."
       },
-      "design": {
-        "title": "Diseño en todas partes",
-        "body": "Interiores, gráfica, web: siempre estoy mirando cómo diseñan otros. Y cuando viajo, absorbo todo lo que puedo de cada cultura."
+      "dive": {
+        "title": "Buzo certificada",
+        "body": "Tengo certificación de buceo y bajo cada vez que puedo. Ahí abajo no hay pantallas ni notificaciones."
       }
     }
   },

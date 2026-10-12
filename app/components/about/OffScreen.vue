@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// Off screen: the personal side, in Ailen's own words — dogs, photography,
-// 3D printing, and an eye for design everywhere. Each block has its own
+// Off screen: the personal side, in Ailen's own words — her dog, photography,
+// 3D printing, and diving. Each block has its own
 // polaroid pinned above it, half over the title; hover (or focus, or a tap on
 // touch) sets it down. Angle, offset and size differ per block so they read
 // as photos dropped on a table, not copies.
@@ -9,7 +9,7 @@ const items = [
   // Placeholder photos until the per-topic ones arrive.
   { key: 'photo', icon: 'i-lucide-camera', photo: '/about/off/dogs.jpg', rot: 4, x: '34%', w: '10rem' },
   { key: 'print', icon: 'i-lucide-box', photo: '/about/off/dogs.jpg', rot: -2.5, x: '18%', w: '12rem' },
-  { key: 'design', icon: 'i-lucide-eye', photo: '/about/off/dogs.jpg', rot: 7, x: '26%', w: '10.5rem' }
+  { key: 'dive', icon: 'i-lucide-waves', photo: '/about/off/dogs.jpg', rot: 7, x: '26%', w: '10.5rem' }
 ] as const
 
 // Touch has no hover: a tap opens a block's photo, another tap closes it.

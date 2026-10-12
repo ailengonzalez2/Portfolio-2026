@@ -85,15 +85,13 @@
     },
     "stats": {
       "heading": "In numbers",
-      "medicine": "years in emergency medicine before design and code",
       "years": "years designing and building digital products",
       "shipped": "products shipped end to end, from Figma to production",
       "faster": "faster delivery than splitting design and development"
     },
     "portraitCaption": "Ailen Gonzalez · Córdoba, Argentina",
-    "eyebrow": "About",
-    "statement": "Designer by craft, developer by habit. I make AI products feel simple.",
-    "statementHighlight": "feel simple.",
+    "statement": "Frontend developer obsessed with AI and UI.",
+    "statementHighlight": "AI and UI.",
     "trajectory": "Trajectory",
     "now": "Now",
     "before": "Before tech",
@@ -173,8 +171,8 @@
     "offScreen": {
       "heading": "Off screen",
       "dogs": {
-        "title": "Spock and Mina",
-        "body": "My two dogs: Spock is 12 and Mina is 6 months old. They're my favorite models."
+        "title": "Spock",
+        "body": "My dog Spock is 12. He's my favorite model."
       },
       "photo": {
         "title": "Photography",
@@ -184,9 +182,9 @@
         "title": "3D, from screen to hand",
         "body": "I model in 3D and turn it into real objects with my printer, which is almost never off."
       },
-      "design": {
-        "title": "Design everywhere",
-        "body": "Interiors, graphic, web: I'm always looking at how others design. And when I travel, I soak up everything I can from each culture."
+      "dive": {
+        "title": "Certified diver",
+        "body": "I'm a certified scuba diver and go down whenever I can. Down there, no screens and no notifications."
       }
     }
   },
