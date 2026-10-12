@@ -3,12 +3,13 @@ const { global } = useAppConfig()
 </script>
 
 <template>
-  <section class="py-32 sm:py-48">
+  <section class="manifesto relative pt-12 sm:pt-16 pb-32 sm:pb-48">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <ResolveText
         :text="$t('manifesto.text')"
         :highlight="$t('manifesto.highlight')"
         tag="p"
+        :finish-at="0.7"
         class="font-display font-normal text-4xl sm:text-6xl lg:text-7xl leading-[1.02] tracking-[-0.02em] text-ink dark:text-paper"
       />
 

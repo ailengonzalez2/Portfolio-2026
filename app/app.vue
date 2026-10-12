@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { pageLabel } from '~/webgl/pageLabel'
-
 const colorMode = useColorMode()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
@@ -33,33 +31,6 @@ useSeoMeta({
   ogSiteName: 'Ailen Gonzalez',
   twitterCard: 'summary_large_image'
 })
-
-const fx = useFxEnabled()
-const router = useRouter()
-const { t } = useI18n()
-const curtain = usePageCurtain()
-
-// WebGL path: a paper curtain covers the page while particles assemble the
-// destination's name, the route swaps underneath, then they disperse and the
-// curtain lifts. Fallback: a plain cross-fade.
-const allProjects = useProjects()
-const pageTransition = computed(() => fx.value
-  ? {
-      name: 'curtain',
-      mode: 'out-in' as const,
-      css: false,
-      onLeave: (_el: Element, done: () => void) => {
-        const label = pageLabel(router.currentRoute.value.path, {
-          t,
-          projectTitle: id => allProjects.value.find(p => p.id === id)?.title
-        })
-        curtain.cover(label).then(done)
-      },
-      onAfterEnter: () => {
-        curtain.reveal()
-      }
-    }
-  : { name: 'fade', mode: 'out-in' as const })
 
 // Default social-share image, auto-generated. Individual pages can override.
 defineOgImage('Hero')
@@ -97,7 +68,7 @@ useSchemaOrg([
     sameAs: [
       'https://www.linkedin.com/in/ailengonzalez/',
       'https://github.com/ailengonzalez2',
-      'https://www.upwork.com/freelancers/ailengonzalez'
+      'https://x.com/Ailegonzalez'
     ]
   }),
   defineWebSite({
@@ -108,10 +79,9 @@ useSchemaOrg([
 
 <template>
   <UApp>
-    <PageCurtain v-if="fx" />
     <NuxtLayout>
       <UMain class="relative">
-        <NuxtPage :transition="pageTransition" />
+        <NuxtPage />
       </UMain>
     </NuxtLayout>
   </UApp>

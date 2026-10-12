@@ -6,6 +6,8 @@ interface SocialLink {
   icon: string
   url: string
   key: string
+  /** Simple Icons fill their whole box; trim so they match the mdi set */
+  small?: boolean
 }
 
 const { t } = useI18n()
@@ -14,7 +16,7 @@ const socialLinks: SocialLink[] = [
   { name: 'LinkedIn', icon: 'i-mdi-linkedin', url: 'https://www.linkedin.com/in/ailengonzalez/', key: 'linkedin' },
   { name: 'CV', icon: 'i-lucide-file-text', url: 'https://cv.ailengonzalez.ar/', key: 'cv' },
   { name: 'GitHub', icon: 'i-mdi-github', url: 'https://github.com/ailengonzalez2', key: 'github' },
-  { name: 'Upwork', icon: 'i-simple-icons-upwork', url: 'https://www.upwork.com/freelancers/ailengonzalez?mp_source=share', key: 'upwork' }
+  { name: 'X', icon: 'i-simple-icons-x', url: 'https://x.com/Ailegonzalez', key: 'x', small: true }
 ]
 
 // Near the bottom the sidebar sits over the ink footer: switch to paper.
@@ -72,7 +74,7 @@ const mobileBottom = computed(() => {
       >
         <UIcon
           :name="social.icon"
-          class="size-[22px]"
+          :class="social.small ? 'size-[18px]' : 'size-[22px]'"
         />
         <span
           class="absolute left-full top-1/2 -translate-y-1/2 ml-2 font-mono text-[11px] uppercase tracking-[0.18em] whitespace-nowrap opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 pointer-events-none"
@@ -111,7 +113,7 @@ const mobileBottom = computed(() => {
       >
         <UIcon
           :name="social.icon"
-          class="size-[18px]"
+          :class="social.small ? 'size-[15px]' : 'size-[18px]'"
         />
       </ULink>
     </nav>

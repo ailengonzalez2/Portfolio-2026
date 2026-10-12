@@ -11,7 +11,9 @@ const props = withDefaults(defineProps<{
   highlight?: string
   tag?: string
   on?: 'scroll' | 'load'
-}>(), { highlight: '', tag: 'p', on: 'scroll' })
+  /** Viewport line (0 top – 1 bottom) the text's end reaches when fully resolved */
+  finishAt?: number
+}>(), { highlight: '', tag: 'p', on: 'scroll', finishAt: 0.45 })
 
 const root = ref<HTMLElement | null>(null)
 const fx = useFxEnabled()
@@ -20,7 +22,7 @@ const progress = ref(1)
 const words = computed(() => splitWords(props.text))
 const range = computed(() => props.highlight ? findPhrase(words.value, splitWords(props.highlight)) : null)
 
-const scrolled = useScrollProgress(root, ['start 0.85', 'end 0.45'])
+const scrolled = useScrollProgress(root, ['start 0.85', `end ${props.finishAt}`])
 onMounted(() => {
   if (props.on === 'load') {
     progress.value = 0

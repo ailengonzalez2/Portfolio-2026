@@ -2,7 +2,7 @@
 import { easeOutCubic, heroName, LOADING_DENSITY, remap } from '~/webgl/math'
 
 // Particles assemble into the name on load; scrolling disperses it back into
-// the ambient field before the manifesto. The track is 160vh only on the
+// the ambient field before the manifesto. The track is 140vh only on the
 // WebGL path (.fx-on, set by plugins/fx.client.ts); otherwise the hero is a
 // static first screen with the name already formed.
 const fx = useFxEnabled()
@@ -10,7 +10,7 @@ const fx = useFxEnabled()
 const track = ref<HTMLElement | null>(null)
 const intro = ref(1)
 const scroll = useScrollProgress(track, ['start start', 'end end'])
-// Eyebrow and subtitle fade out as the title disperses.
+// The subtitle fades out as the title disperses.
 const copyOpacity = computed(() => 1 - remap(scroll.value, 0.1, 0.5))
 
 const nameProgress = computed(() => heroName(scroll.value, intro.value))
@@ -96,13 +96,7 @@ onBeforeUnmount(() => {
         <LoadingField v-if="fx && loading" />
       </Transition>
       <div class="absolute inset-0 flex flex-col justify-center px-6 sm:px-10 lg:pl-28 lg:pr-16 pt-20">
-        <div :style="fx ? { opacity: copyOpacity } : undefined">
-          <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-label">
-            Ailen Gonzalez
-          </p>
-        </div>
-
-        <div class="relative mt-6 self-start">
+        <div class="relative self-start">
           <ParticleName
             :progress="nameProgress"
             :field="field"

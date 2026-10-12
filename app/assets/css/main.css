@@ -85,7 +85,10 @@
 @keyframes fx-boot-reveal { to { opacity: 1; } }
 
 /* Scroll tracks only stretch when the WebGL path runs */
-.fx-on .hero-track { height: 160vh; }
+.fx-on .hero-track { height: 140vh; }
+/* The manifesto slides up over the end of the hero track, so the first
+   phrase arrives while the name is still dispersing (no empty stretch). */
+.fx-on .manifesto { margin-top: -20vh; }
 
 /* Halftone reveal: the DOM-only analog of particles. Content shows through a
    grid of dots that grow until solid (see components/fx/HalftoneReveal.vue). */

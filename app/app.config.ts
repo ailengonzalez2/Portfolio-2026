@@ -43,10 +43,10 @@ export default defineAppConfig({
       'target': '_blank',
       'aria-label': 'GitHub'
     }, {
-      'icon': 'i-simple-icons-upwork',
-      'to': 'https://www.upwork.com/freelancers/ailengonzalez?mp_source=share',
+      'icon': 'i-simple-icons-x',
+      'to': 'https://x.com/Ailegonzalez',
       'target': '_blank',
-      'aria-label': 'Upwork'
+      'aria-label': 'X'
     }, {
       'icon': 'i-simple-icons-telegram',
       'to': 'https://t.me/AilenGonzalez',
