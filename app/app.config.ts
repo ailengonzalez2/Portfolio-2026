@@ -1,11 +1,5 @@
 export default defineAppConfig({
   global: {
-    // TODO: drop a real profile image at /public/profile.png (square, min 800px)
-    picture: {
-      dark: '/profile.png',
-      light: '/profile.png',
-      alt: 'Ailen Gonzalez'
-    },
     meetingLink: 'https://calendly.com/ailengonzalez21-ag/new-meeting',
     email: 'hey@ailengonzalez.ar',
     available: true

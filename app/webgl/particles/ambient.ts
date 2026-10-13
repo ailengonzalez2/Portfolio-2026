@@ -9,8 +9,6 @@ attribute float aRand;
 attribute vec3 aColor;
 uniform float uTime;
 uniform float uPixelRatio;
-uniform float uWipe;
-uniform float uCover;
 uniform vec2 uViewport;
 uniform vec2 uMouse;
 varying vec3 vColor;
@@ -22,14 +20,13 @@ void main() {
   vec2 d = p - uMouse;
   p += normalize(d + 0.0001) * smoothstep(110.0, 0.0, length(d)) * 30.0;
   vColor = aColor;
-  vAlpha = mix(0.22, 1.0, uWipe);
+  vAlpha = 0.22;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 0.0, 1.0);
   float base = 2.4 + aRand * 1.6;
-  gl_PointSize = mix(base, uCover, uWipe * uWipe) * uPixelRatio;
+  gl_PointSize = base * uPixelRatio;
 }`
 
-// Viewport-wide drifting gradient particles: the site's texture, and the page
-// transition wipe (uWipe swells them until they cover the screen).
+// Viewport-wide drifting gradient particles: the site's texture.
 export function createAmbient(count: number) {
   const aPos = new Float32Array(count * 2)
   const aRand = new Float32Array(count)
@@ -53,8 +50,6 @@ export function createAmbient(count: number) {
     depthWrite: false,
     uniforms: {
       ...stageUniforms(),
-      uWipe: { value: 0 },
-      uCover: { value: 60 },
       uOpacity: { value: 1 }
     }
   })
@@ -63,7 +58,3 @@ export function createAmbient(count: number) {
   points.renderOrder = -1
   return points
 }
-
-/** Point size (px) at which `count` points cover a viewport with little overlap gap. */
-export const coverSize = (width: number, height: number, count: number) =>
-  Math.sqrt((width * height) / count) * 2.4

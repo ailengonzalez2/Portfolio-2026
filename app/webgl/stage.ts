@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { enterProgress, isOnScreen, type Viewport } from './math'
-import { coverSize, createAmbient } from './particles/ambient'
+import { createAmbient } from './particles/ambient'
 
 export type ParticleLayer = THREE.Points<THREE.BufferGeometry, THREE.ShaderMaterial>
 
@@ -37,7 +37,6 @@ export class Stage {
   private pointer = new THREE.Vector2(FAR, FAR)
   private ambient: ParticleLayer
   private ambientCount: number
-  private wipeLevel = 0
 
   constructor(canvas: HTMLCanvasElement) {
     this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, powerPreference: 'high-performance' })
@@ -59,7 +58,6 @@ export class Stage {
     this.camera.top = height / 2
     this.camera.bottom = -height / 2
     this.camera.updateProjectionMatrix()
-    this.ambient.material.uniforms.uCover!.value = coverSize(width, height, this.ambientCount)
   }
 
   setPointer(clientX: number, clientY: number) {
@@ -86,14 +84,6 @@ export class Stage {
     }
   }
 
-  setWipe(level: number) {
-    this.wipeLevel = level
-  }
-
-  get wipe() {
-    return this.wipeLevel
-  }
-
   get layerCount() {
     return this.entries.size
   }
@@ -111,7 +101,6 @@ export class Stage {
     const time = (performance.now() - this.start) / 1000
 
     this.syncUniforms(this.ambient.material, time, 0, 0, this.viewport.width, this.viewport.height)
-    this.ambient.material.uniforms.uWipe!.value = this.wipeLevel
 
     for (const e of this.entries) {
       const rect = e.el.getBoundingClientRect()

@@ -51,10 +51,6 @@ export interface Project {
   latentImage?: string
   /** Second screen of the product; the home row's particles change into it on hover */
   altImage?: string
-  /** The one project the home "Process" section walks through. */
-  processShowcase?: boolean
-  /** Code excerpt shown at the Process section's final "Code" stage. */
-  processSnippet?: string
   /** Short tech label for Lab experiments on the home, e.g. 'WebGPU · soft-body'. */
   labTag?: string
   /** Light interactive piece embedded live on the home ("play with my animations") */
@@ -256,20 +252,6 @@ export const projects: Project[] = [
   {
     id: 'asistente',
     kind: 'client',
-    processShowcase: true,
-    // TODO(Ailen): swap for a real excerpt from the Asistente codebase before launch.
-    processSnippet: `<script setup lang="ts">
-const { data: slots } = await useFetch('/api/slots', { query: { date } })
-</script>
-
-<template>
-  <UButton
-    v-for="slot in slots"
-    :key="slot.start"
-    :label="slot.label"
-    @click="book(slot)"
-  />
-</template>`,
     title: 'Asistente — Tu agenda trabaja sola',
     description: 'A booking SaaS for independent professionals in Argentina: a shareable reservations page, deposit collection, and automatic reminders — so the calendar runs itself.',
     image: '/projects/covers/asistente.jpg',

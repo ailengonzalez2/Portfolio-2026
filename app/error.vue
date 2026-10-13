@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { NuxtError } from '#app'
-import { resetWipe } from '~/webgl/runtime'
 
 defineProps<{
   error: NuxtError
@@ -17,11 +16,6 @@ useHead({
 useSeoMeta({
   title: 'Page not found',
   description: 'We are sorry but this page could not be found.'
-})
-
-// A navigation that led here may have left the particle wipe covering the screen.
-onMounted(() => {
-  resetWipe()
 })
 </script>
 

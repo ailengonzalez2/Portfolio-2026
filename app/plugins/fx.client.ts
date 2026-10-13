@@ -1,5 +1,5 @@
 import { shouldUseWebGL } from '~/webgl/math'
-import { provideStage, resetWipe } from '~/webgl/runtime'
+import { provideStage } from '~/webgl/runtime'
 import { bootFx, frameLoop } from '~/webgl/loop'
 
 function hasWebGL() {
@@ -46,11 +46,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     document.documentElement.classList.remove('fx-on', 'fx-boot')
     active.value = false
   }
-
-  // A navigation whose next page errors: clear the wipe.
-  nuxtApp.hook('app:error', () => {
-    resetWipe()
-  })
 
   nuxtApp.hook('app:mounted', async () => {
     await whenIdle()

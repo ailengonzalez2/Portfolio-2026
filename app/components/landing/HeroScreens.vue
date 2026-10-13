@@ -16,7 +16,7 @@ const columns = [
   { up: false, duration: '40s', offset: 7 },
   { up: true, duration: '54s', offset: 14 }
 ].map((c) => {
-  const items = Array.from({ length: 6 }, (_, k) => `/hero/screens/${SHOTS[(c.offset + k) % SHOTS.length]}.jpg`)
+  const items = Array.from({ length: 6 }, (_, k) => `/hero/screens/${SHOTS[(c.offset + k) % SHOTS.length]}.webp`)
   return { ...c, loop: [...items, ...items] }
 })
 </script>

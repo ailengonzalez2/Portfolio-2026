@@ -5,7 +5,3 @@ export function getFeaturedProjects(list: Project[]) {
     .filter(p => p.featuredOrder !== undefined)
     .sort((a, b) => (a.featuredOrder ?? 0) - (b.featuredOrder ?? 0))
 }
-
-export function getProcessShowcase(list: Project[]) {
-  return list.find(p => p.processShowcase && p.processSnippet)
-}

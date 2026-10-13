@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import type { Project } from '../../app/data/projects'
 import { projects } from '../../app/data/projects'
-import { getFeaturedProjects, getProcessShowcase } from '../../app/data/selectors'
+import { getFeaturedProjects } from '../../app/data/selectors'
 
 const base = (id: string, extra: Partial<Project> = {}): Project => ({
   id, kind: 'client', title: id, description: '', image: `/${id}.jpg`, tags: [], date: '2025', links: {}, ...extra
@@ -17,16 +17,5 @@ describe('getFeaturedProjects', () => {
     expect(featured.length).toBeGreaterThanOrEqual(3)
     expect(featured.length).toBeLessThanOrEqual(4)
     expect(featured.every(p => p.kind === 'client')).toBe(true)
-  })
-})
-
-describe('getProcessShowcase', () => {
-  test('needs both the flag and a snippet', () => {
-    expect(getProcessShowcase([base('a', { processShowcase: true })])).toBeUndefined()
-    expect(getProcessShowcase([base('a', { processShowcase: true, processSnippet: 'x' })])?.id).toBe('a')
-  })
-  test('real data has exactly one showcase', () => {
-    expect(projects.filter(p => p.processShowcase).length).toBe(1)
-    expect(getProcessShowcase(projects)).toBeDefined()
   })
 })
