@@ -451,6 +451,9 @@ export async function createLanyardScene(container: HTMLElement, opts: LanyardSc
       ;[frontTex, backTex, strapTex, envMap].forEach(t => t.dispose())
       pmrem.dispose()
       renderer.dispose()
+      // Free the GPU context now: Home ↔ About round trips otherwise pile up
+      // contexts until the browser starts dropping the oldest.
+      renderer.forceContextLoss()
       canvas.remove()
     }
   }

@@ -5,7 +5,11 @@ import { bootFx, frameLoop } from '~/webgl/loop'
 function hasWebGL() {
   try {
     const c = document.createElement('canvas')
-    return !!(c.getContext('webgl2') || c.getContext('webgl'))
+    const gl = c.getContext('webgl2') || c.getContext('webgl')
+    // Release the probe context right away instead of waiting for GC; the
+    // stage makes its own.
+    gl?.getExtension('WEBGL_lose_context')?.loseContext()
+    return !!gl
   } catch {
     return false
   }
