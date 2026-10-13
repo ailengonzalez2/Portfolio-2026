@@ -4,13 +4,13 @@
 // polaroid pinned above it, half over the title; hover (or focus, or a tap on
 // touch) sets it down. Angle, offset and size differ per block so they read
 // as photos dropped on a table, not copies.
-const items = [
+const items: { key: string, icon: string, photo?: string, ratio?: string, rot: number, x: string, w: string }[] = [
   { key: 'dogs', icon: 'i-lucide-dog', photo: '/about/off/dogs.jpg', rot: -6, x: '4%', w: '11.5rem' },
-  // Placeholder photos until the per-topic ones arrive.
-  { key: 'photo', icon: 'i-lucide-camera', photo: '/about/off/dogs.jpg', rot: 4, x: '34%', w: '10rem' },
-  { key: 'print', icon: 'i-lucide-box', photo: '/about/off/dogs.jpg', rot: -2.5, x: '18%', w: '12rem' },
-  { key: 'dive', icon: 'i-lucide-waves', photo: '/about/off/dogs.jpg', rot: 7, x: '26%', w: '10.5rem' }
-] as const
+  { key: 'photo', icon: 'i-lucide-camera', photo: '/about/off/photo.jpg', rot: 4, x: '34%', w: '10rem' },
+  // A three.js render of meander prints until a photo of her own replaces it.
+  { key: 'print', icon: 'i-lucide-box', photo: '/about/off/print.jpg', rot: -2.5, x: '18%', w: '12rem' },
+  { key: 'dive', icon: 'i-lucide-waves', photo: '/about/off/dive.jpg', ratio: '3/2', rot: 7, x: '8%', w: '14rem' }
+]
 
 // Touch has no hover: a tap opens a block's photo, another tap closes it.
 const open = ref<string | null>(null)
@@ -37,6 +37,7 @@ function onTap(key: string, e: PointerEvent) {
       >
         <!-- Decorative: the text below says what the photo shows -->
         <figure
+          v-if="item.photo"
           class="polaroid"
           aria-hidden="true"
         >
@@ -44,10 +45,10 @@ function onTap(key: string, e: PointerEvent) {
             :src="item.photo"
             alt=""
             width="400"
-            height="500"
             fit="cover"
             loading="lazy"
-            class="block w-full aspect-[4/5] object-cover"
+            class="block w-full object-cover"
+            :style="{ aspectRatio: item.ratio ?? '4/5' }"
           />
         </figure>
         <HalftoneReveal>

@@ -16,11 +16,13 @@ const jobs = computed(() => [
   description: t(`about.work.${job.key}.description`)
 })))
 
+// Frontend first. Iconify names: brand marks from simple-icons, lucide for
+// practices that have no logo.
 const toolGroups = [
-  { key: 'design', tools: [['figma', 'Figma'], ['xd', 'Adobe XD']] },
-  { key: 'frontend', tools: [['vue', 'Vue.js'], ['nuxt', 'Nuxt'], ['javascript', 'JavaScript'], ['tailwind', 'Tailwind CSS'], ['html5', 'HTML5'], ['css3', 'CSS3'], ['vuetify', 'Vuetify'], ['bootstrap', 'Bootstrap'], ['github', 'GitHub']] },
-  { key: 'ai', tools: [['claude', 'Claude AI'], ['copilot', 'GitHub Copilot'], ['n8n', 'n8n']] },
-  { key: 'web3', tools: [['ethereum', 'Ethereum'], ['blockchain', 'Blockchain']] }
+  { key: 'frontend', tools: [['i-simple-icons-vuedotjs', 'Vue.js'], ['i-simple-icons-nuxt', 'Nuxt'], ['i-simple-icons-typescript', 'TypeScript'], ['i-simple-icons-javascript', 'JavaScript'], ['i-simple-icons-tailwindcss', 'Tailwind CSS'], ['i-simple-icons-nuxt', 'Nuxt UI'], ['i-simple-icons-html5', 'HTML5'], ['i-simple-icons-css', 'CSS3'], ['i-simple-icons-git', 'Git']] },
+  { key: 'design', tools: [['i-simple-icons-figma', 'Figma'], ['i-simple-icons-adobecreativecloud', 'Adobe CC'], ['i-lucide-component', 'Design systems'], ['i-lucide-mouse-pointer-click', 'Prototyping'], ['i-lucide-users', 'User research'], ['i-lucide-flask-conical', 'Usability testing']] },
+  { key: 'web3', tools: [['i-simple-icons-wagmi', 'Wagmi'], ['i-lucide-code', 'Viem'], ['i-simple-icons-walletconnect', 'Web3Modal'], ['i-lucide-coins', 'DeFi']] },
+  { key: 'ai', tools: [['i-simple-icons-n8n', 'n8n'], ['i-simple-icons-openai', 'OpenAI API'], ['i-lucide-bot', 'LLM integrations'], ['i-lucide-sparkles', 'UX Pilot']] }
 ] as const
 
 const certifications = computed(() => [
@@ -137,11 +139,10 @@ onMounted(() => {
                   :key="name"
                   class="inline-flex items-center gap-1.5 text-ink dark:text-paper"
                 >
-                  <img
-                    :src="`/tech-icons/${icon}.svg`"
-                    alt=""
-                    class="size-3.5 opacity-70 brightness-0 dark:invert"
-                  >
+                  <UIcon
+                    :name="icon"
+                    class="size-3.5 text-label"
+                  />
                   {{ name }}
                 </span>
               </dd>

@@ -15,7 +15,7 @@
   },
   "hero": {
     "title": "AI Product Design & Frontend",
-    "subtitle": "I design and build AI products end to end — from Figma to production code."
+    "subtitle": "I help startups and product teams go from design concept to scalable, pixel-perfect web products in a short time."
   },
   "projects": {
     "clientWork": "Client Work",
@@ -105,7 +105,7 @@
     },
     "tools": "Tools",
     "toolGroups": {
-      "design": "Design",
+      "design": "Design & UX",
       "frontend": "Frontend",
       "ai": "AI & automation",
       "web3": "Web3"

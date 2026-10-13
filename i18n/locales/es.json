@@ -15,7 +15,7 @@
   },
   "hero": {
     "title": "Diseño de Producto IA & Frontend",
-    "subtitle": "Diseño y construyo productos de IA de punta a punta — de Figma a código en producción."
+    "subtitle": "Ayudo a startups y equipos de producto a pasar del concepto de diseño a productos web escalables y pixel-perfect en poco tiempo."
   },
   "projects": {
     "clientWork": "Trabajo con clientes",
@@ -105,7 +105,7 @@
     },
     "tools": "Herramientas",
     "toolGroups": {
-      "design": "Diseño",
+      "design": "Diseño y UX",
       "frontend": "Frontend",
       "ai": "IA y automatización",
       "web3": "Web3"
