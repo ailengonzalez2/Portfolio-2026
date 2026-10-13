@@ -18,7 +18,9 @@ useHead({
     ...(i18nHead.value.meta || [])
   ],
   link: () => [
-    { rel: 'icon', href: '/favicon.ico' },
+    { rel: 'icon', href: '/favicon.ico', sizes: '48x48' },
+    { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+    { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
     ...(i18nHead.value.link || [])
   ],
   htmlAttrs: {
