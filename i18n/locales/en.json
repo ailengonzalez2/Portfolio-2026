@@ -188,7 +188,12 @@
       }
     }
   },
-  "footer": {},
+  "footer": {
+    "place": "Córdoba, Argentina",
+    "localTime": "local time",
+    "credits": "Designed & coded by Ailen Gonzalez",
+    "backToTop": "Back to top"
+  },
   "prefooter": {
     "design": "Design",
     "code": "Code",

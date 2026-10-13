@@ -12,9 +12,9 @@ const SHOTS = [
 // and direction, so neighbours never line up. The slice is doubled for a
 // seamless translateY(-50%) loop.
 const columns = [
-  { up: true, duration: '64s', offset: 0 },
-  { up: false, duration: '52s', offset: 7 },
-  { up: true, duration: '72s', offset: 14 }
+  { up: true, duration: '48s', offset: 0 },
+  { up: false, duration: '40s', offset: 7 },
+  { up: true, duration: '54s', offset: 14 }
 ].map((c) => {
   const items = Array.from({ length: 6 }, (_, k) => `/hero/screens/${SHOTS[(c.offset + k) % SHOTS.length]}.jpg`)
   return { ...c, loop: [...items, ...items] }

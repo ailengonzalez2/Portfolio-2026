@@ -1,204 +1,75 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { remap } from '~/webgl/math'
 
 const { t } = useI18n()
-const { global } = useAppConfig()
 const year = new Date().getFullYear()
 
-// Segments shared by the base (white) layer and the glow overlay so both align
-const segments = computed(() => [
-  { text: t('prefooter.design'), plus: false },
-  { text: '+', plus: true },
-  { text: t('prefooter.code'), plus: false },
-  { text: '+', plus: true },
-  { text: t('prefooter.ai'), plus: false }
-])
+// The signature: design, code, AI — one word at a time, the particles flying
+// from one to the next. The first word assembles as the footer scrolls in.
+const wordsRef = ref<HTMLElement | null>(null)
+const footerScroll = useScrollProgress(wordsRef, ['start end', 'end end'])
+const wordsProgress = computed(() => remap(footerScroll.value, 0.2, 0.8))
+const words = computed(() => [t('prefooter.design'), t('prefooter.code'), t('prefooter.ai')])
 
-// --- Cursor light-trail -------------------------------------------------
-// A radial glow follows the pointer and leaves a fading trail. The glow is
-// painted as the overlay's background and clipped to the text, so it is only
-// visible over the white letters — never over the black background.
-const sectionRef = ref<HTMLElement | null>(null)
-
-// The statement assembles from particles as the footer scrolls into view.
-const footerScroll = useScrollProgress(sectionRef, ['start end', 'end end'])
-const statementProgress = computed(() => remap(footerScroll.value, 0.25, 0.85))
-const overlayRef = ref<HTMLElement | null>(null)
-const trailBg = ref('none')
-
-interface TrailPoint { x: number, y: number, life: number }
-let points: TrailPoint[] = []
-let raf = 0
-let running = false
-
-// Brand gradient stops: orange → pink → purple (brightened / more saturated)
-const stops = [
-  [255, 196, 84],
-  [255, 96, 120],
-  [205, 120, 255]
-] as const
-
-const mix = (a: readonly [number, number, number], b: readonly [number, number, number], k: number) => [
-  Math.round(a[0] + k * (b[0] - a[0])),
-  Math.round(a[1] + k * (b[1] - a[1])),
-  Math.round(a[2] + k * (b[2] - a[2]))
-]
-
-// pos 0 (newest/at cursor) = orange, pos 1 (tail) = purple
-const colorAt = (pos: number) => {
-  const p = Math.max(0, Math.min(1, pos))
-  return p <= 0.5 ? mix(stops[0], stops[1], p * 2) : mix(stops[1], stops[2], (p - 0.5) * 2)
+// Her local time, for clients in other time zones. Client-only, so the
+// prerendered HTML never carries a stale build-time clock.
+const localTime = ref('')
+const tickClock = () => {
+  localTime.value = new Intl.DateTimeFormat('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'America/Argentina/Cordoba' }).format(new Date())
 }
 
-const tick = () => {
-  points = points.filter(pt => (pt.life -= 0.045) > 0)
-  if (!points.length) {
-    trailBg.value = 'none'
-    running = false
-    return
-  }
-  const layers = points.map((pt) => {
-    const a = pt.life
-    const [r, g, b] = colorAt(1 - a)
-    const radius = 70 * (0.45 + a * 0.55)
-    return `radial-gradient(circle ${radius.toFixed(1)}px at ${pt.x.toFixed(1)}px ${pt.y.toFixed(1)}px, rgba(${r},${g},${b},${Math.min(1, 1.15 * a).toFixed(3)}) 0%, rgba(${r},${g},${b},${(0.55 * a).toFixed(3)}) 45%, rgba(${r},${g},${b},0) 72%)`
-  })
-  trailBg.value = layers.join(', ')
-  raf = requestAnimationFrame(tick)
-}
-
-const onMove = (e: MouseEvent) => {
-  const el = overlayRef.value
-  if (!el) return
-  const r = el.getBoundingClientRect()
-  points.push({ x: e.clientX - r.left, y: e.clientY - r.top, life: 1 })
-  if (points.length > 24) points.shift()
-  if (!running) {
-    running = true
-    raf = requestAnimationFrame(tick)
-  }
-}
-
+let clock: ReturnType<typeof setInterval> | undefined
 onMounted(() => {
-  if (!import.meta.client) return
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches
-  if (reduce || !fine) return
-  sectionRef.value?.addEventListener('mousemove', onMove)
+  tickClock()
+  clock = setInterval(tickClock, 30_000)
 })
+onBeforeUnmount(() => clearInterval(clock))
 
-onUnmounted(() => {
-  sectionRef.value?.removeEventListener('mousemove', onMove)
-  if (raf) cancelAnimationFrame(raf)
-})
+const toTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 </script>
 
 <template>
-  <footer class="relative z-10 min-h-screen flex flex-col bg-ink text-paper">
-    <section
-      ref="sectionRef"
-      class="flex-1 flex flex-col items-center justify-center pt-14 sm:pt-20 pb-4 sm:pb-6 px-4 sm:px-6 lg:px-8 overflow-hidden"
+  <footer class="relative z-10 bg-ink text-paper">
+    <div
+      ref="wordsRef"
+      class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16 pt-20 sm:pt-28 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12"
     >
-      <div class="w-full max-w-6xl mx-auto">
-        <!-- Brand statement: Design + Code + AI -->
-        <Reveal
-          :y="30"
-          :duration="0.6"
-          class="text-center"
-        >
-          <ParticleName
-            :progress="statementProgress"
-            :point-size="3"
-            class="inline-block"
-          >
-            <div class="relative inline-block">
-              <!-- Base layer: solid white words, gray + -->
-              <h2 class="magic-heading flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-display font-medium tracking-[-0.04em] leading-[0.95] pb-[0.18em]">
-                <span
-                  v-for="(seg, i) in segments"
-                  :key="`b${i}`"
-                  :class="seg.plus ? 'text-paper/30' : 'magic-word'"
-                >{{ seg.text }}</span>
-              </h2>
-
-              <!-- Glow overlay: same words, gradient trail clipped to the letters -->
-              <h2
-                ref="overlayRef"
-                aria-hidden="true"
-                class="magic-overlay absolute inset-0 flex flex-wrap items-center justify-center gap-x-5 sm:gap-x-8 gap-y-1 text-5xl sm:text-7xl lg:text-8xl font-display font-medium tracking-[-0.04em] leading-[0.95] pb-[0.18em]"
-                :style="{ backgroundImage: trailBg }"
-              >
-                <span
-                  v-for="(seg, i) in segments"
-                  :key="`o${i}`"
-                  :class="seg.plus ? 'invisible' : 'magic-word'"
-                >{{ seg.text }}</span>
-              </h2>
-            </div>
-          </ParticleName>
-        </Reveal>
-
-        <!-- Book a call -->
-        <Reveal
-          :y="20"
-          :duration="0.6"
-          :delay="0.15"
-          class="mt-8 sm:mt-10 flex items-center justify-center"
-        >
-          <UButton
-            :to="global.meetingLink"
-            target="_blank"
-            size="lg"
-            data-umami-event="book-call"
-            data-umami-event-location="footer"
-            class="btn-gradient btn-gradient--light font-medium px-8 py-3 text-base"
-          >
-            {{ t('contactCta.bookCall') }}
-            <template #trailing>
-              <UIcon
-                name="i-lucide-arrow-up-right"
-                class="size-4"
-              />
-            </template>
-          </UButton>
-        </Reveal>
+      <div>
+        <p class="font-display font-medium text-3xl sm:text-4xl tracking-[-0.04em] leading-none">
+          Ailen Gonzalez
+        </p>
+        <p class="mt-4 max-w-sm text-paper/60 leading-relaxed">
+          {{ t('hero.title') }}<br>
+          {{ t('footer.place') }}<template v-if="localTime">
+            · <span class="tabular-nums text-paper">{{ localTime }}</span> {{ t('footer.localTime') }}
+          </template>
+        </p>
       </div>
-    </section>
 
-    <!-- Footer Credits -->
-    <div class="py-8 border-t border-paper/10">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-center text-paper/50">
-          <p class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.18em] text-center">
-            <span>© {{ year }} – Designed &amp; Coded by </span>
-            <NuxtLink
-              to="https://www.linkedin.com/in/ailengonzalez/"
-              target="_blank"
-              class="underline underline-offset-2 hover:text-primary transition-colors"
-            >
-              Ailen Gonzalez
-            </NuxtLink>
-          </p>
-        </div>
+      <h2 :aria-label="words.join(' + ')">
+        <ParticleWords
+          :words="words"
+          :progress="wordsProgress"
+          class="lg:justify-items-end font-display font-medium uppercase text-[clamp(3rem,7vw,7rem)] leading-[0.85] tracking-[-0.04em] text-paper pb-[0.06em]"
+        />
+      </h2>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16 mt-12 sm:mt-16">
+      <div class="py-8 border-t border-paper/10 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/50">
+        <p>© {{ year }} · {{ t('footer.credits') }}</p>
+        <button
+          type="button"
+          class="inline-flex items-center gap-2 uppercase hover:text-paper transition-colors cursor-pointer"
+          @click="toTop"
+        >
+          {{ t('footer.backToTop') }}
+          <UIcon
+            name="i-lucide-arrow-up"
+            class="size-3.5"
+          />
+        </button>
       </div>
     </div>
   </footer>
 </template>
-
-<style scoped>
-.magic-word {
-  white-space: nowrap;
-}
-
-/* Glow overlay sits exactly on top of the white base. Its background (the
-   cursor trail) is clipped to the text, so the colored light only shows on the
-   letters — transparent everywhere else, revealing the white base beneath. */
-.magic-overlay {
-  pointer-events: none;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-</style>

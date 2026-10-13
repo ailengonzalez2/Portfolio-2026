@@ -188,7 +188,12 @@
       }
     }
   },
-  "footer": {},
+  "footer": {
+    "place": "Córdoba, Argentina",
+    "localTime": "hora local",
+    "credits": "Diseñado y programado por Ailen Gonzalez",
+    "backToTop": "Volver arriba"
+  },
   "prefooter": {
     "design": "Diseño",
     "code": "Código",

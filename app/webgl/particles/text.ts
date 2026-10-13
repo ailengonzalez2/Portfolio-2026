@@ -68,7 +68,7 @@ const PAD = 48
  * positions and returns every `step`-th opaque pixel, relative to the
  * element's center (y up). Each node uses its parent's computed font.
  */
-function sampleGlyphs(el: HTMLElement, step: number) {
+export function sampleGlyphs(el: HTMLElement, step: number) {
   const rect = el.getBoundingClientRect()
   const w = Math.ceil(rect.width) + PAD * 2
   const h = Math.ceil(rect.height) + PAD * 2
