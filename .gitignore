@@ -28,3 +28,6 @@ logs
 
 # Internal planning/spec docs — keep out of the public repo
 docs/superpowers/
+
+# Social banners (local tooling, not part of the site)
+banner/
