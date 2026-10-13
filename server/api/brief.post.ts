@@ -33,6 +33,9 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
   const apiKey = config.openrouter?.apiKey
   const model = config.openrouter?.model || 'anthropic/claude-sonnet-4.5'
+  if (!config.briefEnabled) {
+    throw createError({ statusCode: 404, statusMessage: 'Not found' })
+  }
 
   const body = await readBody<{ description?: string }>(event)
   const description = (body?.description || '').trim()

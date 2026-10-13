@@ -36,6 +36,23 @@ const clips = computed(() => [
   webm: `/projects/lab/${c.video}.webm`,
   mp4: `/projects/lab/${c.video}.mp4`
 })))
+
+// The clips sit far below the fold: nothing downloads until one comes into
+// view, and each one only plays while it's on screen.
+const root = ref<HTMLElement | null>(null)
+let observer: IntersectionObserver | undefined
+onMounted(() => {
+  if (!root.value || reduced.value || !('IntersectionObserver' in window)) return
+  observer = new IntersectionObserver((entries) => {
+    for (const { target, isIntersecting } of entries) {
+      const video = target as HTMLVideoElement
+      if (isIntersecting) video.play().catch(() => {})
+      else video.pause()
+    }
+  }, { rootMargin: '200px 0px' })
+  root.value.querySelectorAll('video').forEach(v => observer!.observe(v))
+})
+onBeforeUnmount(() => observer?.disconnect())
 </script>
 
 <template>
@@ -43,7 +60,10 @@ const clips = computed(() => [
     :y="24"
     :delay="0.1"
   >
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 rounded-3xl bg-neutral-950 p-3 sm:p-4 text-white">
+    <div
+      ref="root"
+      class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 rounded-3xl bg-neutral-950 p-3 sm:p-4 text-white"
+    >
       <!-- Loft: the hero of the band. Muted looping video, whole tile is the link. -->
       <NuxtLink
         :to="loftLink"
@@ -54,11 +74,10 @@ const clips = computed(() => [
       >
         <video
           class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-          :autoplay="!reduced"
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="none"
           :poster="loftVideo.poster"
         >
           <source
@@ -140,11 +159,10 @@ const clips = computed(() => [
       >
         <video
           class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-          :autoplay="!reduced"
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="none"
           :poster="c.poster"
         >
           <source

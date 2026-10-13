@@ -8,6 +8,9 @@ interface LeadPayload {
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
   const web3formsKey = config.public?.web3formsKey
+  if (!config.briefEnabled) {
+    throw createError({ statusCode: 404, statusMessage: 'Not found' })
+  }
 
   const body = await readBody<LeadPayload>(event)
   const email = (body?.email || '').trim()
@@ -22,9 +25,8 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // Dev fallback: log to server console so the flow is testable.
+  // Dev fallback: no key, nothing is sent (and no visitor data is logged).
   if (!web3formsKey) {
-    console.log('[lead] (no Web3Forms key) lead captured:', { email, locale, description: description.slice(0, 80) })
     return { ok: true, mock: true }
   }
 

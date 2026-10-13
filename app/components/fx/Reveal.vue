@@ -11,14 +11,17 @@ const props = withDefaults(defineProps<{
 }>(), { y: 20, duration: 0.5, delay: 0 })
 
 const root = ref<HTMLElement | null>(null)
+// Server HTML is visible: content only hides once the client arms it, so a
+// failed or slow hydration never leaves blank sections. Anything already on
+// screen at mount just stays as it is.
+const armed = ref(false)
 const shown = ref(false)
 let observer: IntersectionObserver | undefined
 
 onMounted(() => {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-    shown.value = true
-    return
-  }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return
+  if (!root.value || root.value.getBoundingClientRect().top < window.innerHeight) return
+  armed.value = true
   observer = new IntersectionObserver(([entry]) => {
     if (!entry?.isIntersecting) return
     shown.value = true
@@ -33,7 +36,7 @@ onBeforeUnmount(() => observer?.disconnect())
   <div
     ref="root"
     class="reveal"
-    :class="{ 'is-shown': shown }"
+    :class="{ 'is-armed': armed, 'is-shown': shown }"
     :style="{ '--y': `${props.y}px`, '--duration': `${props.duration}s`, '--delay': `${props.delay}s` }"
   >
     <slot />
@@ -41,28 +44,15 @@ onBeforeUnmount(() => observer?.disconnect())
 </template>
 
 <style scoped>
-.reveal {
+.reveal.is-armed {
   opacity: 0;
   transform: translateY(var(--y));
   transition:
     opacity var(--duration) cubic-bezier(0.22, 1, 0.36, 1) var(--delay),
     transform var(--duration) cubic-bezier(0.22, 1, 0.36, 1) var(--delay);
 }
-.reveal.is-shown {
+.reveal.is-armed.is-shown {
   opacity: 1;
   transform: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    transform: none;
-    transition: opacity 0.2s ease;
-  }
-}
-/* No JavaScript: never hide content. */
-@media (scripting: none) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-  }
 }
 </style>

@@ -9,7 +9,9 @@
     "writing": "writing",
     "about": "about",
     "contact": "contact",
-    "hireMe": "Hire Me"
+    "hireMe": "Hire Me",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
     "title": "AI Product Design & Frontend",

@@ -23,6 +23,27 @@ const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
 
+// While the menu covers the page: hide the particle canvas (it draws above
+// everything), stop the page behind from scrolling, close on Escape and on
+// any navigation.
+const onKey = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') closeMobileMenu()
+}
+watch(isMobileMenuOpen, (open) => {
+  if (!import.meta.client) return
+  document.documentElement.classList.toggle('modal-open', open)
+  document.documentElement.classList.toggle('menu-open', open)
+  if (open) window.addEventListener('keydown', onKey)
+  else window.removeEventListener('keydown', onKey)
+})
+const route = useRoute()
+watch(() => route.fullPath, closeMobileMenu)
+onBeforeUnmount(() => {
+  if (!isMobileMenuOpen.value) return
+  document.documentElement.classList.remove('modal-open', 'menu-open')
+  window.removeEventListener('keydown', onKey)
+})
+
 const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
 </script>
 
@@ -85,7 +106,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
           variant="ghost"
           color="neutral"
           class="md:hidden"
-          :aria-label="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
+          :aria-label="isMobileMenuOpen ? $t('nav.closeMenu') : $t('nav.openMenu')"
           :aria-expanded="isMobileMenuOpen"
           @click="toggleMobileMenu"
         />
@@ -102,6 +123,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
     <div
       v-if="isMobileMenuOpen"
       class="fixed inset-0 z-40 bg-paper dark:bg-ink md:hidden"
+      data-lenis-prevent
     >
       <nav class="flex flex-col items-start justify-center h-full gap-6 px-8">
         <NuxtLink

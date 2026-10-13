@@ -35,7 +35,7 @@ const roleLines = computed(() => {
 // defined, then order themselves into the title.
 const GATHER_MS = 1500
 const INTRO_MS = 2400
-const BOOT_TIMEOUT_MS = 10000
+const BOOT_TIMEOUT_MS = 4000
 const loading = ref(true)
 const field = ref(1)
 const density = ref(LOADING_DENSITY)

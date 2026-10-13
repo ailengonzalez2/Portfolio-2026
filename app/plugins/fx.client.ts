@@ -66,8 +66,21 @@ export default defineNuxtPlugin((nuxtApp) => {
     canvas.setAttribute('aria-hidden', 'true')
     document.body.appendChild(canvas)
 
-    const stage = new Stage(canvas)
-    const lenis = new Lenis({ autoRaf: false, anchors: true })
+    // The renderer can still fail here (busy GPU, too many contexts) even
+    // though the capability check passed: fall back instead of leaving the
+    // page waiting on a stage that never comes.
+    let stage: InstanceType<typeof Stage> | undefined
+    let lenis: InstanceType<typeof Lenis>
+    try {
+      stage = new Stage(canvas)
+      lenis = new Lenis({ autoRaf: false, anchors: true })
+    } catch (e) {
+      console.error('[fx] stage failed to start', e)
+      stage?.dispose()
+      canvas.remove()
+      disableFx()
+      return
+    }
     let destroyed = false
 
     const stopLoop = frameLoop((t) => {

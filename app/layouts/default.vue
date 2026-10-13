@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const route = useRoute()
-// The About page has its own ending, so skip the global contact prompt there.
-const showContact = computed(() => route.path !== '/about')
+const routeBaseName = useRouteBaseName()
+// The About page has its own ending, so skip the global contact prompt there
+// (in every language: /about and /es/about share the base name).
+const showContact = computed(() => routeBaseName(route) !== 'about')
 </script>
 
 <template>

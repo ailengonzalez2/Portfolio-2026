@@ -9,7 +9,9 @@
     "writing": "blog",
     "about": "sobre mí",
     "contact": "contacto",
-    "hireMe": "Contratame"
+    "hireMe": "Contratame",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "hero": {
     "title": "Diseño de Producto IA & Frontend",

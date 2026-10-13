@@ -55,6 +55,9 @@ export default defineNuxtConfig({
       apiKey: '',
       model: 'anthropic/claude-sonnet-4.5'
     },
+    // The brief generator (/api/brief, /api/lead) stays off until it ships:
+    // set NUXT_BRIEF_ENABLED=true with the brief components back in the layout.
+    briefEnabled: false,
     public: {
       web3formsKey: ''
     }
