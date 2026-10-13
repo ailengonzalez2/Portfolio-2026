@@ -45,6 +45,20 @@ export interface Project {
   }
   /** Optional case study content. When present, the project links to an internal case study page. */
   caseStudy?: CaseStudy
+  /** Present = shown in the home "Selected work" section, ascending order. */
+  featuredOrder?: number
+  /** Optional hand-made sketch/wireframe; replaces the auto-generated latent layer. */
+  latentImage?: string
+  /** Second screen of the product; the home row's particles change into it on hover */
+  altImage?: string
+  /** Short tech label for Lab experiments on the home, e.g. 'WebGPU · soft-body'. */
+  labTag?: string
+  /** Light interactive piece embedded live on the home ("play with my animations") */
+  playable?: boolean
+  /** Needs WebGPU: only embedded live where the browser supports it */
+  webgpu?: boolean
+  /** Looping preview video (mp4/webm in /public); the cover image is its poster */
+  video?: string
 }
 
 /**
@@ -58,13 +72,37 @@ export interface Project {
  *
  * See /public/projects/README.md for detailed image guidelines
  */
+/**
+ * Translated text for one project (see projects.es.ts). Every field is
+ * optional: whatever is missing falls back to the English in `projects`.
+ * Arrays replace the English arrays item by item; `metricLabels` are the
+ * metric labels in the same order as `caseStudy.metrics`.
+ */
+export interface ProjectTranslation {
+  title?: string
+  description?: string
+  labTag?: string
+  caseStudy?: {
+    tagline?: string
+    role?: string
+    problem?: string
+    approach?: string
+    result?: string
+    highlights?: string[]
+    outcomes?: string[]
+    metricLabels?: string[]
+  }
+}
+
 export const projects: Project[] = [
   {
     id: 'codecave',
     kind: 'client',
+    featuredOrder: 1,
     title: 'codeCave — Studio Site',
     description: 'The site for codeCave, a Córdoba-based product studio. A distinctive terminal-inspired identity with a neon-on-dark aesthetic, built end to end in Nuxt — "from idea to production".',
     image: '/projects/covers/codecave.jpg',
+    altImage: '/projects/alt/codecave.jpg',
     tags: ['Frontend Development', 'Web Design', 'Branding'],
     date: '2025',
     links: {
@@ -94,9 +132,11 @@ export const projects: Project[] = [
   {
     id: 'enter',
     kind: 'client',
+    featuredOrder: 2,
     title: 'Enter — Sell Tickets Online',
     description: 'A ticketing platform made in Argentina: signed QR codes, a web scanner that works on any phone, and a flat 2% fee via Mercado Pago. A bold, retro ticket-stub identity that stands out from corporate ticketing.',
     image: '/projects/covers/enter.jpg',
+    altImage: '/projects/alt/enter.jpg',
     tags: ['SaaS', 'Web App', 'Product Design'],
     date: '2026',
     links: {
@@ -127,9 +167,11 @@ export const projects: Project[] = [
   {
     id: 'docta',
     kind: 'client',
+    featuredOrder: 4,
     title: 'Docta — Córdoba Culture Agenda',
     description: 'A hand-curated cultural agenda for Córdoba — concerts, theatre, festivals and nightlife, refreshed daily. An editorial, print-inspired design that makes browsing what to do feel like reading a magazine.',
     image: '/projects/covers/docta.jpg',
+    altImage: '/projects/alt/docta.jpg',
     tags: ['Web Design', 'Frontend Development', 'Editorial'],
     date: '2025',
     links: {
@@ -181,9 +223,11 @@ export const projects: Project[] = [
   {
     id: 'habito',
     kind: 'client',
+    featuredOrder: 3,
     title: 'Habito — AI Task Management',
     description: 'Task management for the AI era, where humans and AI agents share one workspace and coordinate as real teammates. Product design and frontend for a clean, focused SaaS interface.',
     image: '/projects/covers/habito.jpg',
+    altImage: '/projects/alt/habito.jpg',
     tags: ['Product Design', 'Web App', 'AI'],
     date: '2025',
     links: {
@@ -258,35 +302,61 @@ export const projects: Project[] = [
     }
   },
   {
-    id: 'brand-spark',
-    kind: 'lab',
-    title: 'Brand Spark — Live Brand Identity',
-    description: 'Describe a brand in two or three sentences and watch a full identity generate live — name, palette, type pairings, voice and moodboard — restyling the page itself as it streams in.',
-    image: '/projects/covers/brand-spark.jpg',
-    tags: ['AI Product', 'LLM Integration', 'Product Design'],
+    id: 'contap',
+    kind: 'client',
+    title: 'Contap — NFC Nails',
+    description: 'Nails with an NFC chip: someone holds a phone near your hand and whatever link you chose opens. A product with a store, pricing and an editable destination per chip.',
+    image: '/projects/covers/contap.jpg',
+    tags: ['Product Design', 'E-commerce', 'Frontend Development'],
     date: '2026',
     links: {
-      preview: 'https://brand-spark.up.railway.app/'
+      preview: 'https://nfc-website-production.up.railway.app/'
     },
     caseStudy: {
-      tagline: 'An AI brand generator that proves its own output by wearing it — the page adopts each identity as it streams in.',
-      role: 'AI Product Design + Frontend',
-      problem: 'Most AI branding tools hand back a static PDF or a grid of logos with no context. You see swatches, not a brand — nothing shows how the palette, typography and voice actually hold together in a real interface, which is the only thing that matters when you have to decide whether an identity works.',
-      approach: 'I built the demo so the output has to prove itself: as the model streams a brand back, the page restyles itself with the generated palette and typefaces in real time. Each identity comes as structured data — named color tokens, primary and body type pairings with rationale, a voice statement with do and don\'t lists, and a moodboard whose imagery is generated to match. Every section can be regenerated on its own without discarding the rest, and the whole identity exports as JSON so it can go straight into design tokens.',
+      tagline: 'Turning a physical object into a link you can change whenever you want.',
+      role: 'Product Design + Frontend',
+      problem: 'NFC products are usually sold as cards or keychains and explained in technical language that assumes you already know what NFC is. The interesting version — wearing the chip, so sharing a contact takes no object and no typing — needed a product story that made the idea obvious to someone who has never heard of the technology.',
+      approach: 'I built the product site around the gesture rather than the technology: oversized type stating the promise ("tu contacto en tu mano"), a plain-language explainer for anyone asking what an NFC even is, and a shop where the chip and its destination are separate things — you buy the nail once and can point it anywhere afterwards. Accounts let each owner edit their own link.',
       highlights: [
-        'Live theming — the page adopts the generated identity as it streams',
-        'Structured output: color tokens, type pairings, voice, copy',
-        'Per-section regeneration without losing the rest',
-        'Generated moodboard imagery, plus mock site and social previews',
-        'Export to JSON for handoff into design tokens'
+        'Product story led by the gesture, not the technology',
+        'Plain-language "what is an NFC?" explainer',
+        'Store with product range and pricing',
+        'Per-user account to edit the chip\'s destination link'
       ],
-      result: 'Live and open to try. It doubles as a working demo of the pieces a production AI feature needs — streaming, structured outputs, generated imagery and a UI that responds to model output rather than just printing it.',
-      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'LLM streaming', 'fal.ai']
+      result: 'Live with the storefront, explainer and account flow in place.',
+      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL']
+    }
+  },
+  {
+    id: 'vinyl-room',
+    kind: 'lab',
+    labTag: 'Three.js · Audio',
+    title: 'Vinyl Room — 3D Turntable',
+    description: 'A record crate and a turntable in 3D. Pick a record, drop it on the platter and its 30-second preview plays while it spins.',
+    image: '/projects/covers/vinyl-room.jpg',
+    tags: ['3D / WebGL', 'Frontend Development', 'Interaction Design'],
+    date: '2026',
+    links: {
+      preview: 'https://vinyl-turntable-production.up.railway.app/'
+    }
+  },
+  {
+    id: 'project-cube',
+    kind: 'lab',
+    labTag: 'Three.js · Puzzle',
+    title: 'Project Cube — Puzzle Portfolio',
+    description: 'A puzzle cube whose six faces are six of my projects. Drag a face to turn it, solve the cube in a few moves or jump straight to a project.',
+    image: '/projects/covers/project-cube.jpg',
+    tags: ['3D / WebGL', 'Frontend Development', 'Interaction Design'],
+    date: '2026',
+    links: {
+      preview: 'https://cubo-proyectos-production.up.railway.app/'
     }
   },
   {
     id: 'loft-3d',
     kind: 'lab',
+    labTag: 'Three.js · 3D',
     title: 'Interactive Loft — 3D Scene',
     description: 'A loft you can orbit around in the browser. Everything that lights up on hover is clickable: furniture opens panels, objects on the table do their own thing, and a Shiba wanders through.',
     image: '/projects/covers/loft-3d.jpg',
@@ -312,34 +382,11 @@ export const projects: Project[] = [
     }
   },
   {
-    id: 'contap',
-    kind: 'lab',
-    title: 'Contap — NFC Nails',
-    description: 'Nails with an NFC chip: someone holds a phone near your hand and whatever link you chose opens. A self-initiated product with a store, pricing and an editable destination per chip.',
-    image: '/projects/covers/contap.jpg',
-    tags: ['Product Design', 'E-commerce', 'Frontend Development'],
-    date: '2026',
-    links: {
-      preview: 'https://nfc-website-production.up.railway.app/'
-    },
-    caseStudy: {
-      tagline: 'Turning a physical object into a link you can change whenever you want.',
-      role: 'Product Design + Frontend',
-      problem: 'NFC products are usually sold as cards or keychains and explained in technical language that assumes you already know what NFC is. The interesting version — wearing the chip, so sharing a contact takes no object and no typing — needed a product story that made the idea obvious to someone who has never heard of the technology.',
-      approach: 'I built the product site around the gesture rather than the technology: oversized type stating the promise ("tu contacto en tu mano"), a plain-language explainer for anyone asking what an NFC even is, and a shop where the chip and its destination are separate things — you buy the nail once and can point it anywhere afterwards. Accounts let each owner edit their own link.',
-      highlights: [
-        'Product story led by the gesture, not the technology',
-        'Plain-language "what is an NFC?" explainer',
-        'Store with product range and pricing',
-        'Per-user account to edit the chip\'s destination link'
-      ],
-      result: 'Live with the storefront, explainer and account flow in place. The project is where I work through commerce and product-narrative problems end to end without a client brief shaping the answer.',
-      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'PostgreSQL']
-    }
-  },
-  {
     id: 'jelly',
     kind: 'lab',
+    playable: true,
+    webgpu: true,
+    labTag: 'WebGPU · soft-body',
     title: 'Jelly — Squishy WebGPU Starfish',
     description: 'A translucent starfish that lives in your browser. Move to make a friend, grab an arm, stretch it and let go — a small experiment in soft-body physics and WebGPU rendering with Three.js.',
     image: '/projects/covers/jelly.jpg',
@@ -363,6 +410,34 @@ export const projects: Project[] = [
       ],
       result: 'Live in the browser. It works as a tiny playground for the questions I keep coming back to in 3D: how to make an object feel physical, how to invite touch without a tutorial, and what WebGPU changes for creative work on the web.',
       stack: ['Three.js', 'WebGPU', 'React', 'Next.js', 'TypeScript']
+    }
+  },
+  {
+    id: 'brand-spark',
+    kind: 'lab',
+    labTag: 'LLM · streaming UI',
+    title: 'Brand Spark — Live Brand Identity',
+    description: 'Describe a brand in two or three sentences and watch a full identity generate live — name, palette, type pairings, voice and moodboard — restyling the page itself as it streams in.',
+    image: '/projects/covers/brand-spark.jpg',
+    tags: ['AI Product', 'LLM Integration', 'Product Design'],
+    date: '2026',
+    links: {
+      preview: 'https://brand-spark.up.railway.app/'
+    },
+    caseStudy: {
+      tagline: 'An AI brand generator that proves its own output by wearing it — the page adopts each identity as it streams in.',
+      role: 'AI Product Design + Frontend',
+      problem: 'Most AI branding tools hand back a static PDF or a grid of logos with no context. You see swatches, not a brand — nothing shows how the palette, typography and voice actually hold together in a real interface, which is the only thing that matters when you have to decide whether an identity works.',
+      approach: 'I built the demo so the output has to prove itself: as the model streams a brand back, the page restyles itself with the generated palette and typefaces in real time. Each identity comes as structured data — named color tokens, primary and body type pairings with rationale, a voice statement with do and don\'t lists, and a moodboard whose imagery is generated to match. Every section can be regenerated on its own without discarding the rest, and the whole identity exports as JSON so it can go straight into design tokens.',
+      highlights: [
+        'Live theming — the page adopts the generated identity as it streams',
+        'Structured output: color tokens, type pairings, voice, copy',
+        'Per-section regeneration without losing the rest',
+        'Generated moodboard imagery, plus mock site and social previews',
+        'Export to JSON for handoff into design tokens'
+      ],
+      result: 'Live and open to try. It doubles as a working demo of the pieces a production AI feature needs — streaming, structured outputs, generated imagery and a UI that responds to model output rather than just printing it.',
+      stack: ['Nuxt 4', 'Vue 3', 'TypeScript', 'Tailwind CSS', 'LLM streaming', 'fal.ai']
     }
   }
 ]

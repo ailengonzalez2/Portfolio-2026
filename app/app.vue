@@ -33,14 +33,14 @@ useSeoMeta({
 })
 
 // Default social-share image, auto-generated. Individual pages can override.
-defineOgImageComponent('Hero')
+defineOgImage('Hero')
 
 // Structured data for search engines and rich results
 useSchemaOrg([
   definePerson({
     name: 'Ailen Gonzalez',
-    jobTitle: ['AI Product Engineer', 'Frontend Developer', 'Product Designer'],
-    description: 'AI Product Engineer, frontend developer and product designer from Argentina. Designs and ships user-facing AI products end to end — from Figma to production Vue/Nuxt code.',
+    jobTitle: ['AI Product Designer', 'Frontend Developer'],
+    description: 'AI product designer and frontend developer from Argentina. Designs and ships user-facing AI products end to end — from Figma to production Vue/Nuxt code.',
     url: 'https://ailengonzalez.ar',
     knowsAbout: [
       'Frontend Development',
@@ -68,7 +68,7 @@ useSchemaOrg([
     sameAs: [
       'https://www.linkedin.com/in/ailengonzalez/',
       'https://github.com/ailengonzalez2',
-      'https://www.upwork.com/freelancers/ailengonzalez'
+      'https://x.com/Ailegonzalez'
     ]
   }),
   defineWebSite({
@@ -79,11 +79,6 @@ useSchemaOrg([
 
 <template>
   <UApp>
-    <!-- Intro animation overlay -->
-    <ClientOnly>
-      <IntroAnimation />
-    </ClientOnly>
-
     <NuxtLayout>
       <UMain class="relative">
         <NuxtPage />

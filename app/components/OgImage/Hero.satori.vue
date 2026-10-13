@@ -1,43 +1,38 @@
 <script setup>
+// Default social-share image, in the site's identity: paper, Red Hat Display,
+// the role in uppercase with the cobalt → violet gradient, like the hero.
 defineProps({
-  // Headline rendered one span per line, matching the hero on the site
-  headline: { type: Array, required: false, default: () => ['AI PRODUCT', 'DESIGN &', 'FRONTEND'] },
-  tagline: { type: String, required: false, default: 'Designer & Frontend Developer' },
-  url: { type: String, required: false, default: 'ailengonzalez.ar' }
+  headline: { type: Array, required: false, default: () => ['AI Product Design', '& Frontend'] },
+  url: { type: String, required: false, default: 'ailengonzalez.ar' },
+  place: { type: String, required: false, default: 'Córdoba, Argentina' }
 })
 </script>
 
 <template>
   <div
-    class="w-full h-full flex flex-col justify-between bg-[#0a0a0a] text-white p-[70px]"
-    style="font-family: 'Inter'"
+    class="w-full h-full flex flex-col justify-between bg-[#F2EFE9] text-[#121212] p-[72px]"
+    style="font-family: 'RedHatDisplayOG'; font-weight: 500"
   >
-    <!-- Top row: wordmark + available pill -->
-    <div class="w-full flex items-center justify-between">
-      <img
-        src="/signature-withe.png"
-        height="46"
-        style="height: 46px;"
-      >
-      <div class="flex items-center gap-3">
-        <div class="w-3 h-3 rounded-full bg-[#4ade80]" />
-        <span class="text-[22px] tracking-[0.2em] uppercase text-white/50">Available for work</span>
-      </div>
-    </div>
+    <span
+      class="text-[40px] leading-none"
+      style="letter-spacing: -0.04em;"
+    >Ailen Gonzalez</span>
 
-    <!-- Headline -->
     <div class="flex flex-col">
       <span
         v-for="(line, i) in headline"
         :key="i"
-        class="text-[100px] font-bold leading-[0.92] tracking-tight uppercase"
+        class="text-[104px] leading-[0.95] uppercase"
+        style="background-image: linear-gradient(90deg, #2B3BFF, #C04BFF); background-clip: text; color: transparent; letter-spacing: -0.02em;"
       >{{ line }}</span>
     </div>
 
-    <!-- Bottom row: url + tagline -->
-    <div class="w-full flex items-center justify-between">
-      <span class="text-[26px] text-white/60">{{ url }}</span>
-      <span class="text-[26px] text-white/60">{{ tagline }}</span>
+    <div
+      class="w-full flex items-center justify-between text-[24px] text-[#5c5951]"
+      style="font-family: 'Geist'"
+    >
+      <span>{{ url }}</span>
+      <span>{{ place }}</span>
     </div>
   </div>
 </template>

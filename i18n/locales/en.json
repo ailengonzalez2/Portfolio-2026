@@ -1,80 +1,28 @@
 {
   "seo": {
-    "homeTitle": "Ailen Gonzalez — AI Product Designer & Frontend Developer",
-    "homeDescription": "AI Product Engineer, frontend developer and product designer. I design and ship user-facing AI products end to end — chat UIs, streaming, RAG flows — in Vue/Nuxt."
+    "homeTitle": "Ailen Gonzalez — AI Product Design & Frontend",
+    "homeDescription": "AI product designer and frontend developer. I design and build AI products end to end, from Figma to production code in Vue and Nuxt."
   },
   "nav": {
     "projects": "projects",
-    "services": "services",
+    "process": "process",
     "writing": "writing",
     "about": "about",
     "contact": "contact",
-    "hireMe": "Hire Me"
+    "hireMe": "Hire Me",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
-    "available": "Available for work",
-    "spotsAvailable": "2 spots available",
-    "title": "AI Product Engineer",
-    "subtitle": "I design and ship user-facing AI features end to end — chat UIs, streaming, tool calls, RAG-backed flows.",
-    "bookCall": "Book a call",
-    "seeWork": "See work"
-  },
-  "hook": {
-    "eyebrow": "What I do",
-    "pre": "I design and ship ",
-    "highlight": "user-facing AI products",
-    "post": " end to end — from the first sketch to production.",
-    "bookCall": "Book a call",
-    "viewWork": "View work"
-  },
-  "services": {
-    "startProject": "Start a project",
-    "aiProduct": {
-      "title": "AI Product Design",
-      "description": "I design and ship the front of your AI product — chat UIs, streaming responses, tool-call surfaces, agent flows, and eval dashboards. From Figma to production code.",
-      "deliverables": ["Chat & streaming UI", "Tool-call rendering", "Prompt + flow design", "Eval dashboards", "Figma → production handoff"],
-      "priceFrom": "From $2.5k",
-      "timeline": "2–3 weeks"
-    },
-    "frontend": {
-      "title": "Frontend / Web3",
-      "description": "I build production-ready frontends in Vue / Nuxt + Tailwind + TypeScript — including clear, intuitive Web3 experiences like DeFi dashboards, NFT marketplaces, and wallet apps. From Figma handoff to deployed app.",
-      "deliverables": ["Vue / Nuxt 4 apps", "Wallet & DeFi UIs", "NFT marketplaces", "Responsive + a11y", "Performance-tuned"],
-      "priceFrom": "From $2k",
-      "timeline": "1–3 weeks"
-    },
-    "llmIntegration": {
-      "title": "AI Integration",
-      "description": "I wire LLMs into real product workflows — RAG, agents, tool calling, structured outputs, n8n automations. Built to ship, measured with evals.",
-      "deliverables": ["RAG pipelines", "Tool calling + agents", "n8n / workflow automation", "Structured outputs", "Evals + monitoring"],
-      "priceFrom": "From $3k",
-      "timeline": "2–4 weeks"
-    },
-    "web3": {
-      "title": "Web3 Frontend",
-      "description": "I craft clear, intuitive Web3 experiences — DeFi dashboards, NFT marketplaces, wallet apps. Built with Wagmi, Viem, and Reown.",
-      "deliverables": ["Wallet integrations", "DeFi / swap UIs", "NFT marketplaces", "Multi-chain support"],
-      "priceFrom": "From $3k",
-      "timeline": "2–4 weeks"
-    }
+    "title": "AI Product Design & Frontend",
+    "subtitle": "I help startups and product teams go from design concept to scalable, pixel-perfect web products in a short time."
   },
   "projects": {
-    "latestSection": "Latest Projects",
     "clientWork": "Client Work",
     "lab": "Lab",
     "labIntro": "Self-directed projects — where I try out ideas and technology without a client brief shaping the answer.",
-    "labTeaser": {
-      "eyebrow": "The lab",
-      "title": "Not everything I build has a client.",
-      "cta": "Play around with my portfolio",
-      "jellyCaption": "Go on, poke it.",
-      "jellyName": "Jelly — a squishy WebGPU starfish",
-      "seeLab": "See the whole lab"
-    },
-    "more": "More",
-    "exploreAll": "Explore Projects",
-    "pageTitle": "Featured Projects",
-    "pageIntro": "A curated collection of my design and development work. Each project represents a unique challenge and a creative solution.",
+    "pageTitle": "Projects",
+    "pageIntro": "Client work I designed and built end to end, and the lab where I try things without a brief.",
     "caseStudy": {
       "back": "All projects",
       "viewLive": "View live",
@@ -88,54 +36,85 @@
       "result": "Result",
       "stack": "Stack",
       "relatedProjects": "More projects",
-      "ctaText": "Building something similar?",
-      "ctaButton": "Let's talk",
       "comingSoonTitle": "Case study coming soon",
-      "comingSoonBody": "For now, explore the work directly via Figma or the live preview above."
+      "comingSoonBody": "For now, explore the work directly via Figma or the live preview above.",
+      "year": "Year",
+      "disciplines": "Disciplines"
+    },
+    "labTeaser": {
+      "eyebrow": "The lab",
+      "title": "Play with my animations.",
+      "cta": "Step into the loft",
+      "jellyCaption": "Go on, poke it.",
+      "jellyName": "Jelly — a squishy WebGPU starfish",
+      "seeLab": "See the whole lab",
+      "vinylCaption": "Drop the needle.",
+      "vinylName": "Vinyl Room — a 3D turntable",
+      "cubeCaption": "Give it a twist.",
+      "cubeName": "Project Cube — a portfolio you solve"
     }
   },
-  "hookQuote": {
-    "pre": "I help startups and product teams go from design concept to ",
-    "highlight": "scalable, pixel-perfect web products",
-    "post": " in a short time.",
-    "support": "This means cleaner handoffs, faster iterations, and products that actually match the vision."
+  "manifesto": {
+    "text": "I design and build AI products — from the first noisy idea to the shape people actually use.",
+    "highlight": "the shape people actually use",
+    "bookCall": "Book a call",
+    "viewWork": "View work"
+  },
+  "work": {
+    "eyebrow": "Selected work",
+    "latentHint": "Hover — or press and hold — to see another screen",
+    "caseStudy": "Read the case study",
+    "visit": "Visit the site",
+    "all": "All projects"
   },
   "testimonials": {
-    "next": "Next testimonial",
-    "goTo": "Show testimonial from {name}"
+    "eyebrow": "Kind words",
+    "label": "Testimonials",
+    "prev": "Previous testimonial",
+    "source": "Client",
+    "next": "Next testimonial"
   },
   "contactCta": {
     "heading": "Let's work together",
     "subtitle": "Have an AI product or frontend in mind? Let's turn it into something real.",
-    "bookCall": "Book a call",
-    "email": "Email me"
-  },
-  "aiQuote": {
-    "quote": "Recently, I've been diving deeper into the AI ecosystem, building agent-driven workflows and intelligent UI experiences.",
-    "highlight": "agent-driven workflows and intelligent UI experiences",
-    "context": "I focus on crafting clear, intuitive AI-powered experiences with tools like the Claude API, LLM agents, and modern frontend frameworks. From conversational interfaces to AI dashboards and agentic apps, I'm always excited to collaborate on innovative ideas and projects."
+    "bookCall": "Book a call"
   },
   "about": {
+    "badge": {
+      "roles": "AI Product Design · Frontend Development · UX/UI Design",
+      "remote": "Remote · worldwide",
+      "languages": "ES · EN"
+    },
+    "stats": {
+      "heading": "In numbers",
+      "years": "years designing and building digital products",
+      "shipped": "products shipped end to end, from Figma to production",
+      "faster": "faster delivery than splitting design and development"
+    },
+    "portraitCaption": "Ailen Gonzalez · Córdoba, Argentina",
+    "statement": "Frontend developer obsessed with AI and UI.",
+    "statementHighlight": "AI and UI.",
+    "trajectory": "Trajectory",
+    "now": "Now",
+    "before": "Before tech",
+    "medicine": {
+      "title": "Emergency physician",
+      "period": "2011 – 2021",
+      "place": "Argentina",
+      "description": "Ten years in emergency departments after graduating from the Universidad Nacional de Córdoba. Still the best training I've had in deciding fast with incomplete information."
+    },
+    "tools": "Tools",
+    "toolGroups": {
+      "design": "Design & UX",
+      "frontend": "Frontend",
+      "ai": "AI & automation",
+      "web3": "Web3"
+    },
     "heading": "About",
-    "pageTitle": "Frontend developer obsessed with AI and UI",
     "exploreCv": "View full CV",
-    "designCode": "Design + Code",
     "designCodeBody": "I mix solid design principles with practical, efficient development to create clean, responsive, and pixel-perfect interfaces. I take care of the whole process — from early research to prototypes to bringing everything to life with smooth, modern code.",
-    "workExperience": "Work Experience",
-    "skills": "Skills",
-    "technical": "Technical",
-    "soft": "Soft",
-    "softBody": "Autonomous work, active listening, attention to detail, clear communication, collaborative mindset, adaptability",
-    "languages": "Languages",
-    "english": "English",
-    "englishLevel": "C1 Advanced • Fluent communication",
-    "spanish": "Spanish",
-    "spanishLevel": "Native",
     "certifications": "Latest Certifications",
-    "funfactLabel": "My #funfact",
-    "funfactBody": "Before moving into tech I worked as a medical doctor from 2011 to 2021 in emergency departments across Argentina, after graduating from the Universidad Nacional de Córdoba — one of the country's leading universities. That experience shaped my analytical mindset and problem-solving approach in design and development.",
     "cert": {
-      "online": "Online",
       "ongoing": "Ongoing"
     },
     "work": {
@@ -159,12 +138,63 @@
         "period": "Feb 2021 – Sep 2022 (REMOTE)",
         "description": "Built e-commerce platforms, landing pages, and corporate websites with custom features and styling, while managing maintenance and security optimizations."
       }
+    },
+    "principles": {
+      "heading": "How I work",
+      "noHandoff": {
+        "title": "Design and code, no handoff",
+        "body": "I design in Figma and take it to production myself. What gets decided in design reaches the product intact, without back-and-forth between teams."
+      },
+      "ai": {
+        "title": "AI where it actually saves time",
+        "body": "I build automations and agents with n8n and LLMs to take repetitive work out of the way, and I design AI products that feel simple to the people using them."
+      },
+      "decide": {
+        "title": "Deciding with incomplete information",
+        "body": "Ten years in emergency rooms taught me to prioritize fast, ask just enough, and move without waiting for certainty that isn't coming."
+      },
+      "remote": {
+        "title": "Remote, with teams anywhere",
+        "body": "Since 2021 I've worked remotely with international teams and clients, in Spanish and English."
+      }
+    },
+    "closing": {
+      "clients": {
+        "eyebrow": "For clients",
+        "title": "Have a project?",
+        "body": "Tell me what you want to build. In a short call we'll see if it's a fit and how to start."
+      },
+      "teams": {
+        "eyebrow": "For companies",
+        "title": "Building a team?",
+        "body": "If you're looking for someone who designs and builds product, here's my full track record."
+      }
+    },
+    "offScreen": {
+      "heading": "Off screen",
+      "dogs": {
+        "title": "Spock",
+        "body": "My dog Spock is 12. He's my favorite model."
+      },
+      "photo": {
+        "title": "Photography",
+        "body": "I'm an amateur photographer. I study photography and go out shooting around Córdoba, the city I love."
+      },
+      "print": {
+        "title": "3D, from screen to hand",
+        "body": "I model in 3D and turn it into real objects with my printer, which is almost never off."
+      },
+      "dive": {
+        "title": "Certified diver",
+        "body": "I'm a certified scuba diver and go down whenever I can. Down there, no screens and no notifications."
+      }
     }
   },
   "footer": {
-    "availableForProjects": "Available for projects",
-    "notAvailable": "Not available",
-    "timezone": "GMT-3"
+    "place": "Córdoba, Argentina",
+    "localTime": "local time",
+    "credits": "Designed & coded by Ailen Gonzalez",
+    "backToTop": "Back to top"
   },
   "prefooter": {
     "design": "Design",
@@ -172,13 +202,10 @@
     "ai": "AI"
   },
   "writing": {
-    "section": "Writing",
     "title": "Notes from shipping AI products",
     "intro": "Practical lessons from designing and shipping LLM-powered features, frontend craft, and Web3 product work.",
     "comingSoon": "Coming soon",
     "back": "All posts",
-    "ctaText": "Want first dibs on new posts?",
-    "ctaButton": "Get in touch",
     "posts": {
       "streaming": {
         "title": "Designing streaming responses in Vue",
@@ -262,5 +289,18 @@
   },
   "common": {
     "switchLanguage": "Switch language"
+  },
+  "error": {
+    "notFound": "This page doesn't exist.",
+    "generic": "Something went wrong.",
+    "body": "The link may be broken or the page may have moved. Head back home and pick it up from there.",
+    "home": "Back to home"
+  },
+  "social": {
+    "nav": "Social links",
+    "linkedin": "LinkedIn profile",
+    "cv": "Read my CV",
+    "github": "GitHub repositories",
+    "x": "Follow me on X"
   }
 }

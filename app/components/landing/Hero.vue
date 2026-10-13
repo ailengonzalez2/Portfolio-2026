@@ -1,164 +1,135 @@
 <script setup lang="ts">
-import { Motion, useScroll, useTransform } from 'motion-v'
-import { ref } from 'vue'
+import { easeOutCubic, heroName, LOADING_DENSITY, remap } from '~/webgl/math'
 
-// Reference to scroll container
-const containerRef = ref<HTMLElement | null>(null)
+// Particles assemble into the name on load; scrolling disperses it back into
+// the ambient field before the manifesto. The track is 140vh only on the
+// WebGL path (.fx-on, set by plugins/fx.client.ts); otherwise the hero is a
+// static first screen with the name already formed.
+const fx = useFxEnabled()
 
-// Track scroll progress - same timing as Rolls split
-const { scrollYProgress } = useScroll({
-  target: containerRef,
-  offset: ['start start', 'end start']
+const track = ref<HTMLElement | null>(null)
+const intro = ref(1)
+const scroll = useScrollProgress(track, ['start start', 'end end'])
+// The subtitle fades out as the title disperses.
+const copyOpacity = computed(() => 1 - remap(scroll.value, 0.1, 0.5))
+
+const nameProgress = computed(() => heroName(scroll.value, intro.value))
+
+// The role is the headline; break before the "&" so it stacks in two lines.
+// The first half splits again so the title keeps its size in the column left
+// free by the screens wall.
+const { t } = useI18n()
+const roleLines = computed(() => {
+  const title = t('hero.title')
+  const i = title.indexOf(' & ')
+  if (i <= 0) return [title]
+  const words = title.slice(0, i).split(' ')
+  const cut = Math.ceil(words.length / 2)
+  return [words.slice(0, cut).join(' '), words.slice(cut).join(' '), title.slice(i + 1)]
 })
 
-// Hero content animations - staggered reveal during the split
-const showcaseOpacity = useTransform(scrollYProgress, [0.25, 0.5], [0, 1])
-const showcaseY = useTransform(scrollYProgress, [0.25, 0.52], [40, 0])
+// Page load: the title stays hidden (html.fx-boot, set by an inline head
+// script) while a 2D field of particles floats across the screen, slowly
+// filling in. Once the WebGL particles are on screen they take over at the
+// same density (the 2D field fades out), keep getting denser and more
+// defined, then order themselves into the title.
+const GATHER_MS = 1500
+const INTRO_MS = 2400
+const BOOT_TIMEOUT_MS = 4000
+const loading = ref(true)
+const field = ref(1)
+const density = ref(LOADING_DENSITY)
 
-// Showcase images that scroll through the hero columns. The original project
-// covers plus the extra gallery shots, interleaved by project so adjacent
-// tiles belong to different work.
-const heroImages = [
-  { src: '/projects/codecave.png', alt: 'codeCave studio site' },
-  { src: '/projects/habito.png', alt: 'Habito AI task management' },
-  { src: '/projects/docta.jpg', alt: 'Docta culture agenda' },
-  { src: '/projects/asistente.png', alt: 'Asistente booking SaaS' },
-  { src: '/projects/yogaapp.png', alt: 'Yoga & wellness app' },
-  { src: '/projects/codecave1.png', alt: 'codeCave studio site' },
-  { src: '/projects/habito1.png', alt: 'Habito AI task management' },
-  { src: '/projects/docta1.jpg', alt: 'Docta culture agenda' },
-  { src: '/projects/asistente1.png', alt: 'Asistente booking SaaS' },
-  { src: '/projects/codecave2.png', alt: 'codeCave studio site' },
-  { src: '/projects/habito2.png', alt: 'Habito AI task management' },
-  { src: '/projects/docta2.jpg', alt: 'Docta culture agenda' },
-  { src: '/projects/asistente2.png', alt: 'Asistente booking SaaS' },
-  { src: '/projects/codecave3.png', alt: 'codeCave studio site' },
-  { src: '/projects/docta3.jpg', alt: 'Docta culture agenda' },
-  { src: '/projects/asistente3.png', alt: 'Asistente booking SaaS' },
-  { src: '/projects/codecave4.png', alt: 'codeCave studio site' },
-  { src: '/projects/codecave5.png', alt: 'codeCave studio site' },
-  { src: '/projects/codecave6.png', alt: 'codeCave studio site' },
-  { src: '/projects/codecave7.png', alt: 'codeCave studio site' }
-]
+const endBoot = () => {
+  loading.value = false
+  document.documentElement.classList.remove('fx-boot')
+}
 
-// Vertical columns spanning the full width. Each column draws a different
-// rotation of the image list (so adjacent columns are NOT aligned) and scrolls
-// at its own speed/direction, looping infinitely.
-const COLUMN_DIRECTIONS = ['up', 'down', 'up', 'down', 'up'] as const
-const COLUMN_DURATIONS = ['34s', '27s', '40s', '24s', '31s']
-const ITEMS_PER_COLUMN = 6
-
-const columns = COLUMN_DIRECTIONS.map((direction, i) => {
-  const start = (i * 4) % heroImages.length
-  // The modulo keeps the index in range, so the lookup can never be undefined.
-  const items = Array.from(
-    { length: ITEMS_PER_COLUMN },
-    (_, k) => heroImages[(start + k) % heroImages.length]!
-  )
-  return {
-    direction,
-    duration: COLUMN_DURATIONS[i],
-    // Duplicate the slice for a seamless translateY(-50%) loop
-    loop: [...items, ...items]
+const tween = (ms: number, onStep: (k: number) => void) => new Promise<void>((resolve) => {
+  const start = performance.now()
+  const step = () => {
+    const k = Math.min(1, (performance.now() - start) / ms)
+    onStep(k)
+    if (k < 1) requestAnimationFrame(step)
+    else resolve()
   }
+  requestAnimationFrame(step)
+})
+
+let run = 0
+const playIntro = async () => {
+  const mine = ++run
+  intro.value = 0
+  field.value = 1
+  density.value = LOADING_DENSITY
+  endBoot()
+  await tween(GATHER_MS, (k) => {
+    if (mine === run) density.value = LOADING_DENSITY + (1 - LOADING_DENSITY) * k * k
+  })
+  if (mine !== run) return
+  await tween(INTRO_MS, (k) => {
+    if (mine === run) intro.value = easeOutCubic(k)
+  })
+  // Formed: later dispersal (scroll) scatters without the load field.
+  if (mine === run) field.value = 0
+}
+
+let bootTimer: ReturnType<typeof setTimeout> | undefined
+onMounted(() => {
+  // Particles never showed up (layer failed): show the plain title.
+  bootTimer = setTimeout(() => {
+    if (loading.value) endBoot()
+  }, BOOT_TIMEOUT_MS)
+})
+onBeforeUnmount(() => {
+  clearTimeout(bootTimer)
+  run++
 })
 </script>
 
 <template>
-  <!-- Scroll container matching Rolls height for synced animations -->
-  <div
-    ref="containerRef"
-    class="absolute inset-0 h-[200vh] z-10"
+  <section
+    ref="track"
+    class="hero-track relative -mt-20"
   >
-    <!-- Sticky Hero content - revealed during Rolls split -->
-    <section class="sticky top-0 h-screen bg-white dark:bg-[#0a0a0a] overflow-hidden">
-      <!-- Hidden heading kept for SEO / accessibility (banner is visual-only) -->
-      <h1 class="sr-only">
-        Ailen Gonzalez — AI Product Design & Frontend
-      </h1>
-
-      <!-- Full-viewport vertical project columns -->
-      <Motion
-        :style="{ opacity: showcaseOpacity, y: showcaseY }"
-        class="absolute inset-0 w-screen"
+    <div class="sticky top-0 h-svh">
+      <!-- Page-load field: floats across the whole first screen -->
+      <Transition
+        leave-active-class="transition-opacity duration-700"
+        leave-to-class="opacity-0"
       >
-        <div class="mask-vertical h-full overflow-hidden px-3 sm:px-4">
-          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 h-full">
-            <div
-              v-for="(col, i) in columns"
-              :key="i"
-              class="overflow-hidden"
-              :class="{ 'hidden sm:block': i === 2, 'hidden lg:block': i > 2 }"
-            >
-              <div
-                class="flex flex-col gap-3 sm:gap-4 will-change-transform"
-                :class="col.direction === 'up' ? 'animate-scroll-up' : 'animate-scroll-down'"
-                :style="{ animationDuration: col.duration }"
+        <LoadingField v-if="fx && loading" />
+      </Transition>
+      <!-- Real project screens beside the title: they arrive as the title
+           forms and leave with it on scroll -->
+      <LandingHeroScreens :style="fx ? { opacity: loading ? 0 : intro * copyOpacity } : undefined" />
+      <!-- Left edge: 7rem, or in line with the header logo once the 80rem
+           container centers (wide screens) -->
+      <div class="absolute inset-0 flex flex-col justify-center px-6 sm:px-10 lg:pl-[max(7rem,calc((100vw_-_80rem)/2_+_2rem))] lg:pr-16 pt-20">
+        <div class="relative self-start">
+          <ParticleName
+            :progress="nameProgress"
+            :field="field"
+            :density="density"
+            @ready="playIntro"
+          >
+            <h1 class="hero-title font-display font-medium uppercase text-[clamp(3rem,7.2vw,8rem)] leading-[0.95] tracking-[-0.02em] btn-gradient-text pb-[0.08em]">
+              <template
+                v-for="(line, i) in roleLines"
+                :key="line"
               >
-                <div
-                  v-for="(image, idx) in col.loop"
-                  :key="`${i}-${idx}`"
-                  class="shrink-0 aspect-4/3 rounded-2xl overflow-hidden ring-1 ring-black/5 shadow-sm"
-                >
-                  <NuxtImg
-                    :src="image.src"
-                    :alt="image.alt"
-                    class="size-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+                <br v-if="i">{{ line }}
+              </template>
+            </h1>
+          </ParticleName>
         </div>
-      </Motion>
-    </section>
-  </div>
+
+        <div :style="fx ? { opacity: copyOpacity } : undefined">
+          <p class="mt-8 max-w-xl text-lg sm:text-xl text-body">
+            {{ $t('hero.subtitle') }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
-
-<style scoped>
-.mask-vertical {
-  mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
-}
-
-/* Vertical project columns */
-.animate-scroll-up,
-.animate-scroll-down {
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-.animate-scroll-up {
-  animation-name: scroll-up;
-}
-
-.animate-scroll-down {
-  animation-name: scroll-down;
-}
-
-@keyframes scroll-up {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
-
-@keyframes scroll-down {
-  0% {
-    transform: translateY(-50%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-scroll-up,
-  .animate-scroll-down {
-    animation: none;
-  }
-}
-</style>

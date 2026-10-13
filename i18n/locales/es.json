@@ -1,103 +1,28 @@
 {
   "seo": {
-    "homeTitle": "Ailen Gonzalez — AI Product Designer & Desarrolladora Frontend",
-    "homeDescription": "AI Product Engineer, desarrolladora frontend y diseñadora de producto. Diseño y construyo productos de AI de punta a punta — chat, streaming, flujos RAG — en Vue/Nuxt."
+    "homeTitle": "Ailen Gonzalez — Diseño de Producto IA & Frontend",
+    "homeDescription": "Diseñadora de producto IA y desarrolladora frontend. Diseño y construyo productos de IA de punta a punta, de Figma a código en producción con Vue y Nuxt."
   },
   "nav": {
     "projects": "proyectos",
-    "services": "servicios",
+    "process": "proceso",
     "writing": "blog",
     "about": "sobre mí",
     "contact": "contacto",
-    "hireMe": "Contratame"
+    "hireMe": "Contratame",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "hero": {
-    "available": "Disponible para nuevos proyectos",
-    "spotsAvailable": "2 lugares disponibles",
-    "title": "AI Product Engineer",
-    "subtitle": "Diseño y construyo features de IA de punta a punta — interfaces de chat, streaming, tool calls y flujos con RAG.",
-    "bookCall": "Agendar una llamada",
-    "seeWork": "Ver trabajo"
-  },
-  "hook": {
-    "eyebrow": "Qué hago",
-    "pre": "Diseño y desarrollo ",
-    "highlight": "productos de IA",
-    "post": " de punta a punta — del primer boceto a producción.",
-    "bookCall": "Agendar una llamada",
-    "viewWork": "Ver trabajo"
-  },
-  "services": {
-    "startProject": "Iniciar un proyecto",
-    "aiProduct": {
-      "title": "Diseño de Productos con IA",
-      "description": "Diseño y desarrollo el frontend de tu producto de IA — interfaces de chat, respuestas en streaming, superficies de tool-calling, flujos de agentes y dashboards de evaluación. De Figma a código en producción.",
-      "deliverables": [
-        "UI de chat y streaming",
-        "Renderizado de tool-calls",
-        "Diseño de prompts y flujos",
-        "Dashboards de evaluación",
-        "Handoff de Figma a producción"
-      ],
-      "priceFrom": "Desde USD 2.5k",
-      "timeline": "2–3 semanas"
-    },
-    "frontend": {
-      "title": "Frontend / Web3",
-      "description": "Construyo frontends listos para producción en Vue / Nuxt + Tailwind + TypeScript — incluyendo experiencias Web3 claras e intuitivas como dashboards DeFi, marketplaces NFT y apps de billeteras. Desde el handoff de Figma hasta el deploy.",
-      "deliverables": [
-        "Apps en Vue / Nuxt 4",
-        "UIs de wallet y DeFi",
-        "Marketplaces NFT",
-        "Responsive y accesibilidad",
-        "Performance optimizado"
-      ],
-      "priceFrom": "Desde USD 2k",
-      "timeline": "1–3 semanas"
-    },
-    "llmIntegration": {
-      "title": "Integración con IA",
-      "description": "Conecto LLMs a flujos reales de producto — RAG, agentes, tool calling, outputs estructurados, automatizaciones con n8n. Diseñados para producción y medidos con evals.",
-      "deliverables": [
-        "Pipelines de RAG",
-        "Tool calling y agentes",
-        "Automatización con n8n",
-        "Outputs estructurados",
-        "Evals y monitoreo"
-      ],
-      "priceFrom": "Desde USD 3k",
-      "timeline": "2–4 semanas"
-    },
-    "web3": {
-      "title": "Frontend Web3",
-      "description": "Diseño experiencias Web3 claras e intuitivas — dashboards DeFi, marketplaces NFT, apps de billeteras. Construidas con Wagmi, Viem y Reown.",
-      "deliverables": [
-        "Integraciones de wallet",
-        "UIs DeFi / swap",
-        "Marketplaces NFT",
-        "Soporte multi-chain"
-      ],
-      "priceFrom": "Desde USD 3k",
-      "timeline": "2–4 semanas"
-    }
+    "title": "Diseño de Producto IA & Frontend",
+    "subtitle": "Ayudo a startups y equipos de producto a pasar del concepto de diseño a productos web escalables y pixel-perfect en poco tiempo."
   },
   "projects": {
-    "latestSection": "Proyectos recientes",
     "clientWork": "Trabajo con clientes",
     "lab": "Lab",
     "labIntro": "Proyectos propios — donde pruebo ideas y tecnología sin un brief de cliente que condicione la respuesta.",
-    "labTeaser": {
-      "eyebrow": "El lab",
-      "title": "No todo lo que construyo tiene un cliente.",
-      "cta": "Jugá con mi portfolio",
-      "jellyCaption": "Dale, tocala.",
-      "jellyName": "Jelly — una estrella de mar en WebGPU",
-      "seeLab": "Ver todo el lab"
-    },
-    "more": "Más",
-    "exploreAll": "Ver proyectos",
-    "pageTitle": "Proyectos destacados",
-    "pageIntro": "Una selección de mis trabajos de diseño y desarrollo. Cada proyecto representa un desafío único y una solución creativa.",
+    "pageTitle": "Proyectos",
+    "pageIntro": "Trabajo con clientes que diseñé y construí de punta a punta, y el lab donde pruebo cosas sin un brief.",
     "caseStudy": {
       "back": "Todos los proyectos",
       "viewLive": "Ver en vivo",
@@ -111,54 +36,85 @@
       "result": "Resultado",
       "stack": "Stack",
       "relatedProjects": "Más proyectos",
-      "ctaText": "¿Estás construyendo algo similar?",
-      "ctaButton": "Hablemos",
       "comingSoonTitle": "Caso de estudio en camino",
-      "comingSoonBody": "Por ahora podés explorar el trabajo directamente en Figma o en el preview arriba."
+      "comingSoonBody": "Por ahora podés explorar el trabajo directamente en Figma o en el preview arriba.",
+      "year": "Año",
+      "disciplines": "Disciplinas"
+    },
+    "labTeaser": {
+      "eyebrow": "El lab",
+      "title": "Jugá con mis animaciones.",
+      "cta": "Entrar al living",
+      "jellyCaption": "Dale, tocala.",
+      "jellyName": "Jelly — una estrella de mar en WebGPU",
+      "seeLab": "Ver todo el lab",
+      "vinylCaption": "Poné un disco.",
+      "vinylName": "Vinyl Room — un tocadiscos en 3D",
+      "cubeCaption": "Dale una vuelta.",
+      "cubeName": "Cubo de proyectos — un portfolio para resolver"
     }
   },
-  "hookQuote": {
-    "pre": "Ayudo a startups y equipos de producto a pasar del concepto de diseño a ",
-    "highlight": "productos web escalables y pixel-perfect",
-    "post": " en poco tiempo.",
-    "support": "Esto significa entregas más limpias, iteraciones más rápidas y productos que de verdad coinciden con la visión."
+  "manifesto": {
+    "text": "Diseño y construyo productos de IA: desde la primera idea con ruido hasta la forma que la gente realmente usa.",
+    "highlight": "la forma que la gente realmente usa",
+    "bookCall": "Agendar una llamada",
+    "viewWork": "Ver trabajo"
+  },
+  "work": {
+    "eyebrow": "Trabajo seleccionado",
+    "latentHint": "Pasá el mouse — o mantené presionado — para ver otra pantalla",
+    "caseStudy": "Leer el caso de estudio",
+    "visit": "Ver el sitio",
+    "all": "Todos los proyectos"
   },
   "testimonials": {
-    "next": "Siguiente testimonio",
-    "goTo": "Ver testimonio de {name}"
+    "eyebrow": "Lo que dicen",
+    "label": "Testimonios",
+    "prev": "Testimonio anterior",
+    "source": "Cliente",
+    "next": "Siguiente testimonio"
   },
   "contactCta": {
     "heading": "Trabajemos juntos",
     "subtitle": "¿Tenés un producto de IA o un frontend en mente? Hagámoslo realidad.",
-    "bookCall": "Agendar una llamada",
-    "email": "Escribime"
-  },
-  "aiQuote": {
-    "quote": "Últimamente estoy explorando más a fondo el ecosistema de la IA, construyendo flujos impulsados por agentes y experiencias de UI inteligentes.",
-    "highlight": "flujos impulsados por agentes y experiencias de UI inteligentes",
-    "context": "Me enfoco en crear experiencias impulsadas por IA claras e intuitivas con herramientas como la API de Claude, agentes LLM y frameworks de frontend modernos. Desde interfaces conversacionales hasta dashboards de IA y apps con agentes, siempre me entusiasma colaborar en ideas y proyectos innovadores."
+    "bookCall": "Agendar una llamada"
   },
   "about": {
+    "badge": {
+      "roles": "Diseño de producto IA · Desarrollo frontend · Diseño UX/UI",
+      "remote": "Remoto · todo el mundo",
+      "languages": "ES · EN"
+    },
+    "stats": {
+      "heading": "En números",
+      "years": "años diseñando y programando productos digitales",
+      "shipped": "productos entregados de punta a punta, de Figma a producción",
+      "faster": "menos tiempo de entrega que separando diseño y desarrollo"
+    },
+    "portraitCaption": "Ailen Gonzalez · Córdoba, Argentina",
+    "statement": "Desarrolladora frontend obsesionada con la IA y la UI.",
+    "statementHighlight": "la IA y la UI.",
+    "trajectory": "Trayectoria",
+    "now": "Ahora",
+    "before": "Antes de la tecnología",
+    "medicine": {
+      "title": "Médica de guardia",
+      "period": "2011 – 2021",
+      "place": "Argentina",
+      "description": "Diez años en guardias de emergencia, después de recibirme en la Universidad Nacional de Córdoba. Sigue siendo el mejor entrenamiento que tuve para decidir rápido con información incompleta."
+    },
+    "tools": "Herramientas",
+    "toolGroups": {
+      "design": "Diseño y UX",
+      "frontend": "Frontend",
+      "ai": "IA y automatización",
+      "web3": "Web3"
+    },
     "heading": "Sobre mí",
-    "pageTitle": "Desarrolladora frontend obsesionada con la IA y la UI",
     "exploreCv": "Ver CV completo",
-    "designCode": "Diseño + Código",
     "designCodeBody": "Combino principios sólidos de diseño con desarrollo práctico y eficiente para crear interfaces limpias, responsive y pixel-perfect. Me ocupo del proceso completo: desde la investigación inicial y los prototipos hasta llevarlo todo a la vida con código moderno y prolijo.",
-    "workExperience": "Experiencia laboral",
-    "skills": "Habilidades",
-    "technical": "Técnicas",
-    "soft": "Blandas",
-    "softBody": "Trabajo autónomo, escucha activa, atención al detalle, comunicación clara, mentalidad colaborativa, adaptabilidad",
-    "languages": "Idiomas",
-    "english": "Inglés",
-    "englishLevel": "C1 Avanzado • Comunicación fluida",
-    "spanish": "Español",
-    "spanishLevel": "Nativo",
     "certifications": "Últimas certificaciones",
-    "funfactLabel": "Mi #funfact",
-    "funfactBody": "Antes de dedicarme a la tecnología trabajé como médica de 2011 a 2021 en servicios de emergencias de toda Argentina, tras recibirme en la Universidad Nacional de Córdoba — una de las universidades más prestigiosas del país. Esa experiencia moldeó mi mentalidad analítica y mi enfoque para resolver problemas en el diseño y el desarrollo.",
     "cert": {
-      "online": "Online",
       "ongoing": "En curso"
     },
     "work": {
@@ -182,12 +138,63 @@
         "period": "Feb 2021 – Sep 2022 (REMOTO)",
         "description": "Construí plataformas de e-commerce, landing pages y sitios corporativos con funcionalidades y estilos a medida, gestionando además el mantenimiento y las optimizaciones de seguridad."
       }
+    },
+    "principles": {
+      "heading": "Cómo trabajo",
+      "noHandoff": {
+        "title": "Diseño y código, sin handoff",
+        "body": "Diseño en Figma y lo llevo a producción yo misma. Lo que se decide en el diseño llega intacto al producto, sin idas y vueltas entre equipos."
+      },
+      "ai": {
+        "title": "IA donde ahorra tiempo de verdad",
+        "body": "Armo automatizaciones y agentes con n8n y LLMs para sacar del medio el trabajo repetitivo, y diseño productos con IA que se sienten simples para quien los usa."
+      },
+      "decide": {
+        "title": "Decidir con información incompleta",
+        "body": "Diez años de guardia me enseñaron a priorizar rápido, preguntar lo justo y avanzar sin esperar certezas que no van a llegar."
+      },
+      "remote": {
+        "title": "Remoto, con equipos de cualquier lado",
+        "body": "Desde 2021 trabajo en remoto con equipos y clientes internacionales, en español y en inglés."
+      }
+    },
+    "closing": {
+      "clients": {
+        "eyebrow": "Para clientes",
+        "title": "¿Tenés un proyecto?",
+        "body": "Contame qué querés construir. En una llamada corta vemos si encaja y cómo arrancar."
+      },
+      "teams": {
+        "eyebrow": "Para empresas",
+        "title": "¿Estás armando un equipo?",
+        "body": "Si buscás a alguien que diseñe y programe producto, acá está mi recorrido completo."
+      }
+    },
+    "offScreen": {
+      "heading": "Fuera de la pantalla",
+      "dogs": {
+        "title": "Spock",
+        "body": "Mi perro Spock tiene 12 años. Es mi modelo favorito."
+      },
+      "photo": {
+        "title": "Fotografía",
+        "body": "Soy fotógrafa aficionada. Estudio fotografía y salgo a sacar fotos por Córdoba, la ciudad que amo."
+      },
+      "print": {
+        "title": "3D, de la pantalla a la mano",
+        "body": "Modelo en 3D y lo convierto en objetos reales con mi impresora, que casi nunca está apagada."
+      },
+      "dive": {
+        "title": "Buzo certificada",
+        "body": "Tengo certificación de buceo y bajo cada vez que puedo. Ahí abajo no hay pantallas ni notificaciones."
+      }
     }
   },
   "footer": {
-    "availableForProjects": "Disponible para proyectos",
-    "notAvailable": "No disponible",
-    "timezone": "GMT-3"
+    "place": "Córdoba, Argentina",
+    "localTime": "hora local",
+    "credits": "Diseñado y programado por Ailen Gonzalez",
+    "backToTop": "Volver arriba"
   },
   "prefooter": {
     "design": "Diseño",
@@ -195,13 +202,10 @@
     "ai": "IA"
   },
   "writing": {
-    "section": "Blog",
     "title": "Notas de construir productos con IA",
     "intro": "Lecciones prácticas de diseñar y shippear features con LLMs, frontend y productos Web3.",
     "comingSoon": "Próximamente",
     "back": "Todos los posts",
-    "ctaText": "¿Querés enterarte primero de los próximos posts?",
-    "ctaButton": "Contactame",
     "posts": {
       "streaming": {
         "title": "Diseñar respuestas con streaming en Vue",
@@ -285,5 +289,18 @@
   },
   "common": {
     "switchLanguage": "Cambiar idioma"
+  },
+  "error": {
+    "notFound": "Esta página no existe.",
+    "generic": "Algo salió mal.",
+    "body": "Puede que el link esté roto o que la página se haya movido. Volvé al inicio y seguí desde ahí.",
+    "home": "Volver al inicio"
+  },
+  "social": {
+    "nav": "Redes sociales",
+    "linkedin": "Perfil de LinkedIn",
+    "cv": "Ver mi CV",
+    "github": "Repositorios en GitHub",
+    "x": "Seguime en X"
   }
 }

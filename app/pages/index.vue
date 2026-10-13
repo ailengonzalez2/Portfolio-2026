@@ -17,24 +17,21 @@ useSeoMeta({
 
 <template>
   <UPage>
-    <!-- Wrapper for Rolls split reveal effect -->
-    <div class="relative isolate">
-      <LandingRolls />
-      <LandingHero />
-    </div>
-    <LandingHook />
+    <LandingHero />
+    <LandingManifesto />
     <section class="pb-20 sm:pb-28 bg-background">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <LandingLabTeaser />
       </div>
     </section>
-    <LandingServices />
-    <section class="pt-10 sm:pt-14 pb-24 sm:pb-32 bg-background">
-      <TechMarquee />
-    </section>
-    <LandingHookQuote />
-    <LandingProjects />
-    <LandingAIquote />
+    <LandingWork />
+    <!-- "How I work" from the about page; #process keeps the menu link working -->
+    <AboutPrinciples
+      id="process"
+      inset="home"
+      tone="dark"
+      class="scroll-mt-20"
+    />
     <LandingTestimonials />
   </UPage>
 </template>

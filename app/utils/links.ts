@@ -4,14 +4,14 @@ export const navLinks: NavigationMenuItem[] = [{
   label: 'projects',
   to: '/projects'
 }, {
-  label: 'services',
-  to: '/#services'
-}, {
-  label: 'writing',
-  to: '/writing'
+  label: 'process',
+  to: '/#process'
 }, {
   label: 'about',
   to: '/about'
+}, {
+  label: 'writing',
+  to: '/writing'
 }, {
   label: 'contact',
   to: '/#contact'

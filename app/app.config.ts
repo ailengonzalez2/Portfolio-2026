@@ -1,11 +1,5 @@
 export default defineAppConfig({
   global: {
-    // TODO: drop a real profile image at /public/profile.png (square, min 800px)
-    picture: {
-      dark: '/profile.png',
-      light: '/profile.png',
-      alt: 'Ailen Gonzalez'
-    },
     meetingLink: 'https://calendly.com/ailengonzalez21-ag/new-meeting',
     email: 'hey@ailengonzalez.ar',
     available: true
@@ -43,10 +37,10 @@ export default defineAppConfig({
       'target': '_blank',
       'aria-label': 'GitHub'
     }, {
-      'icon': 'i-simple-icons-upwork',
-      'to': 'https://www.upwork.com/freelancers/ailengonzalez?mp_source=share',
+      'icon': 'i-simple-icons-x',
+      'to': 'https://x.com/Ailegonzalez',
       'target': '_blank',
-      'aria-label': 'Upwork'
+      'aria-label': 'X'
     }, {
       'icon': 'i-simple-icons-telegram',
       'to': 'https://t.me/AilenGonzalez',

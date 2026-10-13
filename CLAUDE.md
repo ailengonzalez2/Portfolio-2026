@@ -33,7 +33,7 @@ bun run typecheck
 
 - **Framework**: Nuxt 4 with TypeScript
 - **UI**: Nuxt UI 4 (Tailwind CSS v4 + Reka UI)
-- **Animations**: motion-v (`<Motion>` component)
+- **Animations**: own lightweight pieces — `<Reveal>` (fade/rise in on first view) and `useScrollProgress()` (scroll progress 0–1 with motion-style offsets); WebGL particles in `app/webgl/`
 - **Icons**: Iconify (lucide & simple-icons sets)
 - **Images**: @nuxt/image
 - **Package Manager**: Bun
@@ -73,8 +73,9 @@ Uses new import syntax in main.css:
 @import "@nuxt/ui";
 
 @theme static {
-  --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Instrument Serif', serif;
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Red Hat Display', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
 }
 ```
 
@@ -82,10 +83,11 @@ Uses new import syntax in main.css:
 - Use `bg-linear-to-*` instead of `bg-gradient-to-*`
 - Use `shrink-0` instead of `flex-shrink-0`
 
-### Theme Colors
-- Primary: Purple (#A11EE2)
-- Secondary: Peach (#FAC789)
-- Custom classes: `.btn-gradient`, `.btn-gradient-text`
+### Theme
+- Paper `#F2EFE9` (background), ink `#121212` (text); body `#47453f`, label `#5c5951`, hairline `#d6d2c8`
+- Brand gradient: cobalt `#2B3BFF` → `#7643FF` → violet `#C04BFF` (`.btn-gradient`, `.btn-gradient-text`, particles via `gradientAt()` in `app/webgl/math.ts`)
+- Type: Red Hat Display for display (variable, medium weight, tight tracking; the hero role is uppercase; OG images use a static `RedHatDisplayOG` Medium TTF, since Satori can't read variable fonts), Geist body, Geist Mono for small uppercase labels
+- Editorial layout: left-aligned, `max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16`, hairline rules instead of cards
 
 ## Code Conventions
 
@@ -99,14 +101,14 @@ Uses new import syntax in main.css:
 - Use `defineProps<T>()` with TypeScript generics
 - Prefer Nuxt UI components: UButton, UIcon, UCard, UPage, UPageHero, etc.
 
-### Animations with motion-v
+### Animations
 ```vue
-<Motion
-  :initial="{ opacity: 0, y: 20 }"
-  :while-in-view="{ opacity: 1, y: 0 }"
-  :transition="{ duration: 0.5 }"
-  :in-view-options="{ once: true }"
->
+<!-- Fade + rise in the first time it scrolls into view -->
+<Reveal :y="20" :duration="0.5" :delay="0.1">…</Reveal>
+```
+```ts
+// Scroll progress of an element, 0 → 1 (offsets like motion's useScroll)
+const progress = useScrollProgress(el, ['start end', 'end start'])
 ```
 
 ## Configuration

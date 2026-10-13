@@ -1,0 +1,70 @@
+<script setup lang="ts">
+import { findPhrase, splitWords, wordProgress } from '~/webgl/math'
+import { tween } from '~/webgl/loop'
+
+// Real text that resolves word by word: blur → sharp, light → firm (the display
+// face's wght axis). DOM only. `on="scroll"` ties it to the scroll position;
+// `on="load"` plays it once on mount (for headings visible at first paint).
+// The highlighted phrase turns gradient once resolved.
+const props = withDefaults(defineProps<{
+  text: string
+  highlight?: string
+  tag?: string
+  on?: 'scroll' | 'load'
+  /** Viewport line (0 top – 1 bottom) the text's end reaches when fully resolved */
+  finishAt?: number
+}>(), { highlight: '', tag: 'p', on: 'scroll', finishAt: 0.45 })
+
+const root = ref<HTMLElement | null>(null)
+const fx = useFxEnabled()
+const progress = ref(1)
+
+const words = computed(() => splitWords(props.text))
+const range = computed(() => props.highlight ? findPhrase(words.value, splitWords(props.highlight)) : null)
+
+const scrolled = useScrollProgress(root, ['start 0.85', `end ${props.finishAt}`])
+onMounted(() => {
+  if (props.on === 'load') {
+    progress.value = 0
+    tween(0, 1, 1600, (v) => {
+      progress.value = v
+    })
+    return
+  }
+  watch(scrolled, (v) => {
+    progress.value = v
+  }, { immediate: true })
+})
+
+const wp = (i: number) => fx.value ? wordProgress(progress.value, i, words.value.length) : 1
+
+const wordStyle = (i: number) => {
+  if (!fx.value) return undefined
+  const w = wp(i)
+  return {
+    opacity: 0.12 + 0.88 * w,
+    filter: `blur(${((1 - w) * 6).toFixed(2)}px)`,
+    fontVariationSettings: `'wght' ${Math.round(300 + 200 * w)}`
+  }
+}
+
+const isHighlighted = (i: number) => !!range.value && i >= range.value[0] && i < range.value[1] && wp(i) > 0.95
+</script>
+
+<template>
+  <component
+    :is="tag"
+    ref="root"
+  >
+    <template
+      v-for="(word, i) in words"
+      :key="`${i}-${word}`"
+    >
+      <span
+        class="inline-block"
+        :class="{ 'btn-gradient-text': isHighlighted(i) }"
+        :style="wordStyle(i)"
+      >{{ word }}</span>{{ ' ' }}
+    </template>
+  </component>
+</template>

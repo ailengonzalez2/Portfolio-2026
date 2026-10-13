@@ -5,43 +5,21 @@ interface SocialLink {
   name: string
   icon: string
   url: string
-  label: string
-  brandColor: string
-  colorIcon?: string // Path to color version of the icon (optional)
+  key: string
+  /** Simple Icons fill their whole box; trim so they match the mdi set */
+  small?: boolean
 }
 
+const { t } = useI18n()
+
 const socialLinks: SocialLink[] = [
-  {
-    name: 'LinkedIn',
-    icon: 'i-mdi-linkedin',
-    url: 'https://www.linkedin.com/in/ailengonzalez/',
-    label: 'Visitar perfil de LinkedIn',
-    brandColor: '#0077b5'
-  },
-  {
-    name: 'CV',
-    icon: 'i-simple-icons-readdotcv',
-    url: 'https://cv.ailengonzalez.ar/',
-    label: 'Leer mi cv en Read.cv',
-    brandColor: '#B0282D'
-  },
-  {
-    name: 'GitHub',
-    icon: 'i-mdi-github',
-    url: 'https://github.com/ailengonzalez2',
-    label: 'Ver repositorios en GitHub',
-    brandColor: '#3b2063'
-  },
-  {
-    name: 'Upwork',
-    icon: 'i-simple-icons-upwork',
-    url: 'https://www.upwork.com/freelancers/ailengonzalez?mp_source=share',
-    label: 'Contratar en Upwork',
-    brandColor: '#14a800'
-  }
+  { name: 'LinkedIn', icon: 'i-mdi-linkedin', url: 'https://www.linkedin.com/in/ailengonzalez/', key: 'linkedin' },
+  { name: 'CV', icon: 'i-lucide-file-text', url: 'https://cv.ailengonzalez.ar/', key: 'cv' },
+  { name: 'GitHub', icon: 'i-mdi-github', url: 'https://github.com/ailengonzalez2', key: 'github' },
+  { name: 'X', icon: 'i-simple-icons-x', url: 'https://x.com/Ailegonzalez', key: 'x', small: true }
 ]
 
-// Scroll detection for the bottom-of-page colored state
+// Near the bottom the sidebar sits over the ink footer: switch to paper.
 const { y } = useWindowScroll()
 const { height } = useWindowSize()
 
@@ -49,7 +27,6 @@ const isExpanded = computed(() => {
   if (!import.meta.client) return false
   const scrollHeight = document.documentElement.scrollHeight
   const scrollPosition = y.value + height.value
-  // Color the icons when within 200px of the bottom
   return scrollPosition >= scrollHeight - 200
 })
 
@@ -60,6 +37,17 @@ const isMobileExpanded = computed(() => {
   const scrollPosition = y.value + height.value
   // Color when within 100px of the bottom (later than desktop)
   return scrollPosition >= scrollHeight - 100
+})
+
+// Mobile: the pill floats over the text, so it steps aside while reading
+// (scrolling down) and comes back on any scroll up, at the top and near the end.
+const mobileHidden = ref(false)
+let lastY = 0
+watch(y, (now) => {
+  const delta = now - lastY
+  if (Math.abs(delta) < 8) return
+  mobileHidden.value = delta > 0 && now > 200 && !isMobileExpanded.value
+  lastY = now
 })
 
 // Mobile: Calculate bottom offset to stop before footer
@@ -79,20 +67,11 @@ const mobileBottom = computed(() => {
 
 <template>
   <aside
-    class="social-sidebar fixed top-8 left-8 z-50 hidden lg:flex flex-col items-center"
-    aria-label="Enlaces a redes sociales"
+    class="fixed bottom-8 left-8 z-50 hidden lg:flex flex-col items-center gap-6"
   >
-    <!-- Decorative vertical line -->
-    <div
-      class="decorative-line w-px h-40 bg-linear-to-b from-transparent via-[#6b7280]/60 to-[#6b7280] transition-all duration-500"
-      :class="isExpanded ? 'opacity-0 h-0' : 'opacity-100'"
-      aria-hidden="true"
-    />
-
-    <!-- Social icons container -->
     <nav
-      class="flex flex-col items-start gap-3 py-2"
-      aria-label="Redes sociales"
+      class="flex flex-col items-center gap-1"
+      :aria-label="t('social.nav')"
     >
       <ULink
         v-for="social in socialLinks"
@@ -100,37 +79,39 @@ const mobileBottom = computed(() => {
         :to="social.url"
         target="_blank"
         rel="noopener noreferrer"
-        :aria-label="social.label"
-        :style="{ '--brand-color': social.brandColor } as any"
-        class="social-link group relative flex items-center justify-center size-14 transition-all duration-300"
+        :aria-label="t(`social.${social.key}`)"
+        class="group relative flex items-center justify-center size-10 transition-colors duration-300"
+        :class="isExpanded ? 'text-paper/60 hover:text-paper' : 'text-label hover:text-ink'"
       >
         <UIcon
           :name="social.icon"
-          class="social-icon-svg size-8 transition-all duration-300 group-hover:scale-110"
-          :class="isExpanded ? 'scale-125' : ''"
-          :style="{ color: isExpanded ? '#ffffff' : '#6b7280' }"
+          :class="social.small ? 'size-[18px]' : 'size-[22px]'"
         />
-        <!-- Name on hover -->
         <span
-          class="absolute left-full top-1/2 -translate-y-1/2 ml-3 px-2 py-1 text-xs font-medium text-white bg-slate-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none z-20"
+          class="absolute left-full top-1/2 -translate-y-1/2 ml-2 font-mono text-[11px] uppercase tracking-[0.18em] whitespace-nowrap opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 pointer-events-none"
+          :class="isExpanded ? 'text-paper' : 'text-ink'"
         >
           {{ social.name }}
         </span>
       </ULink>
     </nav>
+    <div
+      class="w-px h-20 transition-colors duration-300"
+      :class="isExpanded ? 'bg-paper/30' : 'bg-hairline'"
+      aria-hidden="true"
+    />
   </aside>
 
-  <!-- Mobile: Compact horizontal version at bottom -->
+  <!-- Mobile: compact horizontal pill at the bottom -->
   <div
-    class="social-sidebar-mobile fixed left-1/2 -translate-x-1/2 z-50 lg:hidden transition-[bottom] duration-300 ease-out"
+    class="fixed left-1/2 -translate-x-1/2 z-50 lg:hidden transition-[bottom,translate,opacity] duration-300 ease-out"
+    :class="mobileHidden ? 'translate-y-[calc(100%+2rem)] opacity-0 pointer-events-none' : ''"
     :style="{ bottom: `${mobileBottom}px` }"
-    aria-label="Enlaces a redes sociales"
   >
     <nav
-      class="flex items-center px-4 py-2 backdrop-blur-sm rounded-full border transition-all duration-500"
-      :class="isMobileExpanded ? 'border-slate-300/50 scale-110 gap-2' : 'border-slate-700/50 gap-0'"
-      :style="{ backgroundColor: isMobileExpanded ? 'rgba(15, 23, 42, 0.95)' : 'rgba(30, 41, 59, 0.9)' }"
-      aria-label="Redes sociales"
+      class="flex items-center gap-1 px-3 py-1.5 rounded-full border backdrop-blur-md transition-colors duration-300"
+      :class="isMobileExpanded ? 'bg-ink/90 border-paper/15' : 'bg-paper/90 border-hairline'"
+      :aria-label="t('social.nav')"
     >
       <ULink
         v-for="social in socialLinks"
@@ -138,75 +119,15 @@ const mobileBottom = computed(() => {
         :to="social.url"
         target="_blank"
         rel="noopener noreferrer"
-        :aria-label="social.label"
-        :style="{ '--brand-color': social.brandColor } as any"
-        class="social-icon-mobile group relative flex items-center justify-center size-10 rounded-full transition-all duration-200 active:scale-95"
+        :aria-label="t(`social.${social.key}`)"
+        class="flex items-center justify-center size-9 rounded-full transition-colors active:scale-95"
+        :class="isMobileExpanded ? 'text-paper/70' : 'text-label'"
       >
         <UIcon
           :name="social.icon"
-          class="social-icon-svg size-6 transition-all duration-500 group-hover:scale-110"
-          :class="isMobileExpanded ? 'scale-125' : ''"
-          :style="{ color: isMobileExpanded ? '#ffffff' : '#6b7280' }"
+          :class="social.small ? 'size-[15px]' : 'size-[18px]'"
         />
       </ULink>
     </nav>
   </div>
 </template>
-
-<style scoped>
-.social-sidebar {
-  /* Ensure visibility over other elements */
-  pointer-events: auto;
-}
-
-/* Subtle animation on load */
-.social-sidebar nav {
-  animation: fadeSlideIn 0.6s ease-out;
-}
-
-@keyframes fadeSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Mobile version animation */
-.social-sidebar-mobile nav {
-  animation: fadeSlideUp 0.4s ease-out;
-}
-
-@keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-/* Brand-color the icon on hover */
-.social-link:hover .social-icon-svg,
-.social-link:active .social-icon-svg {
-  color: var(--brand-color) !important;
-}
-
-/* Focus visible for accessibility */
-.social-link:focus-visible,
-.social-icon-mobile:focus-visible {
-  outline: 2px solid var(--color-primary-500);
-  outline-offset: 2px;
-}
-
-/* Mobile hover effects */
-.social-icon-mobile:hover .social-icon-svg,
-.social-icon-mobile:active .social-icon-svg {
-  color: var(--brand-color) !important;
-}
-</style>

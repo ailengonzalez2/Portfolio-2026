@@ -7,8 +7,13 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@vueuse/nuxt',
     '@nuxtjs/seo',
-    'motion-v/nuxt',
     '@nuxtjs/i18n'
+  ],
+
+  // fx/ components are used by bare name (<ResolveImage>, <ParticleName>, ...)
+  components: [
+    { path: '~/components/fx', pathPrefix: false },
+    '~/components'
   ],
 
   devtools: {
@@ -18,6 +23,12 @@ export default defineNuxtConfig({
   app: {
     head: {
       script: [
+        // Mirrors the cheap checks of shouldUseWebGL before first paint, so the
+        // hero title starts hidden behind the loading swirl (see main.css).
+        {
+          innerHTML: 'try{var m=navigator.deviceMemory;if(!/[?&]fx=off/.test(location.search)&&!matchMedia(\'(prefers-reduced-motion: reduce)\').matches&&!(m<4))document.documentElement.classList.add(\'fx-boot\')}catch(e){}',
+          tagPosition: 'head'
+        },
         {
           'src': 'https://umami.codecave.ar/script.js',
           'data-website-id': '3bdc851d-7f3e-402e-9712-cdb5a201091e',
@@ -32,7 +43,7 @@ export default defineNuxtConfig({
   site: {
     url: 'https://ailengonzalez.ar',
     name: 'Ailen Gonzalez',
-    description: 'Ailen Gonzalez — AI Product Engineer, frontend developer and product designer. I design and ship user-facing AI features and polished web experiences.'
+    description: 'Ailen Gonzalez — AI product design and frontend. I design and build AI products end to end, from Figma to production code.'
   },
 
   colorMode: {
@@ -44,6 +55,9 @@ export default defineNuxtConfig({
       apiKey: '',
       model: 'anthropic/claude-sonnet-4.5'
     },
+    // The brief generator (/api/brief, /api/lead) stays off until it ships:
+    // set NUXT_BRIEF_ENABLED=true with the brief components back in the layout.
+    briefEnabled: false,
     public: {
       web3formsKey: ''
     }
@@ -57,7 +71,11 @@ export default defineNuxtConfig({
         '/',
         '/es'
       ],
-      crawlLinks: true
+      crawlLinks: true,
+      // Nuxt's default (4 per core) runs ~30 renders at once. OG images are
+      // CPU-bound on one thread and their 15s timeout starts on arrival, so
+      // the tail of that queue timed out whenever the machine was busy.
+      concurrency: 8
     }
   },
 
@@ -68,6 +86,17 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  // Self-hosted variable Red Hat Display for display type (no render-blocking
+  // third-party stylesheet); the wght axis drives the resolve effect.
+  fonts: {
+    families: [
+      { name: 'Red Hat Display', provider: 'google', weights: ['300 900'], styles: ['normal'] },
+      // Static Red Hat Display Medium for the social-share images only: their
+      // renderer (Satori) can't use variable fonts. Local file in public/fonts.
+      { name: 'RedHatDisplayOG', provider: 'local', weights: [500], global: true }
+    ]
   },
 
   i18n: {
