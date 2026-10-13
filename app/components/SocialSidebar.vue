@@ -39,6 +39,17 @@ const isMobileExpanded = computed(() => {
   return scrollPosition >= scrollHeight - 100
 })
 
+// Mobile: the pill floats over the text, so it steps aside while reading
+// (scrolling down) and comes back on any scroll up, at the top and near the end.
+const mobileHidden = ref(false)
+let lastY = 0
+watch(y, (now) => {
+  const delta = now - lastY
+  if (Math.abs(delta) < 8) return
+  mobileHidden.value = delta > 0 && now > 200 && !isMobileExpanded.value
+  lastY = now
+})
+
 // Mobile: Calculate bottom offset to stop before footer
 const mobileBottom = computed(() => {
   if (!import.meta.client) return 16
@@ -93,7 +104,8 @@ const mobileBottom = computed(() => {
 
   <!-- Mobile: compact horizontal pill at the bottom -->
   <div
-    class="fixed left-1/2 -translate-x-1/2 z-50 lg:hidden transition-[bottom] duration-300 ease-out"
+    class="fixed left-1/2 -translate-x-1/2 z-50 lg:hidden transition-[bottom,translate,opacity] duration-300 ease-out"
+    :class="mobileHidden ? 'translate-y-[calc(100%+2rem)] opacity-0 pointer-events-none' : ''"
     :style="{ bottom: `${mobileBottom}px` }"
   >
     <nav

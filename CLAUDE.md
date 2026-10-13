@@ -86,7 +86,7 @@ Uses new import syntax in main.css:
 ### Theme
 - Paper `#F2EFE9` (background), ink `#121212` (text); body `#47453f`, label `#5c5951`, hairline `#d6d2c8`
 - Brand gradient: cobalt `#2B3BFF` → `#7643FF` → violet `#C04BFF` (`.btn-gradient`, `.btn-gradient-text`, particles via `gradientAt()` in `app/webgl/math.ts`)
-- Type: Red Hat Display for display (variable, medium weight, tight tracking; the hero role is uppercase; OG images still use a static `FrauncesOG` TTF), Geist body, Geist Mono for small uppercase labels
+- Type: Red Hat Display for display (variable, medium weight, tight tracking; the hero role is uppercase; OG images use a static `RedHatDisplayOG` Medium TTF, since Satori can't read variable fonts), Geist body, Geist Mono for small uppercase labels
 - Editorial layout: left-aligned, `max-w-7xl mx-auto px-6 sm:px-10 lg:pl-28 lg:pr-16`, hairline rules instead of cards
 
 ## Code Conventions

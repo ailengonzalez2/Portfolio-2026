@@ -1,6 +1,6 @@
 <script setup>
 // Social-share image for blog posts, in the site's identity: paper,
-// Fraunces title, Geist details, the brand gradient as a thin rule.
+// Red Hat Display title, Geist details, the brand gradient as a thin rule.
 defineProps({
   title: { type: String, required: true },
   category: { type: String, required: false, default: '' },
@@ -12,10 +12,13 @@ defineProps({
 <template>
   <div
     class="w-full h-full flex flex-col justify-between bg-[#F2EFE9] text-[#121212] p-[72px]"
-    style="font-family: 'FrauncesOG'"
+    style="font-family: 'RedHatDisplayOG'; font-weight: 500"
   >
     <div class="w-full flex items-center justify-between">
-      <span class="text-[34px] leading-none">Ailen Gonzalez</span>
+      <span
+        class="text-[34px] leading-none"
+        style="letter-spacing: -0.04em;"
+      >Ailen Gonzalez</span>
       <span
         v-if="category"
         class="text-[24px] text-[#5c5951]"
@@ -30,7 +33,7 @@ defineProps({
       />
       <span
         class="text-[76px] leading-[1.02]"
-        style="letter-spacing: -0.02em;"
+        style="letter-spacing: -0.03em;"
       >{{ title }}</span>
     </div>
 

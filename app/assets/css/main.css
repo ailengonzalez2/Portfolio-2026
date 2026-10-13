@@ -84,6 +84,17 @@
 }
 @keyframes fx-boot-reveal { to { opacity: 1; } }
 
+/* With the screens wall beside it (xl+), the hero title sizes to the gap
+   between its left edge (7rem, or in line with the logo on wide screens) and
+   the wall's left edge, so it never runs under the screens. */
+@media (min-width: 80rem) {
+  .hero-title {
+    --title-left: max(7rem, calc(50vw - 38rem));
+    --wall-left: calc(50vw + 38rem - min(34vw, 34rem));
+    font-size: min(7.2vw, 8rem, calc((var(--wall-left) - var(--title-left) - 3rem) / 6.7));
+  }
+}
+
 /* Scroll tracks only stretch when the WebGL path runs */
 .fx-on .hero-track { height: 140vh; }
 /* The manifesto slides up over the end of the hero track, so the first

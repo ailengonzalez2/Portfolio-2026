@@ -93,9 +93,9 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       { name: 'Red Hat Display', provider: 'google', weights: ['300 900'], styles: ['normal'] },
-      // Static Fraunces for the social-share images only: their renderer
-      // (Satori) can't use variable fonts. Local file in public/fonts.
-      { name: 'FrauncesOG', provider: 'local', weights: [400], global: true }
+      // Static Red Hat Display Medium for the social-share images only: their
+      // renderer (Satori) can't use variable fonts. Local file in public/fonts.
+      { name: 'RedHatDisplayOG', provider: 'local', weights: [500], global: true }
     ]
   },
 

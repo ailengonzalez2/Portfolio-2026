@@ -7,7 +7,8 @@ import type { LanyardScene } from '~/webgl/lanyard/scene'
 //
 // The component is the badge's slot in the layout; the canvas fills the
 // nearest positioned ancestor (the page section), so the swing passes over
-// the text next to it instead of being clipped.
+// the text next to it instead of being clipped. It starts below the navbar
+// so the strap never runs through the menu, and fades in from there.
 const { t, locale } = useI18n()
 
 const slot = ref<HTMLElement | null>(null)
@@ -90,7 +91,7 @@ onBeforeUnmount(() => {
     <div
       v-if="!fallback"
       ref="stage"
-      class="absolute inset-0 z-10 pointer-events-none"
+      class="lanyard-stage absolute inset-x-0 bottom-0 top-20 z-10 pointer-events-none"
     />
     <div
       v-else
@@ -120,3 +121,9 @@ onBeforeUnmount(() => {
     </figcaption>
   </figure>
 </template>
+
+<style scoped>
+.lanyard-stage {
+  mask-image: linear-gradient(to bottom, transparent 0, #000 72px);
+}
+</style>

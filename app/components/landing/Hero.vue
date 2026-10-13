@@ -103,7 +103,9 @@ onBeforeUnmount(() => {
       <!-- Real project screens beside the title: they arrive as the title
            forms and leave with it on scroll -->
       <LandingHeroScreens :style="fx ? { opacity: loading ? 0 : intro * copyOpacity } : undefined" />
-      <div class="absolute inset-0 flex flex-col justify-center px-6 sm:px-10 lg:pl-28 lg:pr-16 pt-20">
+      <!-- Left edge: 7rem, or in line with the header logo once the 80rem
+           container centers (wide screens) -->
+      <div class="absolute inset-0 flex flex-col justify-center px-6 sm:px-10 lg:pl-[max(7rem,calc((100vw_-_80rem)/2_+_2rem))] lg:pr-16 pt-20">
         <div class="relative self-start">
           <ParticleName
             :progress="nameProgress"
