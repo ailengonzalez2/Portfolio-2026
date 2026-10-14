@@ -1,6 +1,6 @@
 {
   "seo": {
-    "homeTitle": "Ailen Gonzalez — AI Product Design & Frontend",
+    "homeTitle": "Ailen Gonzalez — Design Engineer & Frontend",
     "homeDescription": "AI product designer and frontend developer. I design and build AI products end to end, from Figma to production code in Vue and Nuxt."
   },
   "nav": {
@@ -14,7 +14,7 @@
     "closeMenu": "Close menu"
   },
   "hero": {
-    "title": "AI Product Design & Frontend",
+    "title": "Design Engineer & Frontend",
     "subtitle": "I help startups and product teams go from design concept to scalable, pixel-perfect web products in a short time."
   },
   "projects": {

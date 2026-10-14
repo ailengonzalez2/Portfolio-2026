@@ -1,6 +1,6 @@
 {
   "seo": {
-    "homeTitle": "Ailen Gonzalez — Diseño de Producto IA & Frontend",
+    "homeTitle": "Ailen Gonzalez — Design Engineer & Frontend",
     "homeDescription": "Diseñadora de producto IA y desarrolladora frontend. Diseño y construyo productos de IA de punta a punta, de Figma a código en producción con Vue y Nuxt."
   },
   "nav": {
@@ -14,7 +14,7 @@
     "closeMenu": "Cerrar menú"
   },
   "hero": {
-    "title": "Diseño de Producto IA & Frontend",
+    "title": "Design Engineer & Frontend",
     "subtitle": "Ayudo a startups y equipos de producto a pasar del concepto de diseño a productos web escalables y pixel-perfect en poco tiempo."
   },
   "projects": {

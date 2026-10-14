@@ -2,7 +2,7 @@
 // Default social-share image, in the site's identity: paper, Red Hat Display,
 // the role in uppercase with the cobalt → violet gradient, like the hero.
 defineProps({
-  headline: { type: Array, required: false, default: () => ['AI Product Design', '& Frontend'] },
+  headline: { type: Array, required: false, default: () => ['Design Engineer', '& Frontend'] },
   url: { type: String, required: false, default: 'ailengonzalez.ar' },
   place: { type: String, required: false, default: 'Córdoba, Argentina' }
 })
