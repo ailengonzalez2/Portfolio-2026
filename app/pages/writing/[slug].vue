@@ -31,7 +31,8 @@ useSeoMeta({
 defineOgImage('BlogPostSatori', {
   title: post.value.title,
   category: post.value.category,
-  readingTime: post.value.readingTime || ''
+  readingTime: post.value.readingTime || '',
+  v: useRuntimeConfig().public.ogImageVersion
 })
 
 useSchemaOrg([

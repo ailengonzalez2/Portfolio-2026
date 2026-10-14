@@ -35,7 +35,8 @@ useSeoMeta({
 })
 
 // Default social-share image, auto-generated. Individual pages can override.
-defineOgImage('Hero')
+// v puts the image's version in its URL (see ogImageVersion in nuxt.config).
+defineOgImage('Hero', { v: useRuntimeConfig().public.ogImageVersion })
 
 // Structured data for search engines and rich results
 useSchemaOrg([

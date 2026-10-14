@@ -5,7 +5,9 @@ defineProps({
   title: { type: String, required: true },
   category: { type: String, required: false, default: '' },
   readingTime: { type: String, required: false, default: '' },
-  url: { type: String, required: false, default: 'ailengonzalez.ar/writing' }
+  url: { type: String, required: false, default: 'ailengonzalez.ar/writing' },
+  // Cache buster only (ogImageVersion in nuxt.config); not drawn.
+  v: { type: String, required: false, default: '' }
 })
 </script>
 

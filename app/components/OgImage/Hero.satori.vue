@@ -4,7 +4,9 @@
 defineProps({
   headline: { type: Array, required: false, default: () => ['Design Engineer', '& Frontend'] },
   url: { type: String, required: false, default: 'ailengonzalez.ar' },
-  place: { type: String, required: false, default: 'Córdoba, Argentina' }
+  place: { type: String, required: false, default: 'Córdoba, Argentina' },
+  // Cache buster only (ogImageVersion in nuxt.config); not drawn.
+  v: { type: String, required: false, default: '' }
 })
 </script>
 

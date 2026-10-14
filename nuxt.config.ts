@@ -1,4 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { createHash } from 'node:crypto'
+import { readdirSync, readFileSync } from 'node:fs'
+
+// Content hash of everything the social-share images are drawn from (their
+// templates and font). It goes into the image URL, so the URL changes only when
+// the image does and X & co. fetch it again instead of reusing their copy.
+function ogImageVersion() {
+  const files = readdirSync('app/components/OgImage').sort().map(f => `app/components/OgImage/${f}`)
+  const h = createHash('sha256')
+  for (const f of [...files, 'public/fonts/RedHatDisplayOG-Medium.ttf']) h.update(readFileSync(f))
+  return h.digest('hex').slice(0, 8)
+}
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
@@ -59,8 +72,15 @@ export default defineNuxtConfig({
     // set NUXT_BRIEF_ENABLED=true with the brief components back in the layout.
     briefEnabled: false,
     public: {
-      web3formsKey: ''
+      web3formsKey: '',
+      ogImageVersion: ogImageVersion()
     }
+  },
+
+  // nuxt-og-image serves /_og/s/ as immutable for a year by default. The URL
+  // now carries the version, but a day is still a safer ceiling.
+  routeRules: {
+    '/_og/s/**': { headers: { 'cache-control': 'public, max-age=86400, s-maxage=86400' } }
   },
 
   compatibilityDate: '2024-11-01',
