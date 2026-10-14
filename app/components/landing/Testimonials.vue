@@ -65,7 +65,7 @@ onBeforeUnmount(stop)
                 :href="current.link"
                 target="_blank"
                 rel="noopener"
-                class="ml-2 underline underline-offset-4 hover:text-ink"
+                class="link-underline ml-2 hover:text-ink"
               >↗</a>
             </figcaption>
           </figure>
@@ -76,22 +76,28 @@ onBeforeUnmount(stop)
         v-if="count > 1"
         class="mt-10 flex gap-3"
       >
-        <UButton
-          icon="i-lucide-arrow-left"
-          variant="outline"
-          color="neutral"
-          class="rounded-(--radius-btn)"
+        <button
+          type="button"
+          class="btn-outline btn-icon"
           :aria-label="$t('testimonials.prev')"
           @click="go(-1)"
-        />
-        <UButton
-          icon="i-lucide-arrow-right"
-          variant="outline"
-          color="neutral"
-          class="rounded-(--radius-btn)"
+        >
+          <UIcon
+            name="i-lucide-arrow-left"
+            class="size-4"
+          />
+        </button>
+        <button
+          type="button"
+          class="btn-outline btn-icon"
           :aria-label="$t('testimonials.next')"
           @click="go(1)"
-        />
+        >
+          <UIcon
+            name="i-lucide-arrow-right"
+            class="size-4"
+          />
+        </button>
       </div>
     </div>
   </section>

@@ -161,7 +161,7 @@ const related = computed(() =>
             v-if="project!.links.github"
             :to="project!.links.github"
             target="_blank"
-            class="quiet-link"
+            class="link-underline text-ink"
           >
             <UIcon
               name="i-simple-icons-github"
@@ -173,7 +173,7 @@ const related = computed(() =>
             v-if="project!.links.figma"
             :to="project!.links.figma"
             target="_blank"
-            class="quiet-link"
+            class="link-underline text-ink"
           >
             <UIcon
               name="i-simple-icons-figma"
@@ -290,19 +290,6 @@ const related = computed(() =>
 </template>
 
 <style scoped>
-.quiet-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--color-ink);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-color: var(--color-hairline);
-  transition: text-decoration-color 0.2s;
-}
-.quiet-link:hover {
-  text-decoration-color: currentColor;
-}
 .row {
   position: relative;
   display: grid;

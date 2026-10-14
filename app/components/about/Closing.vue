@@ -22,7 +22,7 @@ const { global } = useAppConfig()
           target="_blank"
           data-umami-event="book-call"
           data-umami-event-location="contact"
-          class="btn-gradient inline-flex self-start mt-10 whitespace-nowrap px-8! sm:px-14!"
+          class="btn-gradient self-start mt-10"
         >
           {{ $t('contactCta.bookCall') }}
         </NuxtLink>
@@ -42,7 +42,7 @@ const { global } = useAppConfig()
           target="_blank"
           data-umami-event="view-cv"
           data-umami-event-location="contact"
-          class="inline-flex items-center gap-2 self-start mt-10 rounded-(--radius-btn) border border-ink dark:border-paper px-6 py-3 text-ink dark:text-paper hover:bg-ink hover:text-paper dark:hover:bg-paper dark:hover:text-ink transition-colors"
+          class="btn-outline self-start mt-10"
         >
           {{ $t('about.exploreCv') }}
           <UIcon

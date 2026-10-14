@@ -237,30 +237,102 @@ html.menu-open {
 
 
 
-/* Primary button - ink at rest, resolves into the brand gradient on hover */
-.btn-gradient {
-  background-color: var(--color-ink);
-  background-image: linear-gradient(-89deg, #C04BFF 5.74%, #7643FF 50.64%, #2B3BFF 92.05%);
-  background-size: 0% 100%;
-  background-repeat: no-repeat;
-  color: var(--color-paper);
-  border: none;
-  border-radius: var(--radius-btn);
-  padding: 0.75rem 3.5rem;
-  font-weight: 500;
-  font-size: 1.125rem;
-  transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
-}
+/* Buttons: one small system. Primary (.btn-gradient), secondary (.btn-outline)
+   and text links (.link-underline); .btn-sm and .btn-icon are the sizes.
+   In the components layer so utilities (margins, display) still win. */
+@layer components {
+  .btn-gradient,
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-btn);
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 1.5;
+    white-space: nowrap;
+    cursor: pointer;
+  }
 
-.btn-gradient:hover {
-  background-size: 100% 100%;
-  color: var(--color-ink);
-}
+  /* Primary - ink at rest, resolves into the brand gradient on hover */
+  .btn-gradient {
+    padding: 0.75rem 2rem;
+    background-color: var(--color-ink);
+    background-image: linear-gradient(-89deg, #C04BFF 5.74%, #7643FF 50.64%, #2B3BFF 92.05%);
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    color: var(--color-paper);
+    border: none;
+    transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
+  }
+  .btn-gradient:hover {
+    background-size: 100% 100%;
+    color: var(--color-ink);
+  }
+  /* On ink surfaces: paper at rest, same gradient on hover */
+  .btn-gradient--light {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
 
-/* On ink surfaces (footer): paper at rest, same gradient on hover */
-.btn-gradient--light {
-  background-color: var(--color-paper);
-  color: var(--color-ink);
+  /* Secondary - hairline-weight ink border, fills with ink on hover */
+  .btn-outline {
+    padding: calc(0.75rem - 1px) calc(1.5rem - 1px);
+    border: 1px solid currentColor;
+    background-color: transparent;
+    color: var(--color-ink);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .btn-outline:hover {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-outline--light,
+  .dark .btn-outline {
+    color: var(--color-paper);
+  }
+  .btn-outline--light:hover,
+  .dark .btn-outline:hover {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  @media (min-width: 40rem) {
+    .btn-gradient {
+      padding-inline: 3.5rem;
+    }
+  }
+
+  /* Sizes (after the base rules so they win) */
+  .btn-sm {
+    font-size: 0.875rem;
+  }
+  .btn-gradient.btn-sm {
+    padding: 0.5rem 1.25rem;
+  }
+  .btn-outline.btn-sm {
+    padding: calc(0.5rem - 1px) calc(1.25rem - 1px);
+  }
+  .btn-outline.btn-icon {
+    padding: calc(0.625rem - 1px);
+    font-size: 1rem;
+  }
+
+  /* Text link - hairline underline that darkens on hover */
+  .link-underline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--color-hairline);
+    transition: text-decoration-color 0.2s ease;
+  }
+  .link-underline:hover {
+    text-decoration-color: currentColor;
+  }
 }
 
 .btn-gradient-text {

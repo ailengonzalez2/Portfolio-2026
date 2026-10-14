@@ -96,7 +96,7 @@ const translateLabel = (label?: string) => label ? t(`nav.${label}`) : ''
           :to="localizedTo('/#contact')"
           data-umami-event="cta-hire-me"
           data-umami-event-location="header"
-          class="btn-gradient hidden sm:inline-flex px-5! py-2! text-sm!"
+          class="btn-gradient btn-sm hidden sm:inline-flex"
         >
           {{ $t('nav.hireMe') }}
         </NuxtLink>

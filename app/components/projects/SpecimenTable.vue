@@ -88,7 +88,7 @@ const nameOf = (p: Project) => p.title.split(' — ')[0]
         <NuxtLink
           v-if="hasCaseButton(p)"
           :to="localePath(`/projects/${p.id}`)"
-          class="relative z-10 mt-5 mx-1 inline-flex items-center gap-2 rounded-(--radius-btn) border border-ink px-4 py-2 text-sm font-medium text-ink hover:bg-ink hover:text-paper transition-colors"
+          class="btn-outline btn-sm relative z-10 mt-5 mx-1"
         >
           {{ $t('work.caseStudy') }}
           <UIcon

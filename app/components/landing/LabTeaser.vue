@@ -100,7 +100,7 @@ onBeforeUnmount(() => observer?.disconnect())
           <h3 class="max-w-md font-display font-medium text-3xl sm:text-4xl lg:text-5xl leading-[0.98] tracking-[-0.04em]">
             {{ $t('projects.labTeaser.title') }}
           </h3>
-          <span class="inline-flex items-center gap-2 rounded-(--radius-btn) bg-white px-5 py-2.5 text-sm font-medium text-neutral-900 transition-colors group-hover:bg-secondary">
+          <span class="btn-gradient btn-gradient--light btn-sm group-hover:bg-size-[100%_100%]">
             {{ $t('projects.labTeaser.cta') }}
             <UIcon
               name="i-lucide-arrow-up-right"
@@ -137,7 +137,7 @@ onBeforeUnmount(() => observer?.disconnect())
 
         <NuxtLink
           :to="localePath('/projects#lab')"
-          class="group/lab hidden md:flex items-center justify-between rounded-2xl border border-neutral-800 px-5 py-4 text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-600 hover:text-white"
+          class="group/lab btn-outline btn-outline--light btn-sm hidden md:flex justify-between w-full"
         >
           {{ $t('projects.labTeaser.seeLab') }}
           <UIcon

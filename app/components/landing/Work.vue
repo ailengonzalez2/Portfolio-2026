@@ -69,7 +69,7 @@ const linkFor = (p: Project) => p.links.preview
             :to="linkFor(p).to"
             :target="linkFor(p).external ? '_blank' : undefined"
             :rel="linkFor(p).external ? 'noopener' : undefined"
-            class="mt-10 inline-flex items-center gap-2 font-medium text-ink dark:text-paper underline underline-offset-4 decoration-hairline hover:decoration-current transition-colors"
+            class="link-underline mt-10 text-ink dark:text-paper"
           >
             {{ p.links.preview ? $t('work.visit') : $t('work.caseStudy') }}
             <UIcon
