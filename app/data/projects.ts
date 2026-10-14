@@ -98,7 +98,7 @@ export const projects: Project[] = [
   {
     id: 'codecave',
     kind: 'client',
-    featuredOrder: 1,
+    featuredOrder: 2,
     title: 'codeCave — Studio Site',
     description: 'The site for codeCave, a Córdoba-based product studio. A distinctive terminal-inspired identity with a neon-on-dark aesthetic, built end to end in Nuxt — "from idea to production".',
     image: '/projects/covers/codecave.jpg',
@@ -132,7 +132,7 @@ export const projects: Project[] = [
   {
     id: 'enter',
     kind: 'client',
-    featuredOrder: 2,
+    featuredOrder: 3,
     title: 'Enter — Sell Tickets Online',
     description: 'A ticketing platform made in Argentina: signed QR codes, a web scanner that works on any phone, and a flat 2% fee via Mercado Pago. A bold, retro ticket-stub identity that stands out from corporate ticketing.',
     image: '/projects/covers/enter.jpg',
@@ -223,7 +223,6 @@ export const projects: Project[] = [
   {
     id: 'habito',
     kind: 'client',
-    featuredOrder: 3,
     title: 'Habito — AI Task Management',
     description: 'Task management for the AI era, where humans and AI agents share one workspace and coordinate as real teammates. Product design and frontend for a clean, focused SaaS interface.',
     image: '/projects/covers/habito.jpg',
@@ -252,6 +251,7 @@ export const projects: Project[] = [
   {
     id: 'asistente',
     kind: 'client',
+    featuredOrder: 1,
     title: 'Asistente — Tu agenda trabaja sola',
     description: 'A booking SaaS for independent professionals in Argentina: a shareable reservations page, deposit collection, and automatic reminders — so the calendar runs itself.',
     image: '/projects/covers/asistente.jpg',
